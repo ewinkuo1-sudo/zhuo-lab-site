@@ -43,6 +43,13 @@ sections:
         invasion in oral cancer, and to quantitative collagen pathology scores that a pathologist
         can audit.
 
+        <div class="zl-steps">
+          <div><small>01</small><b>Image</b><p>Unstained section on the multiphoton platform: SHG, TPEF, P-SHG channels in one scan.</p></div>
+          <div><small>02</small><b>Quantify</b><p>Fibre orientation, χ33/χ31, texture features and whole-slide tiles extracted automatically.</p></div>
+          <div><small>03</small><b>Classify</b><p>SVM or deep network returns a call per region, with the source image beside it.</p></div>
+          <div><small>04</small><b>Validate</b><p>Checked against the pathologist's ground truth before anything is reported.</p></div>
+        </div>
+
         Beyond the models themselves, the lab uses AI tooling throughout its day-to-day work:
         coding agents to write and refactor image-analysis and instrument-control code, large
         language models for literature triage and first drafts of analysis reports, and

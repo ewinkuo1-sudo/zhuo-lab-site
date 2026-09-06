@@ -28,6 +28,22 @@ sections:
         color: '#ffffff'
         text_color_light: false
 
+  - block: markdown
+    content:
+      title:
+      text: |
+        <div class="zl-stats">
+          <div><b>1,490</b><span>citations</span></div>
+          <div><b>18</b><span>h-index</span></div>
+          <div><b>33</b><span>papers cited 10+ times</span></div>
+          <div><b>3</b><span>hospital collaborations</span></div>
+        </div>
+        <p class="zl-stats-note">Google Scholar, September 2026.</p>
+    design:
+      columns: '1'
+      spacing:
+        padding: ['0', '0', '0', '0']
+
   - block: features
     content:
       title: Research directions
