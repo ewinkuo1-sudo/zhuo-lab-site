@@ -16,7 +16,7 @@ authors:
 - Fu-Jen Kao
 - Guan-Yu Zhuo
 date: '2024-01-01'
-publishDate: '2026-09-06T08:21:59.408111Z'
+publishDate: '2026-09-06T08:22:34.271473Z'
 publication_types:
 - article-journal
 publication: '*APL Bioengineering*'

@@ -10,7 +10,7 @@ authors:
 - Tomoji Maeda
 - Chin-Yu Lin
 date: '2022-01-01'
-publishDate: '2026-09-06T08:21:59.427999Z'
+publishDate: '2026-09-06T08:22:34.293093Z'
 publication_types:
 - article-journal
 publication: '*International Journal of Molecular Sciences*'

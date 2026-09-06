@@ -12,7 +12,7 @@ authors:
 - Viktor V. Nikolaev
 - Natalya A. Krivova
 date: '2019-01-01'
-publishDate: '2026-09-06T08:21:59.483240Z'
+publishDate: '2026-09-06T08:22:34.346492Z'
 publication_types:
 - article-journal
 publication: '*Frontiers in Physics*'

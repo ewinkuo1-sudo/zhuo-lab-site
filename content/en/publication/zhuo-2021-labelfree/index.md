@@ -11,7 +11,7 @@ authors:
 - Natalya A. Krivova
 - Nirmal Mazumder
 date: '2021-01-01'
-publishDate: '2026-09-06T08:21:59.448794Z'
+publishDate: '2026-09-06T08:22:34.315246Z'
 publication_types:
 - article-journal
 publication: '*Journal of Applied Physics*'

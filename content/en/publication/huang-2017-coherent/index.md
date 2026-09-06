@@ -9,7 +9,7 @@ authors:
 - Wen Chang
 - Chia-Lung Hsieh
 date: '2017-01-01'
-publishDate: '2026-09-06T08:21:59.494873Z'
+publishDate: '2026-09-06T08:22:34.356359Z'
 publication_types:
 - article-journal
 publication: '*ACS Nano*'

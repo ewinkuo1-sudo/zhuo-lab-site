@@ -11,7 +11,7 @@ authors:
 - Krishna Kishore Mahato
 - Nirmal Mazumder
 date: '2020-01-01'
-publishDate: '2026-09-06T08:21:59.460924Z'
+publishDate: '2026-09-06T08:22:34.325667Z'
 publication_types:
 - article-journal
 publication: '*Microscopy Research and Technique*'

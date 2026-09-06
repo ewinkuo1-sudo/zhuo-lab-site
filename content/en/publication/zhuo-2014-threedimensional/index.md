@@ -10,7 +10,7 @@ authors:
 - Y.-Y. LIN
 - S.-W. CHU
 date: '2014-01-01'
-publishDate: '2026-09-06T08:21:59.545628Z'
+publishDate: '2026-09-06T08:22:34.407817Z'
 publication_types:
 - article-journal
 publication: '*Journal of Microscopy*'

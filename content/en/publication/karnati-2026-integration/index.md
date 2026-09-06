@@ -11,7 +11,7 @@ authors:
 - Guan-Yu Zhuo
 - Nirmal Mazumder
 date: '2026-01-01'
-publishDate: '2026-09-06T08:21:59.386286Z'
+publishDate: '2026-09-06T08:22:34.251733Z'
 publication_types:
 - article-journal
 publication: '*IEEE Photonics Journal*'

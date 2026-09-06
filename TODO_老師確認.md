@@ -25,3 +25,6 @@
 ## 授權
 - [ ] 論文圖多數期刊要授權或只能放縮圖。
 - [ ] 成員照片同意公開。
+
+## 論文作者名
+- [ ] 2010 J. Struct. Biol.（澱粉 SHG）Crossref 作者掛「Zong-Yan Zhuo」，Google Scholar 列在老師名下。是早期拼法還是不同人？確認後若是老師，把 `publications.bib` 該筆改成 `Zhuo, Guan-Yu`。

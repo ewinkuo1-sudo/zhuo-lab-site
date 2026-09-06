@@ -17,7 +17,7 @@ authors:
 - Krishna Kishore Mahato
 - Nirmal Mazumder
 date: '2022-01-01'
-publishDate: '2026-09-06T08:21:59.438675Z'
+publishDate: '2026-09-06T08:22:34.303898Z'
 publication_types:
 - article-journal
 publication: '*Journal of Applied Polymer Science*'
