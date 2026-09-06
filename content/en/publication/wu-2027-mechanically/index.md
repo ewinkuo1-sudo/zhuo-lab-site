@@ -11,7 +11,7 @@ authors:
 - Guan-Yu Zhuo
 - Arthur Chiou
 - Jean-Cheng Kuo
-date: '2027-01-01'
+date: '2026-06-01'
 publishDate: '2026-09-06T08:22:34.214147Z'
 publication_types:
 - article-journal

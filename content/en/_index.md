@@ -10,8 +10,6 @@ sections:
         Seeing tissue
         without labels
       text: |
-        <br>
-
         We develop **label-free nonlinear optical microscopy** and bring it to the clinic.
         Our group at the Institute of Biophotonics, National Yang Ming Chiao Tung University (Taipei),
         images collagen, cartilage and tumour stroma with second-harmonic generation, two-photon
@@ -25,8 +23,8 @@ sections:
         url: join/
     design:
       background:
-        color: '#ffffff'
-        text_color_light: false
+        color: '#04201c'
+        text_color_light: true
 
   - block: markdown
     content:
@@ -35,7 +33,7 @@ sections:
         <div class="zl-stats">
           <div><b>1,490</b><span>citations</span></div>
           <div><b>18</b><span>h-index</span></div>
-          <div><b>33</b><span>papers cited 10+ times</span></div>
+          <div><b>4</b><span>clinical programmes</span></div>
           <div><b>3</b><span>hospital collaborations</span></div>
         </div>
         <p class="zl-stats-note">Google Scholar, September 2026.</p>

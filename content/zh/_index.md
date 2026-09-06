@@ -7,15 +7,9 @@ sections:
   - block: hero
     content:
       title: |
-        不染色，
-        直接看見組織
+        不染色，直接看見組織
       text: |
-        <br>
-
-        我們發展**無標記非線性光學顯微技術**，並把它帶進醫院。
-        實驗室位於國立陽明交通大學生醫光電研究所（台北陽明校區），
-        以二倍頻（SHG）、雙光子螢光與拉曼對比觀察膠原蛋白、軟骨與腫瘤基質，
-        結合機器學習做自動判讀，並將整套流程微型化成內視鏡探頭，用於疾病早期診斷。
+        我們發展**無標記非線性光學顯微技術**，並把它帶進醫院。實驗室位於國立陽明交通大學生醫光電研究所（台北陽明校區），以二倍頻（SHG）、雙光子螢光與拉曼對比觀察膠原蛋白、軟骨與腫瘤基質，結合機器學習做自動判讀，並將整套流程微型化成內視鏡探頭，用於疾病早期診斷。
       cta:
         label: 研究方向
         url: research/
@@ -24,8 +18,8 @@ sections:
         url: join/
     design:
       background:
-        color: '#ffffff'
-        text_color_light: false
+        color: '#04201c'
+        text_color_light: true
 
   - block: markdown
     content:
@@ -34,7 +28,7 @@ sections:
         <div class="zl-stats">
           <div><b>1,490</b><span>總引用數</span></div>
           <div><b>18</b><span>h-index</span></div>
-          <div><b>33</b><span>被引 10 次以上的論文</span></div>
+          <div><b>4</b><span>臨床合作案</span></div>
           <div><b>3</b><span>合作醫院</span></div>
         </div>
         <p class="zl-stats-note">資料來源：Google Scholar，2026 年 9 月。</p>

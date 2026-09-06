@@ -8,40 +8,91 @@
   justify-content: center;
 }
 
-// ---- Zhuo Lab look: white ground, navy headings, blue accent, card-style features ----
-$zl-navy: #0b1f4b;
-$zl-blue: #2563eb;
-$zl-blue-soft: #eff6ff;
-$zl-border: #e2e8f0;
+// ---- Zhuo Lab look: white ground, deep-green ink, emerald accent, microscopy motifs ----
+$zl-ink: #04201c;        // navbar, hero background
+$zl-ink-2: #062e28;      // hero gradient partner
+$zl-forest: #064e3b;     // headings
+$zl-green: #0f9d78;      // accent (matches data/themes/zhuo.toml primary)
+$zl-mint: #6ee7b7;       // light accent on dark
+$zl-mint-soft: #ecfdf5;  // icon tiles
+$zl-border: #d5e8e1;
+$zl-text: #1f2937;
+$zl-muted: #5b6b66;
+$zl-surface: #f3faf7;
 
 body {
   font-family: "Inter", "Noto Sans TC", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  color: #1e293b;
+  color: $zl-text;
 }
 
 h1, h2, h3, h4, .section-heading h1, .section-heading h2 {
-  color: $zl-navy;
+  color: $zl-forest;
   letter-spacing: -0.01em;
 }
 
 .navbar {
-  border-bottom: 1px solid $zl-border;
+  border-bottom: 1px solid rgba(110, 231, 183, .18);
   box-shadow: none;
 }
 
-// Hero
+// ---------- Hero: dark field-of-view with SHG fibre illustration ----------
 .wg-hero {
   padding-top: 5rem;
-  padding-bottom: 4rem;
-  .hero-title { color: $zl-navy; font-weight: 800; }
-  .hero-lead p { font-size: 1.15rem; color: #334155; max-width: 46rem; }
-  .btn-primary { background: $zl-blue; border-color: $zl-blue; border-radius: 0.6rem; }
-  .btn-secondary, .btn-outline-primary { border-radius: 0.6rem; }
+  padding-bottom: 4.5rem;
+  position: relative;
+  overflow: hidden;
+  background-color: $zl-ink;
+  background-image:
+    radial-gradient(ellipse 60% 70% at 75% 50%, rgba(16, 185, 129, .22), transparent 70%),
+    radial-gradient(ellipse 50% 60% at 15% 100%, rgba(16, 185, 129, .10), transparent 70%),
+    linear-gradient(rgba(110, 231, 183, .06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(110, 231, 183, .06) 1px, transparent 1px),
+    linear-gradient(180deg, $zl-ink, $zl-ink-2);
+  background-size: auto, auto, 32px 32px, 32px 32px, auto;
+
+  .hero-title { color: #ffffff; font-weight: 800; }
+  .hero-lead p { font-size: 1.15rem; color: #cfe8df; max-width: 46rem; }
+  .hero-lead strong { color: $zl-mint; }
+  .btn-light, .btn-primary { background: $zl-green; border-color: $zl-green; color: #ffffff; border-radius: 0.6rem; }
+  .btn-light:hover, .btn-primary:hover { background: #0b8767; border-color: #0b8767; color: #fff; }
+  .hero-cta-alt { color: $zl-mint; }
+  .hero-cta-alt:hover { color: #fff; }
+
+  // Without an image the hero template renders straight into .container (no .row / .hero-media),
+  // so paint the stylised P-SHG collagen illustration (static/media/hero-shg.svg) on its right side.
+  .container {
+    min-height: 26rem;
+    background: url("../media/hero-shg.svg") no-repeat right center / 42% auto;
+  }
+  .hero-lead { max-width: 46rem; }
+  @media (min-width: 768px) {
+    .hero-title, .hero-lead, .cta-btns, .hero-note { max-width: 54%; }
+  }
+  .cta-btns .btn-light, .cta-btns .btn-light:hover, .cta-btns .btn-light:focus,
+  .cta-btns .btn-primary, .cta-btns .btn-primary:hover { color: #ffffff !important; }
+  @media (max-width: 767.98px) {
+    padding-top: 3rem;
+    .container {
+      min-height: 0;
+      background-position: center bottom;
+      background-size: 78% auto;
+      padding-bottom: 66vw;
+    }
+  }
 }
 
-// Features as cards, 4 across on wide screens, 2 across on tablets
+// ---------- Section headings with a small green rule ----------
+.home-section .section-heading h1 {
+  color: $zl-forest;
+  &::after {
+    content: ""; display: block; width: 3rem; height: 3px; margin: .9rem auto 0;
+    background: $zl-green; border-radius: 2px;
+  }
+}
+
+// ---------- Features as cards: 4 across on desktop, 2 on tablet; heading column left alone ----------
 .wg-features {
-  .row > [class*="col-"] {
+  .row > .col-sm-4 {
     background: #ffffff;
     border: 1px solid $zl-border;
     border-radius: 1rem;
@@ -49,23 +100,23 @@ h1, h2, h3, h4, .section-heading h1, .section-heading h2 {
     margin: 0.5rem;
     flex: 0 0 calc(50% - 1rem);
     max-width: calc(50% - 1rem);
-    transition: box-shadow .2s ease, transform .2s ease;
-    &:hover { box-shadow: 0 8px 24px rgba(11, 31, 75, .08); transform: translateY(-2px); }
+    transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease;
+    &:hover { box-shadow: 0 10px 28px rgba(6, 78, 59, .10); transform: translateY(-2px); border-color: #a7dccb; }
   }
   @media (min-width: 992px) {
-    .row > [class*="col-"] { flex: 0 0 calc(25% - 1rem); max-width: calc(25% - 1rem); }
+    .row > .col-sm-4 { flex: 0 0 calc(25% - 1rem); max-width: calc(25% - 1rem); }
   }
   .featurette-icon {
-    color: $zl-blue;
-    background: $zl-blue-soft;
+    color: $zl-green;
+    background: $zl-mint-soft;
     width: 3.2rem; height: 3.2rem;
     display: inline-flex; align-items: center; justify-content: center;
     border-radius: 0.8rem;
     font-size: 1.4rem;
     margin: 0 auto 0.9rem;
   }
-  .section-subheading { color: $zl-navy; font-weight: 600; font-size: 1.05rem; }
-  p { color: #475569; font-size: 0.95rem; }
+  .section-subheading { color: $zl-forest; font-weight: 600; font-size: 1.05rem; }
+  p { color: #4b5b57; font-size: 0.95rem; }
 }
 
 // Citation list and generic cards
@@ -74,27 +125,41 @@ h1, h2, h3, h4, .section-heading h1, .section-heading h2 {
   border-radius: 0.8rem;
   box-shadow: none;
 }
+.pub-list-item .btn-outline-primary, .btn-outline-primary { border-radius: .4rem; }
+.author-highlighted { color: $zl-forest; }
 
 .page-footer, footer {
-  background: #f8fafc;
+  background: $zl-surface;
   border-top: 1px solid $zl-border;
-  color: #64748b;
+  color: $zl-muted;
+  a { color: $zl-green; }
 }
 
 // Stats row and step cards
 .zl-stats {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; max-width: 60rem; margin: 0 auto;
   @media (min-width: 768px) { grid-template-columns: repeat(4, 1fr); }
-  > div { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 1rem; padding: 1.4rem 1rem; text-align: center; }
-  b { display: block; font-size: 2.1rem; font-weight: 800; color: #0b1f4b; line-height: 1.1; }
-  span { display: block; margin-top: .35rem; color: #64748b; font-size: .9rem; }
+  > div {
+    background: #ffffff; border: 1px solid $zl-border; border-radius: 1rem; padding: 1.4rem 1rem; text-align: center;
+    position: relative; overflow: hidden;
+    &::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: linear-gradient(90deg, $zl-green, $zl-mint); }
+  }
+  b { display: block; font-size: 2.1rem; font-weight: 800; color: $zl-forest; line-height: 1.1; }
+  span { display: block; margin-top: .35rem; color: $zl-muted; font-size: .9rem; }
 }
-.zl-stats-note { text-align: center; color: #94a3b8; font-size: .8rem; margin: .8rem 0 0; }
+.zl-stats-note { text-align: center; color: #8a9a95; font-size: .8rem; margin: .8rem 0 0; }
 .zl-steps {
   display: grid; grid-template-columns: 1fr; gap: 1rem; margin: 1.5rem 0 2rem;
   @media (min-width: 768px) { grid-template-columns: repeat(4, 1fr); }
-  > div { background: #ffffff; border: 1px solid #e2e8f0; border-left: 4px solid #2563eb; border-radius: .8rem; padding: 1.1rem 1rem; }
-  small { display: block; color: #2563eb; font-weight: 700; letter-spacing: .08em; font-size: .75rem; }
-  b { display: block; color: #0b1f4b; font-size: 1.05rem; margin: .25rem 0 .4rem; }
-  p { color: #475569; font-size: .9rem; margin: 0; }
+  > div { background: #ffffff; border: 1px solid $zl-border; border-left: 4px solid $zl-green; border-radius: .8rem; padding: 1.1rem 1rem; }
+  small { display: block; color: $zl-green; font-weight: 700; letter-spacing: .08em; font-size: .75rem; }
+  b { display: block; color: $zl-forest; font-size: 1.05rem; margin: .25rem 0 .4rem; }
+  p { color: #4b5b57; font-size: .9rem; margin: 0; }
+}
+
+// ---------- Dark-mode safety net (site is locked to light, but keep it legible if the lock is ever removed) ----------
+body.dark {
+  h1, h2, h3, h4, .section-heading h1, .section-heading h2, .home-section .section-heading h1 { color: #e6f7f1; }
+  .wg-features .section-subheading, .zl-stats b, .zl-steps b, .author-highlighted { color: $zl-forest; }
+  .page-footer, footer { background: $zl-ink; border-top-color: rgba(110, 231, 183, .18); color: #9fb8b0; }
 }

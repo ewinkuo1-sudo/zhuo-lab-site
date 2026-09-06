@@ -1,8 +1,11 @@
 # SITE SETUP. Docs: https://docs.hugoblox.com/
 
 appearance:
+  # Light only. The theme enables the day/night auto-switch only when BOTH theme_day and
+  # theme_night are set (see blox-bootstrap layouts/_default/baseof.html), so theme_night is
+  # left empty on purpose: the custom SCSS is designed for a white ground.
   theme_day: zhuo
-  theme_night: zhuo
+  theme_night: ''
   font: zhuo
   font_size: L
 
@@ -34,7 +37,7 @@ header:
 
 footer:
   copyright:
-    notice: '© {year} Guan-Yu Zhuo Lab, Institute of Biophotonics, NYCU. Built with [Hugo Blox](https://hugoblox.com).'
+    notice: '© {year} Guan-Yu Zhuo Lab, Institute of Biophotonics, National Yang Ming Chiao Tung University.'
     license:
       enable: false
 

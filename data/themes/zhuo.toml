@@ -1,19 +1,19 @@
-# Zhuo Lab colour theme: white ground, navy text, blue accent (Hugo Blox v5.5 format)
+# Zhuo Lab colour theme: white ground, deep-green ink, emerald accent (Hugo Blox v5.5 format)
 
 [light]
-primary = "#2563eb"
-menu_primary = "#ffffff"
-menu_text = "#0b1f4b"
-menu_text_active = "#2563eb"
-menu_title = "#0b1f4b"
+primary = "#0f9d78"
+menu_primary = "#04201c"
+menu_text = "#d1fae5"
+menu_text_active = "#6ee7b7"
+menu_title = "#ffffff"
 home_section_odd = "#ffffff"
-home_section_even = "#f8fafc"
+home_section_even = "#f3faf7"
 
 [dark]
-primary = "#60a5fa"
-menu_primary = "#0b1f4b"
-menu_text = "#e2e8f0"
-menu_text_active = "#93c5fd"
+primary = "#34d399"
+menu_primary = "#04201c"
+menu_text = "#d1fae5"
+menu_text_active = "#6ee7b7"
 menu_title = "#ffffff"
-home_section_odd = "#0f172a"
-home_section_even = "#1e293b"
+home_section_odd = "#062e28"
+home_section_even = "#04201c"
