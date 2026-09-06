@@ -18,6 +18,7 @@ sections:
         - Building and aligning nonlinear optical microscopes and fibre-based endoscopic probes.
         - Imaging clinical tissue (collagen, cartilage, tumour stroma) and biomaterials.
         - Quantitative image analysis, machine learning and deep learning on label-free images.
+        - Building AI-assisted analysis pipelines with modern tooling (Python, PyTorch, coding agents such as Claude Code).
         - Working directly with clinicians and pathologists on diagnostic problems.
 
         ### Master's and Ph.D. students

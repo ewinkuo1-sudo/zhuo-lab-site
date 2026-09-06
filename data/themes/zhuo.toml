@@ -1,0 +1,19 @@
+# Custom colour theme for the Zhuo Lab site (Hugo Blox v5.5 theme format)
+
+[light]
+primary = "#0e7490"
+menu_primary = "#0b1f33"
+menu_text = "#e2e8f0"
+menu_text_active = "#7dd3fc"
+menu_title = "#ffffff"
+home_section_odd = "#ffffff"
+home_section_even = "#eef6f9"
+
+[dark]
+primary = "#22d3ee"
+menu_primary = "#0b1f33"
+menu_text = "#e2e8f0"
+menu_text_active = "#7dd3fc"
+menu_title = "#ffffff"
+home_section_odd = "#0f172a"
+home_section_even = "#1e293b"

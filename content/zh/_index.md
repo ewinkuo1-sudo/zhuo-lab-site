@@ -15,7 +15,7 @@ sections:
         我們發展**無標記非線性光學顯微技術**，並把它帶進醫院。
         實驗室位於國立陽明交通大學生醫光電研究所（台北陽明校區），
         以二倍頻（SHG）、雙光子螢光與拉曼對比觀察膠原蛋白、軟骨與腫瘤基質，
-        並將這些技術微型化成內視鏡探頭，用於疾病早期診斷。
+        結合機器學習做自動判讀，並將整套流程微型化成內視鏡探頭，用於疾病早期診斷。
       cta:
         label: 研究方向
         url: research/
@@ -44,10 +44,10 @@ sections:
           icon: stethoscope
           icon_pack: fas
           description: 光纖式非線性影像探頭，目標是活體內的即時診斷。
-        - name: 澱粉與生醫材料的分子結構
-          icon: seedling
+        - name: AI 輔助無標記病理
+          icon: brain
           icon_pack: fas
-          description: 以 SHG 與多模態影像分析澱粉顆粒、生物塑膠與工程化支架。
+          description: 用機器學習與深度學習把未染色的多光子影像變成診斷判讀，從紋理特徵加 SVM 到端到端神經網路。
 
   - block: collection
     content:

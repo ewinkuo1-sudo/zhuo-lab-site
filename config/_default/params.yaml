@@ -1,9 +1,9 @@
 # SITE SETUP. Docs: https://docs.hugoblox.com/
 
 appearance:
-  theme_day: minimal
-  theme_night: minimal
-  font: native
+  theme_day: zhuo
+  theme_night: zhuo
+  font: classic
   font_size: L
 
 marketing:

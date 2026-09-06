@@ -1,6 +1,5 @@
 ############################
 ## HUGO MODULES
-## Install or uninstall themes and plugins here.
 ## Docs: https://gohugo.io/hugo-modules/
 ############################
 
@@ -8,3 +7,31 @@ imports:
   - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-plugin-decap-cms
   - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-plugin-netlify
   - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-bootstrap/v5
+
+# Content mounts. English publications are mounted into the Chinese site too,
+# so /zh/publication/ exists without duplicating files.
+mounts:
+  - source: content/en
+    target: content
+    lang: en
+  - source: content/zh
+    target: content
+    lang: zh
+  - source: content/en/publication
+    target: content/publication
+    lang: zh
+  - source: content/en/authors
+    target: content/authors
+    lang: zh
+  - source: static
+    target: static
+  - source: assets
+    target: assets
+  - source: layouts
+    target: layouts
+  - source: data
+    target: data
+  - source: i18n
+    target: i18n
+  - source: archetypes
+    target: archetypes

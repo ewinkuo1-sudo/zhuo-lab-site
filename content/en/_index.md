@@ -15,8 +15,8 @@ sections:
         We develop **label-free nonlinear optical microscopy** and bring it to the clinic.
         Our group at the Institute of Biophotonics, National Yang Ming Chiao Tung University (Taipei),
         images collagen, cartilage and tumour stroma with second-harmonic generation, two-photon
-        fluorescence and Raman contrast, and is miniaturising these tools into endoscopes for
-        early disease diagnosis.
+        fluorescence and Raman contrast, pairs those images with machine learning for automated
+        diagnosis, and is miniaturising the whole pipeline into endoscopes for early disease detection.
       cta:
         label: Our research
         url: research/
@@ -45,10 +45,10 @@ sections:
           icon: stethoscope
           icon_pack: fas
           description: Fibre-based nonlinear imaging probes designed for in vivo diagnosis.
-        - name: Molecular structure of starch and biomaterials
-          icon: seedling
+        - name: AI-assisted label-free pathology
+          icon: brain
           icon_pack: fas
-          description: SHG and multimodal imaging of starch granules, bioplastics and engineered scaffolds.
+          description: Machine learning and deep learning that turn unstained multiphoton images into diagnostic calls, from texture features and SVMs to end-to-end neural networks.
 
   - block: collection
     content:
