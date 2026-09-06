@@ -42,6 +42,12 @@ sections:
         they came from so the reasoning is inspectable.
         **Status.** Published (*J. Microsc.* 2026); ongoing.
 
+        ## Data and ground truth
+        Every study uses **adjacent 5 µm sections** from the same block: one is H&E-stained and
+        annotated by a pathologist to serve as ground truth, the other is left unstained for
+        label-free multiphoton imaging. Classifiers are trained and tested only against that
+        annotation, so every claim traces back to a pathologist's call on the same tissue.
+
         ## How a collaboration works
         1. You bring a diagnostic question and access to tissue (fresh, frozen or FFPE unstained sections).
         2. We image label-free on our multiphoton platform and build the analysis pipeline with you.

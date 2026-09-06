@@ -50,11 +50,11 @@ sections:
           <div><small>04</small><b>Validate</b><p>Checked against the pathologist's ground truth before anything is reported.</p></div>
         </div>
 
-        Beyond the models themselves, the lab uses AI tooling throughout its day-to-day work:
-        coding agents to write and refactor image-analysis and instrument-control code, large
-        language models for literature triage and first drafts of analysis reports, and
-        automated pipelines that take a raw image stack to a figure without manual steps.
-        We see these tools as the way a small lab keeps a translational programme moving.
+        Beyond the models themselves, the lab uses AI tooling throughout its day-to-day work.
+        We use Claude to accelerate image-analysis pipeline development (image registration,
+        fibre-orientation quantification, lifetime fitting), for literature synthesis, and for
+        manuscript preparation, and we build automated pipelines that take a raw image stack to a
+        figure without manual steps. For a small lab this is how a translational programme keeps moving.
 
         <!-- TODO(老師確認): AI 段落是依 Sci Rep 2025、IEEE Photonics J 2026、Lab Invest 2026、J Microsc 2026 的題目寫的草稿，請老師修正細節與正在進行的項目。 -->
 
@@ -69,6 +69,15 @@ sections:
         The same SHG physics that reports on collagen also reports on the crystalline order of
         starch granules. We use it, with spectroscopy, to characterise rice and corn starch,
         starch-based bioplastics and engineered biomaterials.
+
+        ## Other lines of work
+        - **Chiral imaging of collagen** by SHG circular dichroism, the method behind much of the lab's tissue work.
+        - **Single-particle tracking and coherent brightfield microscopy** for label-free, ultrahigh-speed observation of nanoparticles, viruses and intracellular transport in live cells.
+        - **Tumour-microenvironment heterogeneity**, mapping how stromal collagen varies across a lesion rather than reporting one average number.
+
+        ## External resources we build on
+        - [PSHG-TISS](https://doi.org/10.1038/s41597-022-01477-1): a public collection of polarization-resolved SHG images of tissue (Hristu et al., *Sci. Data* 2022). Not produced by this lab.
+        - [Open-source one- and two-photon light-sheet microscope](https://doi.org/10.1038/s41598-025-03107-3) (Hubert et al., *Sci. Rep.* 2025). Not produced by this lab.
 
         <!-- TODO(老師確認): 每個方向補一張自己的代表影像 (P-SHG 膠原蛋白 / SHG-CD / CARS-FLIM)，放 assets/media/ -->
     design:

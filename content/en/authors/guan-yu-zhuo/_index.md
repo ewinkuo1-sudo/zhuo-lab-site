@@ -54,7 +54,7 @@ His research advances label-free optical imaging, in particular multimodal nonli
 - 2012 — Dean of Science Award, National Taiwan University
 
 ### Funding
-- NSTC 113-2628-M-A49-010-MY3 (2024–2027), Principal Investigator
+- NSTC Excellent Young Scholar Research Project, 113-2628-M-A49-010-MY3 (2024–2027), Principal Investigator
 - NSTC 110-2112-M-039-001-MY3 (2021–2024), Principal Investigator
 
 ### Books
