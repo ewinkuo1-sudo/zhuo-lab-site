@@ -6,6 +6,9 @@ main:
   - name: People
     url: people
     weight: 20
+  - name: Collaborations
+    url: collaborations
+    weight: 25
   - name: Publications
     url: publication
     weight: 30

@@ -17,6 +17,9 @@ zh:
       - name: 成員
         url: people
         weight: 20
+      - name: 臨床合作
+        url: collaborations
+        weight: 25
       - name: 論文
         url: publication
         weight: 30
