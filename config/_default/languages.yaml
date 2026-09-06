@@ -1,0 +1,32 @@
+# Languages. Docs: https://docs.hugoblox.com/reference/language/
+en:
+  languageCode: en-us
+  contentDir: content/en
+  weight: 1
+zh:
+  languageCode: zh-Hant-TW
+  contentDir: content/zh
+  weight: 2
+  title: 卓冠宇實驗室 國立陽明交通大學生醫光電研究所   # TODO(老師確認): 實驗室正式中文名稱
+  params:
+    description: 轉譯生醫光電、無標記非線性光學顯微、微型化非線性內視顯微術
+  menu:
+    main:
+      - name: 研究
+        url: research
+        weight: 10
+      - name: 成員
+        url: people
+        weight: 20
+      - name: 論文
+        url: /publication/       # 論文頁不翻譯，直接連英文版
+        weight: 30
+      - name: 儀器設備
+        url: facilities
+        weight: 40
+      - name: 加入我們
+        url: join
+        weight: 50
+      - name: 聯絡
+        url: contact
+        weight: 60

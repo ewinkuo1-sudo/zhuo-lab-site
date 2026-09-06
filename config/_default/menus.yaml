@@ -1,0 +1,20 @@
+# Navigation links (English). Chinese menu lives in languages.yaml.
+main:
+  - name: Research
+    url: research
+    weight: 10
+  - name: People
+    url: people
+    weight: 20
+  - name: Publications
+    url: publication
+    weight: 30
+  - name: Facilities
+    url: facilities
+    weight: 40
+  - name: Join Us
+    url: join
+    weight: 50
+  - name: Contact
+    url: contact
+    weight: 60
