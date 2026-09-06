@@ -7,11 +7,11 @@ authors:
 - Sib Sankar Mal
 - Sindhoora Kaniyala Melanthota
 - Dhani Ram Mahato
-- Guan‐Yu Zhuo
+- Guan-Yu Zhuo
 - Krishna Kishore Mahato
 - Nirmal Mazumder
 date: '2020-01-01'
-publishDate: '2026-09-06T08:21:17.928255Z'
+publishDate: '2026-09-06T08:21:59.460924Z'
 publication_types:
 - article-journal
 publication: '*Microscopy Research and Technique*'

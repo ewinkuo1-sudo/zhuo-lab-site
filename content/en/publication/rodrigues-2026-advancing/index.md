@@ -7,11 +7,11 @@ authors:
 - Gagan Raju
 - Edwin Pious
 - Ankur Gogoi
-- Guan‐Yu Zhuo
+- Guan-Yu Zhuo
 - Nirmal Mazumder
-- Fu‐Jen Kao
+- Fu-Jen Kao
 date: '2026-01-01'
-publishDate: '2026-09-06T08:21:17.833557Z'
+publishDate: '2026-09-06T08:21:59.366097Z'
 publication_types:
 - article-journal
 publication: '*Journal of Microscopy*'

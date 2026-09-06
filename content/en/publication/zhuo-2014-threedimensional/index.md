@@ -2,15 +2,15 @@
 title: Three-dimensional structural imaging of starch granules by second-harmonic
   generation circular dichroism
 authors:
-- G.‐Y. ZHUO
+- Guan-Yu Zhuo
 - H. LEE
-- K.‐J. HSU
+- K.-J. HSU
 - M.J. HUTTUNEN
 - M. KAURANEN
-- Y.‐Y. LIN
-- S.‐W. CHU
+- Y.-Y. LIN
+- S.-W. CHU
 date: '2014-01-01'
-publishDate: '2026-09-06T08:21:18.009670Z'
+publishDate: '2026-09-06T08:21:59.545628Z'
 publication_types:
 - article-journal
 publication: '*Journal of Microscopy*'

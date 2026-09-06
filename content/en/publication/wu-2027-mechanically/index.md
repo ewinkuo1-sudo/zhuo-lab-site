@@ -12,7 +12,7 @@ authors:
 - Arthur Chiou
 - Jean-Cheng Kuo
 date: '2027-01-01'
-publishDate: '2026-09-06T08:21:17.817297Z'
+publishDate: '2026-09-06T08:21:59.350443Z'
 publication_types:
 - article-journal
 publication: '*Biomaterials*'

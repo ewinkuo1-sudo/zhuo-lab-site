@@ -9,7 +9,7 @@ authors:
 - M. Kauranen
 - S.-W. Chu
 date: '2013-01-01'
-publishDate: '2026-09-06T08:21:18.020301Z'
+publishDate: '2026-09-06T08:21:59.555957Z'
 publication_types:
 - article-journal
 publication: '*Biomedical Optics Express*'
