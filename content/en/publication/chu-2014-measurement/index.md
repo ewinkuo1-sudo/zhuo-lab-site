@@ -15,7 +15,7 @@ authors:
 - Satoshi Kawata
 - Katsumasa Fujita
 date: '2014-01-01'
-publishDate: '2026-09-06T08:18:45.474728Z'
+publishDate: '2026-09-06T08:21:17.988809Z'
 publication_types:
 - article-journal
 publication: '*Physical Review Letters*'

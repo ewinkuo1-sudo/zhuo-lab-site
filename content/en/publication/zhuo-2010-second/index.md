@@ -14,7 +14,7 @@ authors:
 - Hsi-Mei Lai
 - Shi-Wei Chu
 date: '2010-01-01'
-publishDate: '2026-09-06T08:18:45.519041Z'
+publishDate: '2026-09-06T08:21:18.031425Z'
 publication_types:
 - article-journal
 publication: '*Journal of Structural Biology*'

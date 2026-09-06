@@ -5,11 +5,11 @@ authors:
 - M. J. Huttunen
 - K.-J. Hsu
 - M. Partanen
-- G.-Y. Zhuo
+- Guan-Yu Zhuo
 - M. Kauranen
 - S.-W. Chu
 date: '2013-01-01'
-publishDate: '2026-09-06T08:18:45.508162Z'
+publishDate: '2026-09-06T08:21:18.020301Z'
 publication_types:
 - article-journal
 publication: '*Biomedical Optics Express*'

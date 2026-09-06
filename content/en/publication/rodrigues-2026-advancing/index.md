@@ -11,7 +11,7 @@ authors:
 - Nirmal Mazumder
 - Fu‐Jen Kao
 date: '2026-01-01'
-publishDate: '2026-09-06T08:18:45.314007Z'
+publishDate: '2026-09-06T08:21:17.833557Z'
 publication_types:
 - article-journal
 publication: '*Journal of Microscopy*'

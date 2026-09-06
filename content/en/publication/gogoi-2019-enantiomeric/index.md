@@ -8,7 +8,7 @@ authors:
 - Nai-Tzu Chen
 - Guan-Yu Zhuo
 date: '2019-01-01'
-publishDate: '2026-09-06T08:18:45.422627Z'
+publishDate: '2026-09-06T08:21:17.938457Z'
 publication_types:
 - article-journal
 publication: '*Molecules*'

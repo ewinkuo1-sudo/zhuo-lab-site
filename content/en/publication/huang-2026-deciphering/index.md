@@ -14,7 +14,7 @@ authors:
 - Guan-Yu Zhuo
 - Muh-Hwa Yang
 date: '2026-01-01'
-publishDate: '2026-09-06T08:18:45.324829Z'
+publishDate: '2026-09-06T08:21:17.844126Z'
 publication_types:
 - article-journal
 publication: '*Laboratory Investigation*'

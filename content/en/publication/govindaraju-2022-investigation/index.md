@@ -12,7 +12,7 @@ authors:
 - Krishna Kishore Mahato
 - Nirmal Mazumder
 date: '2022-01-01'
-publishDate: '2026-09-06T08:18:45.368755Z'
+publishDate: '2026-09-06T08:21:17.885444Z'
 publication_types:
 - article-journal
 publication: '*Food Hydrocolloids*'

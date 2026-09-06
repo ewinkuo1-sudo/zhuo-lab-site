@@ -10,7 +10,7 @@ authors:
 - Tzu-Ming Liu
 - Shi-Wei Chu
 date: '2014-01-01'
-publishDate: '2026-09-06T08:18:45.486077Z'
+publishDate: '2026-09-06T08:21:17.999375Z'
 publication_types:
 - article-journal
 publication: '*BMC Plant Biology*'
