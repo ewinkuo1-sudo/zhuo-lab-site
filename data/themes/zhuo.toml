@@ -1,19 +1,19 @@
-# Custom colour theme for the Zhuo Lab site (Hugo Blox v5.5 theme format)
+# Zhuo Lab colour theme: white ground, navy text, blue accent (Hugo Blox v5.5 format)
 
 [light]
-primary = "#0e7490"
-menu_primary = "#0b1f33"
-menu_text = "#e2e8f0"
-menu_text_active = "#7dd3fc"
-menu_title = "#ffffff"
+primary = "#2563eb"
+menu_primary = "#ffffff"
+menu_text = "#0b1f4b"
+menu_text_active = "#2563eb"
+menu_title = "#0b1f4b"
 home_section_odd = "#ffffff"
-home_section_even = "#eef6f9"
+home_section_even = "#f8fafc"
 
 [dark]
-primary = "#22d3ee"
-menu_primary = "#0b1f33"
+primary = "#60a5fa"
+menu_primary = "#0b1f4b"
 menu_text = "#e2e8f0"
-menu_text_active = "#7dd3fc"
+menu_text_active = "#93c5fd"
 menu_title = "#ffffff"
 home_section_odd = "#0f172a"
 home_section_even = "#1e293b"

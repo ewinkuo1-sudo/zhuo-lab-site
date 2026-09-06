@@ -3,7 +3,7 @@
 appearance:
   theme_day: zhuo
   theme_night: zhuo
-  font: classic
+  font: zhuo
   font_size: L
 
 marketing:

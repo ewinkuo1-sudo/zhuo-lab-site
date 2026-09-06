@@ -7,3 +7,76 @@
 .cta-group {
   justify-content: center;
 }
+
+// ---- Zhuo Lab look: white ground, navy headings, blue accent, card-style features ----
+$zl-navy: #0b1f4b;
+$zl-blue: #2563eb;
+$zl-blue-soft: #eff6ff;
+$zl-border: #e2e8f0;
+
+body {
+  font-family: "Inter", "Noto Sans TC", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #1e293b;
+}
+
+h1, h2, h3, h4, .section-heading h1, .section-heading h2 {
+  color: $zl-navy;
+  letter-spacing: -0.01em;
+}
+
+.navbar {
+  border-bottom: 1px solid $zl-border;
+  box-shadow: none;
+}
+
+// Hero
+.wg-hero {
+  padding-top: 5rem;
+  padding-bottom: 4rem;
+  .hero-title { color: $zl-navy; font-weight: 800; }
+  .hero-lead p { font-size: 1.15rem; color: #334155; max-width: 46rem; }
+  .btn-primary { background: $zl-blue; border-color: $zl-blue; border-radius: 0.6rem; }
+  .btn-secondary, .btn-outline-primary { border-radius: 0.6rem; }
+}
+
+// Features as cards, 4 across on wide screens, 2 across on tablets
+.wg-features {
+  .row > [class*="col-"] {
+    background: #ffffff;
+    border: 1px solid $zl-border;
+    border-radius: 1rem;
+    padding: 1.6rem 1.4rem;
+    margin: 0.5rem;
+    flex: 0 0 calc(50% - 1rem);
+    max-width: calc(50% - 1rem);
+    transition: box-shadow .2s ease, transform .2s ease;
+    &:hover { box-shadow: 0 8px 24px rgba(11, 31, 75, .08); transform: translateY(-2px); }
+  }
+  @media (min-width: 992px) {
+    .row > [class*="col-"] { flex: 0 0 calc(25% - 1rem); max-width: calc(25% - 1rem); }
+  }
+  .featurette-icon {
+    color: $zl-blue;
+    background: $zl-blue-soft;
+    width: 3.2rem; height: 3.2rem;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 0.8rem;
+    font-size: 1.4rem;
+    margin: 0 auto 0.9rem;
+  }
+  .section-subheading { color: $zl-navy; font-weight: 600; font-size: 1.05rem; }
+  p { color: #475569; font-size: 0.95rem; }
+}
+
+// Citation list and generic cards
+.wg-collection .card, .card-simple, .media.stream-item {
+  border: 1px solid $zl-border;
+  border-radius: 0.8rem;
+  box-shadow: none;
+}
+
+.page-footer, footer {
+  background: #f8fafc;
+  border-top: 1px solid $zl-border;
+  color: #64748b;
+}

@@ -24,9 +24,8 @@ sections:
         url: join/
     design:
       background:
-        gradient_end: '#1e3a5f'
-        gradient_start: '#0b1f33'
-        text_color_light: true
+        color: '#ffffff'
+        text_color_light: false
 
   - block: features
     content:
