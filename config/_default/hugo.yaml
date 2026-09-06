@@ -1,6 +1,6 @@
 # Hugo configuration. Guide: https://docs.hugoblox.com/tutorial/
 title: Zhuo Lab, Institute of Biophotonics, NYCU   # TODO(老師確認): 實驗室正式英文名稱
-baseURL: 'https://example.github.io/'               # TODO: 建好 GitHub Pages 後改成正式網址
+baseURL: 'https://ewinkuo1-sudo.github.io/zhuo-lab-site/'   # TODO: 決定正式網址/org 後再改
 
 ############################
 ## LANGUAGE
