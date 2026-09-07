@@ -1,5 +1,5 @@
 # Zhuo Lab font set: Inter for Latin, Noto Sans TC for Chinese
-google_fonts = "family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono"
+google_fonts = "family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono"
 heading_font = "Inter"
 body_font = "Inter"
 nav_font = "Inter"

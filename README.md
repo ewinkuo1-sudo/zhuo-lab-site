@@ -13,6 +13,10 @@ Built with [Hugo Blox](https://hugoblox.com) (research-group template, blox-boot
 | `publications.bib` | Source of truth for the Publications page. Edit or export from Zotero, push, and a GitHub Action opens a PR that regenerates `content/en/publication/` |
 | `config/_default/` | Site config. `languages.yaml` holds the Chinese menu |
 | `.github/workflows/publish.yaml` | Builds with Hugo **0.135.0** (pinned) and deploys to GitHub Pages on push to `main` |
+| `layouts/partials/blocks/features.html` | Override of the Hugo Blox features block: adds `image`, `image_alt` and `url` per item (research cards) |
+| `scripts/imagegen/` | Deterministic Python/SVG generators for every illustration on the site (see below) |
+| `assets/media/gen/` | Illustrations used by content (research thumbs, beam-path schematic); Hugo resizes them to WebP |
+| `static/media/gen/` | `hero-collagen.webp` (CSS background of the hero) and the logo mark |
 
 ## Local preview (Windows)
 
@@ -43,3 +47,24 @@ Undergraduate Students, Alumni. Set `superuser: false`.
 Hugo Blox has shipped breaking changes several times. Bump `WC_HUGO_VERSION` in `publish.yaml`, the module
 versions in `go.mod`, and the local `tools\hugo-*` binary together, once a year at most, and check the
 Hugo Blox release notes first.
+
+## Illustrations (simulated, not data)
+
+Every picture on the site is generated procedurally by the scripts in `scripts/imagegen/` (numpy, scipy, Pillow,
+matplotlib; SVG rendered with headless Chromium). They are *simulations* of what the lab's modalities look like,
+labelled as illustrations on the pages, and should be replaced by real micrographs as soon as the PI supplies them.
+
+| Script | Output | Used by |
+|---|---|---|
+| `hero_collagen.py` | `hero-collagen.webp` (2400x1500 simulated SHG collagen) | Home hero background (`template.scss`) |
+| `thumb_multimodal.py` | `thumb-multimodal.webp` (SHG + TPEF + CARS composite) | Home card 1, Research |
+| `thumb_pshg.py` | `thumb-pshg.webp` (P-SHG orientation map) | Home card 2, Research |
+| `thumb-endoscope.py` | `thumb-endoscope.webp` (probe schematic) | Home card 3, Research |
+| `thumb-ai.py` | `thumb-ai.webp` (tile classifier overlay) | Home card 4, Research |
+| `facilities-beampath.py` | `facilities-beampath.svg` (multiphoton beam path) | Facilities |
+| `logo-mark.py` | `logo-mark.svg`, `wordmark.svg` | `assets/media/logo.svg` (navbar), OG image |
+| `sharing.html` | `sharing.png` / `sharing-zh.png` (1200x630 Open Graph) | `assets/media/sharing.png` |
+
+Scripts write to `static/media/gen/`; copy the WebP/SVG files you want into `assets/media/gen/` (or `assets/media/logo.svg`,
+`assets/media/sharing.png`) after regenerating. Run e.g. `python3 scripts/imagegen/thumb_pshg.py`.
+To replace an illustration with a real image, drop the real file in `assets/media/gen/` under the same name and delete the script.

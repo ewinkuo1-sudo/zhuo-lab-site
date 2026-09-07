@@ -28,3 +28,9 @@
 
 ## 論文作者名
 - [ ] 2010 J. Struct. Biol.（澱粉 SHG）Crossref 作者掛「Zong-Yan Zhuo」，Google Scholar 列在老師名下。是早期拼法還是不同人？確認後若是老師，把 `publications.bib` 該筆改成 `Zhuo, Guan-Yu`。
+
+## 2026-09-08 視覺更新後新增
+- [ ] 目前全站圖片皆為程式模擬的示意圖（首頁 hero、四張研究方向縮圖、儀器頁光路圖），頁面上有標示「示意圖／模擬」。請老師提供真實影像（P-SHG 膠原蛋白、SHG-CD 軟骨、CARS/FLIM、探頭照片）直接取代 `assets/media/gen/` 同名檔案。
+- [ ] 首頁四張數字卡：引用數與 h-index 是老師個人 Scholar 指標，會很快過時；建議換成不會衰退的實驗室數字（論文數、成像模態數、合作醫院數）。
+- [ ] Logo（圓內波形，代表 ω→2ω）是暫定設計，老師可換。
+- [ ] 首頁 News 三則取自現有內容；之後新論文／得獎／新成員請更新 `content/*/_index.md` 的 News 區塊。

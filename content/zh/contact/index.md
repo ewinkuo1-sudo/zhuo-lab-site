@@ -19,6 +19,9 @@ sections:
         country: 台灣
         country_code: TW
       directions: '傳統醫學大樓甲棟 6 樓 604-E 室（研究室）。所辦公室：608 室，+886-2-2826-7000 轉 65707。'
+      coordinates:
+        latitude: '25.1227'
+        longitude: '121.5164'
       autolink: true
     design:
       columns: '1'

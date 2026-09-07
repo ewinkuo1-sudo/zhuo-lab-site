@@ -9,6 +9,9 @@ zh:
   title: 卓冠宇實驗室 國立陽明交通大學生醫光電研究所   # TODO(老師確認): 實驗室正式中文名稱
   params:
     description: 轉譯生醫光電、無標記非線性光學顯微、AI 輔助病理影像分析、微型化非線性內視顯微術
+    footer:
+      copyright:
+        notice: '© {year} 卓冠宇實驗室 · 國立陽明交通大學生醫光電研究所 · 台北市北投區立農街二段 155 號'
   menu:
     main:
       - name: 研究
