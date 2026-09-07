@@ -30,55 +30,102 @@ h1, h2, h3, h4, .section-heading h1, .section-heading h2 {
   letter-spacing: -0.01em;
 }
 
+// ---------- Navbar: wordmark on the left (assets/media/logo.svg), links on the right ----------
 .navbar {
   border-bottom: 1px solid rgba(110, 231, 183, .18);
   box-shadow: none;
 }
+.navbar-brand img {
+  height: 30px;
+  max-height: 30px;
+  width: auto;
+}
+.navbar .nav-link { white-space: nowrap; }
+@media (max-width: 991.98px) {
+  .navbar-brand img { height: 26px; max-height: 26px; }
+}
 
-// ---------- Hero: dark field-of-view with SHG fibre illustration ----------
+// ---------- Hero: full-bleed simulated P-SHG collagen image behind the headline ----------
 .wg-hero {
-  padding-top: 5rem;
-  padding-bottom: 4.5rem;
   position: relative;
   overflow: hidden;
+  padding-top: 5.5rem;
+  padding-bottom: 7rem;          // room for the floating stats cards that overlap the bottom edge
   background-color: $zl-ink;
-  background-image:
-    radial-gradient(ellipse 60% 70% at 75% 50%, rgba(16, 185, 129, .22), transparent 70%),
-    radial-gradient(ellipse 50% 60% at 15% 100%, rgba(16, 185, 129, .10), transparent 70%),
-    linear-gradient(rgba(110, 231, 183, .06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(110, 231, 183, .06) 1px, transparent 1px),
-    linear-gradient(180deg, $zl-ink, $zl-ink-2);
-  background-size: auto, auto, 32px 32px, 32px 32px, auto;
+  background-image: url("../media/gen/hero-collagen.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 72% center;
 
-  .hero-title { color: #ffffff; font-weight: 800; }
-  .hero-lead p { font-size: 1.15rem; color: #cfe8df; max-width: 46rem; }
-  .hero-lead strong { color: $zl-mint; }
-  .btn-light, .btn-primary { background: $zl-green; border-color: $zl-green; color: #ffffff; border-radius: 0.6rem; }
-  .btn-light:hover, .btn-primary:hover { background: #0b8767; border-color: #0b8767; color: #fff; }
-  .hero-cta-alt { color: $zl-mint; }
-  .hero-cta-alt:hover { color: #fff; }
-
-  // Without an image the hero template renders straight into .container (no .row / .hero-media),
-  // so paint the stylised P-SHG collagen illustration (static/media/hero-shg.svg) on its right side.
-  .container {
-    min-height: 26rem;
-    background: url("../media/hero-shg.svg") no-repeat right center / 42% auto;
+  // Legibility gradient: solid ink under the text, clear over the fibres on the right.
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, $zl-ink 0%, $zl-ink 30%, rgba($zl-ink, .82) 47%, rgba($zl-ink, .3) 64%, rgba($zl-ink, 0) 82%),
+      linear-gradient(180deg, rgba($zl-ink, .5) 0%, rgba($zl-ink, 0) 28%, rgba($zl-ink, 0) 70%, rgba($zl-ink, .7) 100%);
   }
-  .hero-lead { max-width: 46rem; }
+  // Honest label: the artwork is a simulation, not data.
+  &::after {
+    content: "Illustration · simulated P-SHG collagen image";
+    position: absolute;
+    right: 1.25rem;
+    top: 1rem;
+    font-size: .68rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(167, 243, 208, .5);
+    pointer-events: none;
+  }
+
+  // Hugo Blox paints design.background.color on this inner layer, which would hide the image.
+  .home-section-bg { display: none; }
+  .container {
+    position: relative;
+    z-index: 1;
+    min-height: 22rem;
+    background: none;
+  }
+  .hero-title {
+    color: #ffffff;
+    font-weight: 800;
+    font-size: clamp(2.3rem, 4.6vw, 3.7rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.2rem;
+  }
+  .hero-lead p { font-size: 1.18rem; line-height: 1.6; color: #cfe8df; max-width: 36rem; }
+  .hero-lead strong { color: $zl-mint; font-weight: 600; }
+  .btn-light, .btn-primary { background: $zl-green; border-color: $zl-green; color: #ffffff; border-radius: 0.6rem; padding: .7rem 1.4rem; font-weight: 600; }
+  .btn-light:hover, .btn-primary:hover { background: #0b8767; border-color: #0b8767; color: #fff; }
+  .hero-cta-alt { color: $zl-mint; font-weight: 500; }
+  .hero-cta-alt:hover { color: #fff; }
+  .hero-note { color: #8fb8aa !important; font-size: .92rem; letter-spacing: .01em; margin-top: 1.1rem; }
+  .cta-btns .btn-light, .cta-btns .btn-light:hover, .cta-btns .btn-light:focus,
+  .cta-btns .btn-primary, .cta-btns .btn-primary:hover { color: #ffffff !important; }
+
   @media (min-width: 768px) {
     .hero-title, .hero-lead, .cta-btns, .hero-note { max-width: 54%; }
   }
-  .cta-btns .btn-light, .cta-btns .btn-light:hover, .cta-btns .btn-light:focus,
-  .cta-btns .btn-primary, .cta-btns .btn-primary:hover { color: #ffffff !important; }
   @media (max-width: 767.98px) {
     padding-top: 3rem;
-    .container {
-      min-height: 0;
-      background-position: center bottom;
-      background-size: 78% auto;
-      padding-bottom: 66vw;
+    padding-bottom: 6rem;
+    background-position: 68% 100%;
+    background-size: auto 130%;
+    &::before {
+      background: linear-gradient(180deg, $zl-ink 0%, $zl-ink 34%, rgba($zl-ink, .7) 52%, rgba($zl-ink, .1) 100%);
     }
+    &::after { right: 1rem; top: .7rem; font-size: .6rem; }
+    .container { min-height: 0; padding-bottom: 40vw; }
+    .hero-lead p { font-size: 1.05rem; }
   }
+}
+html[lang^="zh"] .wg-hero::after {
+  content: "示意圖 · 模擬 P-SHG 膠原蛋白影像";
+  letter-spacing: .05em;
+  text-transform: none;
 }
 
 // ---------- Section headings with a small green rule ----------
@@ -90,7 +137,7 @@ h1, h2, h3, h4, .section-heading h1, .section-heading h2 {
   }
 }
 
-// ---------- Features as cards: 4 across on desktop, 2 on tablet; heading column left alone ----------
+// ---------- Research-direction cards: figure on top, 4 across on desktop, 2 on tablet ----------
 .wg-features {
   .row > .col-sm-4 {
     background: #ffffff;
@@ -100,12 +147,29 @@ h1, h2, h3, h4, .section-heading h1, .section-heading h2 {
     margin: 0.5rem;
     flex: 0 0 calc(50% - 1rem);
     max-width: calc(50% - 1rem);
+    overflow: hidden;
     transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease;
     &:hover { box-shadow: 0 10px 28px rgba(6, 78, 59, .10); transform: translateY(-2px); border-color: #a7dccb; }
   }
   @media (min-width: 992px) {
     .row > .col-sm-4 { flex: 0 0 calc(25% - 1rem); max-width: calc(25% - 1rem); }
   }
+  .row > .zl-feature-card {
+    padding: 0 0 1.4rem;
+    text-align: left;
+    .section-subheading, p { padding: 0 1.25rem; }
+    .section-subheading a { color: inherit; text-decoration: none; }
+    .section-subheading a:hover { color: $zl-green; }
+  }
+  .zl-feature-figure {
+    margin: 0 0 1.05rem;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    background: $zl-ink;
+    a { display: block; height: 100%; }
+    img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .45s ease; }
+  }
+  .zl-feature-card:hover .zl-feature-figure img { transform: scale(1.04); }
   .featurette-icon {
     color: $zl-green;
     background: $zl-mint-soft;
@@ -135,19 +199,36 @@ h1, h2, h3, h4, .section-heading h1, .section-heading h2 {
   a { color: $zl-green; }
 }
 
-// Stats row and step cards
+// ---------- Stats row: floats over the hero's bottom edge ----------
 .zl-stats {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; max-width: 60rem; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; max-width: 60rem; margin: -4.25rem auto 0;
+  position: relative; z-index: 2;
   @media (min-width: 768px) { grid-template-columns: repeat(4, 1fr); }
   > div {
     background: #ffffff; border: 1px solid $zl-border; border-radius: 1rem; padding: 1.4rem 1rem; text-align: center;
     position: relative; overflow: hidden;
+    box-shadow: 0 14px 34px rgba(4, 32, 28, .16);
     &::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: linear-gradient(90deg, $zl-green, $zl-mint); }
   }
   b { display: block; font-size: 2.1rem; font-weight: 800; color: $zl-forest; line-height: 1.1; }
   span { display: block; margin-top: .35rem; color: $zl-muted; font-size: .9rem; }
 }
-.zl-stats-note { text-align: center; color: #8a9a95; font-size: .8rem; margin: .8rem 0 0; }
+.zl-stats-note { text-align: center; color: $zl-muted; font-size: .8rem; margin: .8rem 0 0; }
+
+// ---------- News strip ----------
+.zl-news {
+  list-style: none; padding: 0; margin: 0 auto; max-width: 64rem;
+  display: grid; gap: 1rem; grid-template-columns: 1fr;
+  @media (min-width: 768px) { grid-template-columns: repeat(3, 1fr); }
+  li { background: #ffffff; border: 1px solid $zl-border; border-radius: .9rem; padding: 1rem 1.15rem; margin: 0; }
+  time { display: block; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: $zl-green; margin-bottom: .3rem; }
+  b { color: $zl-forest; font-weight: 600; }
+  a { color: $zl-forest; font-weight: 600; }
+  a:hover { color: $zl-green; }
+  p { margin: .25rem 0 0; color: #4b5b57; font-size: .92rem; }
+}
+
+// ---------- Step cards (research page) ----------
 .zl-steps {
   display: grid; grid-template-columns: 1fr; gap: 1rem; margin: 1.5rem 0 2rem;
   @media (min-width: 768px) { grid-template-columns: repeat(4, 1fr); }
@@ -157,9 +238,58 @@ h1, h2, h3, h4, .section-heading h1, .section-heading h2 {
   p { color: #4b5b57; font-size: .9rem; margin: 0; }
 }
 
+// ---------- Text + figure split (research page) ----------
+.zl-split {
+  display: grid; grid-template-columns: 1fr; gap: 1.25rem 2rem; align-items: start; margin: .5rem 0 2.25rem;
+  @media (min-width: 768px) { grid-template-columns: 1.15fr .85fr; }
+  figure { margin: 0; }
+  figure img { width: 100%; border-radius: .9rem; display: block; }
+  figcaption, .zl-figcap { font-size: .8rem; color: $zl-muted; margin-top: .45rem; line-height: 1.45; }
+  > div > p:first-child { margin-top: 0; }
+}
+figure figcaption { color: $zl-muted; font-size: .82rem; }
+
+// ---------- Callouts (people, join) ----------
+.zl-callout {
+  max-width: 46rem; margin: 2rem auto 0;
+  background: $zl-surface; border: 1px solid $zl-border; border-left: 4px solid $zl-green; border-radius: .9rem;
+  padding: 1.2rem 1.4rem;
+  p { margin: 0; }
+  p + p { margin-top: .5rem; }
+}
+
+// ---------- Contact map (Leaflet / OpenStreetMap) ----------
+#map { height: 340px; margin-top: 1.5rem; border-radius: 1rem; border: 1px solid $zl-border; }
+
 // ---------- Dark-mode safety net (site is locked to light, but keep it legible if the lock is ever removed) ----------
 body.dark {
   h1, h2, h3, h4, .section-heading h1, .section-heading h2, .home-section .section-heading h1 { color: #e6f7f1; }
-  .wg-features .section-subheading, .zl-stats b, .zl-steps b, .author-highlighted { color: $zl-forest; }
+  .wg-features .section-subheading, .zl-stats b, .zl-steps b, .zl-news b, .zl-news a, .author-highlighted { color: $zl-forest; }
   .page-footer, footer { background: $zl-ink; border-top-color: rgba(110, 231, 183, .18); color: #9fb8b0; }
+}
+
+// ---------- Section rhythm, mobile cards, CJK typography, closing band ----------
+.home-section { padding-top: 4.5rem; padding-bottom: 4.5rem; }
+@media (max-width: 767.98px) { .home-section { padding-top: 3rem; padding-bottom: 3rem; } }
+.wg-hero { padding-bottom: 7rem; }
+@media (max-width: 767.98px) { .wg-hero { padding-bottom: 6rem; } }
+@media (max-width: 575.98px) {
+  .wg-features .row > .col-sm-4 { flex: 0 0 calc(100% - 1rem); max-width: calc(100% - 1rem); }
+}
+.section-subheading, .hero-title, .zl-steps b, .zl-news b { text-wrap: balance; }
+html[lang^="zh"] {
+  p, li, .hero-lead p, .wg-features p, .zl-news p { line-height: 1.85; }
+  h1, h2, h3, h4, .section-subheading, .hero-title { letter-spacing: .02em; }
+  .hero-title { line-height: 1.2; }
+}
+.zl-close {
+  text-align: center; max-width: 44rem; margin: 0 auto;
+  h2 { color: #ffffff; font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 700; margin-bottom: .8rem; }
+  p { color: #cfe8df; font-size: 1.1rem; }
+  .zl-close-btns { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; margin-top: 1.4rem; }
+  .btn { border-radius: .6rem; padding: .7rem 1.4rem; font-weight: 600; }
+  .btn-primary { background: $zl-green; border-color: $zl-green; color: #fff !important; }
+  .btn-primary:hover { background: #0b8767; border-color: #0b8767; }
+  .btn-outline-light { color: $zl-mint !important; border-color: rgba(110, 231, 183, .5); }
+  .btn-outline-light:hover { background: rgba(110, 231, 183, .12); }
 }

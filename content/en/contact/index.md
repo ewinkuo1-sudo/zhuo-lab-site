@@ -19,6 +19,9 @@ sections:
         country: Taiwan
         country_code: TW
       directions: 'Traditional Medicine Building A, 6th floor, Room 604-E (office). Institute office: Room 608, +886-2-2826-7000 ext. 65707.'
+      coordinates:
+        latitude: '25.1227'
+        longitude: '121.5164'
       autolink: true
     design:
       columns: '1'

@@ -16,6 +16,9 @@ sections:
 
         ## Label-free nonlinear optical microscopy
 
+        <div class="zl-split">
+        <div>
+
         Second-harmonic generation (SHG), two-photon excited fluorescence (TPEF), coherent anti-Stokes
         Raman scattering (CARS) and fluorescence-lifetime imaging (FLIM) are combined on a single
         multimodal platform. Each contrast reports a different molecular property, so one scan of an
@@ -23,7 +26,18 @@ sections:
         and metabolic state at once. Recent work couples these images with machine learning and deep
         learning to classify tissue automatically.
 
+        </div>
+        <div>
+
+        ![Simulated multimodal micrograph: SHG collagen in green, two-photon autofluorescence of cells in amber, CARS lipid droplets in orange](gen/thumb-multimodal.webp "Illustration (simulated, not data): SHG collagen, two-photon autofluorescence and CARS lipid contrast from one scan of an unstained section.")
+
+        </div>
+        </div>
+
         ## Collagen chirality and extracellular-matrix quantification
+
+        <div class="zl-split">
+        <div>
 
         Collagen is the dominant SHG source in tissue. Polarization-resolved SHG (P-SHG) and SHG
         circular dichroism (SHG-CD) measure fibre orientation, the χ33/χ31 susceptibility ratio and
@@ -32,7 +46,18 @@ sections:
         oesophageal squamous cell carcinoma and high-grade dysplasia in collaboration with
         gastroenterologists and pathologists.
 
+        </div>
+        <div>
+
+        ![Simulated polarization-resolved SHG map in which each collagen fibre is coloured by its local orientation](gen/thumb-pshg.webp "Illustration (simulated, not data): a P-SHG orientation map, hue encoding local fibre angle and brightness encoding SHG intensity, with the two-lobed polarisation response in the inset.")
+
+        </div>
+        </div>
+
         ## AI-assisted label-free pathology
+
+        <div class="zl-split">
+        <div>
 
         A label-free image is only useful in the clinic if it can be read reliably and quickly.
         We therefore treat the analysis pipeline as part of the instrument. Published work extracts
@@ -42,6 +67,14 @@ sections:
         Current efforts extend this to whole-slide multiphoton scans, to the worst pattern of
         invasion in oral cancer, and to quantitative collagen pathology scores that a pathologist
         can audit.
+
+        </div>
+        <div>
+
+        ![Simulated label-free tissue image with a tile-wise classifier probability overlay](gen/thumb-ai.webp "Illustration (simulated, not data): tile-wise classifier output overlaid on a label-free multiphoton image, warm tiles flagging the tumour-like region.")
+
+        </div>
+        </div>
 
         <div class="zl-steps">
           <div><small>01</small><b>Image</b><p>Unstained section on the multiphoton platform: SHG, TPEF, P-SHG channels in one scan.</p></div>
@@ -60,9 +93,20 @@ sections:
 
         ## Miniaturized nonlinear endomicroscopy
 
+        <div class="zl-split">
+        <div>
+
         To bring label-free imaging to patients, we are shrinking the nonlinear microscope into
         fibre-based probes suitable for endoscopy, targeting non-invasive diagnosis and short-pulse
         laser treatment of collagen-rich tissue.
+
+        </div>
+        <div>
+
+        ![Schematic of a fibre-based nonlinear endomicroscopy probe focusing femtosecond pulses into tissue and collecting SHG from collagen](gen/thumb-endoscope.webp "Illustration: a fibre-based nonlinear endomicroscopy probe delivering femtosecond pulses through a miniature objective and collecting the SHG signal from collagen in tissue. Schematic, not to scale.")
+
+        </div>
+        </div>
 
         ## Molecular structure of starch and biomaterials
 

@@ -1,0 +1,68 @@
+{{/* Zhuo Lab override of the Hugo Blox "features" block (blox-bootstrap v5).
+     Adds an optional per-item `image` (path under assets/media/, e.g. gen/thumb-pshg.png),
+     `image_alt` and `url` so research directions can carry a figure and link to a section.
+     Everything else matches the upstream block. */}}
+
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+
+<div class="row featurette">
+  {{ with $block.content.title }}
+  <div class="col-md-12 section-heading">
+    <h1>{{ . | markdownify | emojify }}</h1>
+    {{ if $block.content.subtitle }}<p>{{ $block.content.subtitle | markdownify | emojify }}</p>{{ end }}
+  </div>
+  {{ end }}
+
+  {{ with $block.content.text }}
+  <div class="col-md-12">
+    {{ . | emojify | $page.RenderString }}
+  </div>
+  {{ end }}
+
+  {{ range $block.content.items }}
+  {{ $item := . }}
+  {{ $pack := or .icon_pack "fas" }}
+  {{ $pack_prefix := $pack }}
+  {{ if in (slice "fab" "fas" "far" "fal") $pack }}
+    {{ $pack_prefix = "fa" }}
+  {{ end }}
+  {{ $img := "" }}
+  {{ with .image }}{{ $img = resources.Get (path.Join "media" .) }}{{ end }}
+  {{ $href := "" }}
+  {{ with .url }}
+    {{ $href = . }}
+    {{ if not (urls.Parse $href).Scheme }}{{ $href = $href | relLangURL }}{{ end }}
+  {{ end }}
+  <div class="col-12 col-sm-4{{ if $img }} zl-feature-card{{ end }}">
+    {{ if $img }}
+      {{ $small := $img.Resize "640x webp q82" }}
+      {{ $large := $img.Resize "1280x webp q82" }}
+      <div class="zl-feature-figure">
+        {{ with $href }}<a href="{{ . | safeURL }}" tabindex="-1" aria-hidden="true">{{ end }}
+        <img src="{{ $small.RelPermalink }}"
+             srcset="{{ $small.RelPermalink }} 640w, {{ $large.RelPermalink }} 1280w"
+             sizes="(min-width: 992px) 22vw, (min-width: 576px) 45vw, 92vw"
+             width="{{ $small.Width }}" height="{{ $small.Height }}" loading="lazy" decoding="async"
+             alt="{{ $item.image_alt | default $item.name }}">
+        {{ if $href }}</a>{{ end }}
+      </div>
+    {{ else }}
+      {{ with .icon }}
+      <div class="featurette-icon">
+        {{- if eq $pack "emoji" -}}
+          {{- . | emojify -}}
+        {{- else if eq $pack "custom" -}}
+          {{- $svg_icon := resources.Get (printf "media/icons/%s.svg" .) -}}
+          {{- if $svg_icon -}}<img src="{{ $svg_icon.RelPermalink }}" alt="{{.}}" class="svg-icon svg-baseline" loading="lazy">{{- end -}}
+        {{- else -}}
+          <i class="{{ $pack }} {{ $pack_prefix }}-{{ . }}"></i>
+        {{- end -}}
+      </div>
+      {{ end }}
+    {{ end }}
+    <div class="section-subheading">{{ with $href }}<a href="{{ . | safeURL }}">{{ end }}{{ $item.name | markdownify | emojify }}{{ if $href }}</a>{{ end }}</div>
+    {{ with .description }}<p>{{ . | markdownify | emojify }}</p>{{ end }}
+  </div>
+  {{ end }}
+</div>

@@ -11,6 +11,8 @@ sections:
       text: |
         All systems are built or configured in-house and are available to collaborators after training.
 
+        ![Schematic beam path of the multiphoton scanning microscope](gen/facilities-beampath.svg "Simplified beam path of the multiphoton platform: femtosecond excitation with polarisation control, scanner, objective, and forward plus epi detection channels. Schematic, not to scale.")
+
         ### Multiphoton scanning microscope (SHG / THG / two-photon fluorescence)
         - Femtosecond excitation at 1030 nm; second-harmonic, third-harmonic and two-photon fluorescence collected **simultaneously** on separate channels.
         - Resonant-plus-galvo scanning, video-rate imaging above 20 frames per second.

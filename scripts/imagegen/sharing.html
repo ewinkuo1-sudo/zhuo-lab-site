@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Zhuo Lab sharing image</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { width: 1200px; height: 630px; overflow: hidden; background: #04201c; font-family: Inter, "Noto Sans TC", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  .card { position: relative; width: 1200px; height: 630px; overflow: hidden;
+    background: #04201c url("../../static/media/gen/hero-collagen.webp") no-repeat 78% center / cover; }
+  .card::before { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(90deg, #04201c 0%, #04201c 38%, rgba(4,32,28,.85) 52%, rgba(4,32,28,.25) 72%, rgba(4,32,28,0) 100%); }
+  .text { position: absolute; left: 72px; top: 0; bottom: 0; width: 640px; display: flex; flex-direction: column; justify-content: center; }
+  .brand { display: flex; align-items: center; gap: 16px; margin-bottom: 34px; }
+  .brand img { height: 48px; }
+  h1 { margin: 0 0 18px; font-size: 64px; font-weight: 800; color: #fff; letter-spacing: -0.02em; line-height: 1.05; }
+  h2 { margin: 0 0 22px; font-size: 32px; font-weight: 600; color: #6ee7b7; letter-spacing: -0.01em; line-height: 1.2; }
+  p { margin: 0; font-size: 22px; color: #cfe8df; line-height: 1.4; }
+  body.zh h1 { font-size: 60px; letter-spacing: 0; }
+  body.zh h2 { font-size: 34px; letter-spacing: .02em; }
+  body.zh p { font-size: 22px; letter-spacing: .01em; }
+</style>
+</head>
+<body class="LANGCLASS">
+<div class="card">
+  <div class="text">
+    <div class="brand"><img src="../../static/media/gen/logo-mark.svg" alt=""></div>
+    <h1>TITLE</h1>
+    <h2>SUBTITLE</h2>
+    <p>LINE3</p>
+  </div>
+</div>
+</body>
+</html>
