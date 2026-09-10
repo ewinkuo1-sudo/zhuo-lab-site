@@ -1,7 +1,7 @@
 ---
 title: 王靖崴
 slug: jing-wei-wang
-last_name: 王
+last_name: Wang
 role: 碩士班學生
 organizations:
   - name: 國立陽明交通大學 生醫光電研究所

@@ -1,7 +1,7 @@
 ---
 title: 蔡宜勲
 slug: yi-xun-tsai
-last_name: 蔡
+last_name: Tsai
 role: 碩士班學生
 organizations:
   - name: 國立陽明交通大學 生醫光電研究所

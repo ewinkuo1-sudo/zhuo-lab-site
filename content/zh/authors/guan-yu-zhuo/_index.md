@@ -1,8 +1,8 @@
 ---
 title: 卓冠宇
 slug: guan-yu-zhuo
-first_name: 冠宇
-last_name: 卓
+first_name: Guan-Yu
+last_name: Zhuo
 superuser: true
 role: 副教授、實驗室主持人
 organizations:

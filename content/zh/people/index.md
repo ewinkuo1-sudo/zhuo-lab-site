@@ -14,6 +14,8 @@ sections:
         - 博碩士班學生
         - 大學部專題生
         - 畢業校友
+      # 中文頁的 last_name 一律填羅馬拼音姓氏，只當排序鍵用（頁面顯示的是 title 的中文名），
+      # 否則會按中文字的 Unicode 碼位排，看起來像亂排。
       sort_by: Params.last_name
       sort_ascending: true
     design:

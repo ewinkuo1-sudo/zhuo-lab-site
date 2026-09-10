@@ -1,7 +1,7 @@
 ---
 title: 吳添至
 slug: tian-zhi-wu
-last_name: 吳
+last_name: Wu
 role: 碩士班學生
 organizations:
   - name: 國立陽明交通大學 生醫光電研究所
