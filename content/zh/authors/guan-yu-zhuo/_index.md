@@ -1,5 +1,6 @@
 ---
 title: 卓冠宇
+slug: guan-yu-zhuo
 first_name: 冠宇
 last_name: 卓
 superuser: true
