@@ -11,7 +11,7 @@ sections:
       user_groups:
         - Principal Investigator
         - Postdoctoral Researchers
-        - Graduate Students
+        - Students
         - Undergraduate Students
         - Alumni
       sort_by: Params.last_name

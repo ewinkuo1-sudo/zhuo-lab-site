@@ -12,5 +12,5 @@ social: []
 
 email: ''
 user_groups:
-  - Graduate Students
+  - Students
 ---
