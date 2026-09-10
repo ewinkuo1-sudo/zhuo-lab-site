@@ -10,6 +10,7 @@ sections:
       # Edit `user_groups` in each profile under content/en/authors/ to place a person here.
       user_groups:
         - Principal Investigator
+        - Postdoctoral Researchers
         - Graduate Students
         - Undergraduate Students
         - Alumni

@@ -10,6 +10,7 @@ sections:
       # 中文頁的分組名稱要與 content/zh/authors/ 各成員的 user_groups 一致。
       user_groups:
         - 實驗室主持人
+        - 博士後研究員
         - 博碩士班學生
         - 大學部專題生
         - 畢業校友
