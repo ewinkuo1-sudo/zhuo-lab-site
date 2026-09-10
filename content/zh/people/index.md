@@ -7,11 +7,12 @@ sections:
   - block: people
     content:
       title: 成員
+      # 中文頁的分組名稱要與 content/zh/authors/ 各成員的 user_groups 一致。
       user_groups:
-        - Principal Investigator
-        - Graduate Students
-        - Undergraduate Students
-        - Alumni
+        - 實驗室主持人
+        - 博碩士班學生
+        - 大學部專題生
+        - 畢業校友
       sort_by: Params.last_name
       sort_ascending: true
     design:

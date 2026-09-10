@@ -107,7 +107,7 @@ sections:
         <div class="zl-close">
           <h2>Bring us a diagnostic question.</h2>
           <p>Clinicians with tissue, students with curiosity: both start with one e-mail.</p>
-          <p class="zl-close-btns"><a class="btn btn-primary" href="../collaborations/">Clinical collaborations</a><a class="btn btn-outline-light" href="../join/">Join the lab</a></p>
+          <p class="zl-close-btns"><a class="btn btn-primary" href="collaborations/">Clinical collaborations</a><a class="btn btn-outline-light" href="join/">Join the lab</a></p>
         </div>
     design:
       columns: '1'

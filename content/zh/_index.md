@@ -105,7 +105,7 @@ sections:
         <div class="zl-close">
           <h2>帶著你的診斷問題來找我們。</h2>
           <p>有組織樣本的臨床醫師、有好奇心的學生，都從一封信開始。</p>
-          <p class="zl-close-btns"><a class="btn btn-primary" href="../collaborations/">臨床合作</a><a class="btn btn-outline-light" href="../join/">加入我們</a></p>
+          <p class="zl-close-btns"><a class="btn btn-primary" href="collaborations/">臨床合作</a><a class="btn btn-outline-light" href="join/">加入我們</a></p>
         </div>
     design:
       columns: '1'
