@@ -11,7 +11,7 @@ Built with [Hugo Blox](https://hugoblox.com) (research-group template, blox-boot
 |---|---|
 | `content/en/` | English pages: home, research, people, publication, facilities, join, contact |
 | `content/zh/` | Traditional Chinese pages (publications are not translated; the zh menu links to the English list) |
-| `content/en/authors/<slug>/` | One folder per person. `user_groups` decides which section of People they appear in |
+| `content/en/authors/<slug>/` | One folder per person. `data/people_order.json` sets the shared Home and People order |
 | `publications.bib` | Source of truth for the Publications page. Edit or export from Zotero, push, and a GitHub Action opens a PR that regenerates `content/en/publication/` |
 | `config/_default/` | Site config. `languages.yaml` holds the Chinese menu |
 | `.github/workflows/publish.yaml` | Builds with Hugo **0.135.0** (pinned) and deploys to GitHub Pages on push to `main` |
@@ -83,7 +83,7 @@ See `docs/website-source-audit.md` for the complete source review and unresolved
 
 ## People layout and events
 
-The lab_people block displays full bilingual author biographies alongside rectangular, uncropped portraits. data/people_order.json follows the reference screenshot order; new author profiles are appended automatically. Edit biographies in the existing author files.
+The lab_people block displays full bilingual author biographies alongside rectangular, uncropped portraits. data/people_order.json groups current profiles as PI, postdoc, research assistant, Ph.D. students, then M.Sc. students, retaining the previous order within each group. Home and People use this order in both languages. Add new members to both language folders and to the end of their role group in this shared file; unlisted profiles are still appended as a fallback. Edit biographies in the existing author files.
 
 The lab_events block uses data/lab_events.json for bilingual event captions and image paths on Home, News and Gallery. Unspecified dates are omitted. Image provenance is in docs/event-photo-sources.json.
 

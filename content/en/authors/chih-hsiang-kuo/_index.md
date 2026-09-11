@@ -6,7 +6,7 @@ role: Ph.D. Student
 organizations:
   - name: Institute of Biophotonics, National Yang Ming Chiao Tung University
     url: https://bioph.nycu.edu.tw/
-bio: Confocal reflectance measurements, ExT.
+bio: Confocal reflectance measurements.
 
 social: []
 

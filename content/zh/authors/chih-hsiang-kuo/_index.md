@@ -6,7 +6,7 @@ role: 博士生
 organizations:
   - name: 國立陽明交通大學 生醫光電研究所
     url: https://bioph.nycu.edu.tw/
-bio: 共軛焦反射式量測、ExT。
+bio: 共軛焦反射式量測。
 
 social: []
 
