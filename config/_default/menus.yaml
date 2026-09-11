@@ -1,29 +1,20 @@
 # Navigation links (English). Chinese menu lives in languages.yaml.
 main:
   - name: Research
-    url: research
+    url: '/#research'
     weight: 10
   - name: People
-    url: people
+    url: '/#people'
     weight: 20
   - name: Gallery
-    url: gallery
-    weight: 22
-  - name: News & Events
-    url: news
-    weight: 24
-  - name: Collaborations
-    url: collaborations
+    url: '/#gallery'
     weight: 25
   - name: Publications
-    url: publication
+    url: '/#publications'
     weight: 30
-  - name: Facilities
-    url: facilities
-    weight: 40
   - name: Join Us
-    url: join
+    url: '/#join'
     weight: 50
   - name: Contact
-    url: contact
+    url: '/#contact'
     weight: 60

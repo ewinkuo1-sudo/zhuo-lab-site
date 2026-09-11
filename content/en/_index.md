@@ -12,10 +12,10 @@ sections:
         Laboratory
       cta:
         label: Our research
-        url: research/
+        url: '#research'
       cta_alt:
         label: Join the lab
-        url: join/
+        url: '#join'
       cta_note:
         label: Institute of Biophotonics · National Yang Ming Chiao Tung University · Taipei
     design:
@@ -64,69 +64,85 @@ sections:
             <h3>Guan-Yu Zhuo, Ph.D.</h3>
             <p>Associate Professor, <a href="https://bioph.nycu.edu.tw/">Institute of Biophotonics</a>, National Yang Ming Chiao Tung University.</p>
             <p>Ph.D. in Physics, National Taiwan University (2012). Postdoctoral research at Caltech, Academia Sinica, and Max Planck Institute for Polymer Research. NSTC Excellent Young Scholar (2024–2027). Co-editor, <em>Advanced Biophysical Techniques in Biosciences</em> (Springer, 2025).</p>
-            <p><a href="people/guan-yu-zhuo/">Full profile</a> · <a href="https://scholar.google.com/citations?user=nF1TaA8AAAAJ">Google Scholar</a></p>
+            <p><a href="https://scholar.google.com/citations?user=nF1TaA8AAAAJ">Google Scholar</a> · <a href="https://orcid.org/0000-0002-9813-2989">ORCID</a></p>
           </div>
         </div>
     design:
       columns: '1'
 
   - block: features
+    id: research
     content:
-      title: Research directions
+      title: Research
       items:
         - name: Label-free nonlinear optical microscopy
           image: gen/thumb-multimodal.webp
           image_alt: Simulated multimodal micrograph with SHG collagen, two-photon autofluorescence and CARS lipid contrast (illustration)
-          url: research/#label-free-nonlinear-optical-microscopy
           icon: microscope
           icon_pack: fas
           description: SHG, two-photon fluorescence, CARS and FLIM on one platform, with no stain and no fixation.
         - name: Collagen chirality and ECM quantification
           image: gen/thumb-pshg.webp
           image_alt: Simulated polarization-resolved SHG orientation map of collagen fibres (illustration)
-          url: research/#collagen-chirality-and-extracellular-matrix-quantification
           icon: dna
           icon_pack: fas
           description: Polarization-resolved SHG and SHG circular dichroism to read fibre orientation and pathology in cancer and cartilage.
         - name: Miniaturized nonlinear endomicroscopy
           image: gen/thumb-endoscope.webp
           image_alt: Schematic of a fibre-based nonlinear endomicroscopy probe imaging collagen in tissue (illustration)
-          url: research/#miniaturized-nonlinear-endomicroscopy
           icon: stethoscope
           icon_pack: fas
           description: Fibre-based nonlinear imaging probes designed for in vivo diagnosis.
         - name: AI-assisted label-free pathology
           image: gen/thumb-ai.webp
           image_alt: Simulated label-free tissue image with a tile-wise classifier probability overlay (illustration)
-          url: research/#ai-assisted-label-free-pathology
           icon: brain
           icon_pack: fas
           description: Machine learning and deep learning that turn unstained multiphoton images into diagnostic calls, from texture features and SVMs to end-to-end neural networks.
+
+  - block: markdown
+    id: research-detail
+    content:
+      title:
+      text: |
+        <div class="zl-steps">
+          <div><small>01</small><b>Image</b><p>Unstained section on the multiphoton platform: SHG, TPEF, P-SHG channels in one scan.</p></div>
+          <div><small>02</small><b>Quantify</b><p>Fibre orientation, χ33/χ31, texture features and whole-slide tiles extracted automatically.</p></div>
+          <div><small>03</small><b>Classify</b><p>SVM or deep network returns a call per region, with the source image beside it.</p></div>
+          <div><small>04</small><b>Validate</b><p>Checked against the pathologist's ground truth before anything is reported.</p></div>
+        </div>
+    design:
+      columns: '1'
+      spacing:
+        padding: ['0', '0', '2rem', '0']
+
+  - block: lab_people
+    id: people
+    content:
+      title: People
 
   - block: lab_gallery
     id: gallery
     content:
       title: Gallery
       text: Explore microscopy images from the lab. Select an image to view the full original.
-      count: 3
-      link_label: Explore the gallery
+      count: 6
 
   - block: lab_events
     id: activities
     content:
       count: 3
       title: Events & lab life
-      link_label: All activities and photos
 
   - block: lab_news
     id: news
     content:
       title: News
-      link_label: All news and events
 
   - block: collection
+    id: publications
     content:
-      title: Recent publications
+      title: Publications
       text: |
         Complete list on [Google Scholar](https://scholar.google.com/citations?user=nF1TaA8AAAAJ).
       count: 5
@@ -138,19 +154,41 @@ sections:
       columns: '1'
 
   - block: markdown
-    id: closing
+    id: join
     content:
-      title:
-      subtitle:
+      title: Join Us
+      subtitle: Graduate students, undergraduates and postdocs
       text: |
-        <div class="zl-close">
-          <h2>Bring us a diagnostic question.</h2>
-          <p>Clinicians with tissue, students with curiosity: both start with one e-mail.</p>
-          <p class="zl-close-btns"><a class="btn btn-primary" href="collaborations/">Clinical collaborations</a><a class="btn btn-outline-light" href="join/">Join the lab</a></p>
-        </div>
+        We are an interdisciplinary lab. Our work sits between optics, tissue biology and clinical
+        medicine, so we welcome students from **physics, electrical and optical engineering,
+        biomedical engineering, life sciences and medicine**.
+
+        **What you would work on** — building nonlinear optical microscopes and fibre probes; imaging clinical tissue and biomaterials; quantitative image analysis with ML/DL; AI-assisted pipelines (Python, PyTorch, Claude Code); working directly with clinicians.
+
+        **How to apply** — send one e-mail to <zhuo0929@nycu.edu.tw> with a short CV, which research direction interests you, and your earliest start date. Master's and Ph.D. students apply through the [Institute of Biophotonics](https://bioph.nycu.edu.tw/) admission programmes.
     design:
       columns: '1'
-      background:
-        color: '#04201c'
-        text_color_light: true
+
+  - block: contact
+    id: contact
+    content:
+      title: Contact
+      text: |-
+        Institute of Biophotonics, National Yang Ming Chiao Tung University (Yangming campus, Taipei).
+      email: zhuo0929@nycu.edu.tw
+      phone: +886-2-2826-7962
+      address:
+        street: 'No. 155, Sec. 2, Linong St., Beitou District'
+        city: Taipei
+        region: ''
+        postcode: '11221'
+        country: Taiwan
+        country_code: TW
+      directions: 'Traditional Medicine Building A, 6th floor, Room 604-E (office). Institute office: Room 608, +886-2-2826-7000 ext. 65707.'
+      coordinates:
+        latitude: '25.1227'
+        longitude: '121.5164'
+      autolink: true
+    design:
+      columns: '1'
 ---
