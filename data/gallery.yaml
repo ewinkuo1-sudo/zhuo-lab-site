@@ -33,3 +33,10 @@
   zh:
     title: 綠色顯微影像
     alt: 深色背景中呈現綠色長條與條紋狀結構的影像。
+- image: gallery/lab-06.jpg
+  en:
+    title: Circular pseudocolour image
+    alt: A round orange and yellow structure with a purple rim on a dark background.
+  zh:
+    title: 圓形結構偽彩色影像
+    alt: 深色背景中呈現橙黃色圓形結構，外緣帶有紫色訊號。

@@ -11,6 +11,7 @@ sections:
       user_groups:
         - 實驗室主持人
         - 博士後研究員
+        - 研究助理
         - 博碩士班學生
         - 大學部專題生
         - 畢業校友
@@ -22,6 +23,14 @@ sections:
       show_interests: false
       show_role: true
       show_social: true
+
+  - block: markdown
+    content:
+      title: 實驗室日常
+      text: |
+        ![實驗室成員聚餐合照](people/lab-group.jpg)
+    design:
+      columns: '1'
 
   - block: markdown
     content:

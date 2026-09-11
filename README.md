@@ -74,3 +74,7 @@ To replace an illustration with a real image, drop the real file in `assets/medi
 The supplied Google Sites snapshot adds five microscopy images in `assets/media/gallery/`, a bilingual Gallery, and the lab's full English name in the home-page introduction. `data/gallery.yaml` holds bilingual display text; `docs/gallery-sources.json` records hashes and original dimensions. Original files are preserved; Hugo creates responsive WebP previews without cropping. Image descriptions only describe visible appearance; sample types, imaging modalities and publication matches still need source captions.
 
 `data/lab_news.yaml` is the shared news content for the home pages and new bilingual News pages. Supplied, explicitly named portraits were added for Guan-Yu Zhuo and Jackson Rodrigues in both languages. The remaining unlabelled portraits were not assigned.
+
+## Full source-folder follow-up
+
+See `docs/website-source-audit.md` for the complete source review and unresolved gaps. Six additional member portraits, source-backed bilingual biographies, three member profiles, a group photo and a sixth gallery image were added. The first two gallery originals now use the higher-resolution supplied source files. Existing profile URLs remain stable.

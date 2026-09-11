@@ -1,19 +1,19 @@
 {
   "source": "tbl@nycu - Google 協作平台.html, supplied Google Sites editor snapshot",
   "extracted_on": "2026-09-11",
-  "notes": "Five unique embedded images; original bytes preserved. Captions describe appearance only. Sample, modality, acquisition date and publication mapping were not supplied.",
+  "notes": "Images 1 and 2 replaced by higher-resolution source files in Pictures on 2026-09-11. Images 3–5 are unchanged snapshot originals. Image 6 comes from 大頭照/IMG_7319.jpg. Descriptions are visual only.",
   "images": [
     {
       "file": "assets/media/gallery/lab-01.jpg",
-      "sha256": "6f93aef0a9ec0897cb646363c7418fa00731d00f013862de7be534347abf6b41",
-      "width": 2048,
-      "height": 2048
+      "sha256": "0cf00975f6f3634dfeb52b0f24584ab63121b2e406337b28f1bec4092d8f9647",
+      "width": 4193,
+      "height": 4193
     },
     {
       "file": "assets/media/gallery/lab-02.jpg",
-      "sha256": "02f02782d2c0877fc94bed312d59b3800b2576e9cacf9181309370de44b80499",
-      "width": 2048,
-      "height": 1364
+      "sha256": "3af0227159d4bd2277f654629f5e58345b26c07ef501bbeeed226324db98379d",
+      "width": 2750,
+      "height": 1832
     },
     {
       "file": "assets/media/gallery/lab-03.png",
@@ -32,6 +32,13 @@
       "sha256": "6bcb10b2909a4bd2368ca13f0f1b88c7636041f97fb1e9ba8b646ab38653eb92",
       "width": 512,
       "height": 512
+    },
+    {
+      "file": "assets/media/gallery/lab-06.jpg",
+      "source": "大頭照/IMG_7319.jpg",
+      "sha256": "0a7de690da2e198df46d23d374d23fc7eee7a399103f9d602121dca6f88c7113",
+      "width": 277,
+      "height": 276
     }
   ]
 }

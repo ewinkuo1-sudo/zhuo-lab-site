@@ -60,3 +60,10 @@
 - 已將既有最新消息集中到 `data/lab_news.yaml`，首頁與獨立 News 共用。
 - [ ] 五張影像的樣本、成像方式、圖說與論文出處未包含於快照，需補上才可添加科學解釋或論文配對。
 - [ ] 儀器規格、其餘成員照片姓名對應、其他 Google Sites 分頁內容仍缺來源資料。
+
+## 2026-09-11 完整資料夾補充
+已依 `截圖` 的具名卡片補上六張成員照片及介紹；新增 Po-Han Huang、Wei-Hsun Wang、Jun 個人頁。姓名、來源及保留事項見 `docs/website-source-audit.md`。
+- [ ] Tiger 的文字錯置且沒有完整照片，待正確姓名／介紹／照片。
+- [ ] 確認英文顯示姓名 Yi-Shun Tsai、Ching-wei Wang 與既有中文名的拼法；原網址維持不變。
+- [ ] Jun 依 2026-09-10 名冊列研究助理；Alumni 分類與完整英文姓名仍待確認。
+- [ ] Po-Han Huang、Wei-Hsun Wang 的正式中文姓名待補。

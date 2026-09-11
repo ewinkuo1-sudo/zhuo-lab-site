@@ -1,0 +1,116 @@
+[
+  {
+    "profile": "maclinez-lewis",
+    "source": "大頭照/233.jpg",
+    "labelled_screenshot": "螢幕擷取畫面 2026-09-11 112546.png",
+    "source_sha256": "20241db1da99f27c9df10d0fd549ced655ff4c79d018ca6dd7cbaa7a48eada3f",
+    "crop_pixels": [
+      900,
+      150,
+      3550,
+      2800
+    ],
+    "screenshot_crop_reference_2048px": null,
+    "output_size": [
+      1000,
+      1000
+    ]
+  },
+  {
+    "profile": "po-han-huang",
+    "source": "Pictures/People/A2409C5E-9A81-4E08-A7E4-BCDCA0800D9D.jpg",
+    "labelled_screenshot": "螢幕擷取畫面 2026-09-11 112605.png",
+    "source_sha256": "de32a057188686244bf988fcfb8eea2d46b70dc1a8a74aadac012470eb6f29af",
+    "crop_pixels": [
+      150,
+      250,
+      3800,
+      3900
+    ],
+    "screenshot_crop_reference_2048px": null,
+    "output_size": [
+      1000,
+      1000
+    ]
+  },
+  {
+    "profile": "yi-xun-tsai",
+    "source": "大頭照/DSC_7414b.jpg",
+    "labelled_screenshot": "螢幕擷取畫面 2026-09-11 112611.png",
+    "source_sha256": "e4141f29fd597a0b5b2d2a97dddfe30db49ddef0dfb3a0c4566d3f5b7438cf48",
+    "crop_pixels": null,
+    "screenshot_crop_reference_2048px": null,
+    "output_size": [
+      1000,
+      1000
+    ],
+    "processing": "Whole source image fitted with white padding to a square"
+  },
+  {
+    "profile": "jing-wei-wang",
+    "source": "大頭照/607375626302652486.jpg",
+    "labelled_screenshot": "螢幕擷取畫面 2026-09-11 112617.png",
+    "source_sha256": "31e16bb21c6bbe01077b4589a3cc399c7d2d67b62d6dd61c0f8ad0aa7162c248",
+    "crop_pixels": [
+      0,
+      0,
+      1209,
+      1209
+    ],
+    "screenshot_crop_reference_2048px": null,
+    "output_size": [
+      1000,
+      1000
+    ]
+  },
+  {
+    "profile": "wei-hsun-wang",
+    "source": "截圖/螢幕擷取畫面 2026-09-11 112551.png",
+    "labelled_screenshot": "螢幕擷取畫面 2026-09-11 112551.png",
+    "source_sha256": "886be2c040468be6f50d21f3452706b8b04d3d8e27f16d10f9d0bb0d7626ac68",
+    "crop_pixels": null,
+    "screenshot_crop_reference_2048px": [
+      [
+        188,
+        394,
+        583,
+        939
+      ],
+      [
+        0.08,
+        0.08,
+        0.86,
+        0.65
+      ]
+    ],
+    "output_size": [
+      434,
+      436
+    ]
+  },
+  {
+    "profile": "jun",
+    "source": "截圖/螢幕擷取畫面 2026-09-11 112600.png",
+    "labelled_screenshot": "螢幕擷取畫面 2026-09-11 112600.png",
+    "source_sha256": "f13346c2f57fe0614b349104cda268e6331cf258f91a0086195c1f2c704efede",
+    "crop_pixels": null,
+    "screenshot_crop_reference_2048px": [
+      [
+        188,
+        425,
+        583,
+        969
+      ],
+      [
+        0.18,
+        0.2,
+        0.9,
+        0.72
+      ]
+    ],
+    "output_size": [
+      400,
+      397
+    ]
+  }
+]

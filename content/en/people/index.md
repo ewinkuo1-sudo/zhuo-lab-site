@@ -11,6 +11,7 @@ sections:
       user_groups:
         - Principal Investigator
         - Postdoctoral Researchers
+        - Research Assistants
         - Students
         - Undergraduate Students
         - Alumni
@@ -20,6 +21,14 @@ sections:
       show_interests: false
       show_role: true
       show_social: true
+
+  - block: markdown
+    content:
+      title: Life in the lab
+      text: |
+        ![Lab members sharing a meal](people/lab-group.jpg)
+    design:
+      columns: '1'
 
   - block: markdown
     content:

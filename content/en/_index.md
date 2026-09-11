@@ -47,6 +47,8 @@ sections:
       title: About the lab
       text: |
         **Translational Biophotonics Laboratory (TBL)** at the Institute of Biophotonics, National Yang Ming Chiao Tung University bridges optical innovation and clinical translation, advancing multimodal nonlinear optics for cancer biology and diagnosis.
+
+        Led by Guan-Yu Zhuo, our lab develops wave-encoded nonlinear endomicroscopy and multimodal, label-free imaging using SHG, THG, two-photon excited fluorescence, Raman and stimulated Raman scattering. We combine optical physics, biomedical engineering and clinical collaboration to investigate cancer biology, early detection, tumour margins and invasive patterns.
     design:
       columns: '1'
 
