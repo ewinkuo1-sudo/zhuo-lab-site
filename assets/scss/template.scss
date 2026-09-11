@@ -368,3 +368,18 @@ html[lang^="zh"] {
   }
   .zl-events { grid-template-columns: minmax(0, 1fr); }
 }
+
+// ---------- PI spotlight on homepage ----------
+.zl-pi {
+  display: grid; grid-template-columns: 200px 1fr; gap: 2rem; align-items: start;
+  max-width: 52rem; margin: 0 auto;
+  img { width: 100%; border-radius: .9rem; display: block; }
+  h3 { color: $zl-forest; font-size: 1.3rem; font-weight: 700; margin: 0 0 .5rem; }
+  p { font-size: .95rem; line-height: 1.7; margin: 0 0 .6rem; color: $zl-text; }
+  a { color: $zl-green; font-weight: 500; }
+  a:hover { color: $zl-forest; }
+}
+@media (max-width: 767.98px) {
+  .zl-pi { grid-template-columns: 1fr; text-align: center; }
+  .zl-pi img { max-width: 180px; margin: 0 auto; }
+}

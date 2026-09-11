@@ -29,12 +29,12 @@ sections:
       title:
       text: |
         <div class="zl-stats">
-          <div><b>1,490</b><span>總引用數</span></div>
-          <div><b>18</b><span>h-index</span></div>
+          <div><b>21+</b><span>期刊論文</span></div>
+          <div><b>5</b><span>成像模態</span></div>
           <div><b>4</b><span>臨床合作案</span></div>
           <div><b>3</b><span>合作醫院</span></div>
         </div>
-        <p class="zl-stats-note">資料來源：Google Scholar，2026 年 9 月。</p>
+        <p class="zl-stats-note">SHG · THG · TPEF · CARS/SRS · FLIM</p>
     design:
       columns: '1'
       spacing:
@@ -45,13 +45,28 @@ sections:
     content:
       title: 關於我們
       text: |
-        Translational Biophotonics Lab 是由卓冠宇教授領導的前沿研究團隊，隸屬國立陽明交通大學生醫光電研究所。我們致力於開創先進光學影像技術，並將其轉化為癌症診斷與生物醫學探索中具有實質影響力的臨床應用。
+        **不染色，直接看見組織。** 我們打造非線性光學顯微鏡 — SHG、TPEF、CARS、FLIM — 在細胞尺度上成像癌症與膠原蛋白，不需要染色、不需要固定。然後我們把這些工具帶進臨床：光纖內視顯微探頭、偏振解析膠原蛋白定量、以及用深度學習把光子訊號直接變成診斷判讀。
 
-        我們專精於波編碼非線性內視顯微術、多模態非線性光學成像，以及無標記成像技術，包括二次諧波產生（SHG）、三次諧波產生（THG）、雙光子激發螢光（TPEF）、拉曼與受激拉曼散射（SRS）。透過整合多光子激發、二次與三次諧波產生，以及偏振解析對比機制，我們以前所未有的精確度，呈現細胞與分子尺度的光與組織交互作用。
+        實驗室由卓冠宇教授主持，隸屬陽明交通大學生醫光電研究所，研究橫跨超快光學、組織生物學與轉譯醫學。
+    design:
+      columns: '1'
 
-        我們的研究串聯基礎光子學與轉譯醫學，實現不需染劑或標記的即時活體組織病理分析。我們聚焦於癌症生物學中的臨床挑戰，包括早期偵測、腫瘤邊界評估，以及透過高解析度、多模態成像理解腫瘤侵犯型態。
-
-        在創新與合作的推動下，實驗室結合光學物理、生物醫學工程與臨床洞見，開發兼具小型化、智慧化與臨床應用能力的下一代診斷工具。
+  - block: markdown
+    id: pi
+    content:
+      title: 實驗室主持人
+      text: |
+        <div class="zl-pi">
+          <div class="zl-pi-photo">
+            <img src="media/pi/zhuo.jpg" alt="卓冠宇教授" loading="lazy">
+          </div>
+          <div class="zl-pi-text">
+            <h3>卓冠宇 Guan-Yu Zhuo, Ph.D.</h3>
+            <p>副教授，<a href="https://bioph.nycu.edu.tw/">國立陽明交通大學生醫光電研究所</a>。</p>
+            <p>國立臺灣大學物理學博士（2012）。曾於加州理工學院、中央研究院原分所、德國馬克斯普朗克高分子研究所從事博士後研究。2024 年獲選國科會「優秀年輕學者」（2024–2027）。《Advanced Biophysical Techniques in Biosciences》共同編者（Springer, 2025）。</p>
+            <p><a href="people/guan-yu-zhuo/">完整介紹</a> · <a href="https://scholar.google.com/citations?user=nF1TaA8AAAAJ">Google Scholar</a></p>
+          </div>
+        </div>
     design:
       columns: '1'
 

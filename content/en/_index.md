@@ -29,12 +29,12 @@ sections:
       title:
       text: |
         <div class="zl-stats">
-          <div><b>1,490</b><span>citations</span></div>
-          <div><b>18</b><span>h-index</span></div>
+          <div><b>21+</b><span>journal papers</span></div>
+          <div><b>5</b><span>imaging modalities</span></div>
           <div><b>4</b><span>clinical programmes</span></div>
           <div><b>3</b><span>hospital collaborations</span></div>
         </div>
-        <p class="zl-stats-note">Google Scholar, September 2026.</p>
+        <p class="zl-stats-note">SHG · THG · TPEF · CARS/SRS · FLIM</p>
     design:
       columns: '1'
       spacing:
@@ -45,13 +45,28 @@ sections:
     content:
       title: About Us
       text: |
-        Translational Biophotonics Lab is a cutting-edge research group led by Professor Guan-Yu Zhuo at the Institute of Biophotonics, National Yang Ming Chiao Tung University. Our mission is to pioneer advanced optical imaging technologies and translate them into impactful clinical applications for cancer diagnosis and biomedical discovery.
+        **See tissue without labels.** We build nonlinear optical microscopes — SHG, TPEF, CARS, FLIM — that image cancer and collagen at the cellular scale, with no stain and no fixation. Then we bring those tools into the clinic: fibre-based endomicroscopy probes, polarization-resolved collagen mapping, and deep learning that turns raw photon signals into diagnostic calls.
 
-        We specialize in wave-encoded nonlinear endomicroscopy, multimodal nonlinear optical imaging, and label-free imaging techniques such as Second Harmonic Generation (SHG), Third Harmonic Generation (THG), Two Photon Excited Fluorescence (TPEF), Raman and Stimulated Raman Scattering (SRS). By integrating multiphoton excitation, second and third harmonic generation, and polarization-resolved contrast mechanisms, we visualize light–tissue interactions at the cellular and molecular scale with unprecedented precision.
+        Led by Prof. Guan-Yu Zhuo at the Institute of Biophotonics, NYCU, the lab sits at the intersection of ultrafast optics, tissue biology, and translational medicine.
+    design:
+      columns: '1'
 
-        Our research bridges the gap between fundamental photonics and translational medicine, enabling real-time, in vivo characterization of tissue pathology without the need for dyes or labels. We focus on clinical challenges in cancer biology, including early detection, margin assessment, and understanding invasive patterns through high-resolution, multimodal imaging.
-
-        Driven by innovation and collaboration, the lab combines optical physics, biomedical engineering, and clinical insight to develop next-generation diagnostic tools that are compact, intelligent, and clinically deployable.
+  - block: markdown
+    id: pi
+    content:
+      title: Principal Investigator
+      text: |
+        <div class="zl-pi">
+          <div class="zl-pi-photo">
+            <img src="media/pi/zhuo.jpg" alt="Prof. Guan-Yu Zhuo" loading="lazy">
+          </div>
+          <div class="zl-pi-text">
+            <h3>Guan-Yu Zhuo, Ph.D.</h3>
+            <p>Associate Professor, <a href="https://bioph.nycu.edu.tw/">Institute of Biophotonics</a>, National Yang Ming Chiao Tung University.</p>
+            <p>Ph.D. in Physics, National Taiwan University (2012). Postdoctoral research at Caltech, Academia Sinica, and Max Planck Institute for Polymer Research. NSTC Excellent Young Scholar (2024–2027). Co-editor, <em>Advanced Biophysical Techniques in Biosciences</em> (Springer, 2025).</p>
+            <p><a href="people/guan-yu-zhuo/">Full profile</a> · <a href="https://scholar.google.com/citations?user=nF1TaA8AAAAJ">Google Scholar</a></p>
+          </div>
+        </div>
     design:
       columns: '1'
 
