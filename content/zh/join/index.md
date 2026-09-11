@@ -36,4 +36,9 @@ sections:
         <!-- TODO(老師確認): 公開 email 或改表單；名額與背景要求；是否列合作醫師。 -->
     design:
       columns: '1'
+  - block: lab_video
+    id: video
+    content:
+      title: 在陽明交大的生活
+      text: 陽明交通大學的學生分享校園生活與研究。
 ---

@@ -356,6 +356,59 @@ html[lang^="zh"] {
 
 .wg-lab-gallery .section-heading, .wg-lab-news .section-heading { text-align: center; }
 
+// Video: a click-to-load facade. The poster frame is served locally, so nothing
+// is requested from YouTube until the visitor presses play.
+.zl-videos {
+  max-width: 56rem;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.6rem;
+}
+.zl-videos-grid { max-width: none; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.zl-video {
+  margin: 0;
+  min-width: 0;
+  border: 1px solid $zl-border;
+  background: #fff;
+  overflow: hidden;
+  figcaption { padding: 1.1rem 1.2rem; }
+  h2 { font-size: 1.08rem; margin: 0 0 .5rem; }
+  p { font-size: .9rem; margin: 0 0 .6rem; line-height: 1.65; color: $zl-text; }
+}
+.zl-video-facade {
+  display: block;
+  position: relative;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: $zl-ink;
+  cursor: pointer;
+  aspect-ratio: 16 / 9;
+  img { display: block; width: 100%; height: 100%; object-fit: cover; margin: 0; }
+  &:hover .zl-video-play-bg, &:focus-visible .zl-video-play-bg { fill: $zl-accent; }
+  &:hover .zl-video-play { transform: translate(-50%, -50%) scale(1.06); }
+}
+.zl-video-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform .15s ease;
+  pointer-events: none;
+  svg { display: block; filter: drop-shadow(0 2px 6px rgba(20, 45, 69, .45)); }
+  .zl-video-play-bg { fill: rgba(20, 45, 69, .82); transition: fill .15s ease; }
+}
+.zl-video-frame { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+.zl-video-credit { font-size: .78rem; margin: 0 !important; color: $zl-muted; }
+.wg-lab-video { background: #fff; }
+.wg-lab-video .section-heading { text-align: center; }
+@media (max-width: 767.98px) {
+  .zl-videos-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .zl-video-play, .zl-video-facade:hover .zl-video-play { transition: none; transform: translate(-50%, -50%); }
+}
+
 
 // Full portraits and biographies following the supplied reference.
 .wg-lab-people { background: $zl-surface; }

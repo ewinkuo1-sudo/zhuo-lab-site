@@ -1,0 +1,21 @@
+# Videos embedded on the site. One entry per video.
+#
+# youtube_id  YouTube video ID (the v= parameter).
+# thumbnail   Path under assets/media/. Stored locally so no third-party request
+#             is made before the visitor presses play.
+# source      Canonical watch URL, shown as the credit link.
+# credit      Channel that published the video. Required for third-party videos:
+#             do not present another channel's video as the lab's own work.
+- youtube_id: MmVlpbcqJaM
+  thumbnail: video/nycu-study-in-taiwan.jpg
+  source: https://www.youtube.com/watch?v=MmVlpbcqJaM
+  credit: Study in Taiwan
+  en:
+    title: Meet the students at NYCU
+    description: Students at National Yang Ming Chiao Tung University describe campus life,
+      research and studying in Taiwan. Produced by Study in Taiwan.
+    alt: Video thumbnail showing students on the National Yang Ming Chiao Tung University campus.
+  zh:
+    title: 認識陽明交大的學生
+    description: 國立陽明交通大學的學生分享校園生活、研究與在台灣求學的經驗。影片由 Study in Taiwan 製作。
+    alt: 影片縮圖，陽明交通大學校園中的學生。

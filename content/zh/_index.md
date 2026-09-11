@@ -119,6 +119,11 @@ sections:
     count: 3
     title: 活動與實驗室日常
     link_label: 查看所有活動與照片
+- block: lab_video
+  id: video
+  content:
+    title: 在陽明交大的生活
+    text: 在寫信給我們之前，先認識你將加入的校園與學生社群。
 - block: lab_join
   id: join
   content:

@@ -1,0 +1,68 @@
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $zh := eq $page.Language.Lang "zh" }}
+{{ $items := site.Data.videos }}
+{{ with $block.content.only }}
+  {{ $want := . }}
+  {{ $items = where $items "youtube_id" $want }}
+{{ end }}
+{{ with $block.content.count }}{{ $items = first (int .) $items }}{{ end }}
+<div class="row">
+  <div class="col-12 section-heading">
+    {{ with $block.content.title }}<h1>{{ . }}</h1>{{ end }}
+    {{ with $block.content.text }}<p>{{ . }}</p>{{ end }}
+  </div>
+  <div class="col-12">
+    <div class="zl-videos{{ if gt (len $items) 1 }} zl-videos-grid{{ end }}">
+      {{ range $items }}
+      {{ $copy := index . $page.Language.Lang }}
+      {{ $img := resources.Get (path.Join "media" .thumbnail) }}
+      {{ if not $img }}{{ errorf "Missing video thumbnail: %s" .thumbnail }}{{ end }}
+      {{ $small := $img.Resize (printf "%dx webp q85" (int (math.Min 720 $img.Width))) }}
+      {{ $large := $img.Resize (printf "%dx webp q90" (int (math.Min 1280 $img.Width))) }}
+      <figure class="zl-video">
+        <button class="zl-video-facade" type="button"
+                data-youtube-id="{{ .youtube_id }}"
+                data-video-title="{{ $copy.title }}"
+                aria-label="{{ if $zh }}播放影片：{{ else }}Play video: {{ end }}{{ $copy.title }}">
+          <img src="{{ $small.RelPermalink }}" srcset="{{ $small.RelPermalink }} {{ $small.Width }}w, {{ $large.RelPermalink }} {{ $large.Width }}w"
+               sizes="(min-width: 992px) 720px, 92vw"
+               width="{{ $small.Width }}" height="{{ $small.Height }}" alt="{{ $copy.alt }}" loading="lazy" decoding="async">
+          <span class="zl-video-play" aria-hidden="true">
+            <svg viewBox="0 0 68 48" width="88" height="62" focusable="false"><path class="zl-video-play-bg" d="M66.5 7.7a8.6 8.6 0 0 0-6-6C55.2 0 34 0 34 0S12.8 0 7.5 1.6a8.6 8.6 0 0 0-6 6A90 90 0 0 0 0 24a90 90 0 0 0 1.5 16.3 8.6 8.6 0 0 0 6 6C12.8 48 34 48 34 48s21.2 0 26.5-1.7a8.6 8.6 0 0 0 6-6A90 90 0 0 0 68 24a90 90 0 0 0-1.5-16.3z"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+          </span>
+        </button>
+        <figcaption>
+          <h2>{{ $copy.title }}</h2>
+          <p>{{ $copy.description }}</p>
+          <p class="zl-video-credit">
+            <a href="{{ .source }}" rel="noopener">{{ .credit }} · {{ if $zh }}在 YouTube 觀看{{ else }}Watch on YouTube{{ end }} <span aria-hidden="true">↗</span></a>
+          </p>
+        </figcaption>
+      </figure>
+      {{ end }}
+    </div>
+    {{ if and $block.content.link_label $block.content.link_url }}<p class="zl-section-link"><a href="{{ partial "lab_url" $block.content.link_url }}">{{ $block.content.link_label }} <span aria-hidden="true">→</span></a></p>{{ end }}
+  </div>
+</div>
+<script>
+// Click-to-load YouTube facade: nothing is requested from YouTube until the visitor presses play.
+if (!window.__zlVideoFacade) {
+  window.__zlVideoFacade = true;
+  document.addEventListener('click', function (event) {
+    var facade = event.target.closest('.zl-video-facade');
+    if (!facade) return;
+    var id = facade.getAttribute('data-youtube-id');
+    if (!id) return;
+    var frame = document.createElement('iframe');
+    frame.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&rel=0';
+    frame.title = facade.getAttribute('data-video-title') || 'YouTube video';
+    frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    frame.referrerPolicy = 'strict-origin-when-cross-origin';
+    frame.allowFullscreen = true;
+    frame.className = 'zl-video-frame';
+    facade.replaceWith(frame);
+    frame.focus();
+  });
+}
+</script>

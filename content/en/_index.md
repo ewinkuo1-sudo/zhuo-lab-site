@@ -129,6 +129,11 @@ sections:
     count: 3
     title: Events & lab life
     link_label: All activities and photos
+- block: lab_video
+  id: video
+  content:
+    title: Life at NYCU
+    text: Before you write to us, meet the campus and student community you would be joining.
 - block: lab_join
   id: join
   content:

@@ -17,6 +17,8 @@ Built with [Hugo Blox](https://hugoblox.com) (research-group template, blox-boot
 | `.github/workflows/publish.yaml` | Builds with Hugo **0.135.0** (pinned) and deploys to GitHub Pages on push to `main` |
 | `layouts/partials/blocks/features.html` | Override of the Hugo Blox features block: adds `image`, `image_alt` and `url` per item (research cards) |
 | `scripts/imagegen/` | Deterministic Python/SVG generators for every illustration on the site (see below) |
+| `data/videos.yaml` | Videos shown by the `lab_video` block: YouTube ID, local poster frame, channel credit and bilingual copy |
+| `layouts/partials/blocks/lab_video.html` | `lab_video` block. Click-to-load facade: the poster is served locally and nothing is requested from YouTube until the visitor presses play (embed uses `youtube-nocookie.com`) |
 | `assets/media/gen/` | Illustrations used by content (research thumbs, beam-path schematic); Hugo resizes them to WebP |
 | `static/media/gen/` | Legacy concept artwork and the logo mark; the current hero uses `assets/media/gallery/lab-04.png` |
 
@@ -43,6 +45,26 @@ academic import publications.bib content/en/publication/ --compact
 Copy `content/en/authors/guan-yu-zhuo/` to a new slug (e.g. `wang-xiao-ming`), replace `avatar.jpg`,
 edit `_index.md`, and set `user_groups` to one of: Principal Investigator, Graduate Students,
 Undergraduate Students, Alumni. Set `superuser: false`.
+
+## Adding a video
+
+Add an entry to `data/videos.yaml` and save the video's poster frame under `assets/media/video/`
+(`https://i.ytimg.com/vi/<ID>/maxresdefault.jpg`), so no request reaches YouTube before the visitor
+presses play. Record the file's hash and origin in `docs/video-sources.json`. Always set `credit` to
+the channel that published the video: do not present a third party's video as the lab's own work.
+
+Then reference it from a landing page:
+
+```yaml
+- block: lab_video
+  id: video
+  content:
+    title: Life at NYCU
+    text: Optional introduction.
+    only: MmVlpbcqJaM   # optional: one specific video; otherwise all entries, newest first
+```
+
+The block is currently on both home pages and both Join pages.
 
 ## Upgrading Hugo Blox
 

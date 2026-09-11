@@ -1,0 +1,19 @@
+{
+  "note": "Locally stored poster frames for embedded videos. Each file is the published thumbnail of the video it links to, saved so that no third-party request is made before the visitor presses play. Videos themselves are embedded from youtube-nocookie.com and are not redistributed.",
+  "videos": [
+    {
+      "youtube_id": "MmVlpbcqJaM",
+      "title": "Meet the Students at National Yang Ming Chiao Tung University (國立陽明交通大學) | Study in Taiwan",
+      "channel": "Study in Taiwan",
+      "source": "https://www.youtube.com/watch?v=MmVlpbcqJaM",
+      "thumbnail": {
+        "path": "assets/media/video/nycu-study-in-taiwan.jpg",
+        "origin": "https://i.ytimg.com/vi/MmVlpbcqJaM/maxresdefault.jpg",
+        "sha256": "015458f2dc7019e404d9754e2423bb3fcdc1822a8a9f50069aad6abcff082f69",
+        "width": 1280,
+        "height": 720,
+        "retrieved": "2026-09-11"
+      }
+    }
+  ]
+}
