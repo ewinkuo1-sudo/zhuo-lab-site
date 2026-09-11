@@ -84,3 +84,23 @@ See `docs/website-source-audit.md` for the complete source review and unresolved
 The lab_people block displays full bilingual author biographies alongside rectangular, uncropped portraits. data/people_order.json follows the reference screenshot order; new author profiles are appended automatically. Edit biographies in the existing author files.
 
 The lab_events block uses data/lab_events.json for bilingual event captions and image paths on Home, News and Gallery. Unspecified dates are omitted. Image provenance is in docs/event-photo-sources.json.
+
+
+## Homepage redesign (2026-09-11)
+
+Home now leads with a real lab image and research mission, followed by news, four research directions, three selected papers, PI, milestones, compact member cards, image and activity previews, recruitment and contact. Full People and author pages remain available.
+
+- `data/highlights.json`: bilingual selected-paper summaries and attributed figures; titles, journals, years and DOIs come from existing publication pages.
+- `data/gallery.yaml`: eight images, including two newly sourced paper figures and five originals awaiting scientific captions.
+- `layouts/partials/lab_url.html`: language-aware page links using actual page permalinks. The navbar override fixes homepage anchors when deployed under a GitHub Pages project path.
+- `lab_people` with `compact: true`: profile summaries on Home; full biographies on People.
+- `docs/homepage-figure-sources.json`: figure provenance, hashes and open licences where applicable. Original figures remain uncropped; Hugo generates WebP previews.
+- Homepage metrics count website records; they do not claim lab-only lifetime output or unverified clinical partnerships.
+
+Browser verification requires Python with Playwright and Microsoft Edge. Build with the deployment prefix so the Chinese URL regression is exercised:
+
+```powershell
+$env:PATH = "C:\Users\ewink\.cache\zhuo-site-tools\go\go\bin;" + $env:PATH
+& 'C:\Users\ewink\.cache\zhuo-site-tools\hugo\hugo.exe' --minify --baseURL 'http://127.0.0.1:18766/zhuo-lab-site/' --destination 'C:\Users\ewink\.cache\zhuo-site-review\redesign-public\zhuo-lab-site'
+& 'C:\Users\ewink\AppData\Local\Programs\Python\Python312\python.exe' scripts/check_home_redesign.py --root 'C:\Users\ewink\.cache\zhuo-site-review\redesign-public' --output 'C:\Users\ewink\.cache\zhuo-site-review\redesign'
+```

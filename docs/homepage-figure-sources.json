@@ -1,0 +1,29 @@
+[
+  {
+    "file": "assets/media/publications/esophagus-2025.png",
+    "url": "https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41598-025-13910-7/MediaObjects/41598_2025_13910_Fig2_HTML.png",
+    "article": "https://doi.org/10.1038/s41598-025-13910-7",
+    "figure": 2,
+    "credit": "Makkithaya et al. (2025)",
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "sha256": "cab0c157fd27f739c62ccd90639afd8b4c3fe5119b4c162eda3ed6fa825adf28"
+  },
+  {
+    "file": "assets/media/publications/cartilage-2024.jpg",
+    "url": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e317/11062753/fc4d94b02fe5/ABPID9-000008-026107_1-g003.jpg",
+    "article": "https://doi.org/10.1063/5.0196676",
+    "figure": 3,
+    "credit": "Makkithaya et al. (2024)",
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "sha256": "9fe504e32c48d04454018261bc1dae248399a599e44410cba80e913054fcae46"
+  },
+  {
+    "file": "assets/media/gallery/lab-02.jpg",
+    "url": "https://ars.els-cdn.com/content/image/1-s2.0-S0023683725001679-gr5_lrg.jpg",
+    "article": "https://doi.org/10.1016/j.labinv.2025.104257",
+    "figure": 5,
+    "credit": "Huang et al. (2026)",
+    "sha256": "3af0227159d4bd2277f654629f5e58345b26c07ef501bbeeed226324db98379d",
+    "note": "Byte-for-byte match to the user-supplied Figure 5; reused without duplication."
+  }
+]

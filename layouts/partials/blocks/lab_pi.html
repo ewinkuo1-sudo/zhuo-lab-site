@@ -1,0 +1,11 @@
+{{ $zh := eq .wcPage.Language.Lang "zh" }}
+{{ with site.GetPage "/authors/guan-yu-zhuo" }}
+{{ $p := . }}{{ $img := (.Resources.GetMatch "avatar*").Resize "400x webp q88" }}
+<div class="section-heading"><h1>{{ if $zh }}實驗室主持人{{ else }}Principal Investigator{{ end }}</h1></div>
+<div class="zl-pi">
+  <a href="{{ .RelPermalink }}"><img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ .Title }}" loading="lazy"></a>
+  <div><h2>{{ .Title }}</h2><p class="zl-person-role">{{ .Params.role }}</p><p>{{ .Params.bio }}</p>
+  <p>{{ if $zh }}物理學博士，研究橫跨非線性光學顯微、組織影像與轉譯生醫光電。{{ else }}A physicist working across nonlinear optical microscopy, tissue imaging and translational biophotonics.{{ end }}</p>
+  <p><a href="{{ .RelPermalink }}">{{ if $zh }}完整介紹與學經歷{{ else }}Full profile and background{{ end }} →</a></p>
+  <div class="zl-inline-links">{{ range .Params.social }}{{ if in (slice "google-scholar" "orcid") .icon }}<a href="{{ .link }}">{{ if eq .icon "orcid" }}ORCID{{ else }}Google Scholar{{ end }}</a>{{ end }}{{ end }}</div></div>
+</div>{{ end }}

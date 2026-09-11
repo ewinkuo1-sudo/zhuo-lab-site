@@ -1,0 +1,9 @@
+{{- $href := . -}}
+{{- $parts := split $href "#" -}}
+{{- $target := index $parts 0 -}}
+{{- if not (urls.Parse $href).Scheme -}}
+  {{- if eq $target "" -}}{{- $href = site.Home.RelPermalink -}}
+  {{- else -}}{{- with site.GetPage $target -}}{{- $href = .RelPermalink -}}{{- else -}}{{- $href = $target | relURL -}}{{- end -}}{{- end -}}
+  {{- if gt (len $parts) 1 -}}{{- $href = printf "%s#%s" $href (index $parts 1) -}}{{- end -}}
+{{- end -}}
+{{- return $href -}}

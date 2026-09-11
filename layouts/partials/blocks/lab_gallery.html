@@ -22,12 +22,15 @@
                sizes="(min-width: 992px) 540px, (min-width: 768px) 45vw, 92vw"
                width="{{ $small.Width }}" height="{{ $small.Height }}" alt="{{ $copy.alt }}" loading="lazy" decoding="async">
         </a>
-        <figcaption><h2>{{ $copy.title }}</h2><p>{{ $copy.alt }}</p>
+        <figcaption><h2>{{ $copy.title }}</h2><p>{{ $copy.description | default $copy.alt }}</p>
           <a href="{{ $img.RelPermalink }}">{{ if $zh }}查看原圖{{ else }}View original{{ end }} <span aria-hidden="true">↗</span></a>
+        {{ with .source }}<p class="zl-image-credit"><a href="{{ . }}">{{ $copy.title }} · DOI</a></p>{{ end }}
+          {{ with .credit }}<p class="zl-image-credit">{{ . }}</p>{{ end }}
+          {{ with .license }}<p class="zl-image-credit"><a href="{{ . }}">CC BY 4.0</a></p>{{ end }}
         </figcaption>
       </figure>
       {{ end }}
     </div>
-    {{ with $block.content.link_label }}<p class="zl-section-link"><a class="btn btn-outline-primary" href="{{ "gallery/" | relLangURL }}">{{ . }}</a></p>{{ end }}
+    {{ with $block.content.link_label }}<p class="zl-section-link"><a class="btn btn-outline-primary" href="{{ partial "lab_url" "gallery/" }}">{{ . }}</a></p>{{ end }}
   </div>
 </div>

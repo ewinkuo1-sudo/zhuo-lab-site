@@ -1,0 +1,4 @@
+{{ $b := .wcBlock.content }}{{ $zh := eq .wcPage.Language.Lang "zh" }}
+<div class="section-heading"><h1>{{ $b.title }}</h1><p>{{ $b.text }}</p></div>
+<div class="zl-join-grid">{{ range $b.items }}<article><h2>{{ .title }}</h2><p>{{ .text }}</p><p class="zl-join-detail">{{ .apply }}</p></article>{{ end }}</div>
+<div class="zl-apply"><p>{{ $b.apply }}</p><a class="btn btn-primary" href="mailto:zhuo0929@nycu.edu.tw">{{ if $zh }}聯絡卓老師{{ else }}Contact Prof. Zhuo{{ end }} ↗</a><a href="https://bioph.nycu.edu.tw/">{{ if $zh }}生醫光電所招生資訊{{ else }}Institute admissions{{ end }} ↗</a></div>

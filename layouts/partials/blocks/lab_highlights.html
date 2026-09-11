@@ -1,0 +1,19 @@
+{{ $lang := .wcPage.Language.Lang }}{{ $zh := eq $lang "zh" }}
+<div class="section-heading"><h1>{{ .wcBlock.content.title }}</h1><p>{{ .wcBlock.content.text }}</p></div>
+<div class="zl-highlights">
+{{ range site.Data.highlights }}
+  {{ $item := . }}{{ $copy := index . $lang }}
+  {{ $pub := (index (where site.Sites "Language.Lang" "en") 0).GetPage (printf "/publication/%s" .slug) }}
+  {{ if not $pub }}{{ errorf "Missing selected publication: %s" .slug }}{{ end }}
+  {{ $img := resources.Get (printf "media/%s" .image) }}{{ $thumb := $img.Resize "900x webp q88" }}
+  <article class="zl-highlight">
+    <a class="zl-highlight-image" href="{{ $img.RelPermalink }}"><img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" alt="{{ $copy.alt }}" loading="lazy" decoding="async"></a>
+    <div class="zl-highlight-copy"><p class="zl-eyebrow">{{ $pub.Params.publication | plainify | strings.TrimPrefix "*" | strings.TrimSuffix "*" }} · {{ $pub.Date.Format "2006" }}</p>
+      <h2><a href="{{ $pub.RelPermalink }}">{{ $copy.title }}</a></h2><p>{{ $copy.summary }}</p>
+      <div class="zl-inline-links"><a href="{{ $pub.RelPermalink }}">{{ if $zh }}論文資料{{ else }}Paper details{{ end }} →</a><a href="https://doi.org/{{ $pub.Params.doi }}">DOI ↗</a></div>
+      <p class="zl-image-credit"><a href="{{ .source }}">{{ .credit }}</a>{{ with .license }} · <a href="{{ . }}">CC BY 4.0</a>{{ end }}</p>
+    </div>
+  </article>
+{{ end }}
+</div>
+<p class="zl-section-link"><a class="btn btn-outline-primary" href="{{ (index (where site.Sites "Language.Lang" "en") 0).Home.RelPermalink }}publication/">{{ if $zh }}完整論文清單{{ else }}All publications{{ end }} →</a></p>

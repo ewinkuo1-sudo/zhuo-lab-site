@@ -1,0 +1,52 @@
+[
+  {
+    "slug": "huang-2026-deciphering",
+    "image": "gallery/lab-02.jpg",
+    "credit": "Huang et al. · Laboratory Investigation · Fig. 5",
+    "source": "https://doi.org/10.1016/j.labinv.2025.104257",
+    "en": {
+      "title": "Seeing oral cancer invasion",
+      "summary": "Multimodal nonlinear microscopy examines the tissue microenvironment associated with an aggressive pattern of oral cancer invasion.",
+      "alt": "Figure 5 from Huang et al., showing six microscopy panels with original annotations."
+    },
+    "zh": {
+      "title": "看見口腔癌的侵犯型態",
+      "summary": "結合臨床資料與多模態非線性顯微影像，研究口腔癌侵襲型態所伴隨的組織微環境變化。",
+      "alt": "Huang 等人論文圖 5，六分圖顯微影像保留原始標記。"
+    }
+  },
+  {
+    "slug": "makkithaya-2025-quantitative",
+    "image": "publications/esophagus-2025.png",
+    "credit": "Makkithaya et al. · Scientific Reports · Fig. 2",
+    "source": "https://doi.org/10.1038/s41598-025-13910-7",
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "en": {
+      "title": "Reading the esophageal tissue matrix",
+      "summary": "SHG and two-photon fluorescence images reveal tissue architecture; texture analysis and machine learning compare esophageal disease groups.",
+      "alt": "Published figure with H&E histology and SHG, two-photon fluorescence and merged esophageal tissue images."
+    },
+    "zh": {
+      "title": "量化食道組織的細胞外基質",
+      "summary": "以 SHG 與雙光子螢光呈現組織結構，結合紋理分析與機器學習，比較不同食道病變組別。",
+      "alt": "論文圖包含 H&E 組織切片，以及食道組織的 SHG、雙光子螢光與合併影像。"
+    }
+  },
+  {
+    "slug": "makkithaya-2024-investigating",
+    "image": "publications/cartilage-2024.jpg",
+    "credit": "Makkithaya et al. · APL Bioengineering · Fig. 3",
+    "source": "https://doi.org/10.1063/5.0196676",
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "en": {
+      "title": "Mapping cartilage with polarized light",
+      "summary": "Polarization-resolved SHG and quantitative image analysis investigate structural differences in cartilage affected by osteoarthritis and rheumatoid arthritis.",
+      "alt": "Osteoarthritis cartilage: H&E images, SHG intensity, susceptibility ratio, polarization and orientation maps."
+    },
+    "zh": {
+      "title": "用偏振光解析軟骨結構",
+      "summary": "以偏振解析 SHG 與定量影像分析，研究骨關節炎及類風濕性關節炎相關的軟骨結構差異。",
+      "alt": "骨關節炎軟骨的 H&E、SHG 強度、感受率比值、偏振與方向分布圖。"
+    }
+  }
+]

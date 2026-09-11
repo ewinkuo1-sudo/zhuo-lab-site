@@ -1,0 +1,7 @@
+{{ $zh := eq .wcPage.Language.Lang "zh" }}
+{{ $en := index (where site.Sites "Language.Lang" "en") 0 }}
+<div class="zl-metrics">
+<div><b>{{ len (where $en.RegularPages "Section" "publication") }}</b><span>{{ if $zh }}收錄論文{{ else }}Listed publications{{ end }}</span></div>
+<div><b>{{ len site.Data.people_order }}</b><span>{{ if $zh }}成員介紹{{ else }}Member profiles{{ end }}</span></div>
+<div><b>4</b><span>{{ if $zh }}研究方向{{ else }}Research directions{{ end }}</span></div>
+</div><p class="zl-stats-note">{{ if $zh }}依本站目前收錄資料統計，論文包含主持人歷年共同著作。檢核日期：2026 年 9 月 11 日。{{ else }}Counts reflect this website; publications include the PI's earlier co-authored work. Reviewed 11 September 2026.{{ end }}</p>

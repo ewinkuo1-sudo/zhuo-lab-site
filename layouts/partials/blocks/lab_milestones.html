@@ -1,0 +1,4 @@
+{{ $b := .wcBlock.content }}
+<div class="section-heading"><h1>{{ $b.title }}</h1></div>
+<ol class="zl-milestones">{{ range $b.items }}<li><time>{{ .year }}</time><div><h2>{{ .title }}</h2><p>{{ .text }}</p></div></li>{{ end }}</ol>
+<p class="zl-section-link"><a href="{{ (site.GetPage "/authors/guan-yu-zhuo").RelPermalink }}">{{ $b.link_label }} →</a></p>

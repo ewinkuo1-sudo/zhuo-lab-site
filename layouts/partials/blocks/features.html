@@ -32,7 +32,7 @@
   {{ $href := "" }}
   {{ with .url }}
     {{ $href = . }}
-    {{ if not (urls.Parse $href).Scheme }}{{ $href = $href | relLangURL }}{{ end }}
+    {{ if not (urls.Parse $href).Scheme }}{{ $href = partial "lab_url" $href }}{{ end }}
   {{ end }}
   <div class="col-12 col-sm-4{{ if $img }} zl-feature-card{{ end }}">
     {{ if $img }}
@@ -63,6 +63,8 @@
     {{ end }}
     <div class="section-subheading">{{ with $href }}<a href="{{ . | safeURL }}">{{ end }}{{ $item.name | markdownify | emojify }}{{ if $href }}</a>{{ end }}</div>
     {{ with .description }}<p>{{ . | markdownify | emojify }}</p>{{ end }}
+    {{ with $item.image_credit }}<p class="zl-image-credit">{{ . }}{{ with $item.image_source }} · <a href="{{ . }}">{{ if eq $page.Language.Lang "zh" }}來源{{ else }}Source{{ end }}</a>{{ end }}{{ with $item.image_license }} · <a href="{{ . }}">CC BY 4.0</a>{{ end }}</p>{{ end }}
+    {{ with $href }}<p class="zl-research-link"><a href="{{ . }}">{{ if eq $page.Language.Lang "zh" }}了解研究{{ else }}Explore this research{{ end }} →</a></p>{{ end }}
   </div>
   {{ end }}
 </div>

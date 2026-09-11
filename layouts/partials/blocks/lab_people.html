@@ -10,6 +10,20 @@
   {{ range where site.Pages "Section" "authors" }}
     {{ if and .Params.user_groups (not (in $people .)) }}{{ $people = $people | append . }}{{ end }}
   {{ end }}
+  {{ if $block.content.compact }}
+  <div class="zl-people-cards">
+  {{ range $people }}{{ if ne (.File.Dir | path.Clean | path.Base) "guan-yu-zhuo" }}
+    <article class="zl-member-card">
+      {{ $person := . }}
+      <a class="zl-member-photo" href="{{ .RelPermalink }}" tabindex="-1" aria-hidden="true">
+      {{ with .Resources.GetMatch "avatar*" }}{{ $img := .Resize "400x webp q85" }}<img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="" loading="lazy" decoding="async">
+      {{ else }}<span class="zl-member-placeholder">TBL</span>{{ end }}</a>
+      <div class="zl-member-copy"><h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2><p class="zl-person-role">{{ .Params.role }}</p>{{ with .Params.bio }}<p>{{ . }}</p>{{ end }}</div>
+    </article>
+  {{ end }}{{ end }}
+  </div>
+  <p class="zl-section-link"><a href="{{ partial "lab_url" "people/" }}">{{ if eq $page.Language.Lang "zh" }}所有成員與完整介紹{{ else }}All members and full profiles{{ end }} →</a></p>
+  {{ else }}
   {{ range $people }}
   {{ $person := . }}
   {{ $portrait := .Resources.GetMatch "avatar*" }}
@@ -41,5 +55,6 @@
       {{ end }}
     </div>
   </article>
+  {{ end }}
   {{ end }}
 </div>

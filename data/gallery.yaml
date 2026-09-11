@@ -1,3 +1,41 @@
+- image: publications/esophagus-2025.png
+  source: https://doi.org/10.1038/s41598-025-13910-7
+  credit: Makkithaya et al. · Scientific Reports · Fig. 2
+  license: https://creativecommons.org/licenses/by/4.0/
+  en:
+    title: Reading the esophageal tissue matrix
+    alt: Published figure with H&E histology and SHG, two-photon fluorescence and merged esophageal tissue images.
+    description: Published figure with H&E histology and SHG, two-photon fluorescence and merged esophageal tissue
+      images.
+  zh:
+    title: 量化食道組織的細胞外基質
+    alt: 論文圖包含 H&E 組織切片，以及食道組織的 SHG、雙光子螢光與合併影像。
+    description: 論文圖包含 H&E 組織切片，以及食道組織的 SHG、雙光子螢光與合併影像。
+- image: publications/cartilage-2024.jpg
+  source: https://doi.org/10.1063/5.0196676
+  credit: Makkithaya et al. · APL Bioengineering · Fig. 3
+  license: https://creativecommons.org/licenses/by/4.0/
+  en:
+    title: Mapping cartilage with polarized light
+    alt: 'Osteoarthritis cartilage: H&E images, SHG intensity, susceptibility ratio, polarization and orientation
+      maps.'
+    description: 'Osteoarthritis cartilage: H&E images, SHG intensity, susceptibility ratio, polarization and orientation
+      maps.'
+  zh:
+    title: 用偏振光解析軟骨結構
+    alt: 骨關節炎軟骨的 H&E、SHG 強度、感受率比值、偏振與方向分布圖。
+    description: 骨關節炎軟骨的 H&E、SHG 強度、感受率比值、偏振與方向分布圖。
+- image: gallery/lab-02.jpg
+  en:
+    title: Oral cancer microscopy · Figure 5
+    alt: Cyan microscopy panels A–F with arrows and scale bars retained from the source.
+    description: Six panels from the oral cancer invasion study, preserving the published arrows and scale bars.
+  zh:
+    title: 口腔癌顯微影像 · 論文圖 5
+    alt: 青色顯微影像 A–F 分圖，保留原圖箭頭與比例尺。
+    description: 口腔癌侵犯型態研究的六分圖，保留論文原始箭頭與比例尺。
+  source: https://doi.org/10.1016/j.labinv.2025.104257
+  credit: Huang et al. · Laboratory Investigation · Fig. 5
 - image: gallery/lab-01.jpg
   en:
     title: Red and green tissue image
@@ -5,13 +43,6 @@
   zh:
     title: 紅綠雙色組織影像
     alt: 深色背景中的紅色與綠色組織結構。
-- image: gallery/lab-02.jpg
-  en:
-    title: Six-panel microscopy figure
-    alt: Cyan microscopy panels A–F with arrows and scale bars retained from the source.
-  zh:
-    title: 六分圖顯微影像
-    alt: 青色顯微影像 A–F 分圖，保留原圖箭頭與比例尺。
 - image: gallery/lab-03.png
   en:
     title: Pseudocolour microscopy image

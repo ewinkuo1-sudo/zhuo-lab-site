@@ -32,6 +32,6 @@
       </article>
       {{ end }}
     </div>
-    {{ with $block.content.link_label }}<p class="zl-section-link"><a href="{{ "news/" | relLangURL }}#activities">{{ . }} <span aria-hidden="true">→</span></a></p>{{ end }}
+    {{ with $block.content.link_label }}<p class="zl-section-link"><a href="{{ partial "lab_url" "news/" }}#activities">{{ . }} <span aria-hidden="true">→</span></a></p>{{ end }}
   </div>
 </div>
