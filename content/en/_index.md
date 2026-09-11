@@ -97,6 +97,7 @@ sections:
   - block: lab_events
     id: activities
     content:
+      count: 3
       title: Events & lab life
       link_label: All activities and photos
 

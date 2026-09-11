@@ -1,5 +1,109 @@
 [
   {
+    "id": "tps-2026",
+    "image": "events/tps-2026.jpg",
+    "en": {
+      "title": "TPS 2026 Annual Meeting",
+      "category": "Conference",
+      "description": "Lab members together in front of the TPS 2026 annual meeting banner.",
+      "alt": "Lab members together in front of the TPS 2026 annual meeting banner.",
+      "date": "13–15 January 2026"
+    },
+    "zh": {
+      "title": "TPS 2026 台灣物理年會",
+      "category": "學術會議",
+      "description": "實驗室成員於 TPS 2026 台灣物理年會活動看板前合影。",
+      "alt": "實驗室成員於 TPS 2026 台灣物理年會活動看板前合影。",
+      "date": "2026 年 1 月 13–15 日"
+    }
+  },
+  {
+    "id": "lab-group-2025-11",
+    "image": "events/lab-group-2025-11.jpg",
+    "en": {
+      "title": "Together in the classroom",
+      "category": "Lab life",
+      "description": "Lab members gathered for a group photograph in front of a classroom whiteboard.",
+      "alt": "Lab members gathered for a group photograph in front of a classroom whiteboard.",
+      "date": "12 November 2025"
+    },
+    "zh": {
+      "title": "實驗室成員合照",
+      "category": "實驗室日常",
+      "description": "實驗室成員在教室白板前留下團體合照。",
+      "alt": "實驗室成員在教室白板前留下團體合照。",
+      "date": "2025 年 11 月 12 日"
+    }
+  },
+  {
+    "id": "birthday-gathering-2025-09",
+    "image": "events/birthday-gathering-2025-09.jpg",
+    "en": {
+      "title": "A birthday gathering",
+      "category": "Lab life",
+      "description": "A group photograph around a birthday cake during a shared meal and celebration.",
+      "alt": "A group photograph around a birthday cake during a shared meal and celebration.",
+      "date": "24 September 2025"
+    },
+    "zh": {
+      "title": "生日聚餐",
+      "category": "實驗室日常",
+      "description": "成員圍在生日蛋糕旁合影，一同分享聚餐與慶祝的時光。",
+      "alt": "成員圍在生日蛋糕旁合影，一同分享聚餐與慶祝的時光。",
+      "date": "2025 年 9 月 24 日"
+    }
+  },
+  {
+    "id": "lab-meal-2025-07",
+    "image": "events/lab-meal-2025-07.jpg",
+    "en": {
+      "title": "A summer meal together",
+      "category": "Lab life",
+      "description": "Lab members sharing a meal and a photograph around the restaurant table.",
+      "alt": "Lab members sharing a meal and a photograph around the restaurant table.",
+      "date": "15 July 2025"
+    },
+    "zh": {
+      "title": "夏日聚餐",
+      "category": "實驗室日常",
+      "description": "實驗室成員在餐廳相聚用餐，留下餐桌旁的合照。",
+      "alt": "實驗室成員在餐廳相聚用餐，留下餐桌旁的合照。",
+      "date": "2025 年 7 月 15 日"
+    }
+  },
+  {
+    "id": "lab-dinner-table",
+    "image": "events/lab-dinner-table.jpg",
+    "en": {
+      "title": "Around a long table",
+      "category": "Lab life",
+      "description": "Lab members seated around a long table during a shared meal.",
+      "alt": "Lab members seated around a long table during a shared meal."
+    },
+    "zh": {
+      "title": "餐敘時光",
+      "category": "實驗室日常",
+      "description": "實驗室成員圍坐長桌，一起享用餐點。",
+      "alt": "實驗室成員圍坐長桌，一起享用餐點。"
+    }
+  },
+  {
+    "id": "lab-dinner-group",
+    "image": "events/lab-dinner-group.jpg",
+    "en": {
+      "title": "A group moment together",
+      "category": "Lab life",
+      "description": "Lab members posing together in front of a surf-themed display at the restaurant.",
+      "alt": "Lab members posing together in front of a surf-themed display at the restaurant."
+    },
+    "zh": {
+      "title": "餐敘合影",
+      "category": "實驗室日常",
+      "description": "實驗室成員在餐廳的衝浪主題看板前合影。",
+      "alt": "實驗室成員在餐廳的衝浪主題看板前合影。"
+    }
+  },
+  {
     "id": "fom-2026",
     "image": "events/fom-2026.jpg",
     "en": {

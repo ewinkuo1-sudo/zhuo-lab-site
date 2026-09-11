@@ -13,7 +13,7 @@ sections:
     content:
       title: 實驗室日常
       text: |
-        ![實驗室成員聚餐合照](people/lab-group.jpg)
+        ![實驗室成員在教室的團體合照](events/lab-group-2025-11.jpg)
 
         [瀏覽活動與照片](../news/#activities)
     design:

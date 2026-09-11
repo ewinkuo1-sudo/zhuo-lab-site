@@ -34,3 +34,7 @@ Portrait crops and source hashes are recorded in `people-photo-sources.json`; ga
 ## Screenshot-layout and activity follow-up
 
 People now renders full existing bilingual profile bodies beside uncropped rectangular portraits in reference order, followed by the remaining roster. Existing role corrections and URLs are retained. Profiles without portraits remain visible. Homepage, News and Gallery share data/lab_events.json: FOM 2026 artwork, ALPS 2025 group photograph and the lab meal. The meal date is unspecified. ALPS dates/location verified at https://alps.opicon.jp/alps2025/. Source hashes are recorded in event-photo-sources.json.
+
+## Additional downloaded photographs, 2026-09-11
+
+Added all six newly downloaded Pictures files: TPS 2026, the November classroom group, September birthday meal, July meal, and two undated restaurant photographs. Dates follow LINE album names; the TPS banner also supports the conference date. No dates were inferred from download timestamps. News and Gallery show all nine image entries. Home shows three new entries with a link to the full list. People now shows the classroom group image; the previous meal photo remains in the activity archive. All six originals are copied without cropping; source hashes and date evidence are in event-photo-sources.json.

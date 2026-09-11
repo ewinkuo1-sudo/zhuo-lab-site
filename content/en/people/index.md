@@ -13,7 +13,7 @@ sections:
     content:
       title: Life in the lab
       text: |
-        ![Lab members sharing a meal](people/lab-group.jpg)
+        ![Lab members together in a classroom](events/lab-group-2025-11.jpg)
 
         [View activities and photos](../news/#activities)
     design:

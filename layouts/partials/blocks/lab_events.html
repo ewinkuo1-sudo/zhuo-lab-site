@@ -1,11 +1,13 @@
 {{ $page := .wcPage }}
 {{ $block := .wcBlock }}
 {{ $zh := eq $page.Language.Lang "zh" }}
+{{ $items := site.Data.lab_events }}
+{{ with $block.content.count }}{{ $items = first (int .) $items }}{{ end }}
 <div class="row">
   <div class="col-12 section-heading"><h1>{{ $block.content.title }}</h1>{{ with $block.content.text }}<p>{{ . }}</p>{{ end }}</div>
   <div class="col-12">
     <div class="zl-events">
-      {{ range site.Data.lab_events }}
+      {{ range $items }}
       {{ $event := . }}
       {{ $copy := index . $page.Language.Lang }}
       {{ $img := resources.Get (path.Join "media" .image) }}

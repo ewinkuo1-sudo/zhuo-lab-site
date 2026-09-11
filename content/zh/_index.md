@@ -95,6 +95,7 @@ sections:
   - block: lab_events
     id: activities
     content:
+      count: 3
       title: 活動與實驗室日常
       link_label: 所有活動與照片
 

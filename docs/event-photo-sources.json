@@ -8,5 +8,47 @@
     "source": "Pictures/bnr-conference.jpg",
     "destination": "assets/media/events/alps-2025.jpg",
     "sha256": "093b1b95023da215a049d5b462c053131031fab5667666a950ca8dbac3110606"
+  },
+  {
+    "source": "Pictures/LINE_ALBUM_20260113-115_260911_1.jpg",
+    "destination": "assets/media/events/tps-2026.jpg",
+    "sha256": "c4bc7d709445bdffe52dde52077ba5eee776b88e6b059fc23709c870e47aa075",
+    "date_source": "相簿名稱與照片活動看板",
+    "note": "Caption describes the supplied photograph; no individual identities or specific restaurant names inferred."
+  },
+  {
+    "source": "Pictures/LINE_ALBUM_20251112_260911_1.jpg",
+    "destination": "assets/media/events/lab-group-2025-11.jpg",
+    "sha256": "f67fca008598b13fdcfffd78308d7ce53f90acf7b59c063ef17a40efc221e645",
+    "date_source": "LINE 相簿名稱 20251112",
+    "note": "Caption describes the supplied photograph; no individual identities or specific restaurant names inferred."
+  },
+  {
+    "source": "Pictures/LINE_ALBUM_2025924_260911_1.jpg",
+    "destination": "assets/media/events/birthday-gathering-2025-09.jpg",
+    "sha256": "9f8d7d40784911e1d5f1060790220a971ab69657f217ad38e12ad817ddb243b6",
+    "date_source": "LINE 相簿名稱 2025924",
+    "note": "Caption describes the supplied photograph; no individual identities or specific restaurant names inferred."
+  },
+  {
+    "source": "Pictures/LINE_ALBUM_20250715_260911_1.jpg",
+    "destination": "assets/media/events/lab-meal-2025-07.jpg",
+    "sha256": "a52b52c9a15ebd4ccb787eebae78239d9fe54a66543fcea8254f374cdaaebfed",
+    "date_source": "LINE 相簿名稱 20250715",
+    "note": "Caption describes the supplied photograph; no individual identities or specific restaurant names inferred."
+  },
+  {
+    "source": "Pictures/S__30711813.jpg",
+    "destination": "assets/media/events/lab-dinner-table.jpg",
+    "sha256": "c1be400c0e2795eda47caea1b23d22b34075b0687a832e85650c26b865ed4492",
+    "date_source": null,
+    "note": "Caption describes the supplied photograph; no individual identities or specific restaurant names inferred."
+  },
+  {
+    "source": "Pictures/S__30711821.jpg",
+    "destination": "assets/media/events/lab-dinner-group.jpg",
+    "sha256": "293545dd927031f11027b35eee4cc5663c4464c9ada4999bfc338ece1a223fd4",
+    "date_source": null,
+    "note": "Caption describes the supplied photograph; no individual identities or specific restaurant names inferred."
   }
 ]
