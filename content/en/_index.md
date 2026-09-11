@@ -7,11 +7,9 @@ sections:
   - block: hero
     content:
       title: |
-        Seeing tissue
-        without labels
-      text: |
-        We build **label-free nonlinear optical microscopes** that read collagen and tissue structure
-        with no stain, and turn those images into diagnoses clinicians can act on.
+        Translational<br>
+        Biophotonics<br>
+        Laboratory
       cta:
         label: Our research
         url: research/
@@ -45,11 +43,15 @@ sections:
   - block: markdown
     id: about
     content:
-      title: About the lab
+      title: About Us
       text: |
-        **Translational Biophotonics Laboratory (TBL)** at the Institute of Biophotonics, National Yang Ming Chiao Tung University bridges optical innovation and clinical translation, advancing multimodal nonlinear optics for cancer biology and diagnosis.
+        Translational Biophotonics Lab is a cutting-edge research group led by Professor Guan-Yu Zhuo at the Institute of Biophotonics, National Yang Ming Chiao Tung University. Our mission is to pioneer advanced optical imaging technologies and translate them into impactful clinical applications for cancer diagnosis and biomedical discovery.
 
-        Led by Guan-Yu Zhuo, our lab develops wave-encoded nonlinear endomicroscopy and multimodal, label-free imaging using SHG, THG, two-photon excited fluorescence, Raman and stimulated Raman scattering. We combine optical physics, biomedical engineering and clinical collaboration to investigate cancer biology, early detection, tumour margins and invasive patterns.
+        We specialize in wave-encoded nonlinear endomicroscopy, multimodal nonlinear optical imaging, and label-free imaging techniques such as Second Harmonic Generation (SHG), Third Harmonic Generation (THG), Two Photon Excited Fluorescence (TPEF), Raman and Stimulated Raman Scattering (SRS). By integrating multiphoton excitation, second and third harmonic generation, and polarization-resolved contrast mechanisms, we visualize light–tissue interactions at the cellular and molecular scale with unprecedented precision.
+
+        Our research bridges the gap between fundamental photonics and translational medicine, enabling real-time, in vivo characterization of tissue pathology without the need for dyes or labels. We focus on clinical challenges in cancer biology, including early detection, margin assessment, and understanding invasive patterns through high-resolution, multimodal imaging.
+
+        Driven by innovation and collaboration, the lab combines optical physics, biomedical engineering, and clinical insight to develop next-generation diagnostic tools that are compact, intelligent, and clinically deployable.
     design:
       columns: '1'
 
