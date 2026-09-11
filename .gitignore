@@ -8,3 +8,6 @@ assets/jsconfig.json
 public/
 resources/
 .hugo_build.lock
+
+# Python browser-check caches
+__pycache__/

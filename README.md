@@ -1,5 +1,7 @@
 # Zhuo Lab website
 
+[網站配色、直角與留白改版計畫](NEXT_SESSION_PLAN.md)（2026-09-11；已完成）。驗證與比較圖見 [改版紀錄](docs/visual-refresh-review.md)。
+
 Lab website for Prof. Guan-Yu Zhuo, Institute of Biophotonics, National Yang Ming Chiao Tung University.
 Built with [Hugo Blox](https://hugoblox.com) (research-group template, blox-bootstrap v5) and deployed to GitHub Pages.
 
@@ -104,3 +106,7 @@ $env:PATH = "C:\Users\ewink\.cache\zhuo-site-tools\go\go\bin;" + $env:PATH
 & 'C:\Users\ewink\.cache\zhuo-site-tools\hugo\hugo.exe' --minify --baseURL 'http://127.0.0.1:18766/zhuo-lab-site/' --destination 'C:\Users\ewink\.cache\zhuo-site-review\redesign-public\zhuo-lab-site'
 & 'C:\Users\ewink\AppData\Local\Programs\Python\Python312\python.exe' scripts/check_home_redesign.py --root 'C:\Users\ewink\.cache\zhuo-site-review\redesign-public' --output 'C:\Users\ewink\.cache\zhuo-site-review\redesign'
 ```
+
+## Colour and spacing refresh (2026-09-11)
+
+The bilingual site now uses square corners, a centered 1040 px content width, wider gutters, a two-column research grid and compact horizontal member cards on narrow phones. Navy and teal distinguish research content; warm accents distinguish lab life and milestones. See `docs/visual-refresh-review.md` for browser checks and before/after screenshots.

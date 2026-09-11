@@ -42,7 +42,7 @@
         {{ with $href }}<a href="{{ . | safeURL }}" tabindex="-1" aria-hidden="true">{{ end }}
         <img src="{{ $small.RelPermalink }}"
              srcset="{{ $small.RelPermalink }} 640w, {{ $large.RelPermalink }} 1280w"
-             sizes="(min-width: 992px) 22vw, (min-width: 576px) 45vw, 92vw"
+             sizes="(min-width: 1200px) 500px, (min-width: 768px) 44vw, 90vw"
              width="{{ $small.Width }}" height="{{ $small.Height }}" loading="lazy" decoding="async"
              alt="{{ $item.image_alt | default $item.name }}">
         {{ if $href }}</a>{{ end }}

@@ -47,6 +47,7 @@ def main():
       status,ids=fetched[key]
       if status!=200 or (u.fragment and unquote(u.fragment) not in ids): failures.append({'path':suffix,'href':href,'status':status,'missing_fragment':u.fragment if unquote(u.fragment) not in ids else ''})
      if width in [1440,390]:
+      page.evaluate('async () => { await Promise.all([...document.images].map(i=>i.decode().catch(()=>{}))); await new Promise(requestAnimationFrame); }')
       prefix='zh' if suffix else 'en'
       page.screenshot(path=str(args.output/f'{prefix}-home-{width}.png'),full_page=True)
       capture_style=page.add_style_tag(content='header { visibility: hidden !important; }')

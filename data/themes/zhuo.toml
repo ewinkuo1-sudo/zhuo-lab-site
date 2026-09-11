@@ -1,19 +1,18 @@
-# Zhuo Lab colour theme: white ground, deep-green ink, emerald accent (Hugo Blox v5.5 format)
-
+# Shared navy/teal palette; custom section accents live in template.scss.
 [light]
-primary = "#0f9d78"
-menu_primary = "#04201c"
-menu_text = "#d1fae5"
-menu_text_active = "#6ee7b7"
+primary = "#137c83"
+menu_primary = "#142d45"
+menu_text = "#edf3f8"
+menu_text_active = "#a3e4e5"
 menu_title = "#ffffff"
-home_section_odd = "#ffffff"
-home_section_even = "#f3faf7"
+home_section_odd = "#faf8f4"
+home_section_even = "#ffffff"
 
 [dark]
-primary = "#34d399"
-menu_primary = "#04201c"
-menu_text = "#d1fae5"
-menu_text_active = "#6ee7b7"
+primary = "#a3e4e5"
+menu_primary = "#142d45"
+menu_text = "#edf3f8"
+menu_text_active = "#a3e4e5"
 menu_title = "#ffffff"
-home_section_odd = "#062e28"
-home_section_even = "#04201c"
+home_section_odd = "#203e58"
+home_section_even = "#142d45"
