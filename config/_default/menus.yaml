@@ -3,15 +3,15 @@ main:
   - name: Research
     url: '/#research'
     weight: 10
-  - name: People
-    url: '/#people'
-    weight: 20
-  - name: Gallery
-    url: '/#gallery'
-    weight: 25
   - name: Publications
     url: '/#publications'
+    weight: 20
+  - name: People
+    url: '/#people'
     weight: 30
+  - name: Gallery
+    url: '/#gallery'
+    weight: 40
   - name: Join Us
     url: '/#join'
     weight: 50

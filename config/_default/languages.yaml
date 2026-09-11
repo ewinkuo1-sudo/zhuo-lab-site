@@ -17,15 +17,15 @@ zh:
       - name: 研究
         url: '/#research'
         weight: 10
-      - name: 成員
-        url: '/#people'
-        weight: 20
-      - name: 影像
-        url: '/#gallery'
-        weight: 25
       - name: 論文
         url: '/#publications'
+        weight: 20
+      - name: 成員
+        url: '/#people'
         weight: 30
+      - name: 影像
+        url: '/#gallery'
+        weight: 40
       - name: 加入我們
         url: '/#join'
         weight: 50
