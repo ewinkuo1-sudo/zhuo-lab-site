@@ -1,0 +1,45 @@
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+<div class="zl-people">
+  <div class="section-heading"><h1>{{ $block.content.title }}</h1></div>
+  {{ $people := slice }}
+  {{ range site.Data.people_order }}
+    {{ with site.GetPage (printf "/authors/%s" .) }}{{ $people = $people | append . }}{{ end }}
+  {{ end }}
+  {{/* Future author profiles are included even without an explicit display order. */}}
+  {{ range where site.Pages "Section" "authors" }}
+    {{ if and .Params.user_groups (not (in $people .)) }}{{ $people = $people | append . }}{{ end }}
+  {{ end }}
+  {{ range $people }}
+  {{ $person := . }}
+  {{ $portrait := .Resources.GetMatch "avatar*" }}
+  {{ $id := .File.Dir | path.Clean | path.Base }}
+  <article class="zl-person{{ if not $portrait }} zl-person-no-photo{{ end }}" id="member-{{ $id }}" aria-labelledby="name-{{ $id }}">
+    <div class="zl-person-photo">
+      {{ with $portrait }}
+        {{ $small := .Resize (printf "%dx webp q90" (int (math.Min 380 .Width))) }}
+        {{ $large := .Resize (printf "%dx webp q90" (int (math.Min 760 .Width))) }}
+        <a href="{{ $person.RelPermalink }}" tabindex="-1" aria-hidden="true">
+          <img src="{{ $small.RelPermalink }}" srcset="{{ $small.RelPermalink }} {{ $small.Width }}w, {{ $large.RelPermalink }} {{ $large.Width }}w"
+               sizes="(min-width: 1200px) 340px, (min-width: 768px) 30vw, 80vw"
+               width="{{ $small.Width }}" height="{{ $small.Height }}" alt="{{ $person.Title }}"
+               loading="lazy" decoding="async">
+        </a>
+      {{ else }}
+        <div class="zl-person-monogram" aria-hidden="true">TBL</div>
+      {{ end }}
+    </div>
+    <div class="zl-person-copy">
+      <h2 id="name-{{ $id }}"><a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ with .Params.education.courses }}{{ with (index . 0).course }}<span class="zl-person-degree">{{ . }}</span>{{ end }}{{ end }}</h2>
+      <p class="zl-person-role">{{ .Params.role }}</p>
+      {{ with .Params.organizations }}<p class="zl-person-affiliation">{{ (index . 0).name }}</p>{{ end }}
+      <div class="zl-person-bio">{{ .Content }}</div>
+      {{ with .Params.social }}
+      <ul class="zl-person-links">
+        {{ range . }}<li><a href="{{ .link }}">{{ if eq .icon "envelope" }}Email{{ else if eq .icon "google-scholar" }}Google Scholar{{ else if eq .icon "orcid" }}ORCID{{ else }}{{ .icon | humanize }}{{ end }}</a></li>{{ end }}
+      </ul>
+      {{ end }}
+    </div>
+  </article>
+  {{ end }}
+</div>

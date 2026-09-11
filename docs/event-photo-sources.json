@@ -1,0 +1,12 @@
+[
+  {
+    "source": "Pictures/2026_FOM-Sweden_FINAL-B_WEB.jpg",
+    "destination": "assets/media/events/fom-2026.jpg",
+    "sha256": "2ee467a09f8801f0f974d8e49cc17992ca7263778a1d5c15ff6f3b6ce04101de"
+  },
+  {
+    "source": "Pictures/bnr-conference.jpg",
+    "destination": "assets/media/events/alps-2025.jpg",
+    "sha256": "093b1b95023da215a049d5b462c053131031fab5667666a950ca8dbac3110606"
+  }
+]

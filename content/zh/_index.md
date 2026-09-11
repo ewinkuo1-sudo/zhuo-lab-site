@@ -24,6 +24,7 @@ sections:
         text_color_light: true
 
   - block: markdown
+    id: lab-stats
     content:
       title:
       text: |
@@ -91,11 +92,17 @@ sections:
       count: 3
       link_label: 瀏覽全部研究影像
 
+  - block: lab_events
+    id: activities
+    content:
+      title: 活動與實驗室日常
+      link_label: 所有活動與照片
+
   - block: lab_news
     id: news
     content:
       title: 最新消息
-      link_label: 所有消息
+      link_label: 所有消息與活動
 
   - block: collection
     content:
@@ -111,6 +118,7 @@ sections:
       columns: '1'
 
   - block: markdown
+    id: closing
     content:
       title:
       subtitle:

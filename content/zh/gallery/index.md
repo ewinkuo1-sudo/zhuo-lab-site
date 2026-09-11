@@ -7,4 +7,9 @@ sections:
   content:
     title: 研究影像
     text: 探索實驗室的顯微影像；點選圖片可查看完整原圖。
+- block: lab_events
+  id: activities
+  content:
+    title: 活動與實驗室日常
+    link_label: 所有活動與照片
 ---

@@ -9,7 +9,7 @@ main:
   - name: Gallery
     url: gallery
     weight: 22
-  - name: News
+  - name: News & Events
     url: news
     weight: 24
   - name: Collaborations

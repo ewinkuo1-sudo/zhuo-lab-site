@@ -1,0 +1,55 @@
+[
+  {
+    "id": "fom-2026",
+    "image": "events/fom-2026.jpg",
+    "en": {
+      "title": "Focus on Microscopy 2026",
+      "category": "Conference",
+      "date": "2026",
+      "description": "FOM 2026 in Stockholm, Sweden. Conference artwork featuring the Stockholm waterfront.",
+      "alt": "FOM 2026 conference artwork with a view of Stockholm"
+    },
+    "zh": {
+      "title": "Focus on Microscopy 2026",
+      "category": "學術會議",
+      "date": "2026",
+      "description": "於瑞典斯德哥爾摩舉辦的 FOM 2026；活動宣傳圖呈現斯德哥爾摩水岸景色。",
+      "alt": "FOM 2026 活動宣傳圖與斯德哥爾摩水岸景色"
+    }
+  },
+  {
+    "id": "alps-2025",
+    "image": "events/alps-2025.jpg",
+    "url": "https://alps.opicon.jp/alps2025/",
+    "en": {
+      "title": "ALPS 2025",
+      "category": "Conference",
+      "date": "21–25 April 2025",
+      "description": "The 14th Advanced Lasers and Photon Sources Conference at PACIFICO Yokohama, Japan. Group photograph from the conference.",
+      "alt": "ALPS 2025 conference group photograph beneath the event banner"
+    },
+    "zh": {
+      "title": "ALPS 2025",
+      "category": "學術會議",
+      "date": "2025 年 4 月 21–25 日",
+      "description": "第十四屆 Advanced Lasers and Photon Sources 研討會，地點為日本 PACIFICO 橫濱會展中心。照片為研討會團體合照。",
+      "alt": "ALPS 2025 研討會與會者在活動布條前的團體合照"
+    }
+  },
+  {
+    "id": "lab-gathering",
+    "image": "people/lab-group.jpg",
+    "en": {
+      "title": "Around the table",
+      "category": "Lab life",
+      "description": "Lab members sharing a meal and a moment together beyond the lab.",
+      "alt": "Lab members gathered around a restaurant table"
+    },
+    "zh": {
+      "title": "實驗室聚餐",
+      "category": "實驗室日常",
+      "description": "研究之外，實驗室成員相聚用餐，留下輕鬆的共同回憶。",
+      "alt": "實驗室成員在餐廳聚餐的合照"
+    }
+  }
+]

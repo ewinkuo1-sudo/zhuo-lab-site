@@ -319,3 +319,52 @@ html[lang^="zh"] {
 }
 
 .wg-lab-gallery .section-heading, .wg-lab-news .section-heading { text-align: center; }
+
+
+// Full portraits and biographies following the supplied reference.
+.wg-lab-people { background: #fff; }
+.zl-people {
+  .section-heading { text-align: center; margin-bottom: 2rem; }
+  .zl-person { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 2.2rem; padding: 2.5rem 0; border-bottom: 1px solid $zl-border; align-items: start; }
+  .zl-person:last-child { border-bottom: 0; padding-bottom: 0; }
+  .zl-person-photo { min-width: 0; }
+  .zl-person-photo img { width: 100%; height: auto; max-height: 520px; object-fit: contain; object-position: top center; display: block; margin: 0; border-radius: 0; }
+  .zl-person-copy { min-width: 0; }
+  h2 { font-size: 1.45rem; font-weight: 650; line-height: 1.4; margin: 0 0 .75rem; }
+  h2 a { color: $zl-ink; }
+  h2 a:hover { color: $zl-green; }
+  .zl-person-degree { font-size: .95rem; font-weight: 400; font-style: italic; display: inline-block; margin-left: .5rem; }
+  .zl-person-role { font-style: italic; font-size: 1.04rem; color: $zl-forest; margin: 0 0 .3rem; }
+  .zl-person-affiliation { font-size: .91rem; color: $zl-muted; margin-bottom: 1.25rem; }
+  .zl-person-bio { font-size: 1rem; line-height: 1.75; }
+  .zl-person-bio p { margin: 0 0 1rem; }
+  .zl-person-bio h3 { font-size: 1.05rem; margin: 1.25rem 0 .5rem; }
+  .zl-person-bio ul { padding-left: 1.2rem; }
+  .zl-person-links { list-style: none; padding: 0; margin: 1rem 0 0; display: flex; flex-wrap: wrap; gap: 1rem; font-size: .88rem; }
+  .zl-person-monogram { display: grid; place-items: center; min-height: 170px; background: $zl-surface; color: $zl-green; font-size: 2rem; letter-spacing: .15em; }
+  a:focus-visible { outline: 3px solid $zl-green; outline-offset: 4px; }
+}
+.zl-events {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem;
+  .zl-event { border: 1px solid $zl-border; border-radius: .7rem; overflow: hidden; background: #fff; min-width: 0; }
+  .zl-event-image { display: flex; align-items: center; justify-content: center; aspect-ratio: 3 / 2; background: $zl-surface; }
+  img { display: block; width: 100%; height: 100%; object-fit: contain; margin: 0; }
+  .zl-event-copy { padding: 1.2rem; }
+  .zl-event-category { color: $zl-green; font-size: .72rem; letter-spacing: .02em; margin: 0 0 .6rem; }
+  h2 { font-size: 1.2rem; margin: 0 0 .65rem; line-height: 1.4; }
+  p { font-size: .91rem; line-height: 1.65; }
+  .zl-event-links { display: flex; flex-wrap: wrap; gap: .5rem 1rem; font-size: .82rem; }
+  a:focus-visible { outline: 3px solid $zl-green; outline-offset: -3px; }
+}
+.wg-lab-events .section-heading { text-align: center; }
+@media (max-width: 991.98px) { .zl-events { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 767.98px) {
+  .zl-people {
+    .zl-person { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; padding: 2rem 0; }
+    .zl-person-photo { width: 80%; max-width: 340px; margin: 0 auto; }
+    .zl-person-degree { display: block; margin: .3rem 0 0; }
+    .zl-person-bio { font-size: .96rem; }
+    .zl-person-no-photo .zl-person-photo { display: none; }
+  }
+  .zl-events { grid-template-columns: minmax(0, 1fr); }
+}

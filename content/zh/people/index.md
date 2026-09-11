@@ -4,35 +4,23 @@ date: 2026-09-06
 type: landing
 
 sections:
-  - block: people
+  - block: lab_people
     content:
       title: 成員
-      # 中文頁的分組名稱要與 content/zh/authors/ 各成員的 user_groups 一致。
-      user_groups:
-        - 實驗室主持人
-        - 博士後研究員
-        - 研究助理
-        - 博碩士班學生
-        - 大學部專題生
-        - 畢業校友
-      # 中文頁的 last_name 一律填羅馬拼音姓氏，只當排序鍵用（頁面顯示的是 title 的中文名），
-      # 否則會按中文字的 Unicode 碼位排，看起來像亂排。
-      sort_by: Params.last_name
-      sort_ascending: true
-    design:
-      show_interests: false
-      show_role: true
-      show_social: true
 
   - block: markdown
+    id: lab-life
     content:
       title: 實驗室日常
       text: |
         ![實驗室成員聚餐合照](people/lab-group.jpg)
+
+        [瀏覽活動與照片](../news/#activities)
     design:
       columns: '1'
 
   - block: markdown
+    id: join-the-lab
     content:
       title:
       text: |

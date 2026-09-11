@@ -26,6 +26,7 @@ sections:
         text_color_light: true
 
   - block: markdown
+    id: lab-stats
     content:
       title:
       text: |
@@ -93,11 +94,17 @@ sections:
       count: 3
       link_label: Explore the gallery
 
+  - block: lab_events
+    id: activities
+    content:
+      title: Events & lab life
+      link_label: All activities and photos
+
   - block: lab_news
     id: news
     content:
       title: News
-      link_label: All news
+      link_label: All news and events
 
   - block: collection
     content:
@@ -113,6 +120,7 @@ sections:
       columns: '1'
 
   - block: markdown
+    id: closing
     content:
       title:
       subtitle:

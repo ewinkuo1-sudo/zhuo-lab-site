@@ -1,0 +1,35 @@
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $zh := eq $page.Language.Lang "zh" }}
+<div class="row">
+  <div class="col-12 section-heading"><h1>{{ $block.content.title }}</h1>{{ with $block.content.text }}<p>{{ . }}</p>{{ end }}</div>
+  <div class="col-12">
+    <div class="zl-events">
+      {{ range site.Data.lab_events }}
+      {{ $event := . }}
+      {{ $copy := index . $page.Language.Lang }}
+      {{ $img := resources.Get (path.Join "media" .image) }}
+      {{ if not $img }}{{ errorf "Missing event image: %s" .image }}{{ end }}
+      {{ $small := $img.Resize (printf "%dx webp q85" (int (math.Min 640 $img.Width))) }}
+      {{ $large := $img.Resize (printf "%dx webp q90" (int (math.Min 1280 $img.Width))) }}
+      <article class="zl-event" id="{{ .id }}">
+        <a class="zl-event-image" href="{{ $img.RelPermalink }}" aria-label="{{ if $zh }}查看原圖：{{ else }}View original: {{ end }}{{ $copy.title }}">
+          <img src="{{ $small.RelPermalink }}" srcset="{{ $small.RelPermalink }} {{ $small.Width }}w, {{ $large.RelPermalink }} {{ $large.Width }}w"
+               sizes="(min-width: 992px) 350px, (min-width: 768px) 45vw, 92vw"
+               width="{{ $small.Width }}" height="{{ $small.Height }}" alt="{{ $copy.alt }}" loading="lazy" decoding="async">
+        </a>
+        <div class="zl-event-copy">
+          <p class="zl-event-category">{{ $copy.category }}{{ with $copy.date }} <span aria-hidden="true">·</span> {{ . }}{{ end }}</p>
+          <h2>{{ $copy.title }}</h2>
+          <p>{{ $copy.description }}</p>
+          <div class="zl-event-links">
+            <a href="{{ $img.RelPermalink }}">{{ if $zh }}查看原圖{{ else }}View photo{{ end }} <span aria-hidden="true">↗</span></a>
+            {{ with $event.url }}<a href="{{ . }}">{{ if $zh }}會議官網{{ else }}Conference website{{ end }} <span aria-hidden="true">↗</span></a>{{ end }}
+          </div>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+    {{ with $block.content.link_label }}<p class="zl-section-link"><a href="{{ "news/" | relLangURL }}#activities">{{ . }} <span aria-hidden="true">→</span></a></p>{{ end }}
+  </div>
+</div>

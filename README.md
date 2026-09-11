@@ -78,3 +78,9 @@ The supplied Google Sites snapshot adds five microscopy images in `assets/media/
 ## Full source-folder follow-up
 
 See `docs/website-source-audit.md` for the complete source review and unresolved gaps. Six additional member portraits, source-backed bilingual biographies, three member profiles, a group photo and a sixth gallery image were added. The first two gallery originals now use the higher-resolution supplied source files. Existing profile URLs remain stable.
+
+## People layout and events
+
+The lab_people block displays full bilingual author biographies alongside rectangular, uncropped portraits. data/people_order.json follows the reference screenshot order; new author profiles are appended automatically. Edit biographies in the existing author files.
+
+The lab_events block uses data/lab_events.json for bilingual event captions and image paths on Home, News and Gallery. Unspecified dates are omitted. Image provenance is in docs/event-photo-sources.json.

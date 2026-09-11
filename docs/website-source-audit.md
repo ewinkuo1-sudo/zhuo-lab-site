@@ -25,8 +25,12 @@ Reviewed every file under the supplied `website` folder, including `Pictures`, `
 - No labelled individual portraits were found for Cheng-Yi Shih, Chih-Hsiang Kuo, Gagan Raju, Tian-Zhi Wu or Ting-Jung Chang.
 - `112706` shows a Study in Taiwan / NYCU video but no usable video URL. Do not publish the screenshot as a playable video.
 - `112712` shows collapsed high-speed/multiphoton headings and editor placeholders, not instrument specifications.
-- `2026_FOM-Sweden_FINAL-B_WEB.jpg` and `bnr-conference.jpg` are conference artwork. No source establishes lab attendance or a news event.
+- Follow-up: bnr-conference.jpg is the ALPS 2025 conference group photograph, identified by the banner; the FOM 2026 image is conference artwork. Both are now included at the user’s request, without inferring individual lab attendance.
 - `m_mam_31_4cover.jpeg` is a journal cover. No supplied caption associates it with a specific lab paper; do not claim a cover award or publication.
 - Browser editor assets/account panels are not website content and are excluded from deployment.
 
 Portrait crops and source hashes are recorded in `people-photo-sources.json`; gallery hashes in `gallery-sources.json`. Source screenshots are retained in the user's local folder and are not published.
+
+## Screenshot-layout and activity follow-up
+
+People now renders full existing bilingual profile bodies beside uncropped rectangular portraits in reference order, followed by the remaining roster. Existing role corrections and URLs are retained. Profiles without portraits remain visible. Homepage, News and Gallery share data/lab_events.json: FOM 2026 artwork, ALPS 2025 group photograph and the lab meal. The meal date is unspecified. ALPS dates/location verified at https://alps.opicon.jp/alps2025/. Source hashes are recorded in event-photo-sources.json.

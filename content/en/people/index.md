@@ -4,33 +4,23 @@ date: 2026-09-06
 type: landing
 
 sections:
-  - block: people
+  - block: lab_people
     content:
       title: People
-      # Edit `user_groups` in each profile under content/en/authors/ to place a person here.
-      user_groups:
-        - Principal Investigator
-        - Postdoctoral Researchers
-        - Research Assistants
-        - Students
-        - Undergraduate Students
-        - Alumni
-      sort_by: Params.last_name
-      sort_ascending: true
-    design:
-      show_interests: false
-      show_role: true
-      show_social: true
 
   - block: markdown
+    id: lab-life
     content:
       title: Life in the lab
       text: |
         ![Lab members sharing a meal](people/lab-group.jpg)
+
+        [View activities and photos](../news/#activities)
     design:
       columns: '1'
 
   - block: markdown
+    id: join-the-lab
     content:
       title:
       text: |

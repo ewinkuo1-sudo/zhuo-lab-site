@@ -8,4 +8,9 @@ sections:
     title: Gallery
     text: Explore microscopy images from the lab. Select an image to view the full
       original.
+- block: lab_events
+  id: activities
+  content:
+    title: Events & lab life
+    link_label: All activities and photos
 ---

@@ -20,10 +20,10 @@ zh:
       - name: 成員
         url: people
         weight: 20
-      - name: 研究影像
+      - name: 影像與照片
         url: gallery
         weight: 22
-      - name: 最新消息
+      - name: 消息與活動
         url: news
         weight: 24
       - name: 臨床合作
