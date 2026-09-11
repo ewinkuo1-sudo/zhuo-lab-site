@@ -13,6 +13,7 @@ sections:
     join_label: Join the lab
     image_alt: A multicolour tissue overview supplied by the lab, shown in full.
     image_caption: Imaging from the lab
+    original_label: View full image
     gallery_label: View the gallery
 - block: markdown
   id: about
@@ -20,7 +21,7 @@ sections:
     title: Our mission
     text: 'We investigate how light–tissue interactions reveal structural changes associated with disease. Through
       nonlinear microscopy, polarization-resolved imaging and quantitative analysis, we study cancer and collagen,
-      while developing miniaturized fibre probes and AI-assisted image analysis.
+      with AI-assisted image analysis and the longer-term goal of miniaturized fibre probes.
 
 
       Led by Prof. Guan-Yu Zhuo at NYCU''s Institute of Biophotonics, our work connects optics, tissue biology and
@@ -40,7 +41,8 @@ sections:
   content:
     title: Research
     items:
-    - name: Label-free nonlinear optical microscopy
+    - research_key: microscopy
+      name: Label-free nonlinear optical microscopy
       image: publications/esophagus-2025.png
       image_alt: Published figure with H&E histology and SHG, two-photon fluorescence and merged esophageal tissue
         images.
@@ -52,7 +54,8 @@ sections:
       image_credit: Makkithaya et al. · Scientific Reports · Fig. 2
       image_source: https://doi.org/10.1038/s41598-025-13910-7
       image_license: https://creativecommons.org/licenses/by/4.0/
-    - name: Collagen chirality and ECM quantification
+    - research_key: collagen
+      name: Collagen chirality and extracellular-matrix quantification
       image: publications/cartilage-2024.jpg
       image_alt: 'Osteoarthritis cartilage: H&E images, SHG intensity, susceptibility ratio, polarization and orientation
         maps.'
@@ -64,16 +67,18 @@ sections:
       image_credit: Makkithaya et al. · APL Bioengineering · Fig. 3
       image_source: https://doi.org/10.1063/5.0196676
       image_license: https://creativecommons.org/licenses/by/4.0/
-    - name: Miniaturized nonlinear endomicroscopy
+    - research_key: endomicroscopy
+      name: Miniaturized nonlinear endomicroscopy
       image: gen/thumb-endoscope.webp
       image_alt: Schematic of a fibre-based nonlinear endomicroscopy probe imaging collagen in tissue (illustration)
       icon: stethoscope
       icon_pack: fas
-      description: How can microscopy reach smaller spaces? We integrate optical fibres and miniature optics to
-        develop nonlinear endomicroscopy tools.
+      description: How can microscopy reach smaller spaces? This direction explores optical fibres and miniature optics for
+        nonlinear endomicroscopy.
       url: research/#miniaturized-nonlinear-endomicroscopy
       image_credit: Concept illustration
-    - name: AI-assisted label-free pathology
+    - research_key: ai
+      name: AI-assisted label-free pathology
       image: gen/thumb-ai.webp
       image_alt: Simulated label-free tissue image with a tile-wise classifier probability overlay (illustration)
       icon: brain

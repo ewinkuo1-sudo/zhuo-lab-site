@@ -12,12 +12,13 @@ sections:
     join_label: 加入我們
     image_alt: 實驗室提供的多色組織全景影像，保留完整畫面。
     image_caption: 實驗室研究影像
+    original_label: 查看完整原圖
     gallery_label: 瀏覽影像
 - block: markdown
   id: about
   content:
     title: 研究理念
-    text: '我們研究如何從光與組織的交互作用中，讀出疾病相關的結構變化。透過非線性光學顯微、偏振解析成像與定量分析，探索癌症與膠原蛋白的影像特徵，並開發微型化光纖探頭與 AI 輔助分析方法。
+    text: '我們研究如何從光與組織的交互作用中，讀出疾病相關的結構變化。透過非線性光學顯微、偏振解析成像與定量分析，探索癌症與膠原蛋白的影像特徵，結合 AI 輔助分析，並以微型化光纖探頭為長期發展方向。
 
 
       實驗室由卓冠宇教授主持，隸屬國立陽明交通大學生醫光電研究所，串聯光學、組織生物學與臨床研究。'
@@ -36,7 +37,8 @@ sections:
   content:
     title: 研究
     items:
-    - name: 無標記非線性光學顯微
+    - research_key: microscopy
+      name: 無標記非線性光學顯微
       image: publications/esophagus-2025.png
       image_alt: 論文圖包含 H&E 組織切片，以及食道組織的 SHG、雙光子螢光與合併影像。
       icon: microscope
@@ -46,7 +48,8 @@ sections:
       image_credit: Makkithaya et al. · Scientific Reports · Fig. 2
       image_source: https://doi.org/10.1038/s41598-025-13910-7
       image_license: https://creativecommons.org/licenses/by/4.0/
-    - name: 膠原蛋白手性與細胞外基質定量
+    - research_key: collagen
+      name: 膠原蛋白手性與細胞外基質定量
       image: publications/cartilage-2024.jpg
       image_alt: 骨關節炎軟骨的 H&E、SHG 強度、感受率比值、偏振與方向分布圖。
       icon: dna
@@ -56,15 +59,17 @@ sections:
       image_credit: Makkithaya et al. · APL Bioengineering · Fig. 3
       image_source: https://doi.org/10.1063/5.0196676
       image_license: https://creativecommons.org/licenses/by/4.0/
-    - name: 微型化非線性內視顯微術
+    - research_key: endomicroscopy
+      name: 微型化非線性內視顯微術
       image: gen/thumb-endoscope.webp
       image_alt: 光纖式非線性內視顯微探頭對組織中膠原蛋白取像的示意圖
       icon: stethoscope
       icon_pack: fas
-      description: 如何將顯微成像帶入更小的探測空間？整合光纖與微型光學元件，開發非線性內視成像工具。
+      description: 如何將顯微成像帶入更小的探測空間？以光纖與微型光學元件為方向，探索非線性內視成像。
       url: research/#微型化非線性內視顯微術
       image_credit: 研究概念示意圖
-    - name: AI 輔助無標記病理
+    - research_key: ai
+      name: AI 輔助無標記病理
       image: gen/thumb-ai.webp
       image_alt: 模擬無標記組織影像疊加分類器逐格機率圖（示意圖）
       icon: brain

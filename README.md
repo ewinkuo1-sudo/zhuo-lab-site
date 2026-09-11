@@ -18,7 +18,7 @@ Built with [Hugo Blox](https://hugoblox.com) (research-group template, blox-boot
 | `layouts/partials/blocks/features.html` | Override of the Hugo Blox features block: adds `image`, `image_alt` and `url` per item (research cards) |
 | `scripts/imagegen/` | Deterministic Python/SVG generators for every illustration on the site (see below) |
 | `assets/media/gen/` | Illustrations used by content (research thumbs, beam-path schematic); Hugo resizes them to WebP |
-| `static/media/gen/` | `hero-collagen.webp` (CSS background of the hero) and the logo mark |
+| `static/media/gen/` | Legacy concept artwork and the logo mark; the current hero uses `assets/media/gallery/lab-04.png` |
 
 ## Local preview (Windows)
 
@@ -58,7 +58,7 @@ labelled as illustrations on the pages, and should be replaced by real micrograp
 
 | Script | Output | Used by |
 |---|---|---|
-| `hero_collagen.py` | `hero-collagen.webp` (2400x1500 simulated SHG collagen) | Home hero background (`template.scss`) |
+| `hero_collagen.py` | `hero-collagen.webp` (2400x1500 simulated SHG collagen) | Legacy hero artwork (the current hero uses a supplied research image) |
 | `thumb_multimodal.py` | `thumb-multimodal.webp` (SHG + TPEF + CARS composite) | Home card 1, Research |
 | `thumb_pshg.py` | `thumb-pshg.webp` (P-SHG orientation map) | Home card 2, Research |
 | `thumb-endoscope.py` | `thumb-endoscope.webp` (probe schematic) | Home card 3, Research |
@@ -110,3 +110,9 @@ $env:PATH = "C:\Users\ewink\.cache\zhuo-site-tools\go\go\bin;" + $env:PATH
 ## Colour and spacing refresh (2026-09-11)
 
 The bilingual site now uses square corners, a centered 1040 px content width, wider gutters, a two-column research grid and compact horizontal member cards on narrow phones. Navy and teal distinguish research content; warm accents distinguish lab life and milestones. See `docs/visual-refresh-review.md` for browser checks and before/after screenshots.
+
+## Hero background and research alignment (2026-09-11)
+
+The bilingual homepage now uses the supplied microscopy image as an uncropped background with a separate readability gradient and a direct original-image link. Research detail pages reuse the home research names, order, images, credits and stable anchors. `data/research.json` holds bilingual evidence summaries and publication slugs; `lab_research.html` reads publication metadata from the English records.
+
+See [validation and previews](docs/research-hero-review.md), [source audit](docs/research-content-audit.md), and [future sessions](FUTURE_ROADMAP.md). Current project progress and equipment capabilities still require confirmation; the audit distinguishes published evidence from unverified drafts.

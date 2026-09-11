@@ -1,16 +1,14 @@
 {{ $b := .wcBlock.content }}
 {{ $img := resources.Get "media/gallery/lab-04.png" }}
 {{ $small := $img.Resize "800x webp q85" }}{{ $large := $img.Resize "1400x webp q88" }}
-<div class="zl-hero-grid">
-  <div class="zl-hero-copy">
-    <p class="zl-eyebrow">NYCU · INSTITUTE OF BIOPHOTONICS</p>
-    <h1>Translational<br>Biophotonics Laboratory</h1>
-    <p class="zl-hero-statement">{{ $b.statement }}</p>
-    <p class="zl-hero-description">{{ $b.description }}</p>
-    <div class="zl-hero-actions"><a class="btn btn-primary" href="#research">{{ $b.research_label }}</a><a class="btn btn-outline-light" href="#join">{{ $b.join_label }}</a></div>
-  </div>
-  <figure class="zl-hero-figure">
-    <a href="{{ partial "lab_url" "gallery/" }}"><img src="{{ $small.RelPermalink }}" srcset="{{ $small.RelPermalink }} 800w, {{ $large.RelPermalink }} 1400w" sizes="(min-width: 992px) 50vw, 92vw" width="{{ $small.Width }}" height="{{ $small.Height }}" alt="{{ $b.image_alt }}" fetchpriority="high" decoding="async"></a>
-    <figcaption>{{ $b.image_caption }} <a href="{{ partial "lab_url" "gallery/" }}">{{ $b.gallery_label }} ↗</a></figcaption>
-  </figure>
+<div class="zl-hero-backdrop" aria-hidden="true">
+  <img src="{{ $small.RelPermalink }}" srcset="{{ $small.RelPermalink }} 800w, {{ $large.RelPermalink }} 1400w" sizes="(min-width: 992px) 720px, 100vw" width="{{ $large.Width }}" height="{{ $large.Height }}" alt="" fetchpriority="high" decoding="async">
 </div>
+<div class="zl-hero-copy">
+  <p class="zl-eyebrow">NYCU · INSTITUTE OF BIOPHOTONICS</p>
+  <h1>Translational<br>Biophotonics Laboratory</h1>
+  <p class="zl-hero-statement">{{ $b.statement }}</p>
+  <p class="zl-hero-description">{{ $b.description }}</p>
+  <div class="zl-hero-actions"><a class="btn btn-primary" href="#research">{{ $b.research_label }}</a><a class="btn btn-outline-light" href="#join">{{ $b.join_label }}</a></div>
+</div>
+<p class="zl-hero-credit">{{ $b.image_caption }} · <a href="{{ $img.RelPermalink }}">{{ $b.original_label }} ↗</a> · <a href="{{ partial "lab_url" "gallery/" }}">{{ $b.gallery_label }} →</a></p>

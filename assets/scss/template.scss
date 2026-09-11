@@ -468,11 +468,22 @@ a:hover { color: $zl-accent-hover; }
 }
 
 .zl-eyebrow { font-size: .7rem; letter-spacing: .12em; font-weight: 650; text-transform: uppercase; }
-.wg-lab-hero { background: linear-gradient(115deg, $zl-ink, $zl-ink-2); padding: 5rem 0; }
+.wg-lab-hero { position: relative; isolation: isolate; overflow: hidden; background: $zl-ink; padding: 4.5rem 0 2rem; }
+.wg-lab-hero > .container { position: static; }
 .wg-lab-hero .home-section-bg { display: none; }
-.zl-hero-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 3.5rem; align-items: center; }
+// Complete research image forms the background; only the presentation layer is shaded.
+.zl-hero-backdrop {
+  position: absolute; inset: 0; z-index: -1; background: #000;
+  img { width: 100%; height: 100%; display: block; margin: 0; object-fit: contain; object-position: right center; }
+  &::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, $zl-ink 0%, rgba($zl-ink,.97) 30%, rgba($zl-ink,.86) 60%, rgba($zl-ink,.18) 82%, rgba($zl-ink,0) 100%); }
+}
+.zl-hero-credit {
+  position: relative; margin: 2.5rem 0 0; width: fit-content; max-width: 100%; padding: .5rem .75rem;
+  color: #d6e4ed; background: $zl-ink; font-size: .76rem; line-height: 1.7;
+  a { display: inline-block; color: $zl-light-accent; text-decoration: underline; text-underline-offset: .2em; }
+}
 .zl-hero-copy {
-  min-width: 0;
+  min-width: 0; max-width: 34rem; min-height: 22rem;
   .zl-eyebrow { color: $zl-light-accent; margin-bottom: 1.4rem; }
   h1 { color: #fff; font-size: clamp(2rem, 3.6vw, 3.1rem); line-height: 1.14; font-weight: 750; margin: 0 0 1.5rem; letter-spacing: -.025em; }
   .zl-hero-statement { color: $zl-light-accent; font-size: 1.3rem; font-weight: 600; line-height: 1.6; margin-bottom: .8rem; }
@@ -484,13 +495,6 @@ a:hover { color: $zl-accent-hover; }
 .zl-hero-actions .btn-primary:hover, .zl-apply .btn-primary:hover { background: $zl-accent-hover; border-color: $zl-accent-hover; }
 .zl-hero-actions .btn-outline-light { color: #fff; border-color: #a3e4e5; }
 .zl-hero-actions .btn-outline-light:hover { color: $zl-ink; background: #fff; }
-.zl-hero-figure {
-  margin: 0; min-width: 0;
-  > a { display: block; background: #102438; border: 1px solid #526c83; border-radius: 0; padding: .5rem; }
-  img { display: block; width: 100%; height: auto; margin: 0; }
-  figcaption { color: #c2d6e4; font-size: .76rem; margin-top: .8rem; line-height: 1.6; }
-  figcaption a { color: $zl-light-accent; margin-left: .5rem; }
-}
 .zl-metrics { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1rem; max-width: 45rem; margin: 0 auto; text-align: center; }
 .zl-metrics > div { padding: 1rem; border-top: 2px solid $zl-border; }
 .zl-metrics b { display: block; color: $zl-heading; font-size: 2rem; }
@@ -544,16 +548,18 @@ a:hover { color: $zl-accent-hover; }
 .zl-apply > a { margin: .4rem .6rem; display: inline-block; }
 .zl-apply > a:not(.btn) { color: $zl-heading; font-size: .9rem; }
 @media (max-width: 991.98px) {
-  .zl-hero-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .zl-hero-copy { max-width: 40rem; }
-  .zl-hero-figure { width: 100%; max-width: 42rem; margin: 0 auto; }
+  .wg-lab-hero { padding: 3rem 0 1.5rem; }
+  .zl-hero-copy { max-width: 34rem; min-height: 0; }
+  .zl-hero-backdrop img { object-position: center bottom; height: auto; position: absolute; bottom: 0; }
+  .zl-hero-backdrop::after { background: linear-gradient(180deg, $zl-ink 0%, rgba($zl-ink,.96) 35%, rgba($zl-ink,.84) 53%, rgba($zl-ink,.06) 78%, rgba($zl-ink,.12) 100%); }
+  .zl-hero-credit { margin-top: clamp(12rem, 46vw, 23rem); }
   .zl-people-cards { grid-template-columns: repeat(3,minmax(0,1fr)); }
   .zl-highlights { grid-template-columns: 1fr; }
   .zl-highlight { display: grid; grid-template-columns: 1fr 1.3fr; }
   .zl-highlight-image { height: 100%; border-bottom: 0; border-right: 1px solid $zl-border; }
 }
 @media (max-width: 767.98px) {
-  .wg-lab-hero { padding: 3rem 0; }
+  .wg-lab-hero { padding: 2.5rem 0 1.25rem; }
   .zl-hero-copy h1 { font-size: 2.1rem; }
   .zl-hero-copy .zl-hero-statement { font-size: 1.15rem; }
   .zl-people-cards { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1.25rem; }
@@ -591,4 +597,28 @@ a:hover { color: $zl-accent-hover; }
   .zl-member-photo { aspect-ratio: auto; min-height: 130px; }
   .zl-member-copy { min-width: 0; }
   .zl-member-placeholder { font-size: 1.2rem; }
+}
+
+// Research detail follows the homepage direction order and reuses its image attribution.
+.zl-research-intro { max-width: 44rem; margin-bottom: 2.5rem; }
+.zl-research-toc { display: flex; flex-wrap: wrap; gap: .65rem 1.5rem; padding-left: 1.2rem; font-size: .9rem; }
+.zl-research-direction { padding: 2.5rem 0; border-top: 1px solid $zl-border; scroll-margin-top: 100px; }
+.zl-research-direction h2 { font-size: clamp(1.4rem, 2.4vw, 1.9rem); line-height: 1.4; margin: 0 0 1.5rem; }
+.zl-research-detail { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 2.5rem; align-items: start; }
+.zl-research-detail > * { min-width: 0; }
+.zl-research-detail h3 { font-size: .95rem; margin: 1.3rem 0 .4rem; color: $zl-accent; }
+.zl-research-detail h3:first-child { margin-top: 0; }
+.zl-research-detail p { font-size: .95rem; }
+.zl-research-figure { margin: 0; }
+.zl-research-figure > a { display: block; padding: .6rem; background: #fff; border: 1px solid $zl-border; }
+.zl-research-figure img { width: 100%; height: auto; display: block; margin: 0; }
+.zl-research-figure figcaption { text-align: left; margin-top: .8rem; font-size: .8rem; color: $zl-muted; line-height: 1.7; }
+.zl-research-status { padding: 1rem 1.2rem; background: $zl-research-surface; border-left: 3px solid $zl-accent; }
+.zl-research-papers { margin: 1.5rem 0; padding-left: 1.2rem; font-size: .88rem; }
+.zl-research-papers li { margin-bottom: .7rem; overflow-wrap: anywhere; }
+.wg-lab-research + .wg-markdown { padding-top: 0; }
+@media (max-width: 767.98px) {
+  .zl-research-detail { grid-template-columns: 1fr; gap: 1.5rem; }
+  .zl-research-direction { padding: 2rem 0; }
+  .zl-hero-copy h1 { font-size: clamp(1.8rem, 7.7vw, 2.1rem); }
 }

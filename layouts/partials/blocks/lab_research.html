@@ -1,0 +1,34 @@
+{{ $page := .wcPage }}
+{{ $b := .wcBlock.content }}
+{{ $zh := eq $page.Language.Lang "zh" }}
+{{ $items := slice }}
+{{ range site.Home.Params.sections }}{{ if eq .id "research" }}{{ $items = .content.items }}{{ end }}{{ end }}
+{{ $pubSite := site }}{{ range site.Sites }}{{ if eq .Language.Lang "en" }}{{ $pubSite = . }}{{ end }}{{ end }}
+<div class="section-heading"><h1>{{ $b.title }}</h1><p>{{ $b.subtitle }}</p></div>
+<div class="zl-research-intro"><p>{{ $b.intro }}</p></div>
+<nav aria-label="{{ $b.title }}"><ol class="zl-research-toc">{{ range $items }}<li><a href="#{{ index (split .url "#") 1 }}">{{ .name }}</a></li>{{ end }}</ol></nav>
+{{ range $items }}
+  {{ $item := . }}{{ $detail := index site.Data.research .research_key }}
+  {{ if not $detail }}{{ errorf "Missing research details: %s" .research_key }}{{ end }}
+  {{ $copy := index $detail $page.Language.Lang }}
+  {{ $img := resources.Get (path.Join "media" .image) }}
+  {{ $small := $img.Resize "720x webp q85" }}{{ $large := $img.Resize "1440x webp q88" }}
+  <article class="zl-research-direction" id="{{ index (split .url "#") 1 }}">
+    <h2>{{ .name }}</h2>
+    <div class="zl-research-detail">
+      <div>
+        <h3>{{ if $zh }}研究問題{{ else }}Research question{{ end }}</h3><p>{{ $copy.question }}</p>
+        <h3>{{ if $zh }}方法{{ else }}Approach{{ end }}</h3><p>{{ $copy.method }}</p>
+        <h3>{{ if $zh }}{{ if eq .research_key "endomicroscopy" }}已有技術基礎{{ else }}已發表發現{{ end }}{{ else }}{{ if eq .research_key "endomicroscopy" }}Published foundation{{ else }}Published findings{{ end }}{{ end }}</h3><p>{{ $copy.finding }}</p>
+      </div>
+      <figure class="zl-research-figure">
+        <a href="{{ $img.RelPermalink }}" aria-label="{{ if $zh }}查看完整原圖：{{ else }}View full image: {{ end }}{{ .name }}"><img src="{{ $small.RelPermalink }}" srcset="{{ $small.RelPermalink }} 720w, {{ $large.RelPermalink }} 1440w" sizes="(min-width: 1200px) 470px, (min-width: 768px) 42vw, 90vw" width="{{ $small.Width }}" height="{{ $small.Height }}" alt="{{ .image_alt }}" loading="lazy" decoding="async"></a>
+        <figcaption>{{ $copy.caption }}<br>{{ .image_credit }}{{ with .image_source }} · <a href="{{ . }}">{{ if $zh }}來源{{ else }}Source{{ end }}</a>{{ end }}{{ with .image_license }} · <a href="{{ . }}">CC BY 4.0</a>{{ end }}<br><a href="{{ $img.RelPermalink }}">{{ if $zh }}查看完整原圖{{ else }}View full image{{ end }} ↗</a></figcaption>
+      </figure>
+    </div>
+    <h3 class="zl-eyebrow">{{ $copy.papers_label }}</h3>
+    <ul class="zl-research-papers">{{ range $detail.papers }}{{ $pub := $pubSite.GetPage (printf "publication/%s" .) }}{{ if not $pub }}{{ errorf "Missing research publication: %s" . }}{{ end }}<li><a href="{{ $pub.RelPermalink }}"{{ if $zh }} hreflang="en"{{ end }}>{{ $pub.Title }}</a> · {{ $pub.Date.Format "2006" }} · {{ $pub.Params.publication | markdownify }} · <a href="https://doi.org/{{ $pub.Params.doi }}">DOI</a></li>{{ end }}</ul>
+    <p class="zl-research-status">{{ $copy.status }}</p>
+    <p class="zl-inline-links"><a href="{{ partial "lab_url" "gallery/" }}">{{ if $zh }}研究影像{{ else }}Research images{{ end }} →</a><a href="{{ partial "lab_url" "contact/" }}">{{ if $zh }}洽詢此研究方向{{ else }}Discuss this research{{ end }} →</a></p>
+  </article>
+{{ end }}

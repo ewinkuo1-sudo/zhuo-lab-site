@@ -1,0 +1,89 @@
+{
+  "microscopy": {
+    "papers": [
+      "zhuo-2021-labelfree",
+      "makkithaya-2025-quantitative"
+    ],
+    "en": {
+      "question": "How can optical contrasts reveal tissue architecture and molecular properties?",
+      "method": "Published work combines SHG, two-photon fluorescence, fluorescence-lifetime imaging and CARS within a multimodal microscopy approach. The contrast channels and acquisition sequence depend on the experiment.",
+      "finding": "The 2021 paper presents a multimodal platform. A 2025 esophageal tissue study combines SHG and two-photon fluorescence with image analysis to compare tissue groups. That study includes H&E-stained sections; its figure should not be read as a demonstration that all samples were unstained.",
+      "status": "Published studies establish the methods and tissue applications. Extending them toward clinical use is a long-term goal; current system configurations and new projects should be discussed with the lab.",
+      "caption": "Esophageal tissue in the 2025 study: H&E histology alongside SHG, two-photon fluorescence and merged images. Full Fig. 2 is retained.",
+      "papers_label": "Representative papers"
+    },
+    "zh": {
+      "question": "不同的光學對比，如何呈現組織結構與分子特性？",
+      "method": "已發表工作以多模態顯微方法結合 SHG、雙光子螢光、螢光生命期成像與 CARS；實際使用的通道與取像順序依實驗而定。",
+      "finding": "2021 年論文介紹多模態平台；2025 年食道組織研究以 SHG、雙光子螢光與影像分析比較組織組別。後者包含 H&E 染色切片，因此這張圖不代表所有樣本皆未染色。",
+      "status": "方法與組織應用已有論文支持，走向臨床使用是長期目標；目前系統配置與新研究進度請洽實驗室。",
+      "caption": "2025 年食道組織研究：H&E 組織切片，以及 SHG、雙光子螢光與合併影像，保留完整圖 2。",
+      "papers_label": "代表論文"
+    }
+  },
+  "collagen": {
+    "papers": [
+      "makkithaya-2024-investigating",
+      "mazumder-2017-polarization"
+    ],
+    "en": {
+      "question": "How can collagen organization be quantified across different tissue conditions?",
+      "method": "Polarization-resolved SHG measures polarization-dependent signals to derive susceptibility ratios, linear polarization and fibre orientation. These measurements describe aspects of collagen organization.",
+      "finding": "The 2024 cartilage study compares normal, osteoarthritic and rheumatoid-arthritis tissues. It reports differences in polarization-derived parameters and collagen organization between these tissue groups.",
+      "status": "Cartilage findings are published. Broader applications to collagen chirality and extracellular-matrix assessment remain research directions; the current scope of ongoing studies needs confirmation.",
+      "caption": "Osteoarthritis cartilage from the 2024 study: histology, SHG intensity and polarization-derived maps. Full Fig. 3 is retained.",
+      "papers_label": "Representative papers"
+    },
+    "zh": {
+      "question": "如何量化不同組織狀態下的膠原蛋白排列？",
+      "method": "偏振解析 SHG 量測訊號隨偏振的變化，取得感受率比值、線偏振程度與纖維方向等參數，描述膠原蛋白的組織特徵。",
+      "finding": "2024 年軟骨研究比較正常、骨關節炎與類風濕性關節炎組織，報告各組在偏振衍生參數與膠原排列上的差異。",
+      "status": "軟骨研究已有發表成果；膠原蛋白手性與細胞外基質評估的延伸應用屬研究方向，進行中計畫的具體範圍待確認。",
+      "caption": "2024 年研究中的骨關節炎軟骨：組織切片、SHG 強度及偏振衍生參數圖，保留完整圖 3。",
+      "papers_label": "代表論文"
+    }
+  },
+  "endomicroscopy": {
+    "papers": [
+      "zhuo-2021-labelfree"
+    ],
+    "en": {
+      "question": "How could nonlinear microscopy be brought into a smaller probing space?",
+      "method": "The concept is to combine optical fibres and miniature optics for excitation delivery and signal collection. Probe design and performance depend on the intended application.",
+      "finding": "The related 2021 paper describes multimodal microscopy as a technical foundation. It is not evidence of a completed endoscopic probe or clinical deployment.",
+      "status": "Miniaturization is a long-term direction. Prototype status, dimensions, imaging performance and representative experimental images await confirmation from the lab.",
+      "caption": "Concept illustration of a fibre-based nonlinear imaging probe; not an instrument photograph, experimental result or scale drawing.",
+      "papers_label": "Related technical background"
+    },
+    "zh": {
+      "question": "如何把非線性顯微成像帶入更小的探測空間？",
+      "method": "概念上結合光纖與微型光學元件，傳遞激發光並收集訊號；探頭設計與效能需依目標應用評估。",
+      "finding": "相關的 2021 年論文提供多模態顯微技術基礎，不能據此視為已完成內視探頭或臨床使用的證據。",
+      "status": "微型化是長期方向；原型進度、尺寸、成像效能與代表性實驗影像待實驗室確認。",
+      "caption": "光纖式非線性成像探頭概念示意；非實機照片、實驗結果或等比例工程圖。",
+      "papers_label": "相關技術背景"
+    }
+  },
+  "ai": {
+    "papers": [
+      "makkithaya-2025-quantitative",
+      "karnati-2026-integration"
+    ],
+    "en": {
+      "question": "Which image features can help distinguish tissue groups?",
+      "method": "The 2025 esophageal study extracts gray-level co-occurrence matrix (GLCM) texture features and uses support-vector machines (SVM) for classification. A 2026 pilot study investigates deep learning and machine learning for two-photon imaging-based oral-lesion classification.",
+      "finding": "Published studies evaluate tissue classification in their respective datasets. The oral-lesion work is a pilot study; these results do not establish a general clinical diagnostic system.",
+      "status": "Image classification has published support. New whole-slide workflows, pathology scores and deployment plans require separate confirmation and validation.",
+      "caption": "Simulated tissue image with a classifier overlay, used to illustrate the analysis concept. It is not output from either cited study.",
+      "papers_label": "Representative papers"
+    },
+    "zh": {
+      "question": "哪些影像特徵有助於區分不同組織組別？",
+      "method": "2025 年食道研究以灰階共現矩陣（GLCM）抽取紋理特徵，使用支持向量機（SVM）分類。2026 年前導研究則探討深度學習與機器學習用於雙光子口腔病灶影像分類。",
+      "finding": "已發表工作在各自的資料集內評估組織分類；口腔病灶工作屬前導研究，結果尚不能代表通用的臨床診斷系統。",
+      "status": "影像分類已有論文支持；新的全片分析流程、病理評分與部署計畫，仍需另行確認與驗證。",
+      "caption": "模擬組織影像與分類器疊圖，用於說明分析概念，並非引用論文的模型輸出。",
+      "papers_label": "代表論文"
+    }
+  }
+}
