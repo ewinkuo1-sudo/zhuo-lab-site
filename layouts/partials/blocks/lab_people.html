@@ -10,21 +10,39 @@
   {{ range where site.Pages "Section" "authors" }}
     {{ if and .Params.user_groups (not (in $people .)) }}{{ $people = $people | append . }}{{ end }}
   {{ end }}
+  {{ $grouped := newScratch }}
+  {{ range $people }}
+    {{ $person := . }}
+    {{ $id := .File.Dir | path.Clean | path.Base }}
+    {{ if not (and $block.content.compact (eq $id "guan-yu-zhuo")) }}
+      {{/* Classify both languages by the same English role when available. */}}
+      {{ $role := .Params.role }}
+      {{ range .AllTranslations }}{{ if eq .Language.Lang "en" }}{{ $role = .Params.role }}{{ end }}{{ end }}
+      {{ $group := "other" }}
+      {{ range site.Data.people_groups }}{{ if in .roles $role }}{{ $group = .id }}{{ end }}{{ end }}
+      {{ $members := $grouped.Get $group | default (slice) }}
+      {{ $grouped.Set $group ($members | append $person) }}
+    {{ end }}
+  {{ end }}
+  {{ range site.Data.people_groups }}
+  {{ $group := . }}
+  {{ with $grouped.Get .id }}
+  <section class="zl-people-group" aria-labelledby="people-group-{{ $group.id }}">
+    <h2 class="zl-people-group-title" id="people-group-{{ $group.id }}">{{ if eq $page.Language.Lang "zh" }}{{ $group.zh }}{{ else }}{{ $group.en }}{{ end }}</h2>
   {{ if $block.content.compact }}
   <div class="zl-people-cards">
-  {{ range $people }}{{ if ne (.File.Dir | path.Clean | path.Base) "guan-yu-zhuo" }}
+  {{ range . }}
     <article class="zl-member-card">
       {{ $person := . }}
       <a class="zl-member-photo" href="{{ .RelPermalink }}" tabindex="-1" aria-hidden="true">
       {{ with .Resources.GetMatch "avatar*" }}{{ $img := .Resize "400x webp q85" }}<img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="" loading="lazy" decoding="async">
       {{ else }}<span class="zl-member-placeholder">TBL</span>{{ end }}</a>
-      <div class="zl-member-copy"><h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2><p class="zl-person-role">{{ .Params.role }}</p>{{ with .Params.bio }}<p>{{ . }}</p>{{ end }}</div>
+      <div class="zl-member-copy"><h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3><p class="zl-person-role">{{ .Params.role }}</p>{{ with .Params.bio }}<p>{{ . }}</p>{{ end }}</div>
     </article>
-  {{ end }}{{ end }}
+  {{ end }}
   </div>
-  <p class="zl-section-link"><a href="{{ partial "lab_url" "people/" }}">{{ if eq $page.Language.Lang "zh" }}所有成員與完整介紹{{ else }}All members and full profiles{{ end }} →</a></p>
   {{ else }}
-  {{ range $people }}
+  {{ range . }}
   {{ $person := . }}
   {{ $portrait := .Resources.GetMatch "avatar*" }}
   {{ $id := .File.Dir | path.Clean | path.Base }}
@@ -44,10 +62,10 @@
       {{ end }}
     </div>
     <div class="zl-person-copy">
-      <h2 id="name-{{ $id }}"><a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ with .Params.education.courses }}{{ with (index . 0).course }}<span class="zl-person-degree">{{ . }}</span>{{ end }}{{ end }}</h2>
+      <h3 id="name-{{ $id }}"><a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ with .Params.education.courses }}{{ with (index . 0).course }}<span class="zl-person-degree">{{ . }}</span>{{ end }}{{ end }}</h3>
       <p class="zl-person-role">{{ .Params.role }}</p>
       {{ with .Params.organizations }}<p class="zl-person-affiliation">{{ (index . 0).name }}</p>{{ end }}
-      <div class="zl-person-bio">{{ .Content }}</div>
+      <div class="zl-person-bio">{{ .Content | replaceRE `<(/?)h3(\s|>)` `<${1}h4${2}` | safeHTML }}</div>
       {{ with .Params.social }}
       <ul class="zl-person-links">
         {{ range . }}<li><a href="{{ .link }}">{{ if eq .icon "envelope" }}Email{{ else if eq .icon "google-scholar" }}Google Scholar{{ else if eq .icon "orcid" }}ORCID{{ else }}{{ .icon | humanize }}{{ end }}</a></li>{{ end }}
@@ -56,5 +74,11 @@
     </div>
   </article>
   {{ end }}
+  {{ end }}
+  </section>
+  {{ end }}
+  {{ end }}
+  {{ if $block.content.compact }}
+  <p class="zl-section-link"><a href="{{ partial "lab_url" "people/" }}">{{ if eq $page.Language.Lang "zh" }}所有成員與完整介紹{{ else }}All members and full profiles{{ end }} →</a></p>
   {{ end }}
 </div>

@@ -1,0 +1,73 @@
+[
+  {
+    "id": "pi",
+    "zh": "主持人",
+    "en": "Principal Investigator",
+    "roles": [
+      "Associate Professor, Principal Investigator",
+      "副教授、實驗室主持人"
+    ]
+  },
+  {
+    "id": "postdocs",
+    "zh": "博士後研究員",
+    "en": "Postdoctoral Researchers",
+    "roles": [
+      "Postdoctoral Researcher",
+      "博士後研究員"
+    ]
+  },
+  {
+    "id": "assistants",
+    "zh": "研究助理",
+    "en": "Research Assistants",
+    "roles": [
+      "Research Assistant",
+      "研究助理"
+    ]
+  },
+  {
+    "id": "phd",
+    "zh": "博士生",
+    "en": "Ph.D. Students",
+    "roles": [
+      "Ph.D. Student",
+      "Ph.D. Student (Exchange)",
+      "博士生",
+      "博士生（交換）"
+    ]
+  },
+  {
+    "id": "masters",
+    "zh": "碩士生",
+    "en": "Master’s Students",
+    "roles": [
+      "M.Sc. Student",
+      "碩士班學生"
+    ]
+  },
+  {
+    "id": "undergraduates",
+    "zh": "大學部專題生",
+    "en": "Undergraduate Students",
+    "roles": [
+      "Undergraduate Student",
+      "大學部專題生"
+    ]
+  },
+  {
+    "id": "alumni",
+    "zh": "校友",
+    "en": "Alumni",
+    "roles": [
+      "Alumni",
+      "校友"
+    ]
+  },
+  {
+    "id": "other",
+    "zh": "其他成員",
+    "en": "Other Members",
+    "roles": []
+  }
+]

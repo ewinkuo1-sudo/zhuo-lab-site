@@ -83,7 +83,7 @@ See `docs/website-source-audit.md` for the complete source review and unresolved
 
 ## People layout and events
 
-The lab_people block displays full bilingual author biographies alongside rectangular, uncropped portraits. data/people_order.json groups current profiles as PI, postdoc, research assistant, Ph.D. students, then M.Sc. students, retaining the previous order within each group. Home and People use this order in both languages. Add new members to both language folders and to the end of their role group in this shared file; unlisted profiles are still appended as a fallback. Edit biographies in the existing author files.
+The lab_people block displays full bilingual author biographies alongside rectangular, uncropped portraits. data/people_order.json groups current profiles as PI, postdoc, research assistant, Ph.D. students, then M.Sc. students, retaining the previous order within each group. Home and People use this order in both languages. Add new members to both language folders and to the end of their role group in this shared file; unlisted profiles are still appended as a fallback. Visible bilingual role headings are defined in `data/people_groups.json`; grouping uses the English profile role in both languages, with unrecognized roles shown under Other Members. Empty groups are omitted, and the PI stays in the dedicated Home spotlight. Edit biographies in the existing author files.
 
 The lab_events block uses data/lab_events.json for bilingual event captions and image paths on Home, News and Gallery. Unspecified dates are omitted. Image provenance is in docs/event-photo-sources.json.
 
