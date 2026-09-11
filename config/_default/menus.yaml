@@ -6,6 +6,12 @@ main:
   - name: People
     url: people
     weight: 20
+  - name: Gallery
+    url: gallery
+    weight: 22
+  - name: News
+    url: news
+    weight: 24
   - name: Collaborations
     url: collaborations
     weight: 25

@@ -50,7 +50,7 @@ Hugo Blox release notes first.
 
 ## Illustrations (simulated, not data)
 
-Every picture on the site is generated procedurally by the scripts in `scripts/imagegen/` (numpy, scipy, Pillow,
+The placeholder research illustrations are generated procedurally by the scripts in `scripts/imagegen/` (numpy, scipy, Pillow,
 matplotlib; SVG rendered with headless Chromium). They are *simulations* of what the lab's modalities look like,
 labelled as illustrations on the pages, and should be replaced by real micrographs as soon as the PI supplies them.
 
@@ -68,3 +68,9 @@ labelled as illustrations on the pages, and should be replaced by real micrograp
 Scripts write to `static/media/gen/`; copy the WebP/SVG files you want into `assets/media/gen/` (or `assets/media/logo.svg`,
 `assets/media/sharing.png`) after regenerating. Run e.g. `python3 scripts/imagegen/thumb_pshg.py`.
 To replace an illustration with a real image, drop the real file in `assets/media/gen/` under the same name and delete the script.
+
+## Imported Google Sites content (2026-09-11)
+
+The supplied Google Sites snapshot adds five microscopy images in `assets/media/gallery/`, a bilingual Gallery, and the lab's full English name in the home-page introduction. `data/gallery.yaml` holds bilingual display text; `docs/gallery-sources.json` records hashes and original dimensions. Original files are preserved; Hugo creates responsive WebP previews without cropping. Image descriptions only describe visible appearance; sample types, imaging modalities and publication matches still need source captions.
+
+`data/lab_news.yaml` is the shared news content for the home pages and new bilingual News pages. Supplied, explicitly named portraits were added for Guan-Yu Zhuo and Jackson Rodrigues in both languages. The remaining unlabelled portraits were not assigned.

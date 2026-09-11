@@ -1,0 +1,35 @@
+- image: gallery/lab-01.jpg
+  en:
+    title: Red and green tissue image
+    alt: Red and green structures across a tissue image on a dark background.
+  zh:
+    title: 紅綠雙色組織影像
+    alt: 深色背景中的紅色與綠色組織結構。
+- image: gallery/lab-02.jpg
+  en:
+    title: Six-panel microscopy figure
+    alt: Cyan microscopy panels A–F with arrows and scale bars retained from the source.
+  zh:
+    title: 六分圖顯微影像
+    alt: 青色顯微影像 A–F 分圖，保留原圖箭頭與比例尺。
+- image: gallery/lab-03.png
+  en:
+    title: Pseudocolour microscopy image
+    alt: Purple, orange and yellow image showing rounded structures and their surroundings.
+  zh:
+    title: 偽彩色顯微影像
+    alt: 以紫、橙、黃色呈現圓形結構與周圍紋理的影像。
+- image: gallery/lab-04.png
+  en:
+    title: Multicolour tissue overview
+    alt: A broad tissue image with red, orange, green and blue structures.
+  zh:
+    title: 多色組織全景
+    alt: 包含紅、橙、綠、藍色結構的大範圍組織影像。
+- image: gallery/lab-05.png
+  en:
+    title: Green microscopy image
+    alt: Green elongated and striated structures against a dark background.
+  zh:
+    title: 綠色顯微影像
+    alt: 深色背景中呈現綠色長條與條紋狀結構的影像。

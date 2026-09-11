@@ -39,6 +39,15 @@ sections:
       spacing:
         padding: ['0', '0', '1.5rem', '0']
 
+  - block: markdown
+    id: about
+    content:
+      title: 關於實驗室
+      text: |
+        **Translational Biophotonics Laboratory（TBL）** 隸屬國立陽明交通大學生醫光電研究所，致力於串聯光學創新與臨床轉譯，推進多模態非線性光學在癌症生物學與診斷上的應用。
+    design:
+      columns: '1'
+
   - block: features
     content:
       title: 研究方向
@@ -72,17 +81,19 @@ sections:
           icon_pack: fas
           description: 用機器學習與深度學習把未染色的多光子影像變成診斷判讀，從紋理特徵加 SVM 到端到端神經網路。
 
-  - block: markdown
+  - block: lab_gallery
+    id: gallery
+    content:
+      title: 研究影像
+      text: 探索實驗室的顯微影像；點選圖片可查看完整原圖。
+      count: 3
+      link_label: 瀏覽全部研究影像
+
+  - block: lab_news
+    id: news
     content:
       title: 最新消息
-      text: |
-        <ul class="zl-news">
-          <li><time>2026</time><b>判讀口腔癌的最差侵犯型態</b><p>多模態非線性光學影像結合深度學習，發表於 <a href="https://doi.org/10.1016/j.labinv.2025.104257">Laboratory Investigation</a>。</p></li>
-          <li><time>2026</time><b>深度學習直接判讀無標記雙光子影像</b><p>不染色分類口腔病灶的先導研究，發表於 <a href="https://doi.org/10.1109/jphot.2026.3701723">IEEE Photonics Journal</a>。</p></li>
-          <li><time>2024</time><b>獲選優秀年輕學者</b><p>卓老師獲國科會 2030 跨世代年輕學者方案「優秀年輕學者」，計畫支持實驗室至 2027 年。</p></li>
-        </ul>
-    design:
-      columns: '1'
+      link_label: 所有消息
 
   - block: collection
     content:

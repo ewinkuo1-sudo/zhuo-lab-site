@@ -1,0 +1,33 @@
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+{{ $zh := eq $page.Language.Lang "zh" }}
+{{ $items := site.Data.gallery }}
+{{ with $block.content.count }}{{ $items = first (int .) $items }}{{ end }}
+<div class="row">
+  <div class="col-12 section-heading">
+    <h1>{{ $block.content.title }}</h1>
+    {{ with $block.content.text }}<p>{{ . }}</p>{{ end }}
+  </div>
+  <div class="col-12">
+    <div class="zl-gallery{{ if $block.content.count }} zl-gallery-preview{{ end }}">
+      {{ range $items }}
+      {{ $copy := index . $page.Language.Lang }}
+      {{ $img := resources.Get (path.Join "media" .image) }}
+      {{ if not $img }}{{ errorf "Missing gallery image: %s" .image }}{{ end }}
+      {{ $small := $img.Resize (printf "%dx webp q85" (int (math.Min 720 $img.Width))) }}
+      {{ $large := $img.Resize (printf "%dx webp q90" (int (math.Min 1440 $img.Width))) }}
+      <figure>
+        <a class="zl-gallery-image" href="{{ $img.RelPermalink }}" aria-label="{{ if $zh }}查看原圖：{{ else }}View original: {{ end }}{{ $copy.title }}">
+          <img src="{{ $small.RelPermalink }}" srcset="{{ $small.RelPermalink }} {{ $small.Width }}w, {{ $large.RelPermalink }} {{ $large.Width }}w"
+               sizes="(min-width: 992px) 540px, (min-width: 768px) 45vw, 92vw"
+               width="{{ $small.Width }}" height="{{ $small.Height }}" alt="{{ $copy.alt }}" loading="lazy" decoding="async">
+        </a>
+        <figcaption><h2>{{ $copy.title }}</h2><p>{{ $copy.alt }}</p>
+          <a href="{{ $img.RelPermalink }}">{{ if $zh }}查看原圖{{ else }}View original{{ end }} <span aria-hidden="true">↗</span></a>
+        </figcaption>
+      </figure>
+      {{ end }}
+    </div>
+    {{ with $block.content.link_label }}<p class="zl-section-link"><a class="btn btn-outline-primary" href="{{ "gallery/" | relLangURL }}">{{ . }}</a></p>{{ end }}
+  </div>
+</div>

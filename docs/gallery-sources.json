@@ -1,0 +1,37 @@
+{
+  "source": "tbl@nycu - Google 協作平台.html, supplied Google Sites editor snapshot",
+  "extracted_on": "2026-09-11",
+  "notes": "Five unique embedded images; original bytes preserved. Captions describe appearance only. Sample, modality, acquisition date and publication mapping were not supplied.",
+  "images": [
+    {
+      "file": "assets/media/gallery/lab-01.jpg",
+      "sha256": "6f93aef0a9ec0897cb646363c7418fa00731d00f013862de7be534347abf6b41",
+      "width": 2048,
+      "height": 2048
+    },
+    {
+      "file": "assets/media/gallery/lab-02.jpg",
+      "sha256": "02f02782d2c0877fc94bed312d59b3800b2576e9cacf9181309370de44b80499",
+      "width": 2048,
+      "height": 1364
+    },
+    {
+      "file": "assets/media/gallery/lab-03.png",
+      "sha256": "4f1210a7db8b7380e0a8efcd4f3f320f9eacd1995f5c0f1404fa92bbc556fabf",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "file": "assets/media/gallery/lab-04.png",
+      "sha256": "2f23d12730148ea3c599ffd06aa2ab40ed6b603461cfdc0328e18fed8a74cb53",
+      "width": 1775,
+      "height": 1638
+    },
+    {
+      "file": "assets/media/gallery/lab-05.png",
+      "sha256": "6bcb10b2909a4bd2368ca13f0f1b88c7636041f97fb1e9ba8b646ab38653eb92",
+      "width": 512,
+      "height": 512
+    }
+  ]
+}

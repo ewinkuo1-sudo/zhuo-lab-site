@@ -41,6 +41,15 @@ sections:
       spacing:
         padding: ['0', '0', '1.5rem', '0']
 
+  - block: markdown
+    id: about
+    content:
+      title: About the lab
+      text: |
+        **Translational Biophotonics Laboratory (TBL)** at the Institute of Biophotonics, National Yang Ming Chiao Tung University bridges optical innovation and clinical translation, advancing multimodal nonlinear optics for cancer biology and diagnosis.
+    design:
+      columns: '1'
+
   - block: features
     content:
       title: Research directions
@@ -74,17 +83,19 @@ sections:
           icon_pack: fas
           description: Machine learning and deep learning that turn unstained multiphoton images into diagnostic calls, from texture features and SVMs to end-to-end neural networks.
 
-  - block: markdown
+  - block: lab_gallery
+    id: gallery
+    content:
+      title: Gallery
+      text: Explore microscopy images from the lab. Select an image to view the full original.
+      count: 3
+      link_label: Explore the gallery
+
+  - block: lab_news
+    id: news
     content:
       title: News
-      text: |
-        <ul class="zl-news">
-          <li><time>2026</time><b>Reading the worst pattern of invasion in oral cancer</b><p>Multimodal nonlinear imaging combined with deep learning, published in <a href="https://doi.org/10.1016/j.labinv.2025.104257">Laboratory Investigation</a>.</p></li>
-          <li><time>2026</time><b>Deep learning on label-free two-photon images</b><p>A pilot study classifying oral lesions without stains, published in <a href="https://doi.org/10.1109/jphot.2026.3701723">IEEE Photonics Journal</a>.</p></li>
-          <li><time>2024</time><b>Excellent Young Scholar award</b><p>Dr. Zhuo named an Excellent Young Scholar in the NSTC 2030 Cross-Generation Young Scholars Program, funding the lab through 2027.</p></li>
-        </ul>
-    design:
-      columns: '1'
+      link_label: All news
 
   - block: collection
     content:

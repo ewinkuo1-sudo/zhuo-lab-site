@@ -1,0 +1,9 @@
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+<div class="row">
+  <div class="col-12 section-heading"><h1>{{ $block.content.title }}</h1></div>
+  <div class="col-12">
+    {{ index site.Data.lab_news $page.Language.Lang | $page.RenderString }}
+    {{ with $block.content.link_label }}<p class="zl-section-link"><a href="{{ "news/" | relLangURL }}">{{ . }} <span aria-hidden="true">→</span></a></p>{{ end }}
+  </div>
+</div>

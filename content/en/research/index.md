@@ -14,6 +14,9 @@ sections:
         tissue directly, without staining, and we turn those images into quantitative markers that
         pathologists and clinicians can use.
 
+
+        [Explore microscopy images from the lab](../gallery/)
+
         ## Label-free nonlinear optical microscopy
 
         <div class="zl-split">
