@@ -109,7 +109,8 @@
             {{ end }}
           {{end}}
 
-          {{ $nav_href := partial "lab_url" (strings.TrimPrefix "/" .URL) }}
+          {{ $nav_href := .URL | relLangURL }}
+          {{ if in .URL "/gallery/" }}{{ $nav_href = partial "lab_url" "gallery/" }}{{ end }}
           {{ if and (gt (len $hash) 0) (not (urls.Parse .URL).Scheme) }}
             {{ $nav_href = printf "%s%s" site.Home.RelPermalink $hash }}
             {{ $is_same_page = $current_page.IsHome }}
