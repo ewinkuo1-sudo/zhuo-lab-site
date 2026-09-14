@@ -194,7 +194,7 @@ html[lang^="zh"] .wg-hero::after {
   .row > .zl-feature-card {
     padding: 0 0 1.5rem;
     text-align: left;
-    .section-subheading, p { padding: 0 1.5rem; }
+    .section-subheading, p, .zl-research-summary { padding: 0 1.5rem; }
     .section-subheading a { color: inherit; text-decoration: none; }
     .section-subheading a:hover { color: $zl-accent; }
   }
