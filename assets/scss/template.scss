@@ -705,3 +705,18 @@ a:hover { color: $zl-accent-hover; }
   .zl-people-group .zl-member-copy { padding: .85rem; }
   .zl-people .zl-member-copy h3 { font-size: .96rem; }
 }
+
+// Focused homepage: research evidence, concise publications and a team overview.
+.zl-research-summary { text-align: left; margin: 1rem 0; }
+.zl-research-summary dt { color: $zl-muted; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; margin-top: .85rem; }
+.zl-research-summary dd { margin: .2rem 0 0; font-size: .95rem; line-height: 1.65; }
+.zl-research-paper { font-size: .85rem; text-align: left; }
+.zl-publication-brief { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; }
+.zl-publication-brief article { border-top: 2px solid $zl-muted; padding-top: 1.2rem; }
+.zl-publication-brief h2 { font-size: 1.2rem; line-height: 1.4; margin: .6rem 0 1rem; }
+.zl-team-summary { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 2.5rem; }
+.zl-team-summary img { width: 100%; height: auto; }
+.zl-team-summary h2 { font-size: 1.5rem; }
+@media (max-width: 767.98px) {
+  .zl-publication-brief, .zl-team-summary { grid-template-columns: 1fr; gap: 1.5rem; }
+}

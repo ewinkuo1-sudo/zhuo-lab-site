@@ -10,7 +10,7 @@ main:
     url: '/#people'
     weight: 30
   - name: Gallery
-    url: '/#gallery'
+    url: '/gallery/'
     weight: 40
   - name: Join Us
     url: '/#join'

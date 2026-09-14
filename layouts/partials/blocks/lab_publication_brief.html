@@ -1,0 +1,9 @@
+{{ $lang := .wcPage.Language.Lang }}{{ $zh := eq $lang "zh" }}
+<div class="section-heading"><h1>{{ .wcBlock.content.title }}</h1><p>{{ .wcBlock.content.text }}</p></div>
+<div class="zl-publication-brief">
+{{ range site.Data.highlights }}
+{{ $copy := index . $lang }}{{ $pub := (index (where site.Sites "Language.Lang" "en") 0).GetPage (printf "/publication/%s" .slug) }}
+<article><p class="zl-eyebrow">{{ $pub.Params.publication | markdownify | plainify }} · {{ $pub.Date.Format "2006" }}</p><h2><a href="{{ $pub.RelPermalink }}">{{ $copy.title }}</a></h2><a href="https://doi.org/{{ $pub.Params.doi }}">DOI ↗</a></article>
+{{ end }}
+</div>
+<p class="zl-section-link"><a class="btn btn-outline-primary" href="{{ (index (where site.Sites "Language.Lang" "en") 0).Home.RelPermalink }}publication/">{{ if $zh }}完整論文清單{{ else }}All publications{{ end }} →</a></p>

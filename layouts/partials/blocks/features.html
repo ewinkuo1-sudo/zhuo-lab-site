@@ -62,7 +62,17 @@
       {{ end }}
     {{ end }}
     <div class="section-subheading">{{ with $href }}<a href="{{ . | safeURL }}">{{ end }}{{ $item.name | markdownify | emojify }}{{ if $href }}</a>{{ end }}</div>
-    {{ with .description }}<p>{{ . | markdownify | emojify }}</p>{{ end }}
+    {{ if $block.content.integrated }}
+    {{ $detail := index site.Data.research $item.research_key }}{{ $copy := index $detail $page.Language.Lang }}
+    <dl class="zl-research-summary">
+      <dt>{{ if eq $page.Language.Lang "zh" }}問題{{ else }}Question{{ end }}</dt><dd>{{ $copy.home_question }}</dd>
+      <dt>{{ if eq $page.Language.Lang "zh" }}方法{{ else }}Method{{ end }}</dt><dd>{{ $copy.home_method }}</dd>
+      <dt>{{ if eq $page.Language.Lang "zh" }}{{ if eq $item.research_key "endomicroscopy" }}技術基礎{{ else }}成果{{ end }}{{ else }}{{ if eq $item.research_key "endomicroscopy" }}Foundation{{ else }}Finding{{ end }}{{ end }}</dt><dd>{{ $copy.home_finding }}</dd>
+    </dl>
+    {{ $en := index (where site.Sites "Language.Lang" "en") 0 }}
+    {{ $pub := $en.GetPage (printf "/publication/%s" $detail.home_paper) }}
+    <p class="zl-research-paper"><a href="{{ $pub.RelPermalink }}">{{ $pub.Params.publication | markdownify | plainify }} · {{ $pub.Date.Format "2006" }} →</a></p>
+    {{ else }}{{ with .description }}<p>{{ . | markdownify | emojify }}</p>{{ end }}{{ end }}
     {{ with $item.image_credit }}<p class="zl-image-credit">{{ . }}{{ with $item.image_source }} · <a href="{{ . }}">{{ if eq $page.Language.Lang "zh" }}來源{{ else }}Source{{ end }}</a>{{ end }}{{ with $item.image_license }} · <a href="{{ . }}">CC BY 4.0</a>{{ end }}</p>{{ end }}
     {{ with $href }}<p class="zl-research-link"><a href="{{ . }}">{{ if eq $page.Language.Lang "zh" }}了解研究{{ else }}Explore this research{{ end }} →</a></p>{{ end }}
   </div>

@@ -1,0 +1,8 @@
+{{ $zh := eq .wcPage.Language.Lang "zh" }}
+{{ $img := (resources.Get "media/people/lab-group.jpg").Resize "1000x webp q85" }}
+<div class="section-heading"><h1>{{ if $zh }}認識團隊{{ else }}Meet the team{{ end }}</h1></div>
+<div class="zl-team-summary">
+<a href="{{ partial "lab_url" "people/" }}"><img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ if $zh }}實驗室團隊合照{{ else }}Lab group photograph{{ end }}" loading="lazy" decoding="async"></a>
+<div><h2>{{ if $zh }}從光學實驗到影像分析{{ else }}From optical experiments to image analysis{{ end }}</h2><p>{{ if $zh }}博士後研究員、研究助理與研究生共同探索非線性光學、組織成像及 AI 輔助分析。認識成員與各自的研究主題，看看實驗室的日常。{{ else }}Postdoctoral researchers, research assistants and graduate students explore nonlinear optics, tissue imaging and AI-assisted analysis together. Meet our members, discover their research interests and see life in the lab.{{ end }}</p>
+<div class="zl-inline-links"><a href="{{ partial "lab_url" "people/" }}">{{ if $zh }}認識所有成員{{ else }}Meet all members{{ end }} →</a><a href="{{ partial "lab_url" "news/" }}">{{ if $zh }}消息與活動{{ else }}News & events{{ end }} →</a><a href="{{ partial "lab_url" "gallery/" }}">{{ if $zh }}研究影像與相簿{{ else }}Images & gallery{{ end }} →</a></div></div>
+</div>

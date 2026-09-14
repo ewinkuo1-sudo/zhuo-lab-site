@@ -138,3 +138,7 @@ The bilingual site now uses square corners, a centered 1040 px content width, wi
 The bilingual homepage now uses the supplied microscopy image as an uncropped background with a separate readability gradient and a direct original-image link. Research detail pages reuse the home research names, order, images, credits and stable anchors. `data/research.json` holds bilingual evidence summaries and publication slugs; `lab_research.html` reads publication metadata from the English records.
 
 See [validation and previews](docs/research-hero-review.md), [source audit](docs/research-content-audit.md), and [future sessions](FUTURE_ROADMAP.md). Current project progress and equipment capabilities still require confirmation; the audit distinguishes published evidence from unverified drafts.
+
+## Focused homepage (2026-09-15)
+
+Both homepages now follow Hero → PI → Research & discoveries → Selected publications → Team overview → Join → Contact. Research cards summarize the question, method and published finding, with a representative paper from `data/research.json`; miniaturization is explicitly a research direction supported by technical background. Selected publications use compact text entries without repeating figures. Full profiles, images, events and the campus video remain on their existing detail pages; Gallery navigation now links directly to its page.

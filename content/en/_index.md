@@ -15,31 +15,13 @@ sections:
     image_caption: Imaging from the lab
     original_label: View full image
     gallery_label: View the gallery
-- block: markdown
-  id: about
-  content:
-    title: Our mission
-    text: 'We investigate how light–tissue interactions reveal structural changes associated with disease. Through
-      nonlinear microscopy, polarization-resolved imaging and quantitative analysis, we study cancer and collagen,
-      with AI-assisted image analysis and the longer-term goal of miniaturized fibre probes.
-
-
-      Led by Prof. Guan-Yu Zhuo at NYCU''s Institute of Biophotonics, our work connects optics, tissue biology and
-      clinical research.'
-  design:
-    columns: '1'
-- block: lab_metrics
-  id: lab-stats
+- block: lab_pi
+  id: pi
   content: {}
-- block: lab_news
-  id: news
-  content:
-    title: News
-    link_label: All news and events
 - block: features
   id: research
   content:
-    title: Research
+    title: Research & discoveries
     items:
     - research_key: microscopy
       name: Label-free nonlinear optical microscopy
@@ -73,8 +55,8 @@ sections:
       image_alt: Schematic of a fibre-based nonlinear endomicroscopy probe imaging collagen in tissue (illustration)
       icon: stethoscope
       icon_pack: fas
-      description: How can microscopy reach smaller spaces? This direction explores optical fibres and miniature optics for
-        nonlinear endomicroscopy.
+      description: How can microscopy reach smaller spaces? This direction explores optical fibres and miniature
+        optics for nonlinear endomicroscopy.
       url: research/#miniaturized-nonlinear-endomicroscopy
       image_credit: Concept illustration
     - research_key: ai
@@ -87,53 +69,16 @@ sections:
         learning to investigate tissue classification.
       url: research/#ai-assisted-label-free-pathology
       image_credit: Concept illustration
-    subtitle: From tissue imaging to quantitative analysis and clinical translation
-- block: lab_highlights
+    subtitle: The questions we ask, the methods we use and what we have found
+    integrated: true
+- block: lab_publication_brief
   id: publications
   content:
-    title: Selected research
-    text: Explore our methods and applications through published work.
-- block: lab_pi
-  id: pi
-  content: {}
-- block: lab_milestones
-  id: milestones
-  content:
-    title: Research & mentorship milestones
-    link_label: More background and achievements
-    items:
-    - year: '2025'
-      title: A book on biophysical techniques
-      text: Prof. Zhuo co-edited Advanced Biophysical Techniques in Biosciences (Springer).
-    - year: '2024'
-      title: Excellent Young Scholar
-      text: Prof. Zhuo was selected for the NSTC 2030 Cross-Generation Young Scholars Program.
-    - year: '2022'
-      title: Student poster recognition
-      text: Student Ming-Chi Chen received an OPTIC 2022 best poster award under Prof. Zhuo's supervision.
-- block: lab_people
+    title: Selected publications
+    text: Read the studies behind our work, or browse the complete publication list.
+- block: lab_team_summary
   id: people
-  content:
-    title: People
-    compact: true
-- block: lab_gallery
-  id: gallery
-  content:
-    title: Gallery
-    text: Explore microscopy images from the lab. Select an image to view the full original.
-    count: 3
-    link_label: Explore all research images
-- block: lab_events
-  id: activities
-  content:
-    count: 3
-    title: Events & lab life
-    link_label: All activities and photos
-- block: lab_video
-  id: video
-  content:
-    title: Life at NYCU
-    text: Before you write to us, meet the campus and student community you would be joining.
+  content: {}
 - block: lab_join
   id: join
   content:

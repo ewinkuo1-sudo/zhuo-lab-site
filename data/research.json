@@ -10,7 +10,10 @@
       "finding": "The 2021 paper presents a multimodal platform. A 2025 esophageal tissue study combines SHG and two-photon fluorescence with image analysis to compare tissue groups. That study includes H&E-stained sections; its figure should not be read as a demonstration that all samples were unstained.",
       "status": "Published studies establish the methods and tissue applications. Extending them toward clinical use is a long-term goal; current system configurations and new projects should be discussed with the lab.",
       "caption": "Esophageal tissue in the 2025 study: H&E histology alongside SHG, two-photon fluorescence and merged images. Full Fig. 2 is retained.",
-      "papers_label": "Representative papers"
+      "papers_label": "Representative papers",
+      "home_question": "How can light reveal tissue structure?",
+      "home_method": "SHG and two-photon fluorescence with quantitative image analysis.",
+      "home_finding": "A 2025 study compares esophageal tissue groups using optical images and texture features."
     },
     "zh": {
       "question": "不同的光學對比，如何呈現組織結構與分子特性？",
@@ -18,8 +21,12 @@
       "finding": "2021 年論文介紹多模態平台；2025 年食道組織研究以 SHG、雙光子螢光與影像分析比較組織組別。後者包含 H&E 染色切片，因此這張圖不代表所有樣本皆未染色。",
       "status": "方法與組織應用已有論文支持，走向臨床使用是長期目標；目前系統配置與新研究進度請洽實驗室。",
       "caption": "2025 年食道組織研究：H&E 組織切片，以及 SHG、雙光子螢光與合併影像，保留完整圖 2。",
-      "papers_label": "代表論文"
-    }
+      "papers_label": "代表論文",
+      "home_question": "如何用光看見組織結構？",
+      "home_method": "結合 SHG、雙光子螢光與定量影像分析。",
+      "home_finding": "2025 年研究以光學影像與紋理特徵比較不同食道組織組別。"
+    },
+    "home_paper": "makkithaya-2025-quantitative"
   },
   "collagen": {
     "papers": [
@@ -32,7 +39,10 @@
       "finding": "The 2024 cartilage study compares normal, osteoarthritic and rheumatoid-arthritis tissues. It reports differences in polarization-derived parameters and collagen organization between these tissue groups.",
       "status": "Cartilage findings are published. Broader applications to collagen chirality and extracellular-matrix assessment remain research directions; the current scope of ongoing studies needs confirmation.",
       "caption": "Osteoarthritis cartilage from the 2024 study: histology, SHG intensity and polarization-derived maps. Full Fig. 3 is retained.",
-      "papers_label": "Representative papers"
+      "papers_label": "Representative papers",
+      "home_question": "How does collagen organization change with disease?",
+      "home_method": "Polarization-resolved SHG maps fibre orientation and related parameters.",
+      "home_finding": "A 2024 study reports differences between normal, osteoarthritic and rheumatoid-arthritis cartilage."
     },
     "zh": {
       "question": "如何量化不同組織狀態下的膠原蛋白排列？",
@@ -40,8 +50,12 @@
       "finding": "2024 年軟骨研究比較正常、骨關節炎與類風濕性關節炎組織，報告各組在偏振衍生參數與膠原排列上的差異。",
       "status": "軟骨研究已有發表成果；膠原蛋白手性與細胞外基質評估的延伸應用屬研究方向，進行中計畫的具體範圍待確認。",
       "caption": "2024 年研究中的骨關節炎軟骨：組織切片、SHG 強度及偏振衍生參數圖，保留完整圖 3。",
-      "papers_label": "代表論文"
-    }
+      "papers_label": "代表論文",
+      "home_question": "疾病如何改變膠原蛋白排列？",
+      "home_method": "以偏振解析 SHG 量測纖維方向與相關參數。",
+      "home_finding": "2024 年研究呈現正常、骨關節炎與類風濕性關節炎軟骨的組織差異。"
+    },
+    "home_paper": "makkithaya-2024-investigating"
   },
   "endomicroscopy": {
     "papers": [
@@ -53,7 +67,10 @@
       "finding": "The related 2021 paper describes multimodal microscopy as a technical foundation. It is not evidence of a completed endoscopic probe or clinical deployment.",
       "status": "Miniaturization is a long-term direction. Prototype status, dimensions, imaging performance and representative experimental images await confirmation from the lab.",
       "caption": "Concept illustration of a fibre-based nonlinear imaging probe; not an instrument photograph, experimental result or scale drawing.",
-      "papers_label": "Related technical background"
+      "papers_label": "Related technical background",
+      "home_question": "How can nonlinear imaging reach smaller spaces?",
+      "home_method": "Explore optical fibres and miniature optics for excitation and signal collection.",
+      "home_finding": "A published multimodal microscopy platform provides technical background; probe miniaturization remains a research direction."
     },
     "zh": {
       "question": "如何把非線性顯微成像帶入更小的探測空間？",
@@ -61,8 +78,12 @@
       "finding": "相關的 2021 年論文提供多模態顯微技術基礎，不能據此視為已完成內視探頭或臨床使用的證據。",
       "status": "微型化是長期方向；原型進度、尺寸、成像效能與代表性實驗影像待實驗室確認。",
       "caption": "光纖式非線性成像探頭概念示意；非實機照片、實驗結果或等比例工程圖。",
-      "papers_label": "相關技術背景"
-    }
+      "papers_label": "相關技術背景",
+      "home_question": "如何在更小的空間進行非線性成像？",
+      "home_method": "探索光纖與微型光學元件的激發光傳遞及訊號收集。",
+      "home_finding": "已發表多模態顯微平台提供技術基礎；探頭微型化仍屬研究方向。"
+    },
+    "home_paper": "zhuo-2021-labelfree"
   },
   "ai": {
     "papers": [
@@ -75,7 +96,10 @@
       "finding": "Published studies evaluate tissue classification in their respective datasets. The oral-lesion work is a pilot study; these results do not establish a general clinical diagnostic system.",
       "status": "Image classification has published support. New whole-slide workflows, pathology scores and deployment plans require separate confirmation and validation.",
       "caption": "Simulated tissue image with a classifier overlay, used to illustrate the analysis concept. It is not output from either cited study.",
-      "papers_label": "Representative papers"
+      "papers_label": "Representative papers",
+      "home_question": "Can image features help distinguish tissue groups?",
+      "home_method": "Texture analysis, machine learning and deep learning.",
+      "home_finding": "A 2026 pilot study evaluates oral-lesion classification from two-photon images."
     },
     "zh": {
       "question": "哪些影像特徵有助於區分不同組織組別？",
@@ -83,7 +107,11 @@
       "finding": "已發表工作在各自的資料集內評估組織分類；口腔病灶工作屬前導研究，結果尚不能代表通用的臨床診斷系統。",
       "status": "影像分類已有論文支持；新的全片分析流程、病理評分與部署計畫，仍需另行確認與驗證。",
       "caption": "模擬組織影像與分類器疊圖，用於說明分析概念，並非引用論文的模型輸出。",
-      "papers_label": "代表論文"
-    }
+      "papers_label": "代表論文",
+      "home_question": "影像特徵能否協助區分組織組別？",
+      "home_method": "運用紋理分析、機器學習與深度學習。",
+      "home_finding": "2026 年前導研究評估以雙光子影像進行口腔病灶分類。"
+    },
+    "home_paper": "karnati-2026-integration"
   }
 }

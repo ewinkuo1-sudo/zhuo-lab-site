@@ -14,28 +14,13 @@ sections:
     image_caption: 實驗室研究影像
     original_label: 查看完整原圖
     gallery_label: 瀏覽影像
-- block: markdown
-  id: about
-  content:
-    title: 研究理念
-    text: '我們研究如何從光與組織的交互作用中，讀出疾病相關的結構變化。透過非線性光學顯微、偏振解析成像與定量分析，探索癌症與膠原蛋白的影像特徵，結合 AI 輔助分析，並以微型化光纖探頭為長期發展方向。
-
-
-      實驗室由卓冠宇教授主持，隸屬國立陽明交通大學生醫光電研究所，串聯光學、組織生物學與臨床研究。'
-  design:
-    columns: '1'
-- block: lab_metrics
-  id: lab-stats
+- block: lab_pi
+  id: pi
   content: {}
-- block: lab_news
-  id: news
-  content:
-    title: 最新消息
-    link_label: 所有消息與活動
 - block: features
   id: research
   content:
-    title: 研究
+    title: 研究方向與成果
     items:
     - research_key: microscopy
       name: 無標記非線性光學顯微
@@ -77,53 +62,16 @@ sections:
       description: 如何從影像提取疾病特徵？結合紋理分析、機器學習與深度學習，研究影像分類與病理評估。
       url: research/#ai-輔助無標記病理
       image_credit: 研究概念示意圖
-    subtitle: 從組織影像到定量分析與臨床應用
-- block: lab_highlights
+    subtitle: 從研究問題、成像方法到已發表成果
+    integrated: true
+- block: lab_publication_brief
   id: publications
   content:
-    title: 精選研究成果
-    text: 以已發表的研究，認識我們的方法與應用。
-- block: lab_pi
-  id: pi
-  content: {}
-- block: lab_milestones
-  id: milestones
-  content:
-    title: 研究與教學里程碑
-    link_label: 更多學經歷與成果
-    items:
-    - year: '2025'
-      title: 生物物理專書
-      text: 卓老師共同編輯 Advanced Biophysical Techniques in Biosciences（Springer）。
-    - year: '2024'
-      title: 優秀年輕學者
-      text: 卓老師獲選國科會 2030 跨世代年輕學者方案。
-    - year: '2022'
-      title: 學生海報成果
-      text: 指導學生陳明奇獲 OPTIC 2022 最佳海報獎。
-- block: lab_people
+    title: 精選論文
+    text: 深入閱讀代表成果，或瀏覽完整論文清單。
+- block: lab_team_summary
   id: people
-  content:
-    title: 成員
-    compact: true
-- block: lab_gallery
-  id: gallery
-  content:
-    title: 研究影像
-    text: 探索實驗室的顯微影像；點選圖片可查看完整原圖。
-    count: 3
-    link_label: 瀏覽全部研究影像
-- block: lab_events
-  id: activities
-  content:
-    count: 3
-    title: 活動與實驗室日常
-    link_label: 查看所有活動與照片
-- block: lab_video
-  id: video
-  content:
-    title: 在陽明交大的生活
-    text: 在寫信給我們之前，先認識你將加入的校園與學生社群。
+  content: {}
 - block: lab_join
   id: join
   content:
