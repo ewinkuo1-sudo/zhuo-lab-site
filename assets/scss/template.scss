@@ -720,3 +720,9 @@ a:hover { color: $zl-accent-hover; }
 @media (max-width: 767.98px) {
   .zl-publication-brief, .zl-team-summary { grid-template-columns: 1fr; gap: 1.5rem; }
 }
+
+/* Keep academic identity and institutional links readable in both languages. */
+#home .zl-hero-identity { margin: 1rem 0; padding-left: 1rem; border-left: 3px solid #67d4c0; max-width: 42rem; }
+#home .zl-hero-identity p { margin: 0 0 .4rem; font-size: 1rem; line-height: 1.55; }
+#home .zl-hero-identity a { color: #fff; text-decoration: underline; text-underline-offset: .2em; overflow-wrap: anywhere; }
+#home .zl-hero-identity { color: #eef5fa; }

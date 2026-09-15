@@ -1,4 +1,5 @@
 {{ $b := .wcBlock.content }}
+{{ $zh := eq .wcPage.Language.Lang "zh" }}
 {{ $img := resources.Get "media/gallery/lab-04.png" }}
 {{ $small := $img.Resize "800x webp q85" }}{{ $large := $img.Resize "1400x webp q88" }}
 <div class="zl-hero-backdrop" aria-hidden="true">
@@ -7,6 +8,11 @@
 <div class="zl-hero-copy">
   <p class="zl-eyebrow">NYCU · INSTITUTE OF BIOPHOTONICS</p>
   <h1>Translational<br>Biophotonics Laboratory</h1>
+  <div class="zl-hero-identity">
+    <p><strong>{{ if $zh }}卓冠宇 Guan-Yu Zhuo · 副教授／實驗室主持人{{ else }}Guan-Yu Zhuo 卓冠宇 · Associate Professor / Principal Investigator{{ end }}</strong></p>
+    <p>{{ if $zh }}國立陽明交通大學 · 生醫光電研究所{{ else }}Institute of Biophotonics · National Yang Ming Chiao Tung University{{ end }}</p>
+    <p><a href="{{ site.Data.institution.faculty_url }}">{{ if $zh }}陽明交大官方教師頁{{ else }}Official NYCU faculty profile{{ end }} ↗</a> · <a href="mailto:{{ site.Data.institution.email }}">{{ site.Data.institution.email }}</a></p>
+  </div>
   <p class="zl-hero-statement">{{ $b.statement }}</p>
   <p class="zl-hero-description">{{ $b.description }}</p>
   <div class="zl-hero-actions"><a class="btn btn-primary" href="#research">{{ $b.research_label }}</a><a class="btn btn-outline-light" href="#join">{{ $b.join_label }}</a></div>

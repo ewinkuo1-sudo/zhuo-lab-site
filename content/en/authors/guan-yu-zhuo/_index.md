@@ -62,3 +62,9 @@ His research advances label-free optical imaging, in particular multimodal nonli
 - Chapter, "Nanoparticle Based Collagen Biomaterials for Wound Healing", in *Collagen Biomaterials*, IntechOpen
 
 <!-- TODO(老師確認): 計畫年份由編號推算，請核對；其他榮譽、學會服務、審稿請補。 -->
+
+
+### Institutional profile and contact
+
+- [Official NYCU faculty profile](https://bioph.nycu.edu.tw/faculty/%E9%83%AD%E6%96%87%E5%A8%9F-%E6%95%99%E6%8E%88-%E6%89%80%E9%95%B7%E3%80%80dr-wen-chuan-kuo-professor-director/%E5%8D%93%E5%86%A0%E5%AE%87-%E5%89%AF%E6%95%99%E6%8E%88%E3%80%80dr-guan-yu-zhuo-associate-professor/)
+- Institutional email: [zhuo0929@nycu.edu.tw](mailto:zhuo0929@nycu.edu.tw)

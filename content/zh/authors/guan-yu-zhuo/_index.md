@@ -63,3 +63,9 @@ user_groups:
 - 專章，"Nanoparticle Based Collagen Biomaterials for Wound Healing"，收於《Collagen Biomaterials》，IntechOpen
 
 <!-- TODO(老師確認): 本頁為英文版的中譯，職稱、系所名稱與計畫名稱的中文寫法請核對；計畫年份由編號推算。 -->
+
+
+### 任職機構與聯絡方式
+
+- [陽明交大官方教師頁](https://bioph.nycu.edu.tw/faculty/%E9%83%AD%E6%96%87%E5%A8%9F-%E6%95%99%E6%8E%88-%E6%89%80%E9%95%B7%E3%80%80dr-wen-chuan-kuo-professor-director/%E5%8D%93%E5%86%A0%E5%AE%87-%E5%89%AF%E6%95%99%E6%8E%88%E3%80%80dr-guan-yu-zhuo-associate-professor/)
+- 機構信箱: [zhuo0929@nycu.edu.tw](mailto:zhuo0929@nycu.edu.tw)
