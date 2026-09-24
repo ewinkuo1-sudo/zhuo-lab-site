@@ -1,7 +1,9 @@
-name: Deploy website to GitHub Pages
+name: Deploy website to GitHub Pages and Cloudflare
 
 env:
   WC_HUGO_VERSION: '0.135.0'
+  # Cloudflare Workers mirror. Same build, different base URL (root domain instead of /zhuo-lab-site/).
+  CF_BASE_URL: 'https://zhuo-lab-site.emd-sleep-interactive.workers.dev/'
 
 on:
   # Trigger the workflow every time you push to the `main` branch
@@ -68,3 +70,41 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # Mirror to Cloudflare Workers (static assets). Skipped until the CLOUDFLARE_API_TOKEN secret exists,
+  # so forks and the GitHub Pages deploy are unaffected.
+  cloudflare:
+    if: github.repository_owner != 'HugoBlox'
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - name: Checkout
+        if: env.CLOUDFLARE_API_TOKEN != ''
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Hugo
+        if: env.CLOUDFLARE_API_TOKEN != ''
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ env.WC_HUGO_VERSION }}
+          extended: true
+      - uses: actions/cache@v4
+        if: env.CLOUDFLARE_API_TOKEN != ''
+        with:
+          path: /tmp/hugo_cache_runner/
+          key: ${{ runner.os }}-hugomod-${{ hashFiles('**/go.mod') }}
+          restore-keys: |
+            ${{ runner.os }}-hugomod-
+      - name: Build with Hugo (Cloudflare base URL)
+        if: env.CLOUDFLARE_API_TOKEN != ''
+        env:
+          HUGO_ENVIRONMENT: production
+        run: hugo --minify --baseURL "${{ env.CF_BASE_URL }}"
+      - name: Deploy to Cloudflare Workers
+        if: env.CLOUDFLARE_API_TOKEN != ''
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: deploy

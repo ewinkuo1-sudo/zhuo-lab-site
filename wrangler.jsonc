@@ -1,0 +1,13 @@
+{
+  // Cloudflare Workers (static assets). `public/` is produced by Hugo; nothing here is committed output.
+  // Build for this target with the Cloudflare base URL, then `wrangler deploy` (CI does both, see publish.yaml).
+  "$schema": "https://unpkg.com/wrangler/config-schema.json",
+  "name": "zhuo-lab-site",
+  "compatibility_date": "2026-09-18",
+  "observability": { "enabled": true },
+  "assets": {
+    "directory": "./public",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

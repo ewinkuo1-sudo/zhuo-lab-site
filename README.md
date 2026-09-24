@@ -14,13 +14,31 @@ Built with [Hugo Blox](https://hugoblox.com) (research-group template, blox-boot
 | `content/en/authors/<slug>/` | One folder per person. `data/people_order.json` sets the shared Home and People order |
 | `publications.bib` | Source of truth for the Publications page. Edit or export from Zotero, push, and a GitHub Action opens a PR that regenerates `content/en/publication/` |
 | `config/_default/` | Site config. `languages.yaml` holds the Chinese menu |
-| `.github/workflows/publish.yaml` | Builds with Hugo **0.135.0** (pinned) and deploys to GitHub Pages on push to `main` |
+| `.github/workflows/publish.yaml` | Builds with Hugo **0.135.0** (pinned) and deploys to GitHub Pages on push to `main`; a second job mirrors the site to Cloudflare Workers (see below) |
+| `wrangler.jsonc` | Cloudflare Workers static-assets config: serves `public/` built with the Cloudflare base URL |
 | `layouts/partials/blocks/features.html` | Override of the Hugo Blox features block: adds `image`, `image_alt` and `url` per item (research cards) |
 | `scripts/imagegen/` | Deterministic Python/SVG generators for every illustration on the site (see below) |
 | `data/videos.yaml` | Videos shown by the `lab_video` block: YouTube ID, local poster frame, channel credit and bilingual copy |
 | `layouts/partials/blocks/lab_video.html` | `lab_video` block. Click-to-load facade: the poster is served locally and nothing is requested from YouTube until the visitor presses play (embed uses `youtube-nocookie.com`) |
 | `assets/media/gen/` | Illustrations used by content (research thumbs, beam-path schematic); Hugo resizes them to WebP |
 | `static/media/gen/` | Legacy concept artwork and the logo mark; the current hero uses `assets/media/gallery/lab-04.png` |
+
+## Hosting: GitHub Pages + Cloudflare Workers
+
+| Target | URL | How it deploys |
+|---|---|---|
+| GitHub Pages | https://ewinkuo1-sudo.github.io/zhuo-lab-site/ | `publish.yaml` → `build` + `deploy` jobs on every push to `main` |
+| Cloudflare Workers | https://zhuo-lab-site.emd-sleep-interactive.workers.dev/ | `publish.yaml` → `cloudflare` job; needs the repo secret `CLOUDFLARE_API_TOKEN` (Workers Scripts: Edit). Without the secret the job is skipped |
+
+Both come from the same source; only `--baseURL` differs (`CF_BASE_URL` in the workflow). The Cloudflare copy is the one to
+attach a custom domain to later (Workers → Settings → Domains & Routes), then update `CF_BASE_URL` and `baseURL` in `config/_default/hugo.yaml`.
+
+Manual deploy from a machine that is logged in with `wrangler login`:
+
+```bash
+hugo --minify --baseURL "https://zhuo-lab-site.emd-sleep-interactive.workers.dev/"
+npx wrangler deploy
+```
 
 ## Local preview (Windows)
 
