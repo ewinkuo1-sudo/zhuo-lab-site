@@ -1,0 +1,77 @@
+{{/* Scroll-reveal for homepage/landing sections. Pairs with the `.zl-motion` rules in assets/scss/template.scss.
+     Targets are tagged here (not in each block partial) so the list stays in one place. */}}
+<script>
+(function () {
+  // Navbar depth once the page has scrolled. Headroom is off on landing pages, so flag it ourselves.
+  var header = document.querySelector('.page-header');
+  if (header) {
+    var ticking = false;
+    var update = function () { header.classList.toggle('zl-scrolled', window.scrollY > 8); ticking = false; };
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    update();
+  }
+
+  var root = document.documentElement;
+  if (!root.classList.contains('zl-motion')) return;
+
+  // Groups: siblings inside one group reveal with a short stagger (index capped in CSS).
+  var groups = [
+    '.home-section .section-heading',
+    '.wg-features .row.featurette > .col-sm-4',
+    '.zl-publication-brief > article',
+    '.zl-join-grid > article',
+    '.zl-team-summary > *',
+    '.zl-pi',
+    '.zl-apply',
+    '.zl-section-link',
+    '.zl-highlights > .zl-highlight',
+    '.zl-people-cards > .zl-member-card',
+    '.zl-people-group-title',
+    '.zl-events > .zl-event',
+    '.zl-gallery > figure',
+    '.zl-videos > .zl-video',
+    '.zl-milestones > li',
+    '.zl-news > li',
+    '.zl-research-direction',
+    '.zl-metrics > div',
+    '.wg-contact .row > *'
+  ];
+  var targets = [];
+  groups.forEach(function (sel) {
+    var els = document.querySelectorAll(sel);
+    var byParent = new Map();
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      if (el.classList.contains('zl-reveal')) continue;
+      var n = byParent.get(el.parentNode) || 0;
+      byParent.set(el.parentNode, n + 1);
+      el.style.setProperty('--zl-i', n);
+      el.classList.add('zl-reveal');
+      targets.push(el);
+    }
+  });
+  if (!targets.length) return;
+
+  var show = function (el) { el.classList.add('zl-in'); };
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { show(e.target); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+  targets.forEach(function (el) { io.observe(el); });
+
+  // Safety nets: print shows everything; anything already inside the viewport after load is shown
+  // even if the observer missed it (e.g. layout shifts from late image loads).
+  var revealAll = function () { targets.forEach(show); io.disconnect(); };
+  window.addEventListener('beforeprint', revealAll);
+  window.addEventListener('load', function () {
+    setTimeout(function () {
+      var vh = window.innerHeight;
+      targets.forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < vh) show(el);
+      });
+    }, 1200);
+  });
+})();
+</script>

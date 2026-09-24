@@ -1,0 +1,3 @@
+{{/* Opt the page into motion before first paint, so reveal targets never flash.
+     No class → every element stays visible (no JS, reduced-motion, or old browsers). */}}
+<script>(function(){try{if(!('IntersectionObserver' in window))return;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;document.documentElement.classList.add('zl-motion');}catch(e){}})();</script>

@@ -726,3 +726,91 @@ a:hover { color: $zl-accent-hover; }
 #home .zl-hero-identity p { margin: 0 0 .4rem; font-size: 1rem; line-height: 1.55; }
 #home .zl-hero-identity a { color: #fff; text-decoration: underline; text-underline-offset: .2em; overflow-wrap: anywhere; }
 #home .zl-hero-identity { color: #eef5fa; }
+
+// ---------- Motion: restrained, content-first ----------
+// `html.zl-motion` is set by layouts/partials/hooks/head-end/zl-motion-flag.html only when JS runs and the
+// visitor has not asked for reduced motion. Without it every rule below is inert and nothing is hidden.
+$zl-ease-out: cubic-bezier(.22, .61, .36, 1);
+
+// Smooth in-page navigation (menu → #research etc.). Reduced-motion override lives further up.
+.zl-motion { scroll-behavior: smooth; }
+
+// Hero: copy settles in line by line, the research image breathes very slowly.
+@keyframes zl-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes zl-breathe { from { transform: scale(1); } to { transform: scale(1.045); } }
+.zl-motion .zl-hero-copy > * {
+  animation: zl-rise .7s $zl-ease-out both;
+  animation-delay: calc(var(--zl-i, 0) * 90ms + 80ms);
+}
+.zl-motion .zl-hero-copy > :nth-child(1) { --zl-i: 0; }
+.zl-motion .zl-hero-copy > :nth-child(2) { --zl-i: 1; }
+.zl-motion .zl-hero-copy > :nth-child(3) { --zl-i: 2; }
+.zl-motion .zl-hero-copy > :nth-child(4) { --zl-i: 3; }
+.zl-motion .zl-hero-copy > :nth-child(5) { --zl-i: 4; }
+.zl-motion .zl-hero-copy > :nth-child(6) { --zl-i: 5; }
+.zl-motion .zl-hero-credit { animation: zl-rise .7s $zl-ease-out .75s both; }
+.zl-motion .zl-hero-backdrop img {
+  transform-origin: 78% 50%;
+  animation: zl-breathe 16s ease-out both;
+}
+
+// Scroll reveal: tagged by hooks/body-end/zl-motion.html. Siblings stagger; the delay index is capped.
+.zl-motion .zl-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .6s $zl-ease-out, transform .6s $zl-ease-out;
+  transition-delay: calc(min(var(--zl-i, 0), 5) * 70ms);
+  will-change: opacity, transform;
+}
+.zl-motion .zl-reveal.zl-in { opacity: 1; transform: none; will-change: auto; }
+// Once revealed, hover transforms must not fight the reveal transition.
+.zl-motion .zl-reveal.zl-in { transition-delay: 0s; }
+
+// Section heading rule draws itself after the heading lands.
+.zl-motion .section-heading.zl-reveal h1::after { width: 0; transition: width .55s $zl-ease-out .3s; }
+.zl-motion .section-heading.zl-reveal.zl-in h1::after { width: 3rem; }
+
+// Cards: a light lift on hover. Scientific figures themselves are not scaled (keeps panels and scale bars honest).
+.wg-features .row > .col-sm-4,
+.zl-highlight, .zl-member-card, .zl-event, .zl-join-grid article, .zl-gallery figure, .zl-video, .zl-publication-brief article {
+  transition: border-color .2s ease, transform .25s $zl-ease-out, box-shadow .25s $zl-ease-out;
+}
+.zl-motion .wg-features .row > .col-sm-4:hover,
+.zl-motion .zl-highlight:hover, .zl-motion .zl-member-card:hover, .zl-motion .zl-event:hover,
+.zl-motion .zl-join-grid article:hover, .zl-motion .zl-gallery figure:hover, .zl-motion .zl-video:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(20, 45, 69, .10);
+}
+.zl-motion .zl-publication-brief article { position: relative; }
+.zl-motion .zl-publication-brief article::before {
+  content: ""; position: absolute; top: -2px; left: 0; height: 2px; width: 0; background: $zl-accent;
+  transition: width .35s $zl-ease-out;
+}
+.zl-motion .zl-publication-brief article:hover::before { width: 100%; }
+
+// Links and buttons: colour changes ease instead of snapping; arrows nudge.
+a, .btn { transition: color .18s ease, background-color .18s ease, border-color .18s ease; }
+.zl-motion .btn { transition: color .18s ease, background-color .18s ease, border-color .18s ease, transform .18s $zl-ease-out, box-shadow .18s ease; }
+.zl-motion .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(20, 45, 69, .18); }
+.zl-motion .btn:active { transform: none; box-shadow: none; }
+
+// Navbar: flat over the hero, gains depth once the page scrolls.
+// Landing pages: hooks/body-end/zl-motion.html toggles .zl-scrolled on .page-header; inner pages: Headroom's .headroom--not-top.
+.navbar { transition: box-shadow .3s ease, background-color .3s ease; }
+.page-header.zl-scrolled .navbar, .navbar.headroom--not-top { box-shadow: 0 2px 14px rgba(8, 20, 34, .35); }
+.zl-motion .navbar .navbar-nav .nav-link:not(.active) {
+  position: relative;
+  &::after {
+    content: ""; position: absolute; left: .5rem; right: .5rem; bottom: .55rem; height: 1px;
+    background: $zl-light-accent; transform: scaleX(0); transform-origin: left; transition: transform .25s $zl-ease-out;
+  }
+  &:hover::after, &:focus-visible::after { transform: scaleX(1); }
+}
+
+// Reduced motion: the flag class is never added, and the existing rule above already neutralises
+// transitions/animations inside .home-section and .navbar. This covers the remaining hooks.
+@media (prefers-reduced-motion: reduce) {
+  .zl-reveal { opacity: 1 !important; transform: none !important; }
+  .zl-hero-backdrop img, .zl-hero-copy > *, .zl-hero-credit { animation: none !important; }
+  a, .btn, .navbar { transition: none !important; }
+}
