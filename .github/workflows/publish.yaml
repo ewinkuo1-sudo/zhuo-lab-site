@@ -107,4 +107,6 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          # The action's default (3.90) needs a `main` script; assets-only wrangler.jsonc needs v4.
+          wranglerVersion: "4"
           command: deploy
