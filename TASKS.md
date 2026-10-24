@@ -28,6 +28,10 @@
 - [x] 手機寬度：10/24 用 Chrome 把線上 9 頁放進 390 px 框實測，全部沒有橫向溢出；首頁流程列自動換行、四卡疊成一欄，沒被切。先前 Edge 無頭截圖被切是無頭模式假象（實體手機未看）
 - [x] 研究地圖頁、成員島 postMessage 實際點擊：10/24 Chrome 線上實點。卡片「在成員島看他」→島選中黃柏翰；島「成員頁介紹」→跳到 #member-po-han-huang 卡片；研究地圖點站別，3D 與右側卡片會換
 
+## 網址與鏡像（10/24 決定）
+- [x] 正式網址先維持 GitHub Pages（ewinkuo1-sudo.github.io/zhuo-lab-site/），baseURL 不動
+- [ ] Cloudflare 鏡像保留：等使用者在 GitHub repo 加 CLOUDFLARE_API_TOKEN 密鑰（10/24 查 gh secret list 為空），加完推一次 commit 觸發部署，再驗 workers.dev 研究地圖不再 404
+
 ## 要老師確認
 - 全片掃描到底是「進行中」還是「待確認」（兩頁現在都寫保守版）
 - 老師成員頁段落縮短是否同意（完整版在個人頁）
