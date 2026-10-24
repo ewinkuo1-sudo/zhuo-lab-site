@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="zh-Hant">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TBL 成員島</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* 成員島：老師是雷射頭（唯一光源），白光經二向色鏡分成四條顏色光路（＝四個研究方向），
+   每位成員是自己那條光路上的一個元件，旁邊站一個積木小人在工作。只做深色。 */
+:root{
+  color-scheme:dark;
+  --bg:#07090c; --surface:#0f1318; --raised:#151a21; --ink:#e3e8ee; --muted:#8c97a6; --line:#232a34;
+  --table:#14171b; --hole:#06070a; --tape:#efeadb; --tape-ink:#15171a;
+  --gA:#E69F00; --gB:#56B4E9; --gC:#009E73; --gD:#CC79A7; --gX:#8a94a3; --white:#f4f1e8;
+  --warn:#f2b632; --warn-bg:#2e230b;
+  --f-body:"Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 32px}
+a{color:inherit}
+.wrap{max-width:1320px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px}
+.brand{display:flex;flex-direction:column;gap:4px;min-width:0}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.eyebrow .laser{color:var(--warn);border:1px solid var(--warn);padding:0 6px;border-radius:3px;letter-spacing:.08em}
+h1{font-weight:700;font-size:clamp(25px,3.6vw,36px);line-height:1.25;margin:0;text-wrap:balance;letter-spacing:.02em}
+.lede{color:var(--muted);margin:0;max-width:62ch}
+.tabs{display:flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:8px;background:var(--surface);flex-wrap:wrap}
+.tabs button{font:inherit;font-size:14px;border:0;background:transparent;color:var(--muted);padding:6px 14px;border-radius:6px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--raised);color:var(--ink);box-shadow:inset 0 -2px 0 var(--white)}
+button:focus-visible,a:focus-visible,.chip:focus-visible,.card:focus-visible{outline:2px solid var(--warn);outline-offset:2px}
+
+.mapview{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px;align-items:start}
+.stagebox{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg);height:min(76vh,720px);min-height:400px}
+#stage{position:absolute;inset:0}
+#stage canvas{display:block;touch-action:none}
+#labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.lab{position:absolute;left:0;top:0;white-space:nowrap;font-family:var(--f-mono);font-size:11px;font-weight:500;line-height:1.3;
+  padding:1px 6px 1px 4px;border-radius:2px;background:var(--tape);color:var(--tape-ink);pointer-events:auto;cursor:pointer;
+  display:flex;align-items:center;gap:4px;box-shadow:0 1px 0 rgba(0,0,0,.5);transition:opacity .2s}
+.lab i{width:7px;height:7px;border-radius:1px;flex:none}
+.lab span{font-family:var(--f-body);font-size:11.5px}
+.lab.dim{opacity:.25}
+.lab.sel{outline:2px solid var(--warn);outline-offset:1px}
+.hidelabels .lab{display:none}
+.toolbar{position:absolute;left:10px;bottom:10px;display:flex;flex-wrap:wrap;gap:6px;max-width:calc(100% - 20px)}
+.toolbar button{font:inherit;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:4px;border:1px solid var(--line);background:var(--raised);color:var(--ink);cursor:pointer}
+.toolbar button[aria-pressed="false"]{color:var(--muted);background:transparent}
+.plate{position:absolute;right:10px;top:10px;font-family:var(--f-mono);font-size:11px;color:var(--muted);text-align:right;pointer-events:none;line-height:1.5}
+.fallback{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--muted)}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:14px;min-width:0;max-height:min(76vh,720px);overflow:auto}
+.panel h2{font-size:22px;line-height:1.3;margin:0;text-wrap:balance}
+.panel h2 small{display:block;font-family:var(--f-mono);font-size:12px;color:var(--muted);font-weight:400;letter-spacing:.06em}
+.panel h3{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin:0 0 4px;font-weight:500;text-transform:uppercase}
+.panel p{margin:0}
+.panel ul{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:3px}
+.who{display:flex;gap:14px;align-items:center}
+.avatar{width:64px;height:64px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--line);background:var(--raised)}
+.avatar.ini{display:grid;place-items:center;font-size:24px;font-weight:500;color:var(--muted)}
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.lane{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--muted)}
+.lane i{width:10px;height:10px;border-radius:2px;display:inline-block}
+.role{font-family:var(--f-mono);font-size:11.5px;padding:0 7px;border-radius:3px;border:1px solid var(--line);color:var(--ink)}
+.part{font-size:13px;color:var(--muted)}
+.oneline{font-size:15.5px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:13px;display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:4px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;text-align:left}
+.chip i{width:8px;height:8px;border-radius:1px;flex:none}
+.inf{display:inline-block;font-size:11.5px;padding:0 6px;border-radius:3px;border:1px dashed var(--muted);color:var(--muted);margin-left:4px;white-space:nowrap}
+.said{display:inline-block;font-size:11.5px;padding:0 6px;border-radius:3px;border:1px solid var(--muted);color:var(--muted);margin-left:4px;white-space:nowrap}
+.pend{display:inline-block;font-size:11.5px;padding:0 6px;border-radius:3px;background:var(--warn-bg);color:var(--warn);margin-left:4px;white-space:nowrap}
+.rel{display:flex;flex-direction:column;gap:6px}
+.rel .r{display:flex;gap:8px;align-items:flex-start;font-size:13.5px}
+.rel .r .t{font-family:var(--f-mono);font-size:11px;padding:0 5px;border-radius:3px;flex:none;margin-top:3px;color:var(--bg);background:#9aa3b0}
+.rel .r .t.sample{background:var(--white)}
+.rel .r .t.baton{background:var(--warn)}
+.lab em{font-style:normal;font-size:10px;color:#6b5a2a;border:1px solid #c9b47a;border-radius:2px;padding:0 3px;line-height:1.2}
+.links{display:flex;flex-direction:column;gap:6px}
+.lnk{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--raised);text-decoration:none;min-width:0}
+.lnk:hover{border-color:var(--muted)}
+.lnk .k{font-family:var(--f-mono);font-size:11px;color:var(--bg);background:var(--gC);border-radius:3px;padding:0 5px;flex:none;margin-top:3px}
+.lnk div{min-width:0}
+.lnk b{font-weight:500;display:block}
+.lnk small{display:block;color:var(--muted);font-size:12.5px;line-height:1.5}
+.legend{display:flex;flex-direction:column;gap:8px}
+.legend .row{display:flex;gap:10px;align-items:flex-start;font-size:13.5px}
+.legend .row i{width:12px;height:12px;border-radius:2px;flex:none;margin-top:5px}
+.legend .row div{min-width:0}
+.legend small{display:block;color:var(--muted);font-size:12.5px}
+.src{font-size:12.5px;color:var(--muted)}
+
+.listview{display:flex;flex-direction:column;gap:22px}
+.sec h2{font-size:20px;margin:0 0 6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sec h2 i{width:12px;height:12px;border-radius:2px;display:inline-block}
+.sec>p{margin:0 0 10px;color:var(--muted);max-width:72ch}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.card{text-align:left;font:inherit;color:inherit;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:flex;gap:12px;cursor:pointer;min-width:0}
+.card:hover{border-color:var(--muted)}
+.card .avatar{width:48px;height:48px;font-size:18px}
+.card h3{font-size:16px;margin:0;font-weight:500}
+.card p{margin:2px 0 0;color:var(--muted);font-size:13.5px}
+footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:4px}
+@media (max-width:960px){
+  .mapview{grid-template-columns:minmax(0,1fr)}
+  .panel{max-height:none}
+  .stagebox{height:62vh;min-height:360px}
+}
+@media (max-width:480px){.plate{display:none}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <span class="eyebrow"><span>TBL · 卓冠宇實驗室 · 成員</span><span class="laser">CLASS 4 · 雷射作業中</span></span>
+      <h1>一張光學桌上的實驗室成員</h1>
+      <p class="lede">老師是雷射頭，白光經二向色鏡分成四種顏色，一種顏色一個研究方向。每位成員是自己那條光路上的一個元件，站在旁邊的小人就是他本人在工作。點元件或小人看介紹。</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="檢視方式">
+      <button role="tab" id="tab-map" aria-selected="true" data-view="map">光學桌</button>
+      <button role="tab" id="tab-list" aria-selected="false" data-view="list">名單</button>
+    </div>
+  </header>
+
+  <div id="view-map" class="mapview">
+    <div class="stagebox" id="stagebox">
+      <div id="stage" role="img" aria-label="示意光路：老師的雷射經二向色鏡分成四條顏色光路，每位成員是光路上的一個元件；完整文字請用名單"></div>
+      <div id="labels"></div>
+      <div class="plate">BREADBOARD 1200 × 900 mm · M6 · 25 mm<br>示意光路，不是實際架設</div>
+      <div class="toolbar">
+        <button id="btn-labels" aria-pressed="true">標籤</button>
+        <button id="btn-photons" aria-pressed="true">光子</button>
+        <button id="btn-spin" aria-pressed="false">旋轉</button>
+        <button id="btn-top" aria-pressed="false">俯視</button>
+        <button id="btn-reset">全部</button>
+      </div>
+    </div>
+    <aside class="panel" id="panel" aria-live="polite"></aside>
+  </div>
+  <div id="view-list" class="listview" hidden></div>
+
+  <footer>
+    <span>光路是示意，不是實驗室的真實架設。誰在哪條光路、元件種類，依每個人目前的題目安排，會隨人事更動。畢業的人排在光路最前面，表示把題目交給後面的人。</span>
+    <span>內容整理自實驗室官網成員頁、Obsidian 筆記\TBL 與 2026-09 到 10 月的週會紀錄。分工連線只畫會議裡明說的，推論的另外標示。最後更新 2026-10-24。</span>
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+const SITE="https://ewinkuo1-sudo.github.io/zhuo-lab-site/zh/author/";
+const LANES={
+  A:{name:"偏振 SHG",desc:"膠原蛋白、軟骨、骨：χ 張量、PTHG。",v:"--gA",z:-1.6,end:"膠原蛋白怎麼排"},
+  B:{name:"多模態對比",desc:"不只 SHG：FLIM、拉曼、CARS、高光譜散射。",v:"--gB",z:0,end:"不染色也看得到"},
+  C:{name:"成像系統與內視",desc:"掃描光路、拼接、電路、光纖內視鏡、光片。",v:"--gC",z:1.6,end:"拍得快、拍得進去"},
+  D:{name:"AI 判讀與臨床",desc:"分級、分割降噪、腫瘤邊界。",v:"--gD",z:3.2,end:"醫師看得懂的答案"},
+  SRC:{name:"光源",desc:"",v:"--white"},
+  N:{name:"新生",desc:"2026-09 入學，題目未定，先在桌邊看。",v:"--gX"}
+};
+const MEMBERS=[
+  {id:"zhuo",name:"卓冠宇",en:"Guan-Yu Zhuo",role:"副教授、實驗室主持人",lane:"SRC",part:"雷射頭（唯一光源）",act:"point",x:-5.0,
+   line:"題目從這裡出來：一道白光，分給四條光路。",
+   does:["轉譯生醫光電","免標記非線性光學顯微術","偏振解析 SHG 與膠原蛋白手性","微型化非線性內視顯微術"],slug:"guan-yu-zhuo",avatar:1},
+  {id:"jun",name:"陳涴鈞",en:"Jun Chen",role:"研究助理，已畢業（2026-10 離開）",lane:"A",part:"半波片（轉偏振）",act:"pass",grad:1,x:-2.6,
+   line:"轉偏振方向，看膠原蛋白怎麼排。工作交棒給承毅。",does:["偏振解析 SHG 看軟骨","拉曼光譜看軟骨的生化組成","多模態非線性光學 × 膠原蛋白（2026-08 口試）"],slug:"jun",avatar:1},
+  {id:"tsai",name:"蔡宜勲",en:"Yi-Xun Tsai",role:"碩士班",lane:"A",part:"分析器（讀偏振）",act:"type",x:0.6,
+   line:"從偏振訊號算出 χ 張量，再交給機器學習。",does:["偏振解析 SHG 與 χ 張量分析","PTHG（骨、軟骨）","細胞影像的機器學習與深度學習"],slug:"yi-xun-tsai",avatar:1},
+  {id:"chang",name:"張庭榮",en:"Ting-Jung Chang",role:"碩士班",lane:"B",part:"二向色鏡＋延遲線（合光）",act:"knob",x:-2.4,
+   line:"把兩道雷射合在一起，架 CARS 光路。",does:["CARS 光路架設","圓偏振"],slug:"ting-jung-chang",avatar:0},
+  {id:"wangjw",name:"王靖崴",en:"Jing-Wei Wang",role:"碩士班",lane:"B",part:"光譜儀（拉曼）",act:"knob",x:0.3,
+   line:"用拉曼與螢光量牛牙琺瑯質。",does:["牛牙琺瑯質的拉曼與螢光量測","超快光學、高解析度影像","拉曼電路測試"],slug:"jing-wei-wang",avatar:1},
+  {id:"gagan",name:"Gagan Raju",en:"Gagan Raju",role:"博士班（交換）",lane:"B",part:"偵測器（螢光壽命）",act:"type",x:2.7,
+   line:"用雙光子螢光壽命看代謝與腫瘤邊界。",does:["雙光子 FLIM 看細胞代謝","腫瘤邊界的螢光壽命","口腔病變的深度學習分級"],slug:"gagan-raju",avatar:0},
+  {id:"shih",name:"施承毅",en:"Cheng-Yi Shih",role:"碩士班",lane:"C",part:"振鏡（掃描）",act:"knob",x:-1.5,
+   line:"把掃描光路架好、影像拼起來。",does:["掃描系統光路","影像拼接（stitching）","光纖耦合"],slug:"cheng-yi-shih",avatar:0},
+  {id:"kuo",name:"郭智翔",en:"Chih-Hsiang Kuo",role:"博士班",lane:"C",part:"物鏡（成像）",act:"knob",x:0.2,
+   line:"共軛焦反射式量測，和光片成像。",does:["共軛焦反射式量測","光片顯微成像"],slug:"chih-hsiang-kuo",avatar:0,
+   toys:[{k:"遊樂場",t:"owl-toys",d:"互動小工具集",u:"https://ewinkuo1-sudo.github.io/owl-toys/"}]},
+  {id:"wangwh",name:"Wei-Hsun Wang",en:"Wei-Hsun Wang",role:"碩士班，已畢業",lane:"C",part:"電路板（訊號）",act:"pass",grad:1,x:-2.9,pend:"交棒給誰待確認",
+   line:"把 SHG 訊號在時間上拉寬，電路收得更快。",does:["SHG 訊號時間展寬","電路設計、訊號增強","高速顯微成像"],slug:"wei-hsun-wang",avatar:1},
+  {id:"huang",name:"黃柏翰",en:"Po-Han Huang",role:"碩士班",lane:"C",part:"光纖探頭（內視）",act:"knob",x:2.3,
+   line:"把非線性成像做進光纖，往內視鏡走。",does:["波向量編碼非線性內視成像（WENE）","光纖式光學元件整合","高光譜散射判腫瘤邊界"],slug:"po-han-huang",avatar:1},
+  {id:"lewis",name:"Maclinez Lewis",en:"Maclinez Crecsilla Lewis",role:"博士班",lane:"D",part:"工作站（分割降噪）",act:"type",x:-0.7,
+   line:"把暗又雜的無染色影像清乾淨、切出細胞核。",does:["AI 輔助膠質母細胞瘤影像","多光子成像加速","影像偵測與分割"],slug:"maclinez-lewis",avatar:1},
+  {id:"jackson",name:"Jackson Rodrigues",en:"Jackson Rodrigues",role:"博士後研究員",lane:"D",part:"工作站（判讀）",act:"type",x:2.3,
+   line:"非線性影像加 AI，做病變分級與腫瘤邊界。",does:["術中腫瘤邊界評估","病變的深度學習分級","非線性光學影像 × AI"],slug:"jackson-rodrigues",avatar:1},
+  {id:"wu",name:"吳添至",en:"Tian-Zhi Wu",role:"碩士班（2026-09 入學）",lane:"N",part:"桌邊",act:"idle",x:0,line:"剛進來，題目還在定。",does:[],slug:"tian-zhi-wu",avatar:0},
+  {id:"fu",name:"傅之全",en:"",role:"碩士班（2026-09 入學）",lane:"N",part:"桌邊",act:"idle",x:1,line:"剛進來，題目還在定。",does:[],slug:"",avatar:0}
+];
+const byId=Object.fromEntries(MEMBERS.map(m=>[m.id,m]));
+// 分工：from 的輸出給 to 用。kind：said＝會議明說、inf＝推論
+const RELS=[
+  {from:"huang",to:"jackson",type:"sample",kind:"said",text:"柏翰的高光譜散射樣本，給 Jackson 測腫瘤邊界",src:"週會 2026-10-14"},
+  {from:"gagan",to:"jackson",type:"data",kind:"said",text:"Gagan 的 FFPE 壽命結論，影響 Jackson 改做多通道結構影像",src:"週會 2026-09-23"},
+  {from:"shih",to:"tsai",type:"data",kind:"inf",text:"承毅架好的掃描光路與拼接，給宜勲拍",src:"週會 2026-09-16、10-14"},
+  {from:"shih",to:"wangjw",type:"data",kind:"inf",text:"承毅架好的掃描光路，給靖崴拍",src:"週會 2026-09-16"},
+  {from:"wangjw",to:"zhuo",type:"data",kind:"said",text:"靖崴與柏翰幫老師測新的解調電路",src:"週會 2026-09-23"},
+  {from:"huang",to:"zhuo",type:"data",kind:"said",text:"柏翰與靖崴幫老師測新的解調電路",src:"週會 2026-09-23"},
+  {from:"jun",to:"shih",type:"baton",kind:"said",text:"涴鈞畢業離開前，把工作交棒給承毅",src:"週會 2026-09-30"}
+];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const laneOf=m=>LANES[m.lane];
+function avatarHtml(m,cls=""){
+  if(m.avatar)return `<img class="avatar ${cls}" src="avatars/${m.slug}.jpg" alt="">`;
+  return `<div class="avatar ini ${cls}">${esc(m.name.replace(/[^A-Za-z一-鿿]/g,"")[0]||"?")}</div>`}
+function chip(id){const m=byId[id];if(!m)return"";return `<button class="chip" data-m="${id}"><i style="background:var(${laneOf(m).v})"></i>${esc(m.name)}</button>`}
+function relRows(id){
+  const rs=RELS.filter(r=>r.from===id||r.to===id);if(!rs.length)return"";
+  return `<div><h3>分工</h3><div class="rel">${rs.map(r=>{const other=r.from===id?r.to:r.from;const dir=r.from===id?"→ 給":"← 來自";
+    return `<div class="r"><span class="t ${r.type}">${r.type==="sample"?"樣品":r.type==="baton"?"交棒":"資料"}</span><div>${dir} ${chip(other)}<br>${esc(r.text)}<span class="${r.kind==="said"?"said":"inf"}">${r.kind==="said"?"明說":"推論"}</span><br><span class="src">${esc(r.src)}</span></div></div>`}).join("")}</div></div>`}
+function renderPanel(id){
+  const el=document.getElementById("panel");
+  if(!id){
+    el.innerHTML=`<h2>怎麼看這張桌子</h2>
+    <div class="legend">
+      <div class="row"><i style="background:var(--white)"></i><div>雷射頭＝老師<small>唯一光源。題目由老師分配，白光從這裡出來。</small></div></div>
+      <div class="row"><i style="background:linear-gradient(90deg,var(--gA),var(--gB),var(--gC),var(--gD))"></i><div>二向色鏡＝分方向<small>白光被分成四種顏色，一種顏色一個研究方向。</small></div></div>
+      <div class="row"><i style="background:var(--tape)"></i><div>元件＝成員<small>每個人是自己那條光路上的一個元件，架光路的是振鏡、物鏡，做分析的是偵測器、工作站。同方向的人前後排，前面的人輸出給後面的人。</small></div></div>
+      <div class="row"><i style="background:#9aa3b0"></i><div>桌面上的灰線＝分工<small>誰的東西給誰用。只畫會議裡明說的，推論的另外標示。</small></div></div>
+      <div class="row"><i style="background:var(--warn)"></i><div>戴方帽的小人＝已畢業<small>排在隊伍最前面，手上的棒子交給後面接手的人。</small></div></div>
+      <div class="row"><i style="background:var(--gX)"></i><div>桌邊的小桌＝新生<small>題目還沒定，先在旁邊看。</small></div></div>
+    </div>
+    <div><h3>四條光路</h3><div class="legend">${["A","B","C","D"].map(k=>`<div class="row"><i style="background:var(${LANES[k].v})"></i><div>${esc(LANES[k].name)}<small>${esc(LANES[k].desc)}</small><div class="chips" style="margin-top:4px">${MEMBERS.filter(m=>m.lane===k).map(m=>chip(m.id)).join("")}</div></div></div>`).join("")}</div></div>
+    <p class="src">點桌上的元件、小人或標籤看介紹。</p>`;return}
+  const m=byId[id],L=laneOf(m);
+  el.innerHTML=`<div class="who">${avatarHtml(m)}<h2>${esc(m.name)}${m.en&&m.en!==m.name?`<small>${esc(m.en)}</small>`:""}</h2></div>
+  <div class="meta"><span class="role">${esc(m.role)}</span><span class="lane"><i style="background:var(${L.v})"></i>${esc(L.name)}</span>${m.pend?`<span class="pend">${esc(m.pend)}</span>`:""}</div>
+  <p class="part">在桌上是：${esc(m.part)}${m.grad?"，排在光路最前面（已畢業，交棒）":""}</p>
+  <p class="oneline">${esc(m.line)}</p>
+  ${m.does.length?`<div><h3>在做什麼</h3><ul>${m.does.map(d=>`<li>${esc(d)}</li>`).join("")}</ul></div>`:""}
+  ${m.lane!=="SRC"&&m.lane!=="N"?`<div><h3>同一條光路</h3><div class="chips">${MEMBERS.filter(x=>x.lane===m.lane&&x.id!==m.id).map(x=>chip(x.id)).join("")||"<span class='src'>目前只有他一個。</span>"}</div></div>`:""}
+  ${m.lane==="SRC"?`<div><h3>分出去的四條光路</h3><div class="chips">${MEMBERS.filter(x=>"ABCD".includes(x.lane)).map(x=>chip(x.id)).join("")}</div></div>`:""}
+  ${relRows(id)}
+  <div><h3>連結</h3><div class="links">
+    ${m.slug?`<a class="lnk" href="${SITE}${m.slug}/" target="_blank" rel="noopener"><span class="k">官網</span><div><b>成員介紹</b><small>官網成員頁</small></div></a>`:`<span class="src">官網還沒有他的頁。</span>`}
+    ${(m.toys||[]).map(t=>`<a class="lnk" href="${t.u}" target="_blank" rel="noopener"><span class="k">${esc(t.k)}</span><div><b>${esc(t.t)}</b><small>${esc(t.d)}</small></div></a>`).join("")}
+  </div></div>`;
+}
+document.addEventListener("click",e=>{const c=e.target.closest("[data-m]");if(c){select(c.dataset.m);showView("map")}
+  const t=e.target.closest("[data-view]");if(t)showView(t.dataset.view)});
+function renderList(){
+  const el=document.getElementById("view-list");
+  el.innerHTML=["SRC","A","B","C","D","N"].map(k=>`<section class="sec"><h2><i style="background:var(${LANES[k].v})"></i>${esc(LANES[k].name)}</h2>${LANES[k].desc?`<p>${esc(LANES[k].desc)}</p>`:""}
+    <div class="cards">${MEMBERS.filter(m=>m.lane===k).map(m=>`<button class="card" data-m="${m.id}">${avatarHtml(m)}<div><h3>${esc(m.name)}</h3><p>${esc(m.role)} · ${esc(m.part)}</p><p>${esc(m.line)}</p></div></button>`).join("")}</div></section>`).join("");
+}
+function showView(v){document.querySelectorAll("[data-view]").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===v));
+  for(const k of["map","list"])document.getElementById("view-"+k).hidden=k!==v;if(v==="map"&&window.__resize)window.__resize()}
+let selected=null,bench=null;
+function select(id){selected=id;renderPanel(id);if(bench)bench.onSelect(id)}
+renderPanel(null);renderList();
+
+(function initBench(){
+  const box=document.getElementById("stagebox"),host=document.getElementById("stage"),labelsEl=document.getElementById("labels");
+  let renderer=null;
+  const HP=new URLSearchParams(location.hash.slice(1)); // 截圖用：#shot&sel=kuo&cam=x,y,z&tgt=x,y,z
+  try{if(window.THREE)renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:HP.has("shot")});}catch(e){renderer=null}
+  if(!renderer){host.innerHTML=`<div class="fallback">這台裝置無法顯示 3D 光學桌，請改用「名單」。</div>`;return}
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  host.appendChild(renderer.domElement);
+  const scene=new THREE.Scene();scene.background=new THREE.Color(css("--bg"));scene.fog=new THREE.Fog(css("--bg"),20,38);
+  const camera=new THREE.PerspectiveCamera(34,1,0.1,100);
+  const OBL=new THREE.Vector3(1.2,12.2,14.4),TOP=new THREE.Vector3(1.2,19,0.01);
+  camera.position.copy(OBL);
+  const controls=new THREE.OrbitControls(camera,renderer.domElement);
+  controls.enableDamping=true;controls.enablePan=true;controls.screenSpacePanning=false;controls.minDistance=4;controls.maxDistance=26;controls.maxPolarAngle=1.32;
+  controls.target.set(1.2,0.3,0.3);controls.autoRotateSpeed=0.5;
+  if(HP.get("cam")){camera.position.set(...HP.get("cam").split(",").map(Number))}
+  if(HP.get("tgt")){controls.target.set(...HP.get("tgt").split(",").map(Number))}
+  if(HP.get("sel"))setTimeout(()=>select(HP.get("sel")),0);
+
+  scene.add(new THREE.AmbientLight(0x8a96a8,0.42));
+  const key=new THREE.DirectionalLight(0xdfe6f0,0.85);key.position.set(-4,12,7);key.castShadow=true;
+  key.shadow.mapSize.set(2048,2048);Object.assign(key.shadow.camera,{left:-9,right:9,top:9,bottom:-9});scene.add(key);
+  const rim=new THREE.DirectionalLight(0x7f8cff,0.22);rim.position.set(6,4,-6);scene.add(rim);
+
+  // 桌面：M6 螺孔 25 mm 間距
+  function holeTex(TW,TD){const cv=document.createElement("canvas");cv.width=TW*4*40;cv.height=TD*4*40;const cx=cv.getContext("2d");
+    cx.fillStyle=css("--table");cx.fillRect(0,0,cv.width,cv.height);const px=40;
+    for(let i=0;i<TW*4;i++)for(let j=0;j<TD*4;j++){const x=(i+0.5)*px,y=(j+0.5)*px;
+      cx.beginPath();cx.arc(x,y,px*0.17,0,Math.PI*2);cx.fillStyle=css("--hole");cx.fill();
+      cx.beginPath();cx.arc(x,y,px*0.2,0.9*Math.PI,1.9*Math.PI);cx.strokeStyle="rgba(255,255,255,0.06)";cx.lineWidth=1.2;cx.stroke()}
+    const tex=new THREE.CanvasTexture(cv);tex.anisotropy=renderer.capabilities.getMaxAnisotropy();return tex}
+  const side=new THREE.MeshStandardMaterial({color:0x15181d,roughness:.65});
+  function bench_(TW,TD,x,z,y=0){const t=new THREE.Mesh(new THREE.BoxGeometry(TW,0.35,TD),[side,side,new THREE.MeshStandardMaterial({map:holeTex(TW,TD),roughness:.55,metalness:.25}),side,side,side]);
+    t.position.set(x,y-0.175,z);t.receiveShadow=true;scene.add(t);return t}
+  const TW=12,TD=9;bench_(TW,TD,0,0);
+  // 新生的小桌（桌邊）
+  const CART={x:7.4,z:2.4};bench_(2.0,1.6,CART.x,CART.z,-0.25);
+  for(const [dx,dz] of[[-0.8,-0.6],[0.8,-0.6],[-0.8,0.6],[0.8,0.6]]){const l=new THREE.Mesh(new THREE.CylinderGeometry(0.04,0.04,1.2,10),side);l.position.set(CART.x+dx,-1.0,CART.z+dz);scene.add(l)}
+
+  const Y=0.62,V=(x,z,y=Y)=>new THREE.Vector3(x,y,z);
+  const M={black:new THREE.MeshStandardMaterial({color:0x1c1f24,roughness:.42,metalness:.35}),
+    steel:new THREE.MeshStandardMaterial({color:0xa9b2bc,roughness:.28,metalness:.6}),
+    grey:new THREE.MeshStandardMaterial({color:0x3a414b,roughness:.5,metalness:.3}),
+    white:new THREE.MeshStandardMaterial({color:0xc9ced6,roughness:.6}),
+    mirror:new THREE.MeshStandardMaterial({color:0xe8edf2,roughness:.08,metalness:.9}),
+    gold:new THREE.MeshStandardMaterial({color:0xb89a5a,roughness:.35,metalness:.6}),
+    tissue:new THREE.MeshStandardMaterial({color:0xd9828f,roughness:.8}),
+    tooth:new THREE.MeshStandardMaterial({color:0xeee6cf,roughness:.5})};
+  const col=v=>new THREE.Color(css(v));
+  const glass=c=>new THREE.MeshStandardMaterial({color:c,transparent:true,opacity:.35,roughness:.05,metalness:.1,emissive:c,emissiveIntensity:.12,depthWrite:false});
+  const band=c=>new THREE.MeshStandardMaterial({color:c,roughness:.35,metalness:.4,emissive:c,emissiveIntensity:.35});
+  const X1=new THREE.Vector3(1,0,0);
+  let cur=null;const generic=new THREE.Group();scene.add(generic);
+  function add(geo,mat,x,y,z,opt={}){const m=new THREE.Mesh(geo,mat);m.position.set(x,y,z);
+    if(opt.axis==="x")m.rotation.z=Math.PI/2;if(opt.axis==="z")m.rotation.x=Math.PI/2;if(opt.ry)m.rotation.y=opt.ry;if(opt.q)m.quaternion.copy(opt.q);
+    m.castShadow=true;m.receiveShadow=true;(cur||generic).add(m);return m}
+  const cyl=(r,h,s=24)=>new THREE.CylinderGeometry(r,r,h,s);
+  function post(x,z,top){add(new THREE.BoxGeometry(0.26,0.03,0.42),M.black,x,0.015,z);add(cyl(0.07,0.24),M.black,x,0.15,z);add(cyl(0.042,top-0.18),M.steel,x,0.18+(top-0.18)/2,z)}
+  function mirror(x,z,inD,outD,opt={}){const y=opt.y??Y;const n=new THREE.Vector3(...outD).sub(new THREE.Vector3(...inD)).normalize();
+    const q=new THREE.Quaternion().setFromUnitVectors(X1,n);post(x,z,y-0.2);
+    add(new THREE.BoxGeometry(0.06,0.34,0.34),M.black,x,y,z,{q});
+    return add(new THREE.BoxGeometry(0.065,0.26,0.26),opt.dm?glass(col(opt.dm)):M.mirror,x,y,z,{q})}
+  function rotMount(x,z,c,kind="hwp"){post(x,z,Y-0.28);
+    add(cyl(0.27,0.1,40),M.black,x,Y,z,{axis:"x"});
+    add(new THREE.TorusGeometry(0.27,0.018,8,40),band(c),x,Y,z,{ry:Math.PI/2});
+    add(cyl(0.18,0.02,40),glass(kind==="swp"?0xffffff:c),x,Y,z,{axis:"x"});
+    if(kind==="swp")for(let i=0;i<8;i++){const a=i/8*Math.PI;add(new THREE.BoxGeometry(0.03,0.005,0.34),M.grey,x+0.012,Y,z,{q:new THREE.Quaternion().setFromAxisAngle(X1,a)})}
+    add(new THREE.BoxGeometry(0.05,0.1,0.06),M.steel,x,Y+0.32,z)}
+  function pmt(x,z,c){add(new THREE.BoxGeometry(0.36,0.34,0.3),M.black,x,Y,z);add(cyl(0.11,0.26),M.grey,x-0.28,Y,z,{axis:"x"});
+    add(new THREE.BoxGeometry(0.37,0.04,0.31),band(c),x,Y+0.17,z);add(new THREE.BoxGeometry(0.4,0.03,0.4),M.black,x,0.015,z);add(cyl(0.05,Y-0.17),M.steel,x,(Y-0.17)/2,z)}
+  function ebox(x,z,w,d,c,leds=4){add(new THREE.BoxGeometry(w,0.32,d),M.grey,x,0.16,z);add(new THREE.BoxGeometry(w+0.01,0.04,d+0.01),band(c),x,0.34,z);
+    for(let i=0;i<leds;i++)add(new THREE.SphereGeometry(0.025,8,8),new THREE.MeshBasicMaterial({color:col("--gC")}),x-w/2+0.12+i*0.09,0.24,z+d/2+0.005)}
+  function pc(x,z,c,text){add(new THREE.BoxGeometry(1.0,0.04,0.55),M.black,x,0.02,z+0.1);add(new THREE.BoxGeometry(0.8,0.5,0.04),M.black,x,0.52,z-0.1);
+    const ec=document.createElement("canvas");ec.width=256;ec.height=160;const e2=ec.getContext("2d");e2.fillStyle="#1a2230";e2.fillRect(0,0,256,160);
+    e2.strokeStyle="#"+c.getHexString();e2.lineWidth=3;for(let i=0;i<6;i++){e2.beginPath();e2.moveTo(20,30+i*20);e2.lineTo(60+Math.random()*160,30+i*20);e2.stroke()}
+    add(new THREE.PlaneGeometry(0.74,0.44),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(ec)}),x,0.52,z-0.078);
+    add(cyl(0.03,0.26),M.steel,x,0.15,z-0.12);add(new THREE.BoxGeometry(0.81,0.04,0.05),band(c),x,0.79,z-0.1);
+    add(new THREE.BoxGeometry(0.5,0.03,0.18),M.grey,x,0.055,z+0.22)}
+  function screen(x,z,c,txt){const ec=document.createElement("canvas");ec.width=512;ec.height=300;const e2=ec.getContext("2d");
+    e2.fillStyle="#0b1622";e2.fillRect(0,0,512,300);e2.fillStyle="#e3e8ee";e2.font="bold 44px 'Noto Sans TC',sans-serif";e2.textAlign="center";e2.fillText(txt,256,165);
+    e2.strokeStyle="#"+c.getHexString();e2.lineWidth=4;e2.strokeRect(14,14,484,272);
+    add(new THREE.BoxGeometry(0.06,0.6,0.95),M.black,x,0.72,z);
+    add(new THREE.PlaneGeometry(0.88,0.54),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(ec)}),x-0.035,0.72,z,{ry:-Math.PI/2});
+    add(cyl(0.04,0.42),M.steel,x,0.21,z);add(new THREE.BoxGeometry(0.4,0.03,0.5),M.black,x,0.015,z)}
+
+  /* 小人偶：方塊身、球頭、兩臂可動 */
+  const skin=new THREE.MeshStandardMaterial({color:0xf0d2b6,roughness:.7});
+  const figs=[];
+  function person(id,x,z,facing,c,act){
+    const g=new THREE.Group();g.position.set(x,0,z);g.rotation.y=facing;
+    const cloth=new THREE.MeshStandardMaterial({color:c,roughness:.75});
+    const pants=new THREE.MeshStandardMaterial({color:0x2a3240,roughness:.8});
+    const mk=(geo,mat,x,y,z,parent=g)=>{const m=new THREE.Mesh(geo,mat);m.position.set(x,y,z);m.castShadow=true;m.userData.id=id;parent.add(m);pick.push(m);return m};
+    for(const dx of[-0.055,0.055])mk(new THREE.BoxGeometry(0.08,0.2,0.09),pants,dx,0.1,0);
+    const body=mk(new THREE.BoxGeometry(0.22,0.24,0.13),cloth,0,0.32,0);
+    const head=new THREE.Group();head.position.set(0,0.52,0);g.add(head);
+    mk(new THREE.SphereGeometry(0.09,16,12),skin,0,0,0,head);
+    mk(new THREE.BoxGeometry(0.19,0.07,0.19),new THREE.MeshStandardMaterial({color:0x202428,roughness:.8}),0,0.05,0,head); // 頭髮
+    for(const dx of[-0.03,0.03])mk(new THREE.SphereGeometry(0.012,6,6),new THREE.MeshBasicMaterial({color:0x111}),dx,0.0,0.085,head); // 眼睛
+    const arms={};
+    for(const [k,dx] of[["L",-0.145],["R",0.145]]){const a=new THREE.Group();a.position.set(dx,0.42,0);g.add(a);mk(new THREE.BoxGeometry(0.07,0.22,0.08),cloth,0,-0.1,0,a);mk(new THREE.SphereGeometry(0.035,8,8),skin,0,-0.22,0,a);arms[k]=a}
+    if(act==="pass"){ // 已畢業：方帽＋手上的接力棒
+      mk(new THREE.BoxGeometry(0.24,0.015,0.24),new THREE.MeshStandardMaterial({color:0x202428,roughness:.8}),0,0.095,0,head);
+      mk(new THREE.BoxGeometry(0.02,0.1,0.02),new THREE.MeshStandardMaterial({color:col("--warn"),roughness:.6}),-0.11,0.05,0.11,head);
+      mk(new THREE.CylinderGeometry(0.02,0.02,0.22,10),new THREE.MeshStandardMaterial({color:col("--warn"),roughness:.5,emissive:col("--warn"),emissiveIntensity:.3}),0,-0.24,0,arms.L).rotation.x=Math.PI/2}
+    scene.add(g);const f={id,g,head,arms,body,act,ph:Math.random()*6.28,look:0};figs.push(f);return f}
+
+  /* 幾何 */
+  const laserZ=-3.2,COLX=-3.8,ENDX=5.0;
+  const groups={},anchors={},pick=[];
+  function begin(id){cur=new THREE.Group();cur.userData.id=id;groups[id]=cur;scene.add(cur)}
+  function end(id,ax,az,top){cur.traverse(o=>{if(o.isMesh){o.userData.id=id;pick.push(o)}});anchors[id]={x:ax,z:az,top};cur=null}
+
+  // 老師：雷射頭
+  begin("zhuo");add(new THREE.BoxGeometry(1.6,0.66,0.62),M.grey,-5.1,0.33,laserZ);add(new THREE.BoxGeometry(1.62,0.05,0.64),band(col("--white")),-5.1,0.68,laserZ);
+  add(cyl(0.07,0.12),M.black,-4.27,Y,laserZ,{axis:"x"});for(let i=0;i<6;i++)add(new THREE.BoxGeometry(0.02,0.4,0.5),M.black,-5.75+i*0.07,0.33,laserZ+0.32);
+  add(new THREE.SphereGeometry(0.04,10,10),new THREE.MeshBasicMaterial({color:col("--gC")}),-4.55,0.72,laserZ+0.2);end("zhuo",-5.1,laserZ,0.85);
+  // 分配柱：轉向鏡＋三片二向色鏡＋末端鏡
+  mirror(COLX,laserZ,[1,0,0],[0,0,1]);
+  const dms={};
+  for(const k of["A","B","C"])dms[k]=mirror(COLX,LANES[k].z,[0,0,1],[1,0,0],{dm:LANES[k].v});
+  mirror(COLX,LANES.D.z,[0,0,1],[1,0,0]);
+  // 四條光路的終點螢幕
+  for(const k of["A","B","C","D"])screen(ENDX,LANES[k].z,col(LANES[k].v),LANES[k].end);
+
+  // 成員元件
+  const lanesZ=k=>LANES[k].z;
+  function build(m){
+    if(m.lane==="SRC")return;
+    if(m.lane==="N"){begin(m.id);add(new THREE.BoxGeometry(0.3,0.04,0.4),M.white,CART.x-0.5+m.x,-0.23,CART.z-0.3);add(new THREE.BoxGeometry(0.06,0.05,0.4),band(col("--gX")),CART.x-0.66+m.x,-0.225,CART.z-0.3);end(m.id,CART.x-0.5+m.x,CART.z-0.3,0.55);return}
+    const z=lanesZ(m.lane),c=col(LANES[m.lane].v),x=m.x;begin(m.id);
+    switch(m.id){
+      case"jun":rotMount(x,z,c,"hwp");break;
+      case"tsai":rotMount(x,z,c,"swp");break;
+      case"chang":post(x-0.35,z,Y-0.2);add(new THREE.BoxGeometry(0.06,0.34,0.34),M.black,x-0.35,Y,z,{ry:Math.PI/4});add(new THREE.BoxGeometry(0.065,0.26,0.26),glass(c),x-0.35,Y,z,{ry:Math.PI/4});
+        add(new THREE.BoxGeometry(0.7,0.08,0.5),M.black,x+0.3,0.04,z+0.55);add(new THREE.BoxGeometry(0.5,0.12,0.4),M.steel,x+0.3,0.14,z+0.55);add(new THREE.BoxGeometry(0.22,0.3,0.3),M.black,x+0.3,Y-0.04,z+0.55);add(new THREE.BoxGeometry(0.71,0.03,0.51),band(c),x+0.3,0.09,z+0.55);break;
+      case"wangjw":post(x-0.4,z,Y-0.2);add(new THREE.BoxGeometry(0.06,0.34,0.34),M.black,x-0.4,Y,z,{ry:Math.PI/4});add(new THREE.BoxGeometry(0.065,0.26,0.26),glass(col("--gA")),x-0.4,Y,z,{ry:Math.PI/4});
+        add(new THREE.BoxGeometry(0.7,0.42,0.5),M.white,x-0.4,0.21,z-0.95);add(new THREE.BoxGeometry(0.71,0.04,0.51),band(c),x-0.4,0.44,z-0.95);add(cyl(0.06,0.2),M.black,x-0.4,Y,z-0.62,{axis:"z"});
+        post(x+0.25,z,Y-0.25);add(new THREE.BoxGeometry(0.12,0.22,0.18),M.tooth,x+0.25,Y,z);break;
+      case"gagan":post(x-0.3,z,Y-0.2);add(new THREE.BoxGeometry(0.06,0.34,0.34),M.black,x-0.3,Y,z,{ry:Math.PI/4});add(new THREE.BoxGeometry(0.065,0.26,0.26),glass(c),x-0.3,Y,z,{ry:Math.PI/4});
+        pmt(x-0.3,z-0.75,c);ebox(x+0.5,z-0.75,0.7,0.45,c);break;
+      case"shih":add(new THREE.BoxGeometry(0.6,0.04,0.6),M.black,x,0.02,z);add(new THREE.BoxGeometry(0.42,Y-0.06,0.42),M.black,x,(Y-0.06)/2+0.04,z);
+        add(new THREE.BoxGeometry(0.44,0.04,0.44),band(c),x,Y-0.03,z);add(new THREE.BoxGeometry(0.02,0.2,0.16),M.mirror,x-0.08,Y+0.1,z,{ry:Math.PI/4});
+        add(new THREE.BoxGeometry(0.16,0.02,0.2),M.mirror,x+0.08,Y+0.12,z,{q:new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,0,1),Math.PI/5)});break;
+      case"kuo":post(x,z,Y-0.15);add(cyl(0.13,0.2),M.black,x,Y,z,{axis:"x"});add(new THREE.CylinderGeometry(0.13,0.08,0.18,24),M.black,x+0.19,Y,z,{q:new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,0,1),-Math.PI/2)});add(cyl(0.081,0.03),M.gold,x+0.29,Y,z,{axis:"x"});add(cyl(0.135,0.04),band(c),x-0.08,Y,z,{axis:"x"});
+        post(x+0.55,z,Y-0.2);add(new THREE.BoxGeometry(0.03,0.3,0.24),glass(0xffffff),x+0.55,Y,z);add(cyl(0.05,0.012),M.tissue,x+0.55,Y,z,{axis:"x"});break;
+      case"wangwh":ebox(x,z-0.7,0.8,0.5,c,5);post(x,z,Y-0.2);add(new THREE.BoxGeometry(0.06,0.34,0.34),M.black,x,Y,z,{ry:Math.PI/4});add(new THREE.BoxGeometry(0.065,0.26,0.26),glass(c),x,Y,z,{ry:Math.PI/4});
+        for(const dx of[-0.15,0.15])add(cyl(0.012,0.4),M.black,x+dx,0.5,z-0.45);break;
+      case"huang":post(x-0.3,z,Y-0.2);add(cyl(0.09,0.2),M.black,x-0.3,Y,z,{axis:"x"});add(cyl(0.095,0.03),band(c),x-0.18,Y,z,{axis:"x"});
+        add(new THREE.TorusGeometry(0.26,0.014,8,48),new THREE.MeshStandardMaterial({color:c,roughness:.4}),x+0.3,0.03,z-0.6,{q:new THREE.Quaternion().setFromAxisAngle(X1,Math.PI/2)});
+        add(cyl(0.03,0.7),M.steel,x+0.25,0.05,z,{axis:"x"});add(cyl(0.05,0.2),M.black,x+0.65,Y-0.5,z,{axis:"x"});break;
+      case"lewis":case"jackson":pc(x,z+0.25,c);break;
+    }
+    end(m.id,x,z,1.0);
+  }
+  MEMBERS.forEach(build);
+
+  // 小人偶：站在元件前面（+z 側），面向元件
+  const F=(id,x,z,face,c,act)=>{const f=person(id,x,z,face,c,act);f.home=new THREE.Vector3(x,0,z);return f};
+  MEMBERS.forEach(m=>{
+    const c=col(LANES[m.lane].v);
+    if(m.lane==="SRC"){F(m.id,-5.1,laserZ+0.85,Math.PI,c,m.act);return}
+    if(m.lane==="N"){F(m.id,CART.x-0.5+m.x,CART.z+0.35,Math.PI,c,m.act).g.position.y=-0.25;return}
+    F(m.id,m.x+0.1,lanesZ(m.lane)+0.62,Math.PI,c,m.act)});
+
+  /* 光束 */
+  const beams=[];
+  function beam(pts,c,opt={}){
+    const o=opt.off||new THREE.Vector3(),p=pts.map(q=>q.clone().add(o)),segs=[];let L=0;
+    for(let i=0;i<p.length-1;i++){const a=p[i],b=p[i+1],l=a.distanceTo(b);
+      const core=new THREE.Mesh(new THREE.TubeGeometry(new THREE.LineCurve3(a,b),1,0.011,6,false),new THREE.MeshBasicMaterial({color:c,transparent:true,opacity:.95,blending:THREE.AdditiveBlending,depthWrite:false}));
+      const glow=new THREE.Mesh(new THREE.TubeGeometry(new THREE.LineCurve3(a,b),1,0.05,10,false),new THREE.MeshBasicMaterial({color:c,transparent:true,opacity:.16,blending:THREE.AdditiveBlending,depthWrite:false}));
+      scene.add(core,glow);segs.push({a,b,l,L0:L,core,glow});L+=l}
+    const n=Math.max(2,Math.round(L/1.4)),photons=[];
+    for(let k=0;k<n;k++){const s=new THREE.Mesh(new THREE.SphereGeometry(0.04,10,10),new THREE.MeshBasicMaterial({color:c,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false}));scene.add(s);photons.push(s)}
+    const b={segs,L,photons,ids:opt.ids||[],off:Math.random()};beams.push(b);return b}
+  const white=col("--white");
+  beam([V(-4.27,laserZ),V(COLX,laserZ),V(COLX,LANES.D.z)],white,{ids:["zhuo"]});
+  for(const k of["A","B","C","D"]){const ids=MEMBERS.filter(m=>m.lane===k).map(m=>m.id);ids.push("zhuo");beam([V(COLX,LANES[k].z),V(ENDX-0.05,LANES[k].z)],col(LANES[k].v),{ids})}
+
+  /* 分工線：貼桌面、走直角 */
+  const links=[];
+  const pos=id=>{const a=anchors[id];return a?new THREE.Vector3(a.x,0,a.z):null};
+  RELS.forEach((r,i)=>{const a=pos(r.from),b=pos(r.to);if(!a||!b)return;
+    const yy=r.type==="sample"?0.012:0.03+((i%5)*0.004);const pts=[new THREE.Vector3(a.x,yy,a.z),new THREE.Vector3(b.x,yy,a.z),new THREE.Vector3(b.x,yy,b.z)];const objs=[];
+    if(r.type==="sample"){for(let s=0;s<2;s++){const p0=pts[s],p1=pts[s+1],l=p0.distanceTo(p1),n=Math.floor(l/0.14);
+      for(let k=0;k<=n;k++){const d=new THREE.Mesh(new THREE.SphereGeometry(0.018,6,6),new THREE.MeshBasicMaterial({color:white,transparent:true,opacity:.55}));d.position.lerpVectors(p0,p1,n?k/n:0);scene.add(d);objs.push(d)}}}
+    else{for(let s=0;s<2;s++){if(pts[s].distanceTo(pts[s+1])<1e-3)continue;
+      const cc=r.type==="baton"?col("--warn"):new THREE.Color(0x6f7886);
+      const m=new THREE.Mesh(new THREE.TubeGeometry(new THREE.LineCurve3(pts[s],pts[s+1]),1,r.type==="baton"?0.02:0.014,6,false),new THREE.MeshStandardMaterial({color:cc,emissive:cc,emissiveIntensity:r.type==="baton"?.4:0,roughness:.6,transparent:true,opacity:r.kind==="inf"?.5:.9}));scene.add(m);objs.push(m)}}
+    links.push({r,objs})});
+
+  /* 標籤 */
+  anchors.zhuo.top=0.95;
+  const labels={};
+  MEMBERS.forEach(m=>{const el=document.createElement("div");el.className="lab";el.innerHTML=`<i style="background:var(${LANES[m.lane].v})"></i><span>${esc(m.name)}</span>${m.grad?"<em>已畢業</em>":""}`;el.dataset.m=m.id;labelsEl.appendChild(el);labels[m.id]=el});
+  const ring=new THREE.Mesh(new THREE.RingGeometry(0.5,0.58,48),new THREE.MeshBasicMaterial({color:col("--warn"),transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false}));
+  ring.rotation.x=-Math.PI/2;ring.position.y=0.008;scene.add(ring);
+
+  let showPh=true;
+  function related(id){const s=new Set([id]);const m=byId[id];
+    if(m&&"ABCD".includes(m.lane)){MEMBERS.filter(x=>x.lane===m.lane).forEach(x=>s.add(x.id));s.add("zhuo")}
+    if(id==="zhuo")MEMBERS.forEach(x=>{if("ABCD".includes(x.lane))s.add(x.id)});
+    RELS.forEach(r=>{if(r.from===id)s.add(r.to);if(r.to===id)s.add(r.from)});return s}
+  function refresh(){
+    const rel=selected?related(selected):null;
+    beams.forEach(b=>{const hi=!selected||b.ids.includes(selected);
+      b.segs.forEach(s=>{s.core.material.opacity=hi?.95:.12;s.glow.material.opacity=hi?.16:.02});b.photons.forEach(p=>p.visible=showPh&&hi)});
+    links.forEach(L=>{const hi=!selected||L.r.from===selected||L.r.to===selected;L.objs.forEach(o=>o.material.opacity=hi?(L.r.type==="sample"?.6:(L.r.kind==="inf"?.5:.9)):.08)});
+    Object.entries(labels).forEach(([id,el])=>{el.classList.toggle("dim",!!rel&&!rel.has(id));el.classList.toggle("sel",id===selected)});
+    const a=selected&&anchors[selected];ring.material.opacity=a?.9:0;if(a)ring.position.set(a.x,byId[selected].lane==="N"?-0.24:0.008,a.z);
+  }
+  bench={onSelect:()=>refresh()};
+
+  const ray=new THREE.Raycaster(),ptr=new THREE.Vector2();let down=null,hover=null;
+  function pickAt(e){const r=renderer.domElement.getBoundingClientRect();ptr.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(ptr,camera);const h=ray.intersectObjects(pick)[0];return h?h.object.userData.id:null}
+  renderer.domElement.addEventListener("pointerdown",e=>down=[e.clientX,e.clientY]);
+  renderer.domElement.addEventListener("pointerup",e=>{if(!down)return;const mv=Math.hypot(e.clientX-down[0],e.clientY-down[1]);down=null;if(mv<6){const id=pickAt(e);select(id===selected?null:id)}});
+  renderer.domElement.addEventListener("pointermove",e=>{if(e.pointerType!=="mouse")return;hover=pickAt(e);renderer.domElement.style.cursor=hover?"pointer":"grab"});
+  labelsEl.addEventListener("pointerenter",e=>{const l=e.target.closest?.(".lab");if(l)hover=l.dataset.m},true);
+
+  const tog=(id,fn)=>{const b=document.getElementById(id);b.onclick=()=>{const v=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",v);fn(v,b)}};
+  tog("btn-labels",v=>box.classList.toggle("hidelabels",!v));
+  tog("btn-photons",v=>{showPh=v;refresh()});
+  tog("btn-spin",v=>controls.autoRotate=v);
+  let camGoal=null;tog("btn-top",v=>{camGoal=(v?TOP:OBL).clone()});
+  document.getElementById("btn-reset").onclick=()=>select(null);
+
+  function resize(){const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);renderer.domElement.style.width=w+"px";renderer.domElement.style.height=h+"px";camera.aspect=w/h;camera.fov=w<560?54:36;camera.updateProjectionMatrix()}
+  window.__resize=resize;new ResizeObserver(resize).observe(host);resize();
+
+  const v=new THREE.Vector3(),clock=new THREE.Clock(),tmp=new THREE.Vector3(),wp=new THREE.Vector3();
+  function pointAt(b,d){for(const s of b.segs){if(d<=s.L0+s.l)return tmp.lerpVectors(s.a,s.b,(d-s.L0)/s.l)}return b.segs[b.segs.length-1].b}
+  const smooth=x=>x<=0?0:x>=1?1:x*x*(3-2*x);
+  function animate(f,t){
+    const T=reduce?0:t+f.ph,{arms:{L,R},head,g,body}=f;
+    const want=(f.id===hover||f.id===selected);
+    // 轉頭看觀眾：目標偏航＝相機方向相對身體朝向
+    head.getWorldPosition(wp);const yaw=Math.atan2(camera.position.x-wp.x,camera.position.z-wp.z)-g.rotation.y;
+    let ty=((yaw+Math.PI)%(2*Math.PI)+2*Math.PI)%(2*Math.PI)-Math.PI;ty=Math.max(-1.2,Math.min(1.2,ty));
+    f.look+=((want?ty:0)-f.look)*0.12;head.rotation.y=f.look;
+    body.position.y=0.32+(reduce?0:0.006*Math.sin(T*2));head.position.y=0.52+(reduce?0:0.006*Math.sin(T*2));
+    switch(f.act){
+      case"knob":R.rotation.x=-1.25+0.12*Math.sin(T*6);R.rotation.z=0.25*Math.sin(T*6);L.rotation.x=-0.3;break;
+      case"type":L.rotation.x=-1.1+0.08*Math.sin(T*9);R.rotation.x=-1.1+0.08*Math.sin(T*9+1.5);break;
+      case"point":{const ph=(T%7)/7;const k=smooth(ph/0.12)-smooth((ph-0.55)/0.12);R.rotation.x=-1.5*k;R.rotation.z=-0.9*k;L.rotation.x=0.05*Math.sin(T*2);break}
+      case"pass":L.rotation.z=1.45+0.06*Math.sin(T*3);L.rotation.x=-0.2;R.rotation.x=0.06*Math.sin(T*2);break; // 左手（世界 +x，下游）伸出去交棒
+      default:L.rotation.x=0.08*Math.sin(T*2);R.rotation.x=-0.08*Math.sin(T*2)}
+  }
+  function tick(){
+    const t=clock.getElapsedTime();
+    if(camGoal){camera.position.lerp(camGoal,0.08);if(camera.position.distanceTo(camGoal)<0.02)camGoal=null}
+    controls.update();
+    const W=host.clientWidth,H=host.clientHeight;
+    for(const [id,el] of Object.entries(labels)){const a=anchors[id];if(!a)continue;v.set(a.x,a.top,a.z).project(camera);
+      el.style.transform=`translate(${(v.x*0.5+0.5)*W}px,${(-v.y*0.5+0.5)*H}px) translate(-50%,-100%)`;el.style.visibility=v.z<1?"visible":"hidden"}
+    beams.forEach(b=>{const n=b.photons.length;b.photons.forEach((p,k)=>{if(!p.visible)return;const u=reduce?(k+0.5)/n:((t*0.8/b.L+b.off+k/n)%1);p.position.copy(pointAt(b,u*b.L))})});
+    figs.forEach(f=>animate(f,t));
+    if(selected&&anchors[selected])ring.scale.setScalar(1+0.04*Math.sin(t*3));
+    renderer.render(scene,camera);requestAnimationFrame(tick);
+  }
+  refresh();tick();
+})();
+</script>
+</html>
