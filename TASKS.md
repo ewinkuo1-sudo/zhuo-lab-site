@@ -30,7 +30,7 @@
 
 ## 網址與鏡像（10/24 決定）
 - [x] 正式網址先維持 GitHub Pages（ewinkuo1-sudo.github.io/zhuo-lab-site/），baseURL 不動
-- [ ] Cloudflare 鏡像保留：等使用者在 GitHub repo 加 CLOUDFLARE_API_TOKEN 密鑰（10/24 查 gh secret list 為空），加完推一次 commit 觸發部署，再驗 workers.dev 研究地圖不再 404
+- [x] Cloudflare 鏡像保留：使用者 10/24 加好 CLOUDFLARE_API_TOKEN；第一次部署因 wrangler-action 預設 3.90 不支援純靜態設定而失敗，publish.yaml 指定 wranglerVersion "4" 後成功。workers.dev 首頁、中英成員頁、研究地圖、成員島都 200 且是新版
 
 ## 要老師確認
 - 全片掃描到底是「進行中」還是「待確認」（兩頁現在都寫保守版）
