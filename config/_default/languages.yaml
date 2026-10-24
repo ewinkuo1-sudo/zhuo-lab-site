@@ -17,6 +17,9 @@ zh:
       - name: 研究
         url: '/#research'
         weight: 10
+      - name: 研究地圖
+        url: '/research-map/'   # static/research-map/，單頁捲動敘事＋3D 光路
+        weight: 15
       - name: 論文
         url: '/#publications'
         weight: 20
