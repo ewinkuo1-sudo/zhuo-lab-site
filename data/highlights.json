@@ -1,22 +1,7 @@
 [
   {
-    "slug": "huang-2026-deciphering",
-    "image": "gallery/lab-02.jpg",
-    "credit": "Huang et al. · Laboratory Investigation · Fig. 5",
-    "source": "https://doi.org/10.1016/j.labinv.2025.104257",
-    "en": {
-      "title": "Seeing oral cancer invasion",
-      "summary": "Multimodal nonlinear microscopy examines the tissue microenvironment associated with an aggressive pattern of oral cancer invasion.",
-      "alt": "Figure 5 from Huang et al., showing six microscopy panels with original annotations."
-    },
-    "zh": {
-      "title": "看見口腔癌的侵犯型態",
-      "summary": "結合臨床資料與多模態非線性顯微影像，研究口腔癌侵襲型態所伴隨的組織微環境變化。",
-      "alt": "Huang 等人論文圖 5，六分圖顯微影像保留原始標記。"
-    }
-  },
-  {
     "slug": "makkithaya-2025-quantitative",
+    "station": "microscopy",
     "image": "publications/esophagus-2025.png",
     "credit": "Makkithaya et al. · Scientific Reports · Fig. 2",
     "source": "https://doi.org/10.1038/s41598-025-13910-7",
@@ -34,6 +19,7 @@
   },
   {
     "slug": "makkithaya-2024-investigating",
+    "station": "collagen",
     "image": "publications/cartilage-2024.jpg",
     "credit": "Makkithaya et al. · APL Bioengineering · Fig. 3",
     "source": "https://doi.org/10.1063/5.0196676",
@@ -47,6 +33,39 @@
       "title": "用偏振光解析軟骨結構",
       "summary": "以偏振解析 SHG 與定量影像分析，研究骨關節炎及類風濕性關節炎相關的軟骨結構差異。",
       "alt": "骨關節炎軟骨的 H&E、SHG 強度、感受率比值、偏振與方向分布圖。"
+    }
+  },
+  {
+    "slug": "huang-2026-deciphering",
+    "station": "ai",
+    "image": "gallery/lab-02.jpg",
+    "credit": "Huang et al. · Laboratory Investigation · Fig. 5",
+    "source": "https://doi.org/10.1016/j.labinv.2025.104257",
+    "en": {
+      "title": "Seeing oral cancer invasion",
+      "summary": "Multimodal nonlinear microscopy examines the tissue microenvironment associated with an aggressive pattern of oral cancer invasion.",
+      "alt": "Figure 5 from Huang et al., showing six microscopy panels with original annotations."
+    },
+    "zh": {
+      "title": "看見口腔癌的侵犯型態",
+      "summary": "結合臨床資料與多模態非線性顯微影像，研究口腔癌侵襲型態所伴隨的組織微環境變化。",
+      "alt": "Huang 等人論文圖 5，六分圖顯微影像保留原始標記。"
+    }
+  },
+  {
+    "slug": "zhuo-2021-labelfree",
+    "station": "endomicroscopy",
+    "image": "gen/thumb-endoscope.webp",
+    "credit": "Concept illustration",
+    "en": {
+      "title": "One platform, many label-free contrasts",
+      "summary": "The multimodal nonlinear microscopy platform that the miniaturized endomicroscopy direction builds on.",
+      "alt": "Schematic of a fibre-based nonlinear endomicroscopy probe (illustration)."
+    },
+    "zh": {
+      "title": "一個平台，多種無標記對比",
+      "summary": "多模態非線性顯微平台，是微型化內視顯微方向的技術基礎。",
+      "alt": "光纖式非線性內視顯微探頭示意圖。"
     }
   }
 ]

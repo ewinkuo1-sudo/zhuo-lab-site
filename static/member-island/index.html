@@ -155,10 +155,11 @@ footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);paddin
 <script>
 const SITE="https://ewinkuo1-sudo.github.io/zhuo-lab-site/zh/author/";
 const LANES={
-  A:{name:"偏振 SHG",desc:"膠原蛋白、軟骨、骨：χ 張量、PTHG。",v:"--gA",z:-1.6,end:"膠原蛋白怎麼排"},
-  B:{name:"多模態對比",desc:"不只 SHG：FLIM、拉曼、CARS、高光譜散射。",v:"--gB",z:0,end:"不染色也看得到"},
-  C:{name:"成像系統與內視",desc:"掃描光路、拼接、電路、光纖內視鏡、光片。",v:"--gC",z:1.6,end:"拍得快、拍得進去"},
-  D:{name:"AI 判讀與臨床",desc:"分級、分割降噪、腫瘤邊界。",v:"--gD",z:3.2,end:"醫師看得懂的答案"},
+  // verb 與官網研究頁四站同一套（看得到／讀得懂／判得準／到得了），顏色也相同。
+  A:{verb:"讀得懂",name:"偏振 SHG",desc:"膠原蛋白、軟骨、骨：χ 張量、PTHG。",v:"--gA",z:-1.6,end:"膠原蛋白怎麼排"},
+  B:{verb:"看得到",name:"多模態對比",desc:"不只 SHG：FLIM、拉曼、CARS、高光譜散射。",v:"--gB",z:0,end:"不染色也看得到"},
+  C:{verb:"到得了",name:"成像系統與內視",desc:"掃描光路、拼接、電路、光纖內視鏡、光片。",v:"--gC",z:1.6,end:"拍得快、拍得進去"},
+  D:{verb:"判得準",name:"AI 判讀與臨床",desc:"分級、分割降噪、腫瘤邊界。",v:"--gD",z:3.2,end:"醫師看得懂的答案"},
   SRC:{name:"光源",desc:"",v:"--white"},
   N:{name:"新生",desc:"2026-09 入學，題目未定，先在桌邊看。",v:"--gX"}
 };
@@ -206,6 +207,10 @@ const RELS=[
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const laneOf=m=>LANES[m.lane];
+const laneName=L=>(L.verb?`<b>${esc(L.verb)}</b> · `:"")+esc(L.name);
+// 成員頁卡片的位置：島嵌在官網 zh／en 成員頁裡時，連回同一頁的卡片；獨立開時連 zh。
+let PEOPLE="../zh/people/";
+try{if(window.top!==window&&!/\/zh\//.test(window.top.location.pathname))PEOPLE="../people/"}catch(e){}
 function avatarHtml(m,cls=""){
   if(m.avatar)return `<img class="avatar ${cls}" src="avatars/${m.slug}.jpg" alt="">`;
   return `<div class="avatar ini ${cls}">${esc(m.name.replace(/[^A-Za-z一-鿿]/g,"")[0]||"?")}</div>`}
@@ -226,11 +231,11 @@ function renderPanel(id){
       <div class="row"><i style="background:var(--warn)"></i><div>戴方帽的小人＝已畢業<small>排在隊伍最前面，手上的棒子交給後面接手的人。</small></div></div>
       <div class="row"><i style="background:var(--gX)"></i><div>桌邊的小桌＝新生<small>題目還沒定，先在旁邊看。</small></div></div>
     </div>
-    <div><h3>四條光路</h3><div class="legend">${["A","B","C","D"].map(k=>`<div class="row"><i style="background:var(${LANES[k].v})"></i><div>${esc(LANES[k].name)}<small>${esc(LANES[k].desc)}</small><div class="chips" style="margin-top:4px">${MEMBERS.filter(m=>m.lane===k).map(m=>chip(m.id)).join("")}</div></div></div>`).join("")}</div></div>
+    <div><h3>四條光路</h3><div class="legend">${["B","A","D","C"].map(k=>`<div class="row"><i style="background:var(${LANES[k].v})"></i><div>${laneName(LANES[k])}<small>${esc(LANES[k].desc)}</small><div class="chips" style="margin-top:4px">${MEMBERS.filter(m=>m.lane===k).map(m=>chip(m.id)).join("")}</div></div></div>`).join("")}</div></div>
     <p class="src">點桌上的元件、小人或標籤看介紹。</p>`;return}
   const m=byId[id],L=laneOf(m);
   el.innerHTML=`<div class="who">${avatarHtml(m)}<h2>${esc(m.name)}${m.en&&m.en!==m.name?`<small>${esc(m.en)}</small>`:""}</h2></div>
-  <div class="meta"><span class="role">${esc(m.role)}</span><span class="lane"><i style="background:var(${L.v})"></i>${esc(L.name)}</span>${m.pend?`<span class="pend">${esc(m.pend)}</span>`:""}</div>
+  <div class="meta"><span class="role">${esc(m.role)}</span><span class="lane"><i style="background:var(${L.v})"></i>${laneName(L)}</span>${m.pend?`<span class="pend">${esc(m.pend)}</span>`:""}</div>
   <p class="part">在桌上是：${esc(m.part)}${m.grad?"，排在光路最前面（已畢業，交棒）":""}</p>
   <p class="oneline">${esc(m.line)}</p>
   ${m.does.length?`<div><h3>在做什麼</h3><ul>${m.does.map(d=>`<li>${esc(d)}</li>`).join("")}</ul></div>`:""}
@@ -238,7 +243,7 @@ function renderPanel(id){
   ${m.lane==="SRC"?`<div><h3>分出去的四條光路</h3><div class="chips">${MEMBERS.filter(x=>"ABCD".includes(x.lane)).map(x=>chip(x.id)).join("")}</div></div>`:""}
   ${relRows(id)}
   <div><h3>連結</h3><div class="links">
-    ${m.slug?`<a class="lnk" href="${SITE}${m.slug}/" target="_blank" rel="noopener"><span class="k">官網</span><div><b>成員介紹</b><small>官網成員頁</small></div></a>`:`<span class="src">官網還沒有他的頁。</span>`}
+    ${m.slug?`<a class="lnk" href="${PEOPLE}#member-${m.slug}" target="_top"><span class="k">卡片</span><div><b>成員頁介紹</b><small>跳到他在成員頁的卡片</small></div></a><a class="lnk" href="${SITE}${m.slug}/" target="_blank" rel="noopener"><span class="k">官網</span><div><b>個人頁</b><small>完整介紹</small></div></a>`:`<span class="src">官網還沒有他的頁。</span>`}
     ${(m.toys||[]).map(t=>`<a class="lnk" href="${t.u}" target="_blank" rel="noopener"><span class="k">${esc(t.k)}</span><div><b>${esc(t.t)}</b><small>${esc(t.d)}</small></div></a>`).join("")}
   </div></div>`;
 }
@@ -246,13 +251,16 @@ document.addEventListener("click",e=>{const c=e.target.closest("[data-m]");if(c)
   const t=e.target.closest("[data-view]");if(t)showView(t.dataset.view)});
 function renderList(){
   const el=document.getElementById("view-list");
-  el.innerHTML=["SRC","A","B","C","D","N"].map(k=>`<section class="sec"><h2><i style="background:var(${LANES[k].v})"></i>${esc(LANES[k].name)}</h2>${LANES[k].desc?`<p>${esc(LANES[k].desc)}</p>`:""}
+  el.innerHTML=["SRC","B","A","D","C","N"].map(k=>`<section class="sec"><h2><i style="background:var(${LANES[k].v})"></i>${laneName(LANES[k])}</h2>${LANES[k].desc?`<p>${esc(LANES[k].desc)}</p>`:""}
     <div class="cards">${MEMBERS.filter(m=>m.lane===k).map(m=>`<button class="card" data-m="${m.id}">${avatarHtml(m)}<div><h3>${esc(m.name)}</h3><p>${esc(m.role)} · ${esc(m.part)}</p><p>${esc(m.line)}</p></div></button>`).join("")}</div></section>`).join("");
 }
 function showView(v){document.querySelectorAll("[data-view]").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===v));
   for(const k of["map","list"])document.getElementById("view-"+k).hidden=k!==v;if(v==="map"&&window.__resize)window.__resize()}
 let selected=null,bench=null;
 function select(id){selected=id;renderPanel(id);if(bench)bench.onSelect(id)}
+// 官網成員頁的卡片按「在成員島看他」時，父頁用 postMessage 送 slug 或 id 過來。
+window.addEventListener("message",e=>{const d=e&&e.data||{};if(!d.sel)return;
+  const m=byId[d.sel]||MEMBERS.find(x=>x.slug===d.sel);if(m){select(m.id);showView("map")}});
 renderPanel(null);renderList();
 
 (function initBench(){

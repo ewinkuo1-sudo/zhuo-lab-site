@@ -3,6 +3,7 @@ title: Ching-wei Wang
 slug: jing-wei-wang
 last_name: Wang
 role: M.Sc. Student
+station: microscopy
 organizations:
 - name: Institute of Biophotonics, National Yang Ming Chiao Tung University
   url: https://bioph.nycu.edu.tw/

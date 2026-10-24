@@ -3,6 +3,7 @@ title: Jackson Rodrigues
 slug: jackson-rodrigues
 last_name: Rodrigues
 role: 博士後研究員
+station: ai
 organizations:
 - name: 國立陽明交通大學 生醫光電研究所
   url: https://bioph.nycu.edu.tw/

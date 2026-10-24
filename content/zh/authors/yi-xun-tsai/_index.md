@@ -3,6 +3,7 @@ title: 蔡宜勲
 slug: yi-xun-tsai
 last_name: Tsai
 role: 碩士班學生
+station: collagen
 organizations:
 - name: 國立陽明交通大學 生醫光電研究所
   url: https://bioph.nycu.edu.tw/

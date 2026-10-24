@@ -3,6 +3,7 @@ title: Macline Crecsilla Lewis
 slug: maclinez-lewis
 last_name: Lewis
 role: 博士生
+station: ai
 organizations:
 - name: 國立陽明交通大學 生醫光電研究所
   url: https://bioph.nycu.edu.tw/

@@ -3,6 +3,7 @@ title: Macline Crecsilla Lewis
 slug: maclinez-lewis
 last_name: Lewis
 role: Ph.D. Student
+station: ai
 organizations:
 - name: Institute of Biophotonics, National Yang Ming Chiao Tung University
   url: https://bioph.nycu.edu.tw/

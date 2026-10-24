@@ -31,6 +31,7 @@
   "collagen": {
     "papers": [
       "makkithaya-2024-investigating",
+      "rodrigues-2026-advancing",
       "mazumder-2017-polarization"
     ],
     "en": {
@@ -87,6 +88,7 @@
   },
   "ai": {
     "papers": [
+      "huang-2026-deciphering",
       "makkithaya-2025-quantitative",
       "karnati-2026-integration"
     ],

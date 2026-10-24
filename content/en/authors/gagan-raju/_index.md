@@ -3,6 +3,7 @@ title: Gagan Raju
 slug: gagan-raju
 last_name: Raju
 role: Ph.D. Student (Exchange)
+station: microscopy
 organizations:
   - name: Institute of Biophotonics, National Yang Ming Chiao Tung University
     url: https://bioph.nycu.edu.tw/

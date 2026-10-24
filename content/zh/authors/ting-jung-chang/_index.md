@@ -3,6 +3,7 @@ title: 張庭榮
 slug: ting-jung-chang
 last_name: Chang
 role: 碩士班學生
+station: microscopy
 organizations:
   - name: 國立陽明交通大學 生醫光電研究所
     url: https://bioph.nycu.edu.tw/

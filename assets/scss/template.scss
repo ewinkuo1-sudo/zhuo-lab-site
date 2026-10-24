@@ -814,3 +814,53 @@ a, .btn { transition: color .18s ease, background-color .18s ease, border-color 
   .zl-hero-backdrop img, .zl-hero-copy > *, .zl-hero-credit { animation: none !important; }
   a, .btn, .navbar { transition: none !important; }
 }
+
+// 研究流程四站的動詞色標（data/stations.json）。首頁卡片、研究頁、精選論文、成員卡片、合作頁共用，
+// 顏色與成員島四條光路相同，讓讀者在任何一頁看到同一個顏色就知道是同一個方向。
+.zl-station { display: inline-flex; align-items: center; gap: .4rem; font-size: .8rem; font-weight: 650; letter-spacing: .03em; color: $zl-heading; text-decoration: none; line-height: 1.3; }
+.zl-station i { width: .62rem; height: .62rem; border-radius: 50%; background: var(--st); flex: none; }
+.zl-station b { font-weight: 700; }
+.zl-station span { font-weight: 400; color: $zl-muted; }
+.zl-station-full { padding: .3rem .8rem .3rem .6rem; border: 1px solid $zl-border; border-radius: 999px; background: #fff; }
+a.zl-station:hover { color: $zl-accent; text-decoration: none; }
+a.zl-station-full:hover { border-color: var(--st); }
+.zl-station-goal i { background: transparent; border: 2px dashed var(--st); box-sizing: border-box; }
+.zl-station-goal small { font-weight: 400; color: $zl-muted; font-size: .72rem; }
+// 首頁：卡片上方一行流程，卡片角落一個動詞。
+.zl-flow { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .5rem .3rem; list-style: none; padding: 0; margin: 0 0 .7rem; }
+.zl-flow li { display: flex; align-items: center; gap: .3rem; }
+.zl-flow li + li::before { content: ""; width: 1.3rem; height: 2px; background: $zl-border; border-radius: 1px; }
+.zl-flow-note { text-align: center; color: $zl-muted; font-size: .9rem; max-width: 44rem; margin: 0 auto 2.4rem; line-height: 1.7; }
+#research .zl-feature-card .zl-station { margin: 1rem 0 .15rem; }
+// 研究頁：方向標題前的色標、「用在哪些案例」橫線。
+.zl-research-direction > .zl-station { margin-bottom: .5rem; }
+.zl-case-line { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .6rem; margin: 1.6rem 0 .4rem; font-size: .88rem; }
+.zl-case-line .zl-eyebrow { color: $zl-muted; margin-right: .2rem; }
+.zl-case { display: inline-flex; align-items: baseline; gap: .3rem; padding: .18rem .75rem; border: 1px solid $zl-border; border-radius: 999px; color: $zl-heading; background: #fff; font-weight: 600; }
+.zl-case:hover { border-color: $zl-accent; color: $zl-accent; text-decoration: none; }
+.zl-case-goal { border-style: dashed; color: $zl-muted; font-weight: 500; }
+.zl-case small { font-size: .72rem; color: $zl-muted; font-weight: 400; }
+.zl-further { border-top: 1px solid $zl-border; padding-top: 1.4rem; margin-top: .5rem; font-size: .9rem; color: $zl-muted; line-height: 1.7; }
+.zl-further h2.zl-eyebrow { font-size: .72rem; color: $zl-muted; margin: 0 0 .6rem; }
+.zl-further ul { padding-left: 1.1rem; margin: 0; }
+.zl-further li { margin-bottom: .4rem; }
+// 合作頁：每個案例走到哪幾站。
+.zl-case-stations { display: flex; flex-wrap: wrap; gap: .5rem 1rem; margin: -.3rem 0 .9rem; }
+// 精選論文：一方向一篇，四欄。
+.zl-publication-brief { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; }
+.zl-publication-brief .zl-station { margin-bottom: .55rem; }
+.zl-publication-brief h2 { font-size: 1.08rem; }
+@media (max-width: 991.98px) { .zl-publication-brief { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 575.98px) { .zl-publication-brief { grid-template-columns: minmax(0, 1fr); } }
+// 成員頁：卡片色標、校友標記、老師縮短後的連結、連回成員島、缺照片的剪影。
+.zl-member-station { margin: 0 0 .6rem; }
+.zl-person-alumni { font-style: normal; font-size: .76rem; margin-left: .55rem; padding: .05rem .55rem; border: 1px solid $zl-border; border-radius: 999px; color: $zl-muted; vertical-align: middle; }
+.zl-person-more a { font-size: .9rem; font-weight: 600; color: $zl-heading; }
+.zl-island-link { color: $zl-accent; }
+.zl-silhouette { display: block; width: 46%; max-width: 120px; height: auto; fill: $zl-border; margin: 0 auto; }
+.zl-member-placeholder .zl-silhouette { width: 58%; }
+.zl-people .zl-person-monogram { min-height: 220px; background: $zl-surface; }
+@media (max-width: 767.98px) {
+  .zl-flow li + li::before { display: none; }
+  .zl-case-stations { gap: .4rem .7rem; }
+}

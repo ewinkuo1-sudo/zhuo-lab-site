@@ -44,15 +44,6 @@ sections:
       image_credit: Makkithaya et al. · APL Bioengineering · Fig. 3
       image_source: https://doi.org/10.1063/5.0196676
       image_license: https://creativecommons.org/licenses/by/4.0/
-    - research_key: endomicroscopy
-      name: 微型化非線性內視顯微術
-      image: gen/thumb-endoscope.webp
-      image_alt: 光纖式非線性內視顯微探頭對組織中膠原蛋白取像的示意圖
-      icon: stethoscope
-      icon_pack: fas
-      description: 如何將顯微成像帶入更小的探測空間？以光纖與微型光學元件為方向，探索非線性內視成像。
-      url: research/#微型化非線性內視顯微術
-      image_credit: 研究概念示意圖
     - research_key: ai
       name: AI 輔助無標記病理
       image: gen/thumb-ai.webp
@@ -61,6 +52,15 @@ sections:
       icon_pack: fas
       description: 如何從影像提取疾病特徵？結合紋理分析、機器學習與深度學習，研究影像分類與病理評估。
       url: research/#ai-輔助無標記病理
+      image_credit: 研究概念示意圖
+    - research_key: endomicroscopy
+      name: 微型化非線性內視顯微術
+      image: gen/thumb-endoscope.webp
+      image_alt: 光纖式非線性內視顯微探頭對組織中膠原蛋白取像的示意圖
+      icon: stethoscope
+      icon_pack: fas
+      description: 如何將顯微成像帶入更小的探測空間？以光纖與微型光學元件為方向，探索非線性內視成像。
+      url: research/#微型化非線性內視顯微術
       image_credit: 研究概念示意圖
     subtitle: 從研究問題、成像方法到已發表成果
     integrated: true

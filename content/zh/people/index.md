@@ -4,22 +4,23 @@ date: 2026-09-06
 type: landing
 
 sections:
-  - block: lab_people
-    content:
-      title: 成員
-
   - block: markdown
     id: member-island
     content:
-      title: 成員島
+      title: 成員
+      subtitle: 一張光學桌上的實驗室
       text: |
-        老師是雷射頭，白光分成四條顏色光路，一種顏色一個研究方向。每位成員是自己那條光路上的一個元件，旁邊的小人就是他本人在工作。點元件或小人看他在做什麼、和誰合作。
+        老師是雷射頭，白光分成四條顏色光路，一種顏色一個研究方向；每位成員是自己那條光路上的一個元件，旁邊的小人就是他本人在工作。點元件或小人看他在做什麼、和誰合作，再按「成員頁介紹」跳到下面他的卡片。卡片上的色標和光路同色。
 
-        <iframe src="../../member-island/" title="成員島：一張光學桌上的實驗室成員" loading="lazy" style="width:100%;height:860px;border:1px solid rgba(128,128,128,.25);border-radius:12px;background:#07090c"></iframe>
+        <iframe id="member-island-frame" src="../../member-island/" title="成員島：一張光學桌上的實驗室成員" style="width:100%;height:min(860px,88vh);border:1px solid rgba(128,128,128,.25);border-radius:12px;background:#07090c"></iframe>
 
         [開新視窗全螢幕看](../../member-island/)
     design:
       columns: '1'
+
+  - block: lab_people
+    content:
+      title: 成員介紹
 
   - block: markdown
     id: lab-life

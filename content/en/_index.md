@@ -49,16 +49,6 @@ sections:
       image_credit: Makkithaya et al. · APL Bioengineering · Fig. 3
       image_source: https://doi.org/10.1063/5.0196676
       image_license: https://creativecommons.org/licenses/by/4.0/
-    - research_key: endomicroscopy
-      name: Miniaturized nonlinear endomicroscopy
-      image: gen/thumb-endoscope.webp
-      image_alt: Schematic of a fibre-based nonlinear endomicroscopy probe imaging collagen in tissue (illustration)
-      icon: stethoscope
-      icon_pack: fas
-      description: How can microscopy reach smaller spaces? This direction explores optical fibres and miniature
-        optics for nonlinear endomicroscopy.
-      url: research/#miniaturized-nonlinear-endomicroscopy
-      image_credit: Concept illustration
     - research_key: ai
       name: AI-assisted label-free pathology
       image: gen/thumb-ai.webp
@@ -68,6 +58,16 @@ sections:
       description: How can images reveal disease features? We combine texture analysis, machine learning and deep
         learning to investigate tissue classification.
       url: research/#ai-assisted-label-free-pathology
+      image_credit: Concept illustration
+    - research_key: endomicroscopy
+      name: Miniaturized nonlinear endomicroscopy
+      image: gen/thumb-endoscope.webp
+      image_alt: Schematic of a fibre-based nonlinear endomicroscopy probe imaging collagen in tissue (illustration)
+      icon: stethoscope
+      icon_pack: fas
+      description: How can microscopy reach smaller spaces? This direction explores optical fibres and miniature
+        optics for nonlinear endomicroscopy.
+      url: research/#miniaturized-nonlinear-endomicroscopy
       image_credit: Concept illustration
     subtitle: The questions we ask, the methods we use and what we have found
     integrated: true

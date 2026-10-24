@@ -7,22 +7,17 @@ sections:
     content:
       title: Research
       subtitle: From optical contrasts to quantitative tissue analysis
-      intro: Our research connects nonlinear microscopy, collagen measurements and computational image analysis, with the long-term goal of clinical translation. The four directions below distinguish published evidence from future development. Publication records are available in English.
+      intro: The four directions are four stages of one pipeline. First see tissue with light, then turn what is seen into numbers, hand them to AI to classify, and finally shrink the whole chain to reach inside the body. Each stage lists published evidence, long-term goals and the clinical cases it serves.
   - block: markdown
     content:
       text: |
-        ## Molecular structure of starch and biomaterials
-
-        Related published work includes the [synthesis and characterization of starch-based bioplastic](https://doi.org/10.1002/app.52924) (2022).
-
-        ## Other lines of work
-
-        Explore the [publication list](../publication/) for additional work. Current project opportunities can be discussed with the [lab](../contact/).
-
-        ## External resources we build on
-
-        - [PSHG-TISS](https://doi.org/10.1038/s41597-022-01477-1): a public tissue P-SHG image collection (Hristu et al., 2022), produced outside this lab.
-        - [Open-source one- and two-photon light-sheet microscope](https://doi.org/10.1038/s41598-025-03107-3) (Hubert et al., 2025), produced outside this lab.
+        <div class="zl-further">
+        <h2 class="zl-eyebrow">Further reading</h2>
+        <ul>
+        <li>Published work outside the main pipeline: <a href="https://doi.org/10.1002/app.52924">synthesis and characterization of starch-based bioplastic</a> (2022). See the <a href="../publication/">publication list</a> for the rest.</li>
+        <li>Public resources we cite (produced outside this lab): the <a href="https://doi.org/10.1038/s41597-022-01477-1">PSHG-TISS</a> tissue P-SHG image collection (Hristu et al., 2022) and an <a href="https://doi.org/10.1038/s41598-025-03107-3">open-source one- and two-photon light-sheet microscope</a> (Hubert et al., 2025).</li>
+        </ul>
+        </div>
     design:
       columns: '1'
 ---

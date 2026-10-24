@@ -3,6 +3,8 @@ title: Wei-Hsun Wang
 slug: wei-hsun-wang
 last_name: Wang
 role: M.Sc. Student
+alumni: true
+station: endomicroscopy
 organizations:
 - name: Institute of Biophotonics, National Yang Ming Chiao Tung University
   url: https://bioph.nycu.edu.tw/

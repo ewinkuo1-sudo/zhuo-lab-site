@@ -3,6 +3,7 @@ title: 王靖崴
 slug: jing-wei-wang
 last_name: Wang
 role: 碩士班學生
+station: microscopy
 organizations:
 - name: 國立陽明交通大學 生醫光電研究所
   url: https://bioph.nycu.edu.tw/

@@ -1,0 +1,23 @@
+{
+  "_comment": "四個研究方向排成一條流程。order 決定首頁卡片、精選論文、成員標籤的順序；color 沿用成員島四條光路（Okabe-Ito），lane 是成員島的光路代號。",
+  "microscopy": {
+    "order": 1, "lane": "B", "color": "#56B4E9",
+    "zh": { "verb": "看得到", "short": "非線性顯微" },
+    "en": { "verb": "See", "short": "Nonlinear microscopy" }
+  },
+  "collagen": {
+    "order": 2, "lane": "A", "color": "#E69F00",
+    "zh": { "verb": "讀得懂", "short": "膠原蛋白定量" },
+    "en": { "verb": "Quantify", "short": "Collagen quantification" }
+  },
+  "ai": {
+    "order": 3, "lane": "D", "color": "#CC79A7",
+    "zh": { "verb": "判得準", "short": "AI 病理" },
+    "en": { "verb": "Classify", "short": "AI pathology" }
+  },
+  "endomicroscopy": {
+    "order": 4, "lane": "C", "color": "#009E73",
+    "zh": { "verb": "到得了", "short": "內視與成像系統" },
+    "en": { "verb": "Reach", "short": "Endoscopy & imaging systems" }
+  }
+}

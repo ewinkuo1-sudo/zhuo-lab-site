@@ -14,6 +14,7 @@
   {{ $img := resources.Get (path.Join "media" .image) }}
   {{ $small := $img.Resize "720x webp q85" }}{{ $large := $img.Resize "1440x webp q88" }}
   <article class="zl-research-direction" id="{{ index (split .url "#") 1 }}">
+    {{ partial "components/zl_station_badge" (dict "key" .research_key "lang" $page.Language.Lang) }}
     <h2>{{ .name }}</h2>
     <div class="zl-research-detail">
       <div>
@@ -26,6 +27,14 @@
         <figcaption>{{ $copy.caption }}<br>{{ .image_credit }}{{ with .image_source }} · <a href="{{ . }}">{{ if $zh }}來源{{ else }}Source{{ end }}</a>{{ end }}{{ with .image_license }} · <a href="{{ . }}">CC BY 4.0</a>{{ end }}<br><a href="{{ $img.RelPermalink }}">{{ if $zh }}查看完整原圖{{ else }}View full image{{ end }} ↗</a></figcaption>
       </figure>
     </div>
+    {{/* 疾病案例是橫線：這個方向被哪些臨床案例用到，連到合作頁同一案例。 */}}
+    {{ $rk := .research_key }}{{ $used := slice }}
+    {{ range site.Data.cases }}{{ $c := . }}{{ with index .stations $rk }}{{ $used = $used | append (dict "case" $c "state" .) }}{{ end }}{{ end }}
+    {{ with $used }}
+    <p class="zl-case-line"><span class="zl-eyebrow">{{ if $zh }}用在哪些案例{{ else }}Used in{{ end }}</span>
+      {{ range . }}<a class="zl-case zl-case-{{ .state }}" href="{{ partial "lab_url" "collaborations/" }}#{{ .case.id }}">{{ index .case (cond $zh "zh" "en") }}{{ if eq .state "goal" }}<small>{{ if $zh }}長期目標{{ else }}long-term{{ end }}</small>{{ end }}</a>{{ end }}
+    </p>
+    {{ end }}
     <h3 class="zl-eyebrow">{{ $copy.papers_label }}</h3>
     <ul class="zl-research-papers">{{ range $detail.papers }}{{ $pub := $pubSite.GetPage (printf "publication/%s" .) }}{{ if not $pub }}{{ errorf "Missing research publication: %s" . }}{{ end }}<li><a href="{{ $pub.RelPermalink }}"{{ if $zh }} hreflang="en"{{ end }}>{{ $pub.Title }}</a> · {{ $pub.Date.Format "2006" }} · {{ $pub.Params.publication | markdownify }} · <a href="https://doi.org/{{ $pub.Params.doi }}">DOI</a></li>{{ end }}</ul>
     <p class="zl-research-status">{{ $copy.status }}</p>

@@ -3,6 +3,7 @@ title: Jackson Rodrigues
 slug: jackson-rodrigues
 last_name: Rodrigues
 role: Postdoctoral Researcher
+station: ai
 organizations:
 - name: Institute of Biophotonics, National Yang Ming Chiao Tung University
   url: https://bioph.nycu.edu.tw/

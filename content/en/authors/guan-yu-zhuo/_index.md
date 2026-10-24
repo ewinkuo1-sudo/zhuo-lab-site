@@ -48,6 +48,8 @@ Guan-Yu Zhuo is an Associate Professor at the Institute of Biophotonics, Nationa
 
 His research advances label-free optical imaging, in particular multimodal nonlinear optical microscopy, polarization-resolved second-harmonic generation and nonlinear endomicroscopy, with the aim of bringing these tools into clinical diagnosis. He was named an Excellent Young Scholar of Taiwan's 2030 Cross-Generation Young Scholars Program in 2024 and is a co-editor of *Advanced Biophysical Techniques in Biosciences* (Springer, 2025).
 
+<!--more-->
+
 ### Honours and awards
 - 2024 — Excellent Young Scholar, 2030 Cross-Generation Young Scholars Program, National Science and Technology Council (NSTC), Taiwan
 - 2022 — Best Poster Award, OPTIC 2022 (student Ming-Chi Chen, supervised)

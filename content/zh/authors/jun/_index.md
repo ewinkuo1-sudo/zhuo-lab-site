@@ -3,6 +3,8 @@ title: 陳涴鈞（Jun）
 slug: jun
 last_name: Chen
 role: 研究助理
+alumni: true
+station: collagen
 organizations:
 - name: 國立陽明交通大學 生醫光電研究所
   url: https://bioph.nycu.edu.tw/

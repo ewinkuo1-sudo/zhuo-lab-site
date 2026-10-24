@@ -3,6 +3,7 @@ title: Po-Han Huang
 slug: po-han-huang
 last_name: Huang
 role: M.Sc. Student
+station: endomicroscopy
 organizations:
 - name: Institute of Biophotonics, National Yang Ming Chiao Tung University
   url: https://bioph.nycu.edu.tw/

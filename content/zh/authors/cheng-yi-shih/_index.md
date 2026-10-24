@@ -3,6 +3,7 @@ title: 施承毅
 slug: cheng-yi-shih
 last_name: Shih
 role: 碩士班學生
+station: endomicroscopy
 organizations:
   - name: 國立陽明交通大學 生醫光電研究所
     url: https://bioph.nycu.edu.tw/

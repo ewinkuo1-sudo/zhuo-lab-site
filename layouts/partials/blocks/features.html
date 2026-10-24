@@ -20,6 +20,19 @@
   </div>
   {{ end }}
 
+  {{ if $block.content.integrated }}
+  {{/* 四個方向是一條流程的四段，不是四個平行題目：卡片上方先放一行順序。 */}}
+  <div class="col-12">
+    <ol class="zl-flow" aria-label="{{ if eq $page.Language.Lang "zh" }}研究流程{{ else }}Research pipeline{{ end }}">
+      {{ range $block.content.items }}
+      {{ $href := .url }}{{ if not (urls.Parse $href).Scheme }}{{ $href = partial "lab_url" $href }}{{ end }}
+      <li>{{ partial "components/zl_station_badge" (dict "key" .research_key "lang" $page.Language.Lang "href" $href "full" true) }}</li>
+      {{ end }}
+    </ol>
+    <p class="zl-flow-note">{{ if eq $page.Language.Lang "zh" }}先用光看到組織，再把看到的變成數字，交給 AI 判讀，最後把整套做小、送進體內。四段依序相扣，每一段各有已發表的成果。{{ else }}First see tissue with light, then turn what is seen into numbers, hand them to AI to classify, and finally shrink the whole chain to reach inside the body. The four stages build on one another, each with published results.{{ end }}</p>
+  </div>
+  {{ end }}
+
   {{ range $block.content.items }}
   {{ $item := . }}
   {{ $pack := or .icon_pack "fas" }}
@@ -61,6 +74,7 @@
       </div>
       {{ end }}
     {{ end }}
+    {{ if $block.content.integrated }}{{ partial "components/zl_station_badge" (dict "key" $item.research_key "lang" $page.Language.Lang) }}{{ end }}
     <div class="section-subheading">{{ with $href }}<a href="{{ . | safeURL }}">{{ end }}{{ $item.name | markdownify | emojify }}{{ if $href }}</a>{{ end }}</div>
     {{ if $block.content.integrated }}
     {{ $detail := index site.Data.research $item.research_key }}{{ $copy := index $detail $page.Language.Lang }}

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "esophagus",
+    "zh": "食道癌", "en": "Oesophageal cancer",
+    "stations": { "microscopy": "published", "collagen": "published", "ai": "published", "endomicroscopy": "goal" }
+  },
+  {
+    "id": "cartilage",
+    "zh": "軟骨疾病", "en": "Cartilage disease",
+    "stations": { "microscopy": "published", "collagen": "published" }
+  },
+  {
+    "id": "oral",
+    "zh": "口腔癌", "en": "Oral cancer",
+    "stations": { "microscopy": "published", "ai": "published", "endomicroscopy": "goal" }
+  },
+  {
+    "id": "collagen-score",
+    "zh": "膠原蛋白病理分數", "en": "Collagen pathology scores",
+    "stations": { "collagen": "published", "ai": "published" }
+  }
+]

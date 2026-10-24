@@ -52,6 +52,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--primary);outline-of
 .route li+li::before{content:"";width:22px;height:2px;background:var(--w780);opacity:.55;border-radius:1px}
 .route a{display:inline-flex;align-items:baseline;gap:6px;padding:5px 12px;border:1px solid var(--line);border-radius:999px;background:var(--card);text-decoration:none;color:var(--ink);font-size:14.5px}
 .route a b{color:var(--primary);font-weight:600}
+.route a .dot{width:10px;height:10px;border-radius:50%;flex:none;align-self:center;display:inline-block}
 .route a:hover{border-color:var(--primary)}
 .cue{color:var(--muted);font-size:14px;margin-top:4px}
 /* ?shot=probe：只拍 3D 場景（內視鏡站概念圖用） */
@@ -181,7 +182,9 @@ document.getElementById("statement").textContent=D.statement;
 document.getElementById("desc").textContent=D.description;
 document.getElementById("official").href=OFFICIAL;
 const NAMES=["光源",...D.stations.map(s=>s.verb),"終點"];
-document.getElementById("route").innerHTML=D.stations.map((s,i)=>`<li><a href="#st-${i+1}"><b>${esc(s.verb)}</b>${esc(s.name)}</a></li>`).join("");
+// 四站的顏色與官網首頁色標、成員島四條光路同一套（data/stations.json）。
+const STCOL={microscopy:"#56B4E9",collagen:"#E69F00",ai:"#CC79A7",endomicroscopy:"#009E73"};
+document.getElementById("route").innerHTML=D.stations.map((s,i)=>`<li><a href="#st-${i+1}"><i class="dot" style="background:${STCOL[s.key]||"var(--primary)"}"></i><b>${esc(s.verb)}</b>${esc(s.name)}</a></li>`).join("");
 
 const intro=`<article class="step" id="st-0" data-i="0"><div class="card">
   <div class="kicker"><span class="n">起點</span><span class="verb">一束近紅外雷射</span></div>

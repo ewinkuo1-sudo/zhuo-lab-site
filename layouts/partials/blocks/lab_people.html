@@ -1,5 +1,9 @@
 {{ $page := .wcPage }}
 {{ $block := .wcBlock }}
+{{ $zh := eq $page.Language.Lang "zh" }}
+{{/* 每個方向在研究頁的錨點，給成員卡片的色標連過去。 */}}
+{{ $anchors := newScratch }}
+{{ range site.Home.Params.sections }}{{ if eq .id "research" }}{{ range .content.items }}{{ $anchors.Set .research_key .url }}{{ end }}{{ end }}{{ end }}
 <div class="zl-people">
   <div class="section-heading"><h1>{{ $block.content.title }}</h1></div>
   {{ $people := slice }}
@@ -20,6 +24,8 @@
       {{ range .AllTranslations }}{{ if eq .Language.Lang "en" }}{{ $role = .Params.role }}{{ end }}{{ end }}
       {{ $group := "other" }}
       {{ range site.Data.people_groups }}{{ if in .roles $role }}{{ $group = .id }}{{ end }}{{ end }}
+      {{/* 已畢業／離開的成員進校友區，與成員島上戴方帽的人一致。 */}}
+      {{ if .Params.alumni }}{{ $group = "alumni" }}{{ end }}
       {{ $members := $grouped.Get $group | default (slice) }}
       {{ $grouped.Set $group ($members | append $person) }}
     {{ end }}
@@ -28,7 +34,7 @@
   {{ $group := . }}
   {{ with $grouped.Get .id }}
   <section class="zl-people-group" aria-labelledby="people-group-{{ $group.id }}">
-    <h2 class="zl-people-group-title" id="people-group-{{ $group.id }}">{{ if eq $page.Language.Lang "zh" }}{{ $group.zh }}{{ else }}{{ $group.en }}{{ end }}</h2>
+    <h2 class="zl-people-group-title" id="people-group-{{ $group.id }}">{{ if $zh }}{{ $group.zh }}{{ else }}{{ $group.en }}{{ end }}</h2>
   {{ if $block.content.compact }}
   <div class="zl-people-cards">
   {{ range . }}
@@ -36,7 +42,7 @@
       {{ $person := . }}
       <a class="zl-member-photo" href="{{ .RelPermalink }}" tabindex="-1" aria-hidden="true">
       {{ with .Resources.GetMatch "avatar*" }}{{ $img := .Resize "400x webp q85" }}<img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="" loading="lazy" decoding="async">
-      {{ else }}<span class="zl-member-placeholder">TBL</span>{{ end }}</a>
+      {{ else }}<span class="zl-member-placeholder">{{ partial "components/zl_silhouette" . }}</span>{{ end }}</a>
       <div class="zl-member-copy"><h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3><p class="zl-person-role">{{ .Params.role }}</p>{{ with .Params.bio }}<p>{{ . }}</p>{{ end }}</div>
     </article>
   {{ end }}
@@ -46,6 +52,7 @@
   {{ $person := . }}
   {{ $portrait := .Resources.GetMatch "avatar*" }}
   {{ $id := .File.Dir | path.Clean | path.Base }}
+  {{ $isPI := eq $id "guan-yu-zhuo" }}
   <article class="zl-person{{ if not $portrait }} zl-person-no-photo{{ end }}" id="member-{{ $id }}" aria-labelledby="name-{{ $id }}">
     <div class="zl-person-photo">
       {{ with $portrait }}
@@ -58,19 +65,28 @@
                loading="lazy" decoding="async">
         </a>
       {{ else }}
-        <div class="zl-person-monogram" aria-hidden="true">TBL</div>
+        <div class="zl-person-monogram" aria-hidden="true">{{ partial "components/zl_silhouette" . }}</div>
       {{ end }}
     </div>
     <div class="zl-person-copy">
-      <h3 id="name-{{ $id }}"><a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ with .Params.education.courses }}{{ with (index . 0).course }}<span class="zl-person-degree">{{ . }}</span>{{ end }}{{ end }}</h3>
-      <p class="zl-person-role">{{ .Params.role }}</p>
-      {{ with .Params.organizations }}<p class="zl-person-affiliation">{{ (index . 0).name }}</p>{{ end }}
-      <div class="zl-person-bio">{{ .Content | replaceRE `<(/?)h3(\s|>)` `<${1}h4${2}` | safeHTML }}</div>
-      {{ with .Params.social }}
-      <ul class="zl-person-links">
-        {{ range . }}<li><a href="{{ .link }}">{{ if eq .icon "envelope" }}Email{{ else if eq .icon "google-scholar" }}Google Scholar{{ else if eq .icon "orcid" }}ORCID{{ else }}{{ .icon | humanize }}{{ end }}</a></li>{{ end }}
-      </ul>
+      {{ with .Params.station }}
+        {{ $href := "" }}{{ with $anchors.Get . }}{{ $href = partial "lab_url" . }}{{ end }}
+        <p class="zl-member-station">{{ partial "components/zl_station_badge" (dict "key" . "lang" $page.Language.Lang "href" $href "full" true) }}</p>
       {{ end }}
+      <h3 id="name-{{ $id }}"><a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ with .Params.education.courses }}{{ with (index . 0).course }}<span class="zl-person-degree">{{ . }}</span>{{ end }}{{ end }}</h3>
+      <p class="zl-person-role">{{ .Params.role }}{{ if .Params.alumni }}<span class="zl-person-alumni">{{ if $zh }}已畢業{{ else }}graduated{{ end }}</span>{{ end }}</p>
+      {{ with .Params.organizations }}<p class="zl-person-affiliation">{{ (index . 0).name }}</p>{{ end }}
+      {{ if $isPI }}
+        {{/* 成員頁只放老師的兩段簡介；得獎、計畫、專書在個人頁。 */}}
+        <div class="zl-person-bio">{{ .Summary }}</div>
+        <p class="zl-person-more"><a href="{{ .RelPermalink }}">{{ if $zh }}完整介紹、榮譽、研究計畫與專書{{ else }}Full profile, honours, funding and books{{ end }} →</a></p>
+      {{ else }}
+        <div class="zl-person-bio">{{ .Content | replaceRE `<(/?)h3(\s|>)` `<${1}h4${2}` | safeHTML }}</div>
+      {{ end }}
+      <ul class="zl-person-links">
+        {{ range .Params.social }}<li><a href="{{ .link }}">{{ if eq .icon "envelope" }}Email{{ else if eq .icon "google-scholar" }}Google Scholar{{ else if eq .icon "orcid" }}ORCID{{ else }}{{ .icon | humanize }}{{ end }}</a></li>{{ end }}
+        <li><a class="zl-island-link" href="#member-island" data-slug="{{ $id }}">{{ if $zh }}在成員島看他{{ else }}See on the member island{{ end }} ↑</a></li>
+      </ul>
     </div>
   </article>
   {{ end }}
@@ -79,6 +95,15 @@
   {{ end }}
   {{ end }}
   {{ if $block.content.compact }}
-  <p class="zl-section-link"><a href="{{ partial "lab_url" "people/" }}">{{ if eq $page.Language.Lang "zh" }}所有成員與完整介紹{{ else }}All members and full profiles{{ end }} →</a></p>
+  <p class="zl-section-link"><a href="{{ partial "lab_url" "people/" }}">{{ if $zh }}所有成員與完整介紹{{ else }}All members and full profiles{{ end }} →</a></p>
+  {{ else }}
+  <script>
+  // 卡片 → 成員島：捲回頂端的 iframe，並請島選中這個人（島用 slug 對回自己的 id）。
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('.zl-island-link'); if (!a) return;
+    var f = document.getElementById('member-island-frame'); if (!f || !f.contentWindow) return;
+    try { f.contentWindow.postMessage({ sel: a.dataset.slug }, '*'); } catch (err) {}
+  });
+  </script>
   {{ end }}
 </div>

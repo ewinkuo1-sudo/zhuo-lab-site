@@ -3,6 +3,8 @@ title: Jun
 slug: jun
 last_name: Chen
 role: Research Assistant
+alumni: true
+station: collagen
 organizations:
 - name: Institute of Biophotonics, National Yang Ming Chiao Tung University
   url: https://bioph.nycu.edu.tw/

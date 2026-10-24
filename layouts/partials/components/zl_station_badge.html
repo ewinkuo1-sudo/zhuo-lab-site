@@ -1,0 +1,7 @@
+{{/* 動詞色標。用法：partial "components/zl_station_badge" (dict "key" "collagen" "lang" "zh" "href" "..." "full" true)
+     顏色與動詞來自 data/stations.json，首頁卡片、研究頁、精選論文、成員卡片共用同一套。 */}}
+{{ $st := index site.Data.stations .key }}
+{{ if $st }}{{ $copy := index $st .lang }}
+{{ $cls := "zl-station" }}{{ if .full }}{{ $cls = "zl-station zl-station-full" }}{{ end }}
+{{ if .href }}<a class="{{ $cls }}" style="--st:{{ $st.color }}" href="{{ .href }}"><i aria-hidden="true"></i><b>{{ $copy.verb }}</b>{{ if .full }}<span>{{ $copy.short }}</span>{{ end }}</a>{{ else }}<span class="{{ $cls }}" style="--st:{{ $st.color }}"><i aria-hidden="true"></i><b>{{ $copy.verb }}</b>{{ if .full }}<span>{{ $copy.short }}</span>{{ end }}</span>{{ end }}
+{{ end }}

@@ -3,6 +3,8 @@ title: Wei-Hsun Wang
 slug: wei-hsun-wang
 last_name: Wang
 role: 碩士班學生
+alumni: true
+station: endomicroscopy
 organizations:
 - name: 國立陽明交通大學 生醫光電研究所
   url: https://bioph.nycu.edu.tw/
