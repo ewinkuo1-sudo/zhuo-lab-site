@@ -42,6 +42,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--primary);outline-of
 .bar span{color:var(--navy-active);font-size:14px}
 .bar a{color:var(--navy-text);font-size:14px;text-decoration:none;white-space:nowrap}
 .bar a:hover{color:var(--navy-active)}
+.bar .nav{display:flex;align-items:center;gap:14px;flex:none}
+.bar .nav #langsw{border:1px solid rgba(237,243,248,.45);border-radius:999px;padding:1px 9px;font-size:13px}
+@media (max-width:440px){html[lang="en"] #brand-page{display:none}} /* 英文字比較寬，窄螢幕只留實驗室名 */
 
 .hero{max-width:1320px;margin:0 auto;padding:26px 16px 18px;display:grid;grid-template-columns:minmax(0,1fr);gap:10px} /* 收短，讓光學桌在第一屏就露出來 */
 .eyebrow{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.14em;color:var(--primary);text-transform:uppercase;margin:0}
@@ -52,7 +55,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--primary);outline-of
 .route li+li::before{content:"";width:22px;height:2px;background:var(--w780);opacity:.55;border-radius:1px}
 .route a{display:inline-flex;align-items:baseline;gap:6px;padding:5px 12px;border:1px solid var(--line);border-radius:999px;background:var(--card);text-decoration:none;color:var(--ink);font-size:14.5px}
 .route a b{color:var(--primary);font-weight:600}
-.route a .dot{width:10px;height:10px;border-radius:50%;flex:none;align-self:center;display:inline-block}
 .route a:hover{border-color:var(--primary)}
 .cue{color:var(--muted);font-size:14px;margin-top:4px}
 /* ?shot=probe：只拍 3D 場景（內視鏡站概念圖用） */
@@ -136,16 +138,16 @@ footer{max-width:1320px;margin:0 auto;padding:24px 16px 40px;border-top:1px soli
 </head>
 <body>
 <header class="bar">
-  <div class="brand"><b>卓冠宇實驗室</b><span>研究地圖</span></div>
-  <a id="official" href="#">回實驗室官網 →</a>
+  <div class="brand"><b id="brand-lab">卓冠宇實驗室</b><span id="brand-page">研究地圖</span></div>
+  <div class="nav"><a id="langsw" href="en/" lang="en">EN</a><a id="official" href="#">回實驗室官網 →</a></div>
 </header>
 
 <section class="hero">
-  <p class="eyebrow">Research map · 跟著一束光走</p>
+  <p class="eyebrow" id="eyebrow">Research map · 跟著一束光走</p>
   <h1 id="statement"></h1>
   <p class="lede" id="desc"></p>
   <ol class="route" id="route"></ol>
-  <p class="cue">往下捲，光會在示意光路上一站一站往前走；每一站的卡片寫這個方向的問題、方法和已發表成果。</p>
+  <p class="cue" id="cue">往下捲，光會在示意光路上一站一站往前走；每一站的卡片寫這個方向的問題、方法和已發表成果。</p>
 </section>
 
 <main class="story">
@@ -154,12 +156,12 @@ footer{max-width:1320px;margin:0 auto;padding:24px 16px 40px;border-top:1px soli
     <div id="labels" aria-hidden="true"></div>
     <svg id="stage2d" viewBox="0 0 400 216" role="img" aria-label="平面示意光路，捲動時依序亮起"></svg>
     <div class="stepper" id="stepper"></div>
-    <div class="plate"><i style="background:var(--w780)"></i>780 nm 激發（近紅外，示意色）<i style="background:var(--wSHG)"></i>SHG 390 nm<i style="background:var(--wTPEF)"></i>雙光子螢光<i style="background:var(--cable)"></i>資料線<br>示意光路，依物理規則排，不是實驗室的真實架設。</div>
+    <div class="plate" id="plate"><i style="background:var(--w780)"></i>780 nm 激發（近紅外，示意色）<i style="background:var(--wSHG)"></i>SHG 390 nm<i style="background:var(--wTPEF)"></i>雙光子螢光<i style="background:var(--cable)"></i>資料線<br>示意光路，依物理規則排，不是實驗室的真實架設。</div>
   </div>
   <div class="steps" id="steps"></div>
 </main>
 
-<footer>
+<footer id="foot">
   <span>示意光路的規則：光只走直線、在 45° 鏡轉彎、只在樣品處變色。它用來說故事，不是實驗室的真實架設。780 nm 是近紅外光，肉眼看不到，圖中的紅色是示意色。</span>
   <span>文字與論文取自實驗室官網研究頁與已發表論文；論文圖依 CC BY 4.0 授權使用，出處標在圖下。</span>
 </footer>
@@ -167,26 +169,50 @@ footer{max-width:1320px;margin:0 auto;padding:24px 16px 40px;border-top:1px soli
 <script src="data.js"></script>
 <script src="vendor/three.min.js"></script><!-- three.js r128，自帶不走 CDN -->
 <script>
-const D=window.SITE_DATA;
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const Q=new URLSearchParams(location.search);
+// 語言：en/index.html 在 <html> 上帶 data-lang="en"、data-base="../"（由 build_data.py 產生）；預覽或 Artifact 可用 ?lang=en
+const ROOT=document.documentElement,LANG=ROOT.dataset.lang||(Q.get("lang")==="en"?"en":"zh"),EN=LANG==="en",BASE=ROOT.dataset.base||"";
+const t=(zh,en)=>EN?en:zh;
+const D=window.SITE_DATA[LANG];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 // ?still：直接顯示每站完成狀態（截圖用，效果同減少動態）；?shot=probe：只拍探頭那一角
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches||Q.has("still")||Q.has("shot");
 const SHOT=Q.get("shot");
 const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-// 放在官網 /research-map/ 底下時，回官網的中文版（上一層的 zh/）；其他地方（預覽、Artifact）用 data 裡的絕對網址
-const OFFICIAL=/\/research-map\/?(index\.html)?$/.test(location.pathname)?new URL("../zh/",location.href).href:D.official;
+// 放在官網 /research-map/ 底下時，中文回官網的中文版（上一層的 zh/），英文回官網首頁（en 是預設語言、沒前綴）；
+// 其他地方（預覽、Artifact）用 data 裡的絕對網址
+const ONSITE=/\/research-map\/?(en\/)?(index\.html)?$/.test(location.pathname);
+const OFFICIAL=ONSITE?new URL(EN?BASE+"../":"../zh/",location.href).href:D.official;
+// 中／EN 切換：官網與本機預覽走 en/ 子目錄；直接雙擊開檔走 index.html；其他地方（Artifact）用 ?lang=
+const FILE=location.protocol==="file:",LOCAL=ONSITE||/^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+const LANGSW=EN?(BASE?(FILE?"../index.html":"../"):location.pathname):(LOCAL?"en/":FILE?"en/index.html":"?lang=en");
 
 /* ---------- 文字 ---------- */
 document.getElementById("statement").textContent=D.statement;
 document.getElementById("desc").textContent=D.description;
 document.getElementById("official").href=OFFICIAL;
-const NAMES=["光源",...D.stations.map(s=>s.verb),"終點"];
-// 四站的顏色與官網首頁色標、成員島四條光路同一套（data/stations.json）。
-const STCOL={microscopy:"#56B4E9",collagen:"#E69F00",ai:"#CC79A7",endomicroscopy:"#009E73"};
-document.getElementById("route").innerHTML=D.stations.map((s,i)=>`<li><a href="#st-${i+1}"><i class="dot" style="background:${STCOL[s.key]||"var(--primary)"}"></i><b>${esc(s.verb)}</b>${esc(s.name)}</a></li>`).join("");
+const sw=document.getElementById("langsw");sw.href=LANGSW;
+if(EN){sw.textContent="中文";sw.lang="zh-Hant";
+  ROOT.lang="en";document.title="Research Map | Zhuo Lab";
+  document.querySelector('meta[name="description"]').content="Follow one beam of light through the four research directions of the Zhuo Lab: multimodal microscopy, polarization-resolved SHG, AI image analysis and miniaturized endomicroscopy.";
+  const set=(id,h)=>{document.getElementById(id).innerHTML=h};
+  set("brand-lab","Zhuo Lab");set("brand-page","Research Map");set("official","Back to lab website →");
+  set("eyebrow","Research map · Follow the light");
+  set("cue","Scroll down and the light moves along the schematic path, one station at a time. Each card gives the question, method and published results for that direction.");
+  set("plate",'<i style="background:var(--w780)"></i>780 nm excitation (near-infrared, display colour)<i style="background:var(--wSHG)"></i>SHG 390 nm<i style="background:var(--wTPEF)"></i>Two-photon fluorescence<i style="background:var(--cable)"></i>Data cable<br>Schematic beam path laid out by physical rules; not the lab’s actual setup.');
+  set("foot","<span>Rules of the schematic path: light travels in straight lines, turns only at 45° mirrors and changes colour only at the sample. It tells a story; it is not the lab’s actual setup. 780 nm light is near-infrared and invisible; the red is a display colour.</span><span>Text and papers come from the research page of the lab website and from published papers. Published figures are used under CC BY 4.0, with the source under each figure.</span>");
+  document.getElementById("stage3d").setAttribute("aria-label","Schematic beam path: the laser passes a half-wave plate and scanning galvos into the objective and onto the sample; the signal returns to two detectors and the data go to a workstation; a second branch goes through a fibre to a probe; the destination is a screen with the lab’s goal. Full text is on the right.");
+  document.getElementById("stage2d").setAttribute("aria-label","Flat schematic beam path that lights up as you scroll");
+}
+const NAMES=[t("光源","Source"),...D.stations.map(s=>s.verb),t("終點","Destination")];
+document.getElementById("route").innerHTML=D.stations.map((s,i)=>`<li><a href="#st-${i+1}"><b>${esc(s.verb)}</b>${esc(s.name)}</a></li>`).join("");
 
-const intro=`<article class="step" id="st-0" data-i="0"><div class="card">
+const intro=EN?`<article class="step" id="st-0" data-i="0"><div class="card">
+  <div class="kicker"><span class="n">Start</span><span class="verb">A near-infrared laser beam</span></div>
+  <h2>How can you see tissue without staining it?</h2>
+  <p>The lab uses a near-infrared laser with extremely short pulses. Only at the focal point are the photons dense enough for the tissue itself to emit new light: collagen gives off second-harmonic generation (SHG) at exactly half the wavelength, and molecules in cells give off two-photon fluorescence.</p>
+  <p>These signals come from the tissue itself, so no stain is needed. Follow this beam to see how it leads, step by step, towards label-free diagnosis.</p>
+</div></article>`:`<article class="step" id="st-0" data-i="0"><div class="card">
   <div class="kicker"><span class="n">起點</span><span class="verb">一束近紅外雷射</span></div>
   <h2>不染色，怎麼看見組織？</h2>
   <p>實驗室用的是脈衝極短的近紅外雷射。只有在聚焦的那一點，光子才密集到能讓組織自己發出新的光：膠原蛋白會發出波長剛好減半的倍頻光（SHG），細胞裡的分子會發出雙光子螢光。</p>
@@ -194,14 +220,14 @@ const intro=`<article class="step" id="st-0" data-i="0"><div class="card">
 </div></article>`;
 
 const stepHTML=(s,i)=>{
-  const fig=s.figure?`<figure><a class="img" href="${esc(s.figure.src)}" target="_blank" rel="noopener"><img src="${esc(s.figure.src)}" width="${s.figure.w}" height="${s.figure.h}" alt="${esc(s.figure.alt)}" loading="lazy" decoding="async"></a>
-    <figcaption>${esc(s.figure.caption)}<br>${esc(s.figure.credit)}${s.figure.source?` · <a href="${esc(s.figure.source)}">原文</a> · <a href="${esc(s.figure.license)}">CC BY 4.0</a>`:""}</figcaption></figure>`:"";
-  const toys=s.toys.length?`<div><h3>動手玩</h3><div class="toys">${s.toys.map(t=>`<a class="toy" href="${esc(t.url)}" target="_blank" rel="noopener"><b>${esc(t.title)} ↗</b><small>${esc(t.desc)}</small></a>`).join("")}</div></div>`:"";
+  const fig=s.figure?`<figure><a class="img" href="${esc(BASE+s.figure.src)}" target="_blank" rel="noopener"><img src="${esc(BASE+s.figure.src)}" width="${s.figure.w}" height="${s.figure.h}" alt="${esc(s.figure.alt)}" loading="lazy" decoding="async"></a>
+    <figcaption>${esc(s.figure.caption)}<br>${esc(s.figure.credit)}${s.figure.source?` · <a href="${esc(s.figure.source)}">${t("原文","Article")}</a> · <a href="${esc(s.figure.license)}">CC BY 4.0</a>`:""}</figcaption></figure>`:"";
+  const toys=s.toys.length?`<div><h3>${t("動手玩","Try it yourself (pages in Chinese)")}</h3><div class="toys">${s.toys.map(t=>`<a class="toy" href="${esc(t.url)}" target="_blank" rel="noopener"><b>${esc(t.title)} ↗</b><small>${esc(t.desc)}</small></a>`).join("")}</div></div>`:"";
   return `<article class="step" id="st-${i+1}" data-i="${i+1}"><div class="card">
-  <div class="kicker"><span class="n">第 ${i+1} 站</span><span class="verb">${esc(s.verb)}</span>${s.developing?`<span class="tag-dev">發展中</span>`:""}</div>
+  <div class="kicker"><span class="n">${t(`第 ${i+1} 站`,`Station ${i+1}`)}</span><span class="verb">${esc(s.verb)}</span>${s.developing?`<span class="tag-dev">${t("發展中","In development")}</span>`:""}</div>
   <h2>${esc(s.name)}</h2>
-  <div><h3>研究問題</h3><p class="q">${esc(s.question)}</p></div>
-  <div><h3>方法</h3><p>${esc(s.method)}</p></div>
+  <div><h3>${t("研究問題","Research question")}</h3><p class="q">${esc(s.question)}</p></div>
+  <div><h3>${t("方法","Method")}</h3><p>${esc(s.method)}</p></div>
   <div><h3>${esc(s.finding_label)}</h3><p>${esc(s.finding)}</p></div>
   ${fig}
   <div><h3>${esc(s.papers_label)}</h3><ul class="papers">${s.papers.map(p=>`<li><span class="t">${esc(p.title)}</span><span class="m">${esc(p.authors)} · ${esc(p.journal)} · ${p.year} · <a href="https://doi.org/${esc(p.doi)}">DOI</a></span></li>`).join("")}</ul></div>
@@ -210,10 +236,10 @@ const stepHTML=(s,i)=>{
 </div></article>`};
 
 const endHTML=`<article class="step end" id="st-${D.stations.length+1}" data-i="${D.stations.length+1}"><div class="card">
-  <div class="kicker"><span class="n" style="color:var(--navy-active)">終點</span></div>
+  <div class="kicker"><span class="n" style="color:var(--navy-active)">${t("終點","Destination")}</span></div>
   <h2>${esc(D.statement)}</h2>
-  <p>看得到、讀得懂、判得準、到得了：四個方向接在同一條光路上，終點是不必染色的組織診斷。前三站已有論文支持，內視鏡微型化仍在發展中。</p>
-  <div class="links"><a href="${esc(OFFICIAL)}">實驗室官網 →</a><a href="${esc(OFFICIAL)}research/">研究方向與成果 →</a><a href="${esc(D.owl)}" target="_blank" rel="noopener">光學互動教材 ↗</a></div>
+  <p>${t("看得到、讀得懂、判得準、到得了：四個方向接在同一條光路上，終點是不必染色的組織診斷。前三站已有論文支持，內視鏡微型化仍在發展中。","See, Quantify, Classify, Reach: four directions on one optical path, ending in tissue diagnosis without staining. The first three have published support; miniaturized endomicroscopy is still in development.")}</p>
+  <div class="links"><a href="${esc(OFFICIAL)}">${t("實驗室官網 →","Lab website →")}</a><a href="${esc(OFFICIAL)}research/">${t("研究方向與成果 →","Research and results →")}</a><a href="${esc(D.owl)}" target="_blank" rel="noopener">${t("光學互動教材 ↗","Interactive optics toys (in Chinese) ↗")}</a></div>
 </div></article>`;
 document.getElementById("steps").innerHTML=intro+D.stations.map(stepHTML).join("")+endHTML;
 const N=D.stations.length+2; // 起點＋四站＋終點
@@ -237,18 +263,18 @@ addEventListener("scroll",onScroll,{passive:true});addEventListener("resize",onS
 /* ---------- 平面 SVG 光路 ---------- */
 // data-s＝第幾站亮起；data-h＝第幾站被強調
 const SVG=`
-<g class="part" data-s="0" data-h="0"><rect x="8" y="40" width="46" height="24" rx="3" fill="#3a414b"/><text x="31" y="77" text-anchor="middle">雷射</text></g>
-<g class="part" data-s="0" data-h="2"><rect x="104" y="40" width="7" height="24" rx="2" fill="#fff" stroke="#3a414b"/><text x="107" y="34" text-anchor="middle">半波片</text></g>
+<g class="part" data-s="0" data-h="0"><rect x="8" y="40" width="46" height="24" rx="3" fill="#3a414b"/><text x="31" y="77" text-anchor="middle">${t("雷射","Laser")}</text></g>
+<g class="part" data-s="0" data-h="2"><rect x="104" y="40" width="7" height="24" rx="2" fill="#fff" stroke="#3a414b"/><text x="107" y="34" text-anchor="middle">${t("半波片","λ/2 plate")}</text></g>
 <g class="part dev" data-s="4" data-h="4"><rect x="152" y="43" width="18" height="18" fill="#eef4fb" stroke="#3a414b"/><line class="el" x1="152" y1="43" x2="170" y2="61" stroke="#3a414b"/></g>
-<g class="part" data-s="0" data-h="0"><rect x="198" y="42" width="20" height="20" rx="3" fill="#3a414b"/><text x="208" y="34" text-anchor="middle">掃描鏡</text></g>
-<g class="part" data-s="0" data-h="1"><line class="el" x1="256" y1="42" x2="274" y2="62" stroke="#6f3fd1" stroke-width="3"/><text x="265" y="34" text-anchor="middle">二向色鏡</text></g>
-<g class="part" data-s="0" data-h="1"><rect x="322" y="70" width="22" height="16" rx="3" fill="#3a414b"/><rect x="314" y="100" width="38" height="6" rx="2" fill="#d98a96"/><text x="364" y="83">物鏡</text><text x="358" y="115">樣品</text></g>
+<g class="part" data-s="0" data-h="0"><rect x="198" y="42" width="20" height="20" rx="3" fill="#3a414b"/><text x="208" y="34" text-anchor="middle">${t("掃描鏡","Scanner")}</text></g>
+<g class="part" data-s="0" data-h="1"><line class="el" x1="256" y1="42" x2="274" y2="62" stroke="#6f3fd1" stroke-width="3"/><text x="265" y="34" text-anchor="middle">${t("二向色鏡","Dichroic")}</text></g>
+<g class="part" data-s="0" data-h="1"><rect x="322" y="70" width="22" height="16" rx="3" fill="#3a414b"/><rect x="314" y="100" width="38" height="6" rx="2" fill="#d98a96"/>${t(`<text x="364" y="83">物鏡</text>`,`<text x="318" y="83" text-anchor="end">Objective</text>`)}<text x="358" y="115">${t("樣品","Sample")}</text></g>
 <g class="part" data-s="1" data-h="1"><rect x="290" y="111" width="22" height="18" rx="3" fill="#2a2f36"/><text x="301" y="142" text-anchor="middle">SHG</text></g>
-<g class="part" data-s="1" data-h="1"><rect x="256" y="158" width="22" height="18" rx="3" fill="#2a2f36"/><text x="267" y="189" text-anchor="middle">螢光</text></g>
-<g class="part" data-s="3" data-h="3"><rect x="334" y="150" width="44" height="30" rx="3" fill="#fff" stroke="#3a414b"/><rect x="339" y="155" width="34" height="18" fill="#cfe7e7"/><text x="356" y="194" text-anchor="middle">工作站</text></g>
-<g class="part" data-s="4" data-h="4"><rect x="152" y="80" width="18" height="16" rx="3" fill="#3a414b"/><text x="176" y="92">振鏡</text></g>
-<g class="part dev" data-s="4" data-h="4"><rect x="187" y="166" width="8" height="26" rx="2" fill="#fff" stroke="#a8650b" stroke-dasharray="3 2"/><rect x="172" y="196" width="38" height="6" rx="2" fill="#d98a96"/><text x="140" y="212">光纖探頭（發展中）</text></g>
-<g class="part" data-s="5" data-h="5"><rect x="330" y="4" width="62" height="34" rx="3" fill="#142d45"/><text x="361" y="18" text-anchor="middle" style="fill:#fff;font-size:9px">無標記診斷</text><text x="361" y="30" text-anchor="middle" style="fill:#a3e4e5;font-size:8px">終點</text></g>
+<g class="part" data-s="1" data-h="1"><rect x="256" y="158" width="22" height="18" rx="3" fill="#2a2f36"/><text x="267" y="189" text-anchor="middle">${t("螢光","TPEF")}</text></g>
+<g class="part" data-s="3" data-h="3"><rect x="334" y="150" width="44" height="30" rx="3" fill="#fff" stroke="#3a414b"/><rect x="339" y="155" width="34" height="18" fill="#cfe7e7"/><text x="356" y="194" text-anchor="middle">${t("工作站","Workstation")}</text></g>
+<g class="part" data-s="4" data-h="4"><rect x="152" y="80" width="18" height="16" rx="3" fill="#3a414b"/><text x="176" y="92">${t("振鏡","Galvos")}</text></g>
+<g class="part dev" data-s="4" data-h="4"><rect x="187" y="166" width="8" height="26" rx="2" fill="#fff" stroke="#a8650b" stroke-dasharray="3 2"/><rect x="172" y="196" width="38" height="6" rx="2" fill="#d98a96"/><text x="140" y="212">${t("光纖探頭（發展中）","Fibre probe (in development)")}</text></g>
+<g class="part" data-s="5" data-h="5"><rect x="330" y="4" width="62" height="34" rx="3" fill="#142d45"/><text x="361" y="18" text-anchor="middle" style="fill:#fff;font-size:9px">${t("無標記診斷","Label-free")}</text><text x="361" y="30" text-anchor="middle" style="fill:#a3e4e5;font-size:8px">${t("終點","diagnosis")}</text></g>
 <path class="beam" data-s="0" pathLength="1" stroke="var(--w780)" d="M54 52 H331 V100"/>
 <path class="beam" data-s="1" pathLength="1" stroke="var(--wSHG)" d="M335 100 V56 H263 V120 H290"/>
 <path class="beam" data-s="1" pathLength="1" stroke="var(--wTPEF)" d="M339 100 V60 H268 V158"/>
@@ -514,10 +540,12 @@ function initBench(){
   drawPC(false);
   // 終點螢幕
   const ec=document.createElement("canvas");ec.width=640;ec.height=380;const e2=ec.getContext("2d");const eTex=new THREE.CanvasTexture(ec);
-  const st=D.statement.replace(/。$/,"").split("，");
+  const st=EN?D.statement.replace(/\.$/,"").split(/\.\s+/):D.statement.replace(/。$/,"").split("，");
   function drawEnd(on){e2.fillStyle=on?css("--navy"):"#2a333d";e2.fillRect(0,0,640,380);
-    e2.textAlign="center";e2.fillStyle=on?"#ffffff":"#6b7783";e2.font="700 52px 'Noto Sans TC',sans-serif";e2.fillText(st[0]||"",320,160);e2.fillText(st[1]||"",320,232);
-    e2.font="500 26px 'Noto Sans TC',sans-serif";e2.fillStyle=on?css("--navy-active"):"#6b7783";e2.fillText("終點：無標記診斷",320,310);eTex.needsUpdate=true}
+    e2.textAlign="center";e2.fillStyle=on?"#ffffff":"#6b7783";e2.font="700 52px 'Noto Sans TC',sans-serif";
+    const fs=Math.min(52,...st.map(x=>52*580/Math.max(1,e2.measureText(x).width)));if(fs<52)e2.font=`700 ${Math.floor(fs)}px 'Noto Sans TC',sans-serif`; // 中文不會縮
+    e2.fillText(st[0]||"",320,160);e2.fillText(st[1]||"",320,232);
+    e2.font="500 26px 'Noto Sans TC',sans-serif";e2.fillStyle=on?css("--navy-active"):"#6b7783";e2.fillText(t("終點：無標記診斷","Destination: label-free diagnosis"),320,310);eTex.needsUpdate=true}
   drawEnd(false);
   const EX=3.8,EZ=1.25,ER=-0.25;
   (function(){const g=new THREE.Group();
@@ -558,17 +586,17 @@ function initBench(){
 
   /* 標籤（h＝哪一站強調；show＝哪些站看得到） */
   const LABS=[
-    {t:"飛秒雷射 780 nm",at:[-4.65,1.5,ZA],show:[0,5],h:0},
-    {t:"半波片：轉偏振",at:[-2.9,1.45,ZA],show:[0,2],h:2},
-    {t:"掃描振鏡",at:[-0.85,1.75,ZA],show:[0],h:0},
-    {t:"物鏡與樣品",at:[2.8,2.6,ZB],show:[0,1,2,5],h:1},
-    {t:"SHG 偵測",at:[1.42,1.35,-2.4],show:[1],h:1},
-    {t:"雙光子螢光偵測",at:[0.6,1.35,-3.22],show:[1],h:1},
-    {t:"工作站：影像分析",at:[PCX,0.85,PCZ],show:[3,5],h:3},
-    {t:"分光鏡",at:[-2.25,1.2,ZA],show:[4],h:4},
-    {t:"振鏡：掃描進光纖",at:[-1.6,1.9,-0.78],show:[4],h:4},
-    {t:"光纖探頭（發展中）",at:[0.3,1.45,1.15],show:[4,5],h:4,dev:true},
-    {t:"終點",at:[EX,1.95,EZ],show:[5],h:5}];
+    {t:t("飛秒雷射 780 nm","Femtosecond laser 780 nm"),at:[-4.65,1.5,ZA],show:[0,5],h:0},
+    {t:t("半波片：轉偏振","Half-wave plate: rotates polarization"),at:[-2.9,1.45,ZA],show:[0,2],h:2},
+    {t:t("掃描振鏡","Scanning galvos"),at:[-0.85,1.75,ZA],show:[0],h:0},
+    {t:t("物鏡與樣品","Objective and sample"),at:[2.8,2.6,ZB],show:[0,1,2,5],h:1},
+    {t:t("SHG 偵測","SHG detector"),at:[1.42,1.35,-2.4],show:[1],h:1},
+    {t:t("雙光子螢光偵測","Two-photon fluorescence detector"),at:[0.6,1.35,-3.22],show:[1],h:1},
+    {t:t("工作站：影像分析","Workstation: image analysis"),at:[PCX,0.85,PCZ],show:[3,5],h:3},
+    {t:t("分光鏡","Beamsplitter"),at:[-2.25,1.2,ZA],show:[4],h:4},
+    {t:t("振鏡：掃描進光纖","Galvos: scanning into the fibre"),at:[-1.6,1.9,-0.78],show:[4],h:4},
+    {t:t("光纖探頭（發展中）","Fibre probe (in development)"),at:[0.3,1.45,1.15],show:[4,5],h:4,dev:true},
+    {t:t("終點","Destination"),at:[EX,1.95,EZ],show:[5],h:5}];
   LABS.forEach(L=>{const el=document.createElement("div");el.className="lab off"+(L.dev?" dev":"");el.textContent=L.t;labelsEl.appendChild(el);L.el=el});
 
   /* 每站鏡頭 */

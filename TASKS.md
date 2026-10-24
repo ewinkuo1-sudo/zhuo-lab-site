@@ -32,6 +32,13 @@
 - [x] 正式網址先維持 GitHub Pages（ewinkuo1-sudo.github.io/zhuo-lab-site/），baseURL 不動
 - [x] Cloudflare 鏡像保留：使用者 10/24 加好 CLOUDFLARE_API_TOKEN；第一次部署因 wrangler-action 預設 3.90 不支援純靜態設定而失敗，publish.yaml 指定 wranglerVersion "4" 後成功。workers.dev 首頁、中英成員頁、研究地圖、成員島都 200 且是新版
 
+## 第二輪改善（10/24 使用者同意做）
+- [x] I1 成員島日間模式：嵌在成員頁固定淺色；單獨開時跟系統＋切換鈕；成員頁 iframe 黑底改掉（people ×2）
+- [x] I2 成員島手機寬度兩個 .lab 區塊超出 4–32 px（其實是 3D 畫布邊緣的名字標籤被切，整頁沒溢出；改成標籤夾在畫布內）
+- [x] I3 成員島英文版（英文成員頁嵌英文）
+- [x] I4 研究地圖英文版（英文選單「Research Map (中文)」改指英文版）
+- [ ] I5 主檔與官網 static 同步、push、線上驗證（桌機、390 px、深淺色）
+
 ## 要老師確認
 - 全片掃描到底是「進行中」還是「待確認」（兩頁現在都寫保守版）
 - 老師成員頁段落縮短是否同意（完整版在個人頁）

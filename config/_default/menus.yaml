@@ -3,8 +3,8 @@ main:
   - name: Research
     url: '/#research'
     weight: 10
-  - name: Research Map (中文)
-    url: '/research-map/'   # static/research-map/, Chinese only for now
+  - name: Research Map
+    url: '/research-map/en/'   # static/research-map/en/ (English); Chinese version is /research-map/
     weight: 15
   - name: Publications
     url: '/#publications'

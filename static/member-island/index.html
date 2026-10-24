@@ -8,7 +8,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 /* 成員島：老師是雷射頭（唯一光源），白光經二向色鏡分成四條顏色光路（＝四個研究方向），
-   每位成員是自己那條光路上的一個元件，旁邊站一個積木小人在工作。只做深色。 */
+   每位成員是自己那條光路上的一個元件，旁邊站一個積木小人在工作。
+   深淺兩色：嵌在官網成員頁（iframe）時固定淺色；單獨開時跟系統，右上角可切換並記住。
+   語言：?lang=en 或嵌在官網英文成員頁時顯示英文。 */
 :root{
   color-scheme:dark;
   --bg:#07090c; --surface:#0f1318; --raised:#151a21; --ink:#e3e8ee; --muted:#8c97a6; --line:#232a34;
@@ -17,6 +19,15 @@
   --warn:#f2b632; --warn-bg:#2e230b;
   --f-body:"Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --chipt:#9aa3b0; --chipt-ink:var(--bg); --labshadow:0 1px 0 rgba(0,0,0,.5);
+}
+/* 淺色：底色、字色照官網（#faf8f4 底、深藍字）；光學桌用淺灰鋁面；「白光」在淺底看不到，改成中灰 */
+:root[data-theme="light"]{
+  color-scheme:light;
+  --bg:#faf8f4; --surface:#ffffff; --raised:#f2efe9; --ink:#1d2733; --muted:#5b6674; --line:#dad5cb;
+  --table:#d3d6da; --hole:#767d86; --tape:#fffaf0; --tape-ink:#1d2733; --white:#7b8492;
+  --warn:#a35f00; --warn-bg:#fdf0d8;
+  --chipt:#6f7886; --chipt-ink:#ffffff; --labshadow:0 0 0 1px rgba(29,39,51,.22),0 1px 2px rgba(29,39,51,.18);
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -33,6 +44,9 @@ h1{font-weight:700;font-size:clamp(25px,3.6vw,36px);line-height:1.25;margin:0;te
 .tabs{display:flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:8px;background:var(--surface);flex-wrap:wrap}
 .tabs button{font:inherit;font-size:14px;border:0;background:transparent;color:var(--muted);padding:6px 14px;border-radius:6px;cursor:pointer}
 .tabs button[aria-selected="true"]{background:var(--raised);color:var(--ink);box-shadow:inset 0 -2px 0 var(--white)}
+.ctrls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pref{font:inherit;font-size:13px;display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer;text-decoration:none;line-height:1.4}
+.pref:hover{color:var(--ink);border-color:var(--muted)}
 button:focus-visible,a:focus-visible,.chip:focus-visible,.card:focus-visible{outline:2px solid var(--warn);outline-offset:2px}
 
 .mapview{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px;align-items:start}
@@ -42,7 +56,7 @@ button:focus-visible,a:focus-visible,.chip:focus-visible,.card:focus-visible{out
 #labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .lab{position:absolute;left:0;top:0;white-space:nowrap;font-family:var(--f-mono);font-size:11px;font-weight:500;line-height:1.3;
   padding:1px 6px 1px 4px;border-radius:2px;background:var(--tape);color:var(--tape-ink);pointer-events:auto;cursor:pointer;
-  display:flex;align-items:center;gap:4px;box-shadow:0 1px 0 rgba(0,0,0,.5);transition:opacity .2s}
+  display:flex;align-items:center;gap:4px;box-shadow:var(--labshadow);transition:opacity .2s}
 .lab i{width:7px;height:7px;border-radius:1px;flex:none}
 .lab span{font-family:var(--f-body);font-size:11.5px}
 .lab.dim{opacity:.25}
@@ -77,7 +91,7 @@ button:focus-visible,a:focus-visible,.chip:focus-visible,.card:focus-visible{out
 .pend{display:inline-block;font-size:11.5px;padding:0 6px;border-radius:3px;background:var(--warn-bg);color:var(--warn);margin-left:4px;white-space:nowrap}
 .rel{display:flex;flex-direction:column;gap:6px}
 .rel .r{display:flex;gap:8px;align-items:flex-start;font-size:13.5px}
-.rel .r .t{font-family:var(--f-mono);font-size:11px;padding:0 5px;border-radius:3px;flex:none;margin-top:3px;color:var(--bg);background:#9aa3b0}
+.rel .r .t{font-family:var(--f-mono);font-size:11px;padding:0 5px;border-radius:3px;flex:none;margin-top:3px;color:var(--chipt-ink);background:var(--chipt)}
 .rel .r .t.sample{background:var(--white)}
 .rel .r .t.baton{background:var(--warn)}
 .lab em{font-style:normal;font-size:10px;color:#6b5a2a;border:1px solid #c9b47a;border-radius:2px;padding:0 3px;line-height:1.2}
@@ -113,31 +127,49 @@ footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);paddin
 }
 @media (max-width:480px){.plate{display:none}}
 </style>
+<script>
+/* 先決定主題與語言，避免先閃一下深色。網址參數優先；嵌在官網（iframe）固定淺色；單獨開時用記住的選擇，否則跟系統。 */
+(function(){
+  var Q=new URLSearchParams(location.search),emb=true;
+  try{emb=window.top!==window}catch(e){}
+  var t=Q.get("theme"),saved=null;
+  try{saved=localStorage.getItem("member-island-theme")}catch(e){}
+  if(t!=="light"&&t!=="dark")t=emb?"light":(saved||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
+  var l=Q.get("lang");
+  if(l!=="en"&&l!=="zh"){l="zh";try{if(emb&&!/\/zh\//.test(window.top.location.pathname))l="en"}catch(e){}}
+  document.documentElement.dataset.theme=t;document.documentElement.lang=l==="en"?"en":"zh-Hant";
+  window.__MI={theme:t,lang:l,embedded:emb,themeFromUser:!!(Q.get("theme")||saved)};
+})();
+</script>
 
 <div class="wrap">
   <header class="top">
     <div class="brand">
-      <span class="eyebrow"><span>TBL · 卓冠宇實驗室 · 成員</span><span class="laser">CLASS 4 · 雷射作業中</span></span>
-      <h1>一張光學桌上的實驗室成員</h1>
-      <p class="lede">老師是雷射頭，白光經二向色鏡分成四種顏色，一種顏色一個研究方向。每位成員是自己那條光路上的一個元件，站在旁邊的小人就是他本人在工作。點元件或小人看介紹。</p>
+      <span class="eyebrow"><span data-t="eyebrow">TBL · 卓冠宇實驗室 · 成員</span><span class="laser" data-t="laser">CLASS 4 · 雷射作業中</span></span>
+      <h1 data-t="h1">一張光學桌上的實驗室成員</h1>
+      <p class="lede" data-t="lede">老師是雷射頭，白光經二向色鏡分成四種顏色，一種顏色一個研究方向。每位成員是自己那條光路上的一個元件，站在旁邊的小人就是他本人在工作。點元件或小人看介紹。</p>
     </div>
-    <div class="tabs" role="tablist" aria-label="檢視方式">
-      <button role="tab" id="tab-map" aria-selected="true" data-view="map">光學桌</button>
-      <button role="tab" id="tab-list" aria-selected="false" data-view="list">名單</button>
+    <div class="ctrls">
+      <div class="tabs" role="tablist" aria-label="檢視方式" data-t-aria="views">
+        <button role="tab" id="tab-map" aria-selected="true" data-view="map" data-t="tabMap">光學桌</button>
+        <button role="tab" id="tab-list" aria-selected="false" data-view="list" data-t="tabList">名單</button>
+      </div>
+      <button class="pref" id="btn-theme" type="button" hidden></button>
+      <a class="pref" id="lnk-lang" hidden></a>
     </div>
   </header>
 
   <div id="view-map" class="mapview">
     <div class="stagebox" id="stagebox">
-      <div id="stage" role="img" aria-label="示意光路：老師的雷射經二向色鏡分成四條顏色光路，每位成員是光路上的一個元件；完整文字請用名單"></div>
+      <div id="stage" role="img" aria-label="示意光路：老師的雷射經二向色鏡分成四條顏色光路，每位成員是光路上的一個元件；完整文字請用名單" data-t-aria="stage"></div>
       <div id="labels"></div>
-      <div class="plate">BREADBOARD 1200 × 900 mm · M6 · 25 mm<br>示意光路，不是實際架設</div>
+      <div class="plate">BREADBOARD 1200 × 900 mm · M6 · 25 mm<br><span data-t="plate">示意光路，不是實際架設</span></div>
       <div class="toolbar">
-        <button id="btn-labels" aria-pressed="true">標籤</button>
-        <button id="btn-photons" aria-pressed="true">光子</button>
-        <button id="btn-spin" aria-pressed="false">旋轉</button>
-        <button id="btn-top" aria-pressed="false">俯視</button>
-        <button id="btn-reset">全部</button>
+        <button id="btn-labels" aria-pressed="true" data-t="bLabels">標籤</button>
+        <button id="btn-photons" aria-pressed="true" data-t="bPhotons">光子</button>
+        <button id="btn-spin" aria-pressed="false" data-t="bSpin">旋轉</button>
+        <button id="btn-top" aria-pressed="false" data-t="bTop">俯視</button>
+        <button id="btn-reset" data-t="bAll">全部</button>
       </div>
     </div>
     <aside class="panel" id="panel" aria-live="polite"></aside>
@@ -145,8 +177,8 @@ footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);paddin
   <div id="view-list" class="listview" hidden></div>
 
   <footer>
-    <span>光路是示意，不是實驗室的真實架設。誰在哪條光路、元件種類，依每個人目前的題目安排，會隨人事更動。畢業的人排在光路最前面，表示把題目交給後面的人。</span>
-    <span>內容整理自實驗室官網成員頁、Obsidian 筆記\TBL 與 2026-09 到 10 月的週會紀錄。分工連線只畫會議裡明說的，推論的另外標示。最後更新 2026-10-24。</span>
+    <span data-t="foot1">光路是示意，不是實驗室的真實架設。誰在哪條光路、元件種類，依每個人目前的題目安排，會隨人事更動。畢業的人排在光路最前面，表示把題目交給後面的人。</span>
+    <span data-t="foot2">內容整理自實驗室官網成員頁、Obsidian 筆記\TBL 與 2026-09 到 10 月的週會紀錄。分工連線只畫會議裡明說的，推論的另外標示。最後更新 2026-10-24。</span>
   </footer>
 </div>
 
@@ -204,12 +236,96 @@ const RELS=[
   {from:"huang",to:"zhuo",type:"data",kind:"said",text:"柏翰與靖崴幫老師測新的解調電路",src:"週會 2026-09-23"},
   {from:"jun",to:"shih",type:"baton",kind:"said",text:"涴鈞畢業離開前，把工作交棒給承毅",src:"週會 2026-09-30"}
 ];
+/* 英文版：照上面中文逐條翻，不加中文沒有的內容。LANG=en 時覆蓋到 LANES／MEMBERS／RELS 上。 */
+const LANG=window.__MI.lang,THEME0=window.__MI.theme,EMBED=window.__MI.embedded;
+const EN={
+  lanes:{
+    A:{verb:"Quantify",name:"Polarization SHG",desc:"Collagen, cartilage, bone: χ tensor, PTHG.",end:"How collagen is arranged"},
+    B:{verb:"See",name:"Multimodal contrast",desc:"Beyond SHG: FLIM, Raman, CARS, hyperspectral scattering.",end:"Seeing without stains"},
+    C:{verb:"Reach",name:"Imaging systems & endoscopy",desc:"Scanning optics, stitching, electronics, fiber endoscopy, light-sheet.",end:"Faster, and inside the body"},
+    D:{verb:"Classify",name:"AI interpretation & clinic",desc:"Grading, segmentation and denoising, tumor margins.",end:"Answers clinicians can use"},
+    SRC:{name:"Light source"},
+    N:{name:"New students",desc:"Joined in September 2026. Topics not set yet; watching from the side table."}
+  },
+  members:{
+    zhuo:{role:"Associate Professor, Principal Investigator",part:"Laser head (the only light source)",line:"Projects start here: one white beam, split into four paths.",
+      does:["Translational biophotonics","Label-free nonlinear optical microscopy","Polarization-resolved SHG and collagen chirality","Miniaturized nonlinear endomicroscopy"]},
+    jun:{role:"Research assistant, graduated (left October 2026)",part:"Half-wave plate (rotates polarization)",line:"Rotates the polarization to see how collagen is arranged. Handed the work over to Cheng-Yi.",
+      does:["Polarization-resolved SHG of cartilage","Raman spectroscopy of cartilage biochemistry","Multimodal nonlinear optics × collagen (thesis defense, August 2026)"]},
+    tsai:{role:"Master's student",part:"Analyzer (reads polarization)",line:"Computes the χ tensor from polarization signals, then hands it to machine learning.",
+      does:["Polarization-resolved SHG and χ tensor analysis","PTHG (bone, cartilage)","Machine learning and deep learning for cell images"]},
+    chang:{role:"Master's student",part:"Dichroic mirror + delay line (combining beams)",line:"Combines two laser beams and builds the CARS setup.",does:["Building the CARS beam path","Circular polarization"]},
+    wangjw:{role:"Master's student",part:"Spectrometer (Raman)",line:"Measures bovine tooth enamel with Raman and fluorescence.",
+      does:["Raman and fluorescence of bovine tooth enamel","Ultrafast optics, high-resolution imaging","Raman circuit testing"]},
+    gagan:{role:"PhD student (exchange)",part:"Detector (fluorescence lifetime)",line:"Uses two-photon fluorescence lifetime to study metabolism and tumor margins.",
+      does:["Two-photon FLIM of cell metabolism","Fluorescence lifetime at tumor margins","Deep-learning grading of oral lesions"]},
+    shih:{role:"Master's student",part:"Galvo mirrors (scanning)",line:"Builds the scanning optics and stitches the images together.",does:["Scanning system optics","Image stitching","Fiber coupling"]},
+    kuo:{role:"PhD student",part:"Objective (imaging)",line:"Confocal reflectance measurement and light-sheet imaging.",does:["Confocal reflectance measurement","Light-sheet microscopy"],
+      toys:[{k:"Playground",t:"owl-toys",d:"Interactive mini tools",u:"https://ewinkuo1-sudo.github.io/owl-toys/"}]},
+    wangwh:{role:"Master's student, graduated",part:"Circuit board (signal)",pend:"Successor to be confirmed",line:"Stretches SHG signals in time so the electronics can capture them faster.",
+      does:["Temporal stretching of SHG signals","Circuit design, signal enhancement","High-speed microscopy"]},
+    huang:{role:"Master's student",part:"Fiber probe (endoscopy)",line:"Brings nonlinear imaging into optical fiber, toward endoscopy.",
+      does:["Wavevector-encoded nonlinear endoscopy (WENE)","Integrating fiber-optic components","Hyperspectral scattering for tumor margins"]},
+    lewis:{role:"PhD student",part:"Workstation (segmentation and denoising)",line:"Cleans up dim, noisy label-free images and segments cell nuclei.",
+      does:["AI-assisted glioblastoma imaging","Faster multiphoton imaging","Image detection and segmentation"]},
+    jackson:{role:"Postdoctoral researcher",part:"Workstation (interpretation)",line:"Nonlinear imaging plus AI for lesion grading and tumor margins.",
+      does:["Intraoperative tumor margin assessment","Deep-learning grading of lesions","Nonlinear optical imaging × AI"]},
+    wu:{role:"Master's student (joined September 2026)",part:"Side table",line:"Just joined; topic not set yet."},
+    fu:{role:"Master's student (joined September 2026)",part:"Side table",line:"Just joined; topic not set yet."}
+  },
+  rels:[
+    "Po-Han's hyperspectral scattering samples go to Jackson for tumor-margin measurements",
+    "Gagan's FFPE lifetime results led Jackson to switch to multichannel structural imaging",
+    "The scanning optics and stitching Cheng-Yi built are used by Yi-Xun for imaging",
+    "The scanning optics Cheng-Yi built are used by Jing-Wei for imaging",
+    "Jing-Wei and Po-Han test the professor's new demodulation circuit",
+    "Po-Han and Jing-Wei test the professor's new demodulation circuit",
+    "Before leaving, Jun handed the work over to Cheng-Yi"
+  ]
+};
+const T={zh:{
+  views:"檢視方式",legendH:"怎麼看這張桌子",fourPaths:"四條光路",clickHint:"點桌上的元件、小人或標籤看介紹。",
+  lg:[["雷射頭＝老師","唯一光源。題目由老師分配，白光從這裡出來。"],["二向色鏡＝分方向","白光被分成四種顏色，一種顏色一個研究方向。"],
+      ["元件＝成員","每個人是自己那條光路上的一個元件，架光路的是振鏡、物鏡，做分析的是偵測器、工作站。同方向的人前後排，前面的人輸出給後面的人。"],
+      ["桌面上的灰線＝分工","誰的東西給誰用。只畫會議裡明說的，推論的另外標示。"],["戴方帽的小人＝已畢業","排在隊伍最前面，手上的棒子交給後面接手的人。"],["桌邊的小桌＝新生","題目還沒定，先在旁邊看。"]],
+  onTable:"在桌上是：",gradNote:"，排在光路最前面（已畢業，交棒）",doing:"在做什麼",samePath:"同一條光路",alone:"目前只有他一個。",split:"分出去的四條光路",
+  rel:"分工",to:"→ 給",from:"← 來自",sample:"樣品",baton:"交棒",data:"資料",said:"明說",inf:"推論",links:"連結",
+  kCard:"卡片",card:"成員頁介紹",cardSub:"跳到他在成員頁的卡片",kSite:"官網",site:"個人頁",siteSub:"完整介紹",noPage:"官網還沒有他的頁。",
+  grad:"已畢業",fallback:"這台裝置無法顯示 3D 光學桌，請改用「名單」。",toDark:"☾ 深色",toLight:"☀ 淺色",themeAria:"切換深淺色",lang:"EN",langAria:"English version",title:"TBL 成員島"
+},en:{
+  eyebrow:"TBL · Zhuo Lab · People",laser:"CLASS 4 · LASER IN USE",h1:"The lab on one optical table",
+  lede:"The professor is the laser head. Dichroic mirrors split the white light into four colors, one per research direction. Each member is a component on their own path, and the little figure beside it is them at work. Click a component or a figure to learn more.",
+  tabMap:"Optical table",tabList:"List",views:"View",stage:"Schematic beam path: the professor's laser is split by dichroic mirrors into four colored paths, and each member is a component on a path. For the full text, use the List view.",
+  plate:"Schematic beam path, not the real setup",bLabels:"Labels",bPhotons:"Photons",bSpin:"Rotate",bTop:"Top view",bAll:"All",
+  foot1:"The beam paths are schematic, not the lab's real setup. Who sits on which path, and as which component, follows each person's current project and will change as people come and go. Graduates sit at the front of their path, handing their topic to the people behind them.",
+  foot2:"Compiled from the People page of the lab website, lab notes, and group meetings from September to October 2026. Collaboration lines show only what was stated in meetings; inferred ones are marked. Last updated 2026-10-24.",
+  legendH:"How to read this table",fourPaths:"Four paths",clickHint:"Click a component, figure or label on the table to learn more.",
+  lg:[["Laser head = the professor","The only light source. Topics are assigned by the professor, and the white beam starts here."],["Dichroic mirrors = directions","The white light is split into four colors, one per research direction."],
+      ["Components = members","Each person is one component on their path: people building optics are galvos and objectives, people doing analysis are detectors and workstations. People on the same path line up, and each passes their output to the next."],
+      ["Gray lines on the table = collaboration","Whose work feeds whom. Only links stated in meetings are drawn; inferred ones are marked."],["Figure in a mortarboard = graduated","Stands at the front of the line, handing the baton to whoever takes over."],["Side table = new students","Topics not set yet; watching from the side."]],
+  onTable:"On the table: ",gradNote:", at the front of the path (graduated, handing over)",doing:"Current work",samePath:"Same path",alone:"No one else on this path yet.",split:"The four paths split from here",
+  rel:"Collaboration",to:"→ to",from:"← from",sample:"Sample",baton:"Baton",data:"Data",said:"Stated",inf:"Inferred",links:"Links",
+  kCard:"Card",card:"People page",cardSub:"Jump to their card on the People page",kSite:"Website",site:"Personal page",siteSub:"Full profile",noPage:"No page on the lab website yet.",
+  grad:"Graduated",fallback:"This device cannot show the 3D optical table. Please use the List view.",toDark:"☾ Dark",toLight:"☀ Light",themeAria:"Switch light or dark",lang:"中文",langAria:"中文版",title:"TBL Member Island"
+}};
+const t_=k=>(T[LANG]&&T[LANG][k]!=null?T[LANG][k]:T.zh[k]);
+if(LANG==="en"){
+  for(const [k,v] of Object.entries(EN.lanes))Object.assign(LANES[k],v);
+  for(const m of MEMBERS){const e=EN.members[m.id];if(e)Object.assign(m,e)}
+  RELS.forEach((r,i)=>{r.text=EN.rels[i]||r.text;r.src=r.src.replace("週會","Group meeting").replace(/、/g,", ")});
+  // 英文版主名用英文名（沒有英文名的保留中文），副標放中文名
+  for(const m of MEMBERS){m.zhName=m.name;if(m.en)m.name=m.id==="lewis"?"Maclinez Lewis":m.en}
+}
+document.title=t_("title");
+document.querySelectorAll("[data-t]").forEach(el=>{const v=T[LANG][el.dataset.t];if(v!=null&&LANG==="en")el.textContent=v});
+document.querySelectorAll("[data-t-aria]").forEach(el=>{const v=T[LANG][el.dataset.tAria];if(v!=null&&LANG==="en")el.setAttribute("aria-label",v)});
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const laneOf=m=>LANES[m.lane];
 const laneName=L=>(L.verb?`<b>${esc(L.verb)}</b> · `:"")+esc(L.name);
 // 成員頁卡片的位置：島嵌在官網 zh／en 成員頁裡時，連回同一頁的卡片；獨立開時連 zh。
-let PEOPLE="../zh/people/";
+const SITE_=LANG==="en"?SITE.replace("/zh/author/","/author/"):SITE;
+let PEOPLE=LANG==="en"?"../people/":"../zh/people/";
 try{if(window.top!==window&&!/\/zh\//.test(window.top.location.pathname))PEOPLE="../people/"}catch(e){}
 function avatarHtml(m,cls=""){
   if(m.avatar)return `<img class="avatar ${cls}" src="avatars/${m.slug}.jpg" alt="">`;
@@ -217,33 +333,28 @@ function avatarHtml(m,cls=""){
 function chip(id){const m=byId[id];if(!m)return"";return `<button class="chip" data-m="${id}"><i style="background:var(${laneOf(m).v})"></i>${esc(m.name)}</button>`}
 function relRows(id){
   const rs=RELS.filter(r=>r.from===id||r.to===id);if(!rs.length)return"";
-  return `<div><h3>分工</h3><div class="rel">${rs.map(r=>{const other=r.from===id?r.to:r.from;const dir=r.from===id?"→ 給":"← 來自";
-    return `<div class="r"><span class="t ${r.type}">${r.type==="sample"?"樣品":r.type==="baton"?"交棒":"資料"}</span><div>${dir} ${chip(other)}<br>${esc(r.text)}<span class="${r.kind==="said"?"said":"inf"}">${r.kind==="said"?"明說":"推論"}</span><br><span class="src">${esc(r.src)}</span></div></div>`}).join("")}</div></div>`}
+  return `<div><h3>${t_("rel")}</h3><div class="rel">${rs.map(r=>{const other=r.from===id?r.to:r.from;const dir=r.from===id?t_("to"):t_("from");
+    return `<div class="r"><span class="t ${r.type}">${t_(r.type==="sample"?"sample":r.type==="baton"?"baton":"data")}</span><div>${dir} ${chip(other)}<br>${esc(r.text)}<span class="${r.kind==="said"?"said":"inf"}">${t_(r.kind==="said"?"said":"inf")}</span><br><span class="src">${esc(r.src)}</span></div></div>`}).join("")}</div></div>`}
 function renderPanel(id){
   const el=document.getElementById("panel");
   if(!id){
-    el.innerHTML=`<h2>怎麼看這張桌子</h2>
-    <div class="legend">
-      <div class="row"><i style="background:var(--white)"></i><div>雷射頭＝老師<small>唯一光源。題目由老師分配，白光從這裡出來。</small></div></div>
-      <div class="row"><i style="background:linear-gradient(90deg,var(--gA),var(--gB),var(--gC),var(--gD))"></i><div>二向色鏡＝分方向<small>白光被分成四種顏色，一種顏色一個研究方向。</small></div></div>
-      <div class="row"><i style="background:var(--tape)"></i><div>元件＝成員<small>每個人是自己那條光路上的一個元件，架光路的是振鏡、物鏡，做分析的是偵測器、工作站。同方向的人前後排，前面的人輸出給後面的人。</small></div></div>
-      <div class="row"><i style="background:#9aa3b0"></i><div>桌面上的灰線＝分工<small>誰的東西給誰用。只畫會議裡明說的，推論的另外標示。</small></div></div>
-      <div class="row"><i style="background:var(--warn)"></i><div>戴方帽的小人＝已畢業<small>排在隊伍最前面，手上的棒子交給後面接手的人。</small></div></div>
-      <div class="row"><i style="background:var(--gX)"></i><div>桌邊的小桌＝新生<small>題目還沒定，先在旁邊看。</small></div></div>
-    </div>
-    <div><h3>四條光路</h3><div class="legend">${["B","A","D","C"].map(k=>`<div class="row"><i style="background:var(${LANES[k].v})"></i><div>${laneName(LANES[k])}<small>${esc(LANES[k].desc)}</small><div class="chips" style="margin-top:4px">${MEMBERS.filter(m=>m.lane===k).map(m=>chip(m.id)).join("")}</div></div></div>`).join("")}</div></div>
-    <p class="src">點桌上的元件、小人或標籤看介紹。</p>`;return}
+    const sw=["var(--white)","linear-gradient(90deg,var(--gA),var(--gB),var(--gC),var(--gD))","var(--tape);box-shadow:inset 0 0 0 1px var(--muted)","var(--chipt)","var(--warn)","var(--gX)"];
+    el.innerHTML=`<h2>${t_("legendH")}</h2>
+    <div class="legend">${t_("lg").map(([a,b],i)=>`<div class="row"><i style="background:${sw[i]}"></i><div>${esc(a)}<small>${esc(b)}</small></div></div>`).join("")}</div>
+    <div><h3>${t_("fourPaths")}</h3><div class="legend">${["B","A","D","C"].map(k=>`<div class="row"><i style="background:var(${LANES[k].v})"></i><div>${laneName(LANES[k])}<small>${esc(LANES[k].desc)}</small><div class="chips" style="margin-top:4px">${MEMBERS.filter(m=>m.lane===k).map(m=>chip(m.id)).join("")}</div></div></div>`).join("")}</div></div>
+    <p class="src">${t_("clickHint")}</p>`;return}
   const m=byId[id],L=laneOf(m);
-  el.innerHTML=`<div class="who">${avatarHtml(m)}<h2>${esc(m.name)}${m.en&&m.en!==m.name?`<small>${esc(m.en)}</small>`:""}</h2></div>
+  const sub=LANG==="en"?(m.zhName&&m.zhName!==m.name?m.zhName:""):(m.en&&m.en!==m.name?m.en:"");
+  el.innerHTML=`<div class="who">${avatarHtml(m)}<h2>${esc(m.name)}${sub?`<small>${esc(sub)}</small>`:""}</h2></div>
   <div class="meta"><span class="role">${esc(m.role)}</span><span class="lane"><i style="background:var(${L.v})"></i>${laneName(L)}</span>${m.pend?`<span class="pend">${esc(m.pend)}</span>`:""}</div>
-  <p class="part">在桌上是：${esc(m.part)}${m.grad?"，排在光路最前面（已畢業，交棒）":""}</p>
+  <p class="part">${t_("onTable")}${esc(m.part)}${m.grad?t_("gradNote"):""}</p>
   <p class="oneline">${esc(m.line)}</p>
-  ${m.does.length?`<div><h3>在做什麼</h3><ul>${m.does.map(d=>`<li>${esc(d)}</li>`).join("")}</ul></div>`:""}
-  ${m.lane!=="SRC"&&m.lane!=="N"?`<div><h3>同一條光路</h3><div class="chips">${MEMBERS.filter(x=>x.lane===m.lane&&x.id!==m.id).map(x=>chip(x.id)).join("")||"<span class='src'>目前只有他一個。</span>"}</div></div>`:""}
-  ${m.lane==="SRC"?`<div><h3>分出去的四條光路</h3><div class="chips">${MEMBERS.filter(x=>"ABCD".includes(x.lane)).map(x=>chip(x.id)).join("")}</div></div>`:""}
+  ${m.does.length?`<div><h3>${t_("doing")}</h3><ul>${m.does.map(d=>`<li>${esc(d)}</li>`).join("")}</ul></div>`:""}
+  ${m.lane!=="SRC"&&m.lane!=="N"?`<div><h3>${t_("samePath")}</h3><div class="chips">${MEMBERS.filter(x=>x.lane===m.lane&&x.id!==m.id).map(x=>chip(x.id)).join("")||`<span class='src'>${t_("alone")}</span>`}</div></div>`:""}
+  ${m.lane==="SRC"?`<div><h3>${t_("split")}</h3><div class="chips">${MEMBERS.filter(x=>"ABCD".includes(x.lane)).map(x=>chip(x.id)).join("")}</div></div>`:""}
   ${relRows(id)}
-  <div><h3>連結</h3><div class="links">
-    ${m.slug?`<a class="lnk" href="${PEOPLE}#member-${m.slug}" target="_top"><span class="k">卡片</span><div><b>成員頁介紹</b><small>跳到他在成員頁的卡片</small></div></a><a class="lnk" href="${SITE}${m.slug}/" target="_blank" rel="noopener"><span class="k">官網</span><div><b>個人頁</b><small>完整介紹</small></div></a>`:`<span class="src">官網還沒有他的頁。</span>`}
+  <div><h3>${t_("links")}</h3><div class="links">
+    ${m.slug?`<a class="lnk" href="${PEOPLE}#member-${m.slug}" target="_top"><span class="k">${t_("kCard")}</span><div><b>${t_("card")}</b><small>${t_("cardSub")}</small></div></a><a class="lnk" href="${SITE_}${m.slug}/" target="_blank" rel="noopener"><span class="k">${t_("kSite")}</span><div><b>${t_("site")}</b><small>${t_("siteSub")}</small></div></a>`:`<span class="src">${t_("noPage")}</span>`}
     ${(m.toys||[]).map(t=>`<a class="lnk" href="${t.u}" target="_blank" rel="noopener"><span class="k">${esc(t.k)}</span><div><b>${esc(t.t)}</b><small>${esc(t.d)}</small></div></a>`).join("")}
   </div></div>`;
 }
@@ -263,12 +374,28 @@ window.addEventListener("message",e=>{const d=e&&e.data||{};if(!d.sel)return;
   const m=byId[d.sel]||MEMBERS.find(x=>x.slug===d.sel);if(m){select(m.id);showView("map")}});
 renderPanel(null);renderList();
 
+/* 深淺色與語言切換：只在單獨開啟時顯示（嵌在官網時跟官網走：淺色、語言照所在頁） */
+let THEME=THEME0;
+(function prefs(){
+  if(EMBED)return;
+  const bt=document.getElementById("btn-theme"),ll=document.getElementById("lnk-lang");
+  const label=()=>{bt.textContent=THEME==="dark"?t_("toLight"):t_("toDark");bt.setAttribute("aria-label",t_("themeAria"))};
+  const apply=(t,save)=>{THEME=t;document.documentElement.dataset.theme=t;label();
+    if(save)try{localStorage.setItem("member-island-theme",t)}catch(e){}
+    if(bench&&bench.setTheme)bench.setTheme()};
+  bt.hidden=false;label();bt.onclick=()=>apply(THEME==="dark"?"light":"dark",true);
+  // 沒手動選過時跟著系統即時變
+  if(!window.__MI.themeFromUser)matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change",e=>apply(e.matches?"dark":"light",false));
+  const q=new URLSearchParams(location.search);q.set("lang",LANG==="en"?"zh":"en");
+  ll.href="?"+q.toString()+location.hash;ll.textContent=t_("lang");ll.setAttribute("aria-label",t_("langAria"));ll.hidden=false;
+})();
+
 (function initBench(){
   const box=document.getElementById("stagebox"),host=document.getElementById("stage"),labelsEl=document.getElementById("labels");
   let renderer=null;
   const HP=new URLSearchParams(location.hash.slice(1)); // 截圖用：#shot&sel=kuo&cam=x,y,z&tgt=x,y,z
   try{if(window.THREE)renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:HP.has("shot")});}catch(e){renderer=null}
-  if(!renderer){host.innerHTML=`<div class="fallback">這台裝置無法顯示 3D 光學桌，請改用「名單」。</div>`;return}
+  if(!renderer){host.innerHTML=`<div class="fallback">${t_("fallback")}</div>`;return}
   const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
   renderer.setPixelRatio(Math.min(devicePixelRatio,2));
   renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
@@ -284,7 +411,10 @@ renderPanel(null);renderList();
   if(HP.get("tgt")){controls.target.set(...HP.get("tgt").split(",").map(Number))}
   if(HP.get("sel"))setTimeout(()=>select(HP.get("sel")),0);
 
-  scene.add(new THREE.AmbientLight(0x8a96a8,0.42));
+  // 隨深淺色變的東西：材質登記在 themed，setTheme() 時重設顏色／混色方式
+  const themed=[],light=()=>THEME==="light";
+  const T_=(mat,v,...props)=>{themed.push([mat,v,props]);return mat};
+  const amb=new THREE.AmbientLight(0x8a96a8,0.42);scene.add(amb);
   const key=new THREE.DirectionalLight(0xdfe6f0,0.85);key.position.set(-4,12,7);key.castShadow=true;
   key.shadow.mapSize.set(2048,2048);Object.assign(key.shadow.camera,{left:-9,right:9,top:9,bottom:-9});scene.add(key);
   const rim=new THREE.DirectionalLight(0x7f8cff,0.22);rim.position.set(6,4,-6);scene.add(rim);
@@ -297,7 +427,9 @@ renderPanel(null);renderList();
       cx.beginPath();cx.arc(x,y,px*0.2,0.9*Math.PI,1.9*Math.PI);cx.strokeStyle="rgba(255,255,255,0.06)";cx.lineWidth=1.2;cx.stroke()}
     const tex=new THREE.CanvasTexture(cv);tex.anisotropy=renderer.capabilities.getMaxAnisotropy();return tex}
   const side=new THREE.MeshStandardMaterial({color:0x15181d,roughness:.65});
-  function bench_(TW,TD,x,z,y=0){const t=new THREE.Mesh(new THREE.BoxGeometry(TW,0.35,TD),[side,side,new THREE.MeshStandardMaterial({map:holeTex(TW,TD),roughness:.55,metalness:.25}),side,side,side]);
+  const tops=[];
+  function bench_(TW,TD,x,z,y=0){const topM=new THREE.MeshStandardMaterial({map:holeTex(TW,TD),roughness:.55,metalness:.25});tops.push([topM,TW,TD]);
+    const t=new THREE.Mesh(new THREE.BoxGeometry(TW,0.35,TD),[side,side,topM,side,side,side]);
     t.position.set(x,y-0.175,z);t.receiveShadow=true;scene.add(t);return t}
   const TW=12,TD=9;bench_(TW,TD,0,0);
   // 新生的小桌（桌邊）
@@ -344,7 +476,7 @@ renderPanel(null);renderList();
     add(cyl(0.03,0.26),M.steel,x,0.15,z-0.12);add(new THREE.BoxGeometry(0.81,0.04,0.05),band(c),x,0.79,z-0.1);
     add(new THREE.BoxGeometry(0.5,0.03,0.18),M.grey,x,0.055,z+0.22)}
   function screen(x,z,c,txt){const ec=document.createElement("canvas");ec.width=512;ec.height=300;const e2=ec.getContext("2d");
-    e2.fillStyle="#0b1622";e2.fillRect(0,0,512,300);e2.fillStyle="#e3e8ee";e2.font="bold 44px 'Noto Sans TC',sans-serif";e2.textAlign="center";e2.fillText(txt,256,165);
+    e2.fillStyle="#0b1622";e2.fillRect(0,0,512,300);e2.fillStyle="#e3e8ee";e2.textAlign="center";let fs=44;do{e2.font=`bold ${fs}px 'Noto Sans TC',sans-serif`;fs-=2}while(e2.measureText(txt).width>456&&fs>18);e2.fillText(txt,256,165);
     e2.strokeStyle="#"+c.getHexString();e2.lineWidth=4;e2.strokeRect(14,14,484,272);
     add(new THREE.BoxGeometry(0.06,0.6,0.95),M.black,x,0.72,z);
     add(new THREE.PlaneGeometry(0.88,0.54),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(ec)}),x-0.035,0.72,z,{ry:-Math.PI/2});
@@ -368,8 +500,8 @@ renderPanel(null);renderList();
     for(const [k,dx] of[["L",-0.145],["R",0.145]]){const a=new THREE.Group();a.position.set(dx,0.42,0);g.add(a);mk(new THREE.BoxGeometry(0.07,0.22,0.08),cloth,0,-0.1,0,a);mk(new THREE.SphereGeometry(0.035,8,8),skin,0,-0.22,0,a);arms[k]=a}
     if(act==="pass"){ // 已畢業：方帽＋手上的接力棒
       mk(new THREE.BoxGeometry(0.24,0.015,0.24),new THREE.MeshStandardMaterial({color:0x202428,roughness:.8}),0,0.095,0,head);
-      mk(new THREE.BoxGeometry(0.02,0.1,0.02),new THREE.MeshStandardMaterial({color:col("--warn"),roughness:.6}),-0.11,0.05,0.11,head);
-      mk(new THREE.CylinderGeometry(0.02,0.02,0.22,10),new THREE.MeshStandardMaterial({color:col("--warn"),roughness:.5,emissive:col("--warn"),emissiveIntensity:.3}),0,-0.24,0,arms.L).rotation.x=Math.PI/2}
+      mk(new THREE.BoxGeometry(0.02,0.1,0.02),T_(new THREE.MeshStandardMaterial({color:col("--warn"),roughness:.6}),"--warn","color"),-0.11,0.05,0.11,head);
+      mk(new THREE.CylinderGeometry(0.02,0.02,0.22,10),T_(new THREE.MeshStandardMaterial({color:col("--warn"),roughness:.5,emissive:col("--warn"),emissiveIntensity:.3}),"--warn","color","emissive"),0,-0.24,0,arms.L).rotation.x=Math.PI/2}
     scene.add(g);const f={id,g,head,arms,body,act,ph:Math.random()*6.28,look:0};figs.push(f);return f}
 
   /* 幾何 */
@@ -379,7 +511,7 @@ renderPanel(null);renderList();
   function end(id,ax,az,top){cur.traverse(o=>{if(o.isMesh){o.userData.id=id;pick.push(o)}});anchors[id]={x:ax,z:az,top};cur=null}
 
   // 老師：雷射頭
-  begin("zhuo");add(new THREE.BoxGeometry(1.6,0.66,0.62),M.grey,-5.1,0.33,laserZ);add(new THREE.BoxGeometry(1.62,0.05,0.64),band(col("--white")),-5.1,0.68,laserZ);
+  begin("zhuo");add(new THREE.BoxGeometry(1.6,0.66,0.62),M.grey,-5.1,0.33,laserZ);add(new THREE.BoxGeometry(1.62,0.05,0.64),T_(band(col("--white")),"--white","color","emissive"),-5.1,0.68,laserZ);
   add(cyl(0.07,0.12),M.black,-4.27,Y,laserZ,{axis:"x"});for(let i=0;i<6;i++)add(new THREE.BoxGeometry(0.02,0.4,0.5),M.black,-5.75+i*0.07,0.33,laserZ+0.32);
   add(new THREE.SphereGeometry(0.04,10,10),new THREE.MeshBasicMaterial({color:col("--gC")}),-4.55,0.72,laserZ+0.2);end("zhuo",-5.1,laserZ,0.85);
   // 分配柱：轉向鏡＋三片二向色鏡＋末端鏡
@@ -394,7 +526,7 @@ renderPanel(null);renderList();
   const lanesZ=k=>LANES[k].z;
   function build(m){
     if(m.lane==="SRC")return;
-    if(m.lane==="N"){begin(m.id);add(new THREE.BoxGeometry(0.3,0.04,0.4),M.white,CART.x-0.5+m.x,-0.23,CART.z-0.3);add(new THREE.BoxGeometry(0.06,0.05,0.4),band(col("--gX")),CART.x-0.66+m.x,-0.225,CART.z-0.3);end(m.id,CART.x-0.5+m.x,CART.z-0.3,0.55);return}
+    if(m.lane==="N"){begin(m.id);add(new THREE.BoxGeometry(0.3,0.04,0.4),M.white,CART.x-0.5+m.x,-0.23,CART.z-0.3);add(new THREE.BoxGeometry(0.06,0.05,0.4),band(col("--gX")),CART.x-0.66+m.x,-0.225,CART.z-0.3);end(m.id,CART.x-0.5+m.x,CART.z-0.3,m.x?0.95:0.5);return} // 兩位新生的標籤上下錯開，免得疊在一起
     const z=lanesZ(m.lane),c=col(LANES[m.lane].v),x=m.x;begin(m.id);
     switch(m.id){
       case"jun":rotMount(x,z,c,"hwp");break;
@@ -418,7 +550,7 @@ renderPanel(null);renderList();
         add(cyl(0.03,0.7),M.steel,x+0.25,0.05,z,{axis:"x"});add(cyl(0.05,0.2),M.black,x+0.65,Y-0.5,z,{axis:"x"});break;
       case"lewis":case"jackson":pc(x,z+0.25,c);break;
     }
-    end(m.id,x,z,1.0);
+    end(m.id,x,z,m.id==="wangwh"?1.45:1.0); // Wei-Hsun Wang 的標籤長，抬高才不會蓋住承毅
   }
   MEMBERS.forEach(build);
 
@@ -431,18 +563,20 @@ renderPanel(null);renderList();
     F(m.id,m.x+0.1,lanesZ(m.lane)+0.62,Math.PI,c,m.act)});
 
   /* 光束 */
-  const beams=[];
+  const beams=[],glows=[];
+  // 深色用加法混色（發光感）；淺底加法會變白看不見，改一般混色
+  function glowMat(c,op,v){const m=new THREE.MeshBasicMaterial({color:c,transparent:true,opacity:op,blending:light()?THREE.NormalBlending:THREE.AdditiveBlending,depthWrite:false});glows.push(m);if(v)T_(m,v,"color");return m}
   function beam(pts,c,opt={}){
     const o=opt.off||new THREE.Vector3(),p=pts.map(q=>q.clone().add(o)),segs=[];let L=0;
     for(let i=0;i<p.length-1;i++){const a=p[i],b=p[i+1],l=a.distanceTo(b);
-      const core=new THREE.Mesh(new THREE.TubeGeometry(new THREE.LineCurve3(a,b),1,0.011,6,false),new THREE.MeshBasicMaterial({color:c,transparent:true,opacity:.95,blending:THREE.AdditiveBlending,depthWrite:false}));
-      const glow=new THREE.Mesh(new THREE.TubeGeometry(new THREE.LineCurve3(a,b),1,0.05,10,false),new THREE.MeshBasicMaterial({color:c,transparent:true,opacity:.16,blending:THREE.AdditiveBlending,depthWrite:false}));
+      const core=new THREE.Mesh(new THREE.TubeGeometry(new THREE.LineCurve3(a,b),1,0.011,6,false),glowMat(c,.95,opt.v));
+      const glow=new THREE.Mesh(new THREE.TubeGeometry(new THREE.LineCurve3(a,b),1,0.05,10,false),glowMat(c,.16,opt.v));
       scene.add(core,glow);segs.push({a,b,l,L0:L,core,glow});L+=l}
     const n=Math.max(2,Math.round(L/1.4)),photons=[];
-    for(let k=0;k<n;k++){const s=new THREE.Mesh(new THREE.SphereGeometry(0.04,10,10),new THREE.MeshBasicMaterial({color:c,transparent:true,blending:THREE.AdditiveBlending,depthWrite:false}));scene.add(s);photons.push(s)}
+    for(let k=0;k<n;k++){const s=new THREE.Mesh(new THREE.SphereGeometry(0.04,10,10),glowMat(c,1,opt.v));scene.add(s);photons.push(s)}
     const b={segs,L,photons,ids:opt.ids||[],off:Math.random()};beams.push(b);return b}
   const white=col("--white");
-  beam([V(-4.27,laserZ),V(COLX,laserZ),V(COLX,LANES.D.z)],white,{ids:["zhuo"]});
+  beam([V(-4.27,laserZ),V(COLX,laserZ),V(COLX,LANES.D.z)],white,{ids:["zhuo"],v:"--white"});
   for(const k of["A","B","C","D"]){const ids=MEMBERS.filter(m=>m.lane===k).map(m=>m.id);ids.push("zhuo");beam([V(COLX,LANES[k].z),V(ENDX-0.05,LANES[k].z)],col(LANES[k].v),{ids})}
 
   /* 分工線：貼桌面、走直角 */
@@ -451,17 +585,18 @@ renderPanel(null);renderList();
   RELS.forEach((r,i)=>{const a=pos(r.from),b=pos(r.to);if(!a||!b)return;
     const yy=r.type==="sample"?0.012:0.03+((i%5)*0.004);const pts=[new THREE.Vector3(a.x,yy,a.z),new THREE.Vector3(b.x,yy,a.z),new THREE.Vector3(b.x,yy,b.z)];const objs=[];
     if(r.type==="sample"){for(let s=0;s<2;s++){const p0=pts[s],p1=pts[s+1],l=p0.distanceTo(p1),n=Math.floor(l/0.14);
-      for(let k=0;k<=n;k++){const d=new THREE.Mesh(new THREE.SphereGeometry(0.018,6,6),new THREE.MeshBasicMaterial({color:white,transparent:true,opacity:.55}));d.position.lerpVectors(p0,p1,n?k/n:0);scene.add(d);objs.push(d)}}}
+      for(let k=0;k<=n;k++){const d=new THREE.Mesh(new THREE.SphereGeometry(0.018,6,6),T_(new THREE.MeshBasicMaterial({color:white,transparent:true,opacity:.55}),"--white","color"));d.position.lerpVectors(p0,p1,n?k/n:0);scene.add(d);objs.push(d)}}}
     else{for(let s=0;s<2;s++){if(pts[s].distanceTo(pts[s+1])<1e-3)continue;
       const cc=r.type==="baton"?col("--warn"):new THREE.Color(0x6f7886);
-      const m=new THREE.Mesh(new THREE.TubeGeometry(new THREE.LineCurve3(pts[s],pts[s+1]),1,r.type==="baton"?0.02:0.014,6,false),new THREE.MeshStandardMaterial({color:cc,emissive:cc,emissiveIntensity:r.type==="baton"?.4:0,roughness:.6,transparent:true,opacity:r.kind==="inf"?.5:.9}));scene.add(m);objs.push(m)}}
+      const mm=new THREE.MeshStandardMaterial({color:cc,emissive:cc,emissiveIntensity:r.type==="baton"?.4:0,roughness:.6,transparent:true,opacity:r.kind==="inf"?.5:.9});if(r.type==="baton")T_(mm,"--warn","color","emissive");
+      const m=new THREE.Mesh(new THREE.TubeGeometry(new THREE.LineCurve3(pts[s],pts[s+1]),1,r.type==="baton"?0.02:0.014,6,false),mm);scene.add(m);objs.push(m)}}
     links.push({r,objs})});
 
   /* 標籤 */
   anchors.zhuo.top=0.95;
   const labels={};
-  MEMBERS.forEach(m=>{const el=document.createElement("div");el.className="lab";el.innerHTML=`<i style="background:var(${LANES[m.lane].v})"></i><span>${esc(m.name)}</span>${m.grad?"<em>已畢業</em>":""}`;el.dataset.m=m.id;labelsEl.appendChild(el);labels[m.id]=el});
-  const ring=new THREE.Mesh(new THREE.RingGeometry(0.5,0.58,48),new THREE.MeshBasicMaterial({color:col("--warn"),transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false}));
+  MEMBERS.forEach(m=>{const el=document.createElement("div");el.className="lab";el.innerHTML=`<i style="background:var(${LANES[m.lane].v})"></i><span>${esc(m.name)}</span>${m.grad?`<em>${t_("grad")}</em>`:""}`;el.dataset.m=m.id;labelsEl.appendChild(el);labels[m.id]=el});
+  const ring=new THREE.Mesh(new THREE.RingGeometry(0.5,0.58,48),glowMat(col("--warn"),0,"--warn"));
   ring.rotation.x=-Math.PI/2;ring.position.y=0.008;scene.add(ring);
 
   let showPh=true;
@@ -477,7 +612,15 @@ renderPanel(null);renderList();
     Object.entries(labels).forEach(([id,el])=>{el.classList.toggle("dim",!!rel&&!rel.has(id));el.classList.toggle("sel",id===selected)});
     const a=selected&&anchors[selected];ring.material.opacity=a?.9:0;if(a)ring.position.set(a.x,byId[selected].lane==="N"?-0.24:0.008,a.z);
   }
-  bench={onSelect:()=>refresh()};
+  function setTheme(){
+    const L=light();scene.background=new THREE.Color(css("--bg"));scene.fog.color.set(css("--bg"));
+    side.color.set(L?0xa9afb6:0x15181d);amb.intensity=L?.78:.42;amb.color.set(L?0xffffff:0x8a96a8);key.intensity=L?.7:.85;
+    tops.forEach(([m,w,d])=>{m.map.dispose();m.map=holeTex(w,d);m.needsUpdate=true});
+    glows.forEach(m=>{m.blending=L?THREE.NormalBlending:THREE.AdditiveBlending;m.needsUpdate=true});
+    themed.forEach(([m,v,props])=>props.forEach(p=>m[p].set(css(v))));
+  }
+  setTheme();
+  bench={onSelect:()=>refresh(),setTheme};
 
   const ray=new THREE.Raycaster(),ptr=new THREE.Vector2();let down=null,hover=null;
   function pickAt(e){const r=renderer.domElement.getBoundingClientRect();ptr.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);ray.setFromCamera(ptr,camera);const h=ray.intersectObjects(pick)[0];return h?h.object.userData.id:null}
@@ -520,7 +663,10 @@ renderPanel(null);renderList();
     controls.update();
     const W=host.clientWidth,H=host.clientHeight;
     for(const [id,el] of Object.entries(labels)){const a=anchors[id];if(!a)continue;v.set(a.x,a.top,a.z).project(camera);
-      el.style.transform=`translate(${(v.x*0.5+0.5)*W}px,${(-v.y*0.5+0.5)*H}px) translate(-50%,-100%)`;el.style.visibility=v.z<1?"visible":"hidden"}
+      // 標籤夾在畫布內，手機窄畫面邊緣的名字才不會被切掉
+      const lw=el.offsetWidth,lh=el.offsetHeight;let px=(v.x*0.5+0.5)*W,py=(-v.y*0.5+0.5)*H;
+      px=Math.min(Math.max(px,lw/2+4),W-lw/2-4);py=Math.min(Math.max(py,lh+4),H-4);
+      el.style.transform=`translate(${px}px,${py}px) translate(-50%,-100%)`;el.style.visibility=v.z<1?"visible":"hidden"}
     beams.forEach(b=>{const n=b.photons.length;b.photons.forEach((p,k)=>{if(!p.visible)return;const u=reduce?(k+0.5)/n:((t*0.8/b.L+b.off+k/n)%1);p.position.copy(pointAt(b,u*b.L))})});
     figs.forEach(f=>animate(f,t));
     if(selected&&anchors[selected])ring.scale.setScalar(1+0.04*Math.sin(t*3));
