@@ -5,7 +5,7 @@ window.SITE_DATA={
   "statement": "用光學看見組織，推進無標記診斷。",
   "description": "結合非線性光學、定量影像與人工智慧，研究癌症和組織結構，開發走向臨床的成像工具。",
   "official": "https://ewinkuo1-sudo.github.io/zhuo-lab-site/",
-  "owl": "https://ewinkuo1-sudo.github.io/owl-toys/",
+  "owl": "https://ewinkuo1-sudo.github.io/cat-toys/",
   "stations": [
    {
     "key": "microscopy",
@@ -47,27 +47,27 @@ window.SITE_DATA={
     "toys": [
      {
       "title": "FLIM Phasor 遊樂場",
-      "url": "https://ewinkuo1-sudo.github.io/owl-toys/flim-phasor-playground.html",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/flim-phasor-playground.html",
       "desc": "螢光壽命怎麼變成一張 phasor 圖。"
      },
      {
       "title": "CARS 拍頻遊樂場",
-      "url": "https://ewinkuo1-sudo.github.io/owl-toys/cars-beat-playground.html",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/cars-beat-playground.html",
       "desc": "兩道雷射拍頻，怎麼讀出分子振動。"
      },
      {
       "title": "FV300 3D 互動顯微鏡",
-      "url": "https://ewinkuo1-sudo.github.io/owl-toys/fv300-3d-microscope.html",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/fv300-3d-microscope.html",
       "desc": "打開雷射掃描顯微鏡，跟著光走到偵測器。"
      },
      {
       "title": "共軛焦 Pinhole 模擬",
-      "url": "https://ewinkuo1-sudo.github.io/owl-toys/pinhole-playground.html",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/pinhole-playground.html",
       "desc": "切片厚度和收光量，怎麼取捨。"
      },
      {
       "title": "脈衝串 ↔ 頻率梳",
-      "url": "https://ewinkuo1-sudo.github.io/owl-toys/pulse-comb-playground.html",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/pulse-comb-playground.html",
       "desc": "脈衝雷射為什麼是一支頻率梳，和壽命量測有什麼關係。"
      }
     ]
@@ -119,17 +119,17 @@ window.SITE_DATA={
     "toys": [
      {
       "title": "SHG 互動教室",
-      "url": "https://ewinkuo1-sudo.github.io/owl-toys/shg-academy.html",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/shg-academy.html",
       "desc": "倍頻訊號從哪來、為什麼膠原特別亮。"
      },
      {
       "title": "P-SHG 偏振遊樂場",
-      "url": "https://ewinkuo1-sudo.github.io/owl-toys/pshg-polar-playground.html",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/pshg-polar-playground.html",
       "desc": "轉偏振、看花瓣圖，讀出纖維方向。"
      },
      {
       "title": "P-SHG 影像實驗室",
-      "url": "https://ewinkuo1-sudo.github.io/owl-toys/pshg-image-lab.html",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/pshg-image-lab.html",
       "desc": "從一疊偏振影像，逐像素算出纖維方向圖。"
      }
     ]
@@ -181,7 +181,7 @@ window.SITE_DATA={
     "toys": [
      {
       "title": "反卷積互動實驗台",
-      "url": "https://ewinkuo1-sudo.github.io/owl-toys/deconvolution-playground.html",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/deconvolution-playground.html",
       "desc": "分析之前：模糊、光子雜訊，影像能救回多少。"
      }
     ]
@@ -225,7 +225,7 @@ window.SITE_DATA={
   "statement": "See tissue through light. Advance label-free diagnosis.",
   "description": "We combine nonlinear optics, quantitative imaging and AI to study cancer and tissue structure, and develop imaging tools for clinical translation.",
   "official": "https://ewinkuo1-sudo.github.io/zhuo-lab-site/",
-  "owl": "https://ewinkuo1-sudo.github.io/owl-toys/",
+  "owl": "https://ewinkuo1-sudo.github.io/cat-toys/",
   "stations": [
    {
     "key": "microscopy",
@@ -267,27 +267,27 @@ window.SITE_DATA={
     "toys": [
      {
       "title": "FLIM phasor playground",
-      "url": "https://ewinkuo1-sudo.github.io/owl-toys/flim-phasor-playground.html?lang=en",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/flim-phasor-playground.html?lang=en",
       "desc": "How fluorescence lifetimes become a phasor plot."
      },
      {
       "title": "CARS beat playground",
-      "url": "https://ewinkuo1-sudo.github.io/owl-toys/cars-beat-playground.html?lang=en",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/cars-beat-playground.html?lang=en",
       "desc": "How two beating lasers read out molecular vibrations."
      },
      {
       "title": "FV300 3D microscope",
-      "url": "https://ewinkuo1-sudo.github.io/owl-toys/fv300-3d-microscope.html?lang=en",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/fv300-3d-microscope.html?lang=en",
       "desc": "Open up a laser-scanning microscope and follow the light to the detectors."
      },
      {
       "title": "Confocal pinhole simulator",
-      "url": "https://ewinkuo1-sudo.github.io/owl-toys/pinhole-playground.html?lang=en",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/pinhole-playground.html?lang=en",
       "desc": "Trade optical-section thickness against collected light."
      },
      {
       "title": "Pulse train ↔ frequency comb",
-      "url": "https://ewinkuo1-sudo.github.io/owl-toys/pulse-comb-playground.html?lang=en",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/pulse-comb-playground.html?lang=en",
       "desc": "Why a pulsed laser is a comb of frequencies, and what that means for lifetime detection."
      }
     ]
@@ -339,17 +339,17 @@ window.SITE_DATA={
     "toys": [
      {
       "title": "SHG academy",
-      "url": "https://ewinkuo1-sudo.github.io/owl-toys/shg-academy.html?lang=en",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/shg-academy.html?lang=en",
       "desc": "Where the frequency-doubled signal comes from, and why collagen is bright."
      },
      {
       "title": "P-SHG polarization playground",
-      "url": "https://ewinkuo1-sudo.github.io/owl-toys/pshg-polar-playground.html?lang=en",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/pshg-polar-playground.html?lang=en",
       "desc": "Rotate the polarization and read fibre orientation from the polar plot."
      },
      {
       "title": "P-SHG image lab",
-      "url": "https://ewinkuo1-sudo.github.io/owl-toys/pshg-image-lab.html?lang=en",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/pshg-image-lab.html?lang=en",
       "desc": "From a stack of polarization images to pixel-by-pixel fibre-orientation maps."
      }
     ]
@@ -401,7 +401,7 @@ window.SITE_DATA={
     "toys": [
      {
       "title": "Deconvolution playground",
-      "url": "https://ewinkuo1-sudo.github.io/owl-toys/deconvolution-playground.html?lang=en",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/deconvolution-playground.html?lang=en",
       "desc": "Before analysis: blur, photon noise, and how far an image can be restored."
      }
     ]
