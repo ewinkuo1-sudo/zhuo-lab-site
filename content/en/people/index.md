@@ -10,7 +10,7 @@ sections:
       title: People
       subtitle: The lab on one optical table
       text: |
-        The PI is the laser head. Its white beam is split into four coloured paths, one per research direction, and every member is a component on their path with a small figure at work beside it. Click a component or figure to see what that person does and who they work with, then use the profile link to jump to their card below. The badge on each card matches the colour of their path. The island is in Chinese for now.
+        The PI is the laser head. Its white beam is split into four coloured paths, one per research direction, and every member is a component on their path with a small figure at work beside it. Click a component or figure to see what that person does and who they work with, then use the profile link to jump to their card below. The badge on each card matches the colour of their path.
 
         <iframe id="member-island-frame" src="../member-island/?lang=en" title="Member island: the lab on one optical table" style="width:100%;height:min(860px,88vh);border:1px solid rgba(128,128,128,.25);border-radius:12px;background:#faf8f4"></iframe>
 
