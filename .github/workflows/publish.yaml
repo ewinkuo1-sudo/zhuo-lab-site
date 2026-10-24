@@ -3,7 +3,7 @@ name: Deploy website to GitHub Pages and Cloudflare
 env:
   WC_HUGO_VERSION: '0.135.0'
   # Cloudflare Workers mirror. Same build, different base URL (root domain instead of /zhuo-lab-site/).
-  CF_BASE_URL: 'https://zhuo-lab-site.emd-sleep-interactive.workers.dev/'
+  CF_BASE_URL: 'https://zhuo-lab-site.zhuo-lab.workers.dev/'
 
 on:
   # Trigger the workflow every time you push to the `main` branch

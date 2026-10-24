@@ -28,7 +28,7 @@ Built with [Hugo Blox](https://hugoblox.com) (research-group template, blox-boot
 | Target | URL | How it deploys |
 |---|---|---|
 | GitHub Pages | https://ewinkuo1-sudo.github.io/zhuo-lab-site/ | `publish.yaml` → `build` + `deploy` jobs on every push to `main` |
-| Cloudflare Workers | https://zhuo-lab-site.emd-sleep-interactive.workers.dev/ | `publish.yaml` → `cloudflare` job; needs the repo secret `CLOUDFLARE_API_TOKEN` (Workers Scripts: Edit). Without the secret the job is skipped |
+| Cloudflare Workers | https://zhuo-lab-site.zhuo-lab.workers.dev/ | `publish.yaml` → `cloudflare` job; needs the repo secret `CLOUDFLARE_API_TOKEN` (Workers Scripts: Edit). Without the secret the job is skipped |
 
 Both come from the same source; only `--baseURL` differs (`CF_BASE_URL` in the workflow). The Cloudflare copy is the one to
 attach a custom domain to later (Workers → Settings → Domains & Routes), then update `CF_BASE_URL` and `baseURL` in `config/_default/hugo.yaml`.
@@ -36,7 +36,7 @@ attach a custom domain to later (Workers → Settings → Domains & Routes), the
 Manual deploy from a machine that is logged in with `wrangler login`:
 
 ```bash
-hugo --minify --baseURL "https://zhuo-lab-site.emd-sleep-interactive.workers.dev/"
+hugo --minify --baseURL "https://zhuo-lab-site.zhuo-lab.workers.dev/"
 npx wrangler deploy
 ```
 
