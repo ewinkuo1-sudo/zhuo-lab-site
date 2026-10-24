@@ -22,7 +22,7 @@
 
   {{ if $block.content.integrated }}
   {{/* 四個方向是一條流程的四段，不是四個平行題目：卡片上方先放一行順序。 */}}
-  <div class="col-12">
+  <div class="col-md-12 zl-flow-wrap">
     <ol class="zl-flow" aria-label="{{ if eq $page.Language.Lang "zh" }}研究流程{{ else }}Research pipeline{{ end }}">
       {{ range $block.content.items }}
       {{ $href := .url }}{{ if not (urls.Parse $href).Scheme }}{{ $href = partial "lab_url" $href }}{{ end }}
