@@ -50,6 +50,12 @@ h1{font-weight:700;font-size:clamp(25px,3.6vw,36px);line-height:1.25;margin:0;te
 button:focus-visible,a:focus-visible,.chip:focus-visible,.card:focus-visible{outline:2px solid var(--warn);outline-offset:2px}
 
 .mapview{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px;align-items:start}
+/* 說明欄可收合：收起時桌子占滿整列（嵌在官網時預設收起，點成員才展開） */
+.mapview.panel-off{grid-template-columns:minmax(0,1fr)}
+.mapview.panel-off .panel{display:none}
+.panel{position:relative}
+.panel-x{position:sticky;top:0;align-self:flex-end;margin:-8px -10px -40px 0;z-index:1;font:inherit;font-size:18px;line-height:1;width:30px;height:30px;border-radius:6px;border:1px solid var(--line);background:var(--raised);color:var(--muted);cursor:pointer}
+.panel-x:hover{color:var(--ink);border-color:var(--muted)}
 .stagebox{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg);height:min(76vh,720px);min-height:400px}
 #stage{position:absolute;inset:0}
 #stage canvas{display:block;touch-action:none}
@@ -174,6 +180,7 @@ footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);paddin
         <button id="btn-spin" aria-pressed="false" data-t="bSpin">旋轉</button>
         <button id="btn-top" aria-pressed="false" data-t="bTop">俯視</button>
         <button id="btn-reset" data-t="bAll">全部</button>
+        <button id="btn-panel" aria-pressed="true" data-t="bPanel">說明</button>
       </div>
     </div>
     <aside class="panel" id="panel" aria-live="polite"></aside>
@@ -288,6 +295,7 @@ const EN={
   ]
 };
 const T={zh:{
+  close:"收起說明",
   views:"檢視方式",legendH:"怎麼看這張桌子",fourPaths:"四條光路",clickHint:"點桌上的元件、小人或標籤看介紹。",
   lg:[["雷射頭＝老師","唯一光源。題目由老師分配，白光從這裡出來。"],["二向色鏡＝分方向","白光被分成四種顏色，一種顏色一個研究方向。"],
       ["元件＝成員","每個人是自己那條光路上的一個元件，架光路的是振鏡、物鏡，做分析的是偵測器、工作站。同方向的人前後排，前面的人輸出給後面的人。"],
@@ -300,7 +308,7 @@ const T={zh:{
   eyebrow:"TBL · Zhuo Lab · People",laser:"CLASS 4 · LASER IN USE",h1:"The lab on one optical table",
   lede:"The professor is the laser head. Dichroic mirrors split the white light into four colors, one per research direction. Each member is a component on their own path, and the little figure beside it is them at work. Click a component or a figure to learn more.",
   tabMap:"Optical table",tabList:"List",views:"View",stage:"Schematic beam path: the professor's laser is split by dichroic mirrors into four colored paths, and each member is a component on a path. For the full text, use the List view.",
-  plate:"Schematic beam path, not the real setup",bLabels:"Labels",bPhotons:"Photons",bSpin:"Rotate",bTop:"Top view",bAll:"All",
+  plate:"Schematic beam path, not the real setup",bLabels:"Labels",bPhotons:"Photons",bSpin:"Rotate",bTop:"Top view",bAll:"All",bPanel:"Guide",close:"Close panel",
   foot1:"The beam paths are schematic, not the lab's real setup. Who sits on which path, and as which component, follows each person's current project and will change as people come and go. Graduates sit at the front of their path, handing their topic to the people behind them.",
   foot2:"Compiled from the People page of the lab website, lab notes, and group meetings from September to October 2026. Collaboration lines show only what was stated in meetings; inferred ones are marked. Last updated 2026-10-24.",
   legendH:"How to read this table",fourPaths:"Four paths",clickHint:"Click a component, figure or label on the table to learn more.",
@@ -341,6 +349,10 @@ function relRows(id){
     return `<div class="r"><span class="t ${r.type}">${t_(r.type==="sample"?"sample":r.type==="baton"?"baton":"data")}</span><div>${dir} ${chip(other)}<br>${esc(r.text)}<span class="${r.kind==="said"?"said":"inf"}">${t_(r.kind==="said"?"said":"inf")}</span><br><span class="src">${esc(r.src)}</span></div></div>`}).join("")}</div></div>`}
 function renderPanel(id){
   const el=document.getElementById("panel");
+  renderPanelBody(id,el);
+  el.insertAdjacentHTML("afterbegin",`<button class="panel-x" type="button" aria-label="${t_("close")}" title="${t_("close")}" onclick="setPanel(false)">×</button>`);
+}
+function renderPanelBody(id,el){
   if(!id){
     const sw=["var(--white)","linear-gradient(90deg,var(--gA),var(--gB),var(--gC),var(--gD))","var(--tape);box-shadow:inset 0 0 0 1px var(--muted)","var(--chipt)","var(--warn)","var(--gX)"];
     el.innerHTML=`<h2>${t_("legendH")}</h2>
@@ -372,7 +384,11 @@ function renderList(){
 function showView(v){document.querySelectorAll("[data-view]").forEach(b=>b.setAttribute("aria-selected",b.dataset.view===v));
   for(const k of["map","list"])document.getElementById("view-"+k).hidden=k!==v;if(v==="map"&&window.__resize)window.__resize()}
 let selected=null,bench=null;
-function select(id){selected=id;renderPanel(id);if(bench)bench.onSelect(id)}
+function select(id){selected=id;renderPanel(id);if(id)setPanel(true);if(bench)bench.onSelect(id)}
+function setPanel(on){document.getElementById("view-map").classList.toggle("panel-off",!on);document.getElementById("btn-panel").setAttribute("aria-pressed",on)}
+// 嵌在官網或窄畫面時預設收起說明欄，桌子才看得清楚；單獨開在寬螢幕維持展開
+setPanel(!(EMBED||matchMedia("(max-width:960px)").matches));
+document.getElementById("btn-panel").onclick=()=>setPanel(document.getElementById("view-map").classList.contains("panel-off"));
 // 官網成員頁的卡片按「在成員島看他」時，父頁用 postMessage 送 slug 或 id 過來。
 window.addEventListener("message",e=>{const d=e&&e.data||{};if(!d.sel)return;
   const m=byId[d.sel]||MEMBERS.find(x=>x.slug===d.sel);if(m){select(m.id);showView("map")}});
@@ -642,7 +658,12 @@ let THEME=THEME0;
   let camGoal=null;tog("btn-top",v=>{camGoal=(v?TOP:OBL).clone()});
   document.getElementById("btn-reset").onclick=()=>select(null);
 
-  function resize(){const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);renderer.domElement.style.width=w+"px";renderer.domElement.style.height=h+"px";camera.aspect=w/h;camera.fov=w<560?54:36;camera.updateProjectionMatrix()}
+  function resize(){const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);renderer.domElement.style.width=w+"px";renderer.domElement.style.height=h+"px";camera.aspect=w/h;camera.fov=w<560?54:36;
+    // 說明欄收起後畫布變很寬，鏡頭距離是照近方形調的，桌子會縮在中間：依寬高比放大，最多 1.45 倍
+    camera.zoom=Math.min(1.45,Math.max(1,1+(w/h-1.1)*0.3));
+    // 放大後桌子下緣會壓到左下工具列：畫面往上推，放越大推越多（最多畫布高的 10%）
+    const dy=h*0.1*(camera.zoom-1)/0.45;if(dy>0.5)camera.setViewOffset(w,h,0,dy,w,h);else camera.clearViewOffset();
+    camera.updateProjectionMatrix()}
   window.__resize=resize;new ResizeObserver(resize).observe(host);resize();
 
   const v=new THREE.Vector3(),clock=new THREE.Clock(),tmp=new THREE.Vector3(),wp=new THREE.Vector3();
