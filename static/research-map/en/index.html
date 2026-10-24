@@ -226,7 +226,7 @@ const intro=EN?`<article class="step" id="st-0" data-i="0"><div class="card">
 const stepHTML=(s,i)=>{
   const fig=s.figure?`<figure><a class="img" href="${esc(BASE+s.figure.src)}" target="_blank" rel="noopener"><img src="${esc(BASE+s.figure.src)}" width="${s.figure.w}" height="${s.figure.h}" alt="${esc(s.figure.alt)}" loading="lazy" decoding="async"></a>
     <figcaption>${esc(s.figure.caption)}<br>${esc(s.figure.credit)}${s.figure.source?` · <a href="${esc(s.figure.source)}">${t("原文","Article")}</a> · <a href="${esc(s.figure.license)}">CC BY 4.0</a>`:""}</figcaption></figure>`:"";
-  const toys=s.toys.length?`<div><h3>${t("動手玩","Try it yourself (pages in Chinese)")}</h3><div class="toys">${s.toys.map(t=>`<a class="toy" href="${esc(t.url)}" target="_blank" rel="noopener"><b>${esc(t.title)} ↗</b><small>${esc(t.desc)}</small></a>`).join("")}</div></div>`:"";
+  const toys=s.toys.length?`<div><h3>${t("動手玩","Try it yourself")}</h3><div class="toys">${s.toys.map(t=>`<a class="toy" href="${esc(t.url)}" target="_blank" rel="noopener"><b>${esc(t.title)} ↗</b><small>${esc(t.desc)}</small></a>`).join("")}</div></div>`:"";
   return `<article class="step" id="st-${i+1}" data-i="${i+1}"><div class="card">
   <div class="kicker"><span class="n">${t(`第 ${i+1} 站`,`Station ${i+1}`)}</span><span class="verb">${esc(s.verb)}</span>${s.developing?`<span class="tag-dev">${t("發展中","In development")}</span>`:""}</div>
   <h2>${esc(s.name)}</h2>
@@ -243,7 +243,7 @@ const endHTML=`<article class="step end" id="st-${D.stations.length+1}" data-i="
   <div class="kicker"><span class="n" style="color:var(--navy-active)">${t("終點","Destination")}</span></div>
   <h2>${esc(D.statement)}</h2>
   <p>${t("看得到、讀得懂、判得準、到得了：四個方向接在同一條光路上，終點是不必染色的組織診斷。前三站已有論文支持，內視鏡微型化仍在發展中。","See, Quantify, Classify, Reach: four directions on one optical path, ending in tissue diagnosis without staining. The first three have published support; miniaturized endomicroscopy is still in development.")}</p>
-  <div class="links"><a href="${esc(OFFICIAL)}">${t("實驗室官網 →","Lab website →")}</a><a href="${esc(OFFICIAL)}research/">${t("研究方向與成果 →","Research and results →")}</a><a href="${esc(D.owl)}" target="_blank" rel="noopener">${t("光學互動教材 ↗","Interactive optics toys (in Chinese) ↗")}</a></div>
+  <div class="links"><a href="${esc(OFFICIAL)}">${t("實驗室官網 →","Lab website →")}</a><a href="${esc(OFFICIAL)}research/">${t("研究方向與成果 →","Research and results →")}</a><a href="${esc(D.owl+t("","?lang=en"))}" target="_blank" rel="noopener">${t("光學互動教材 ↗","Interactive optics toys ↗")}</a></div>
 </div></article>`;
 document.getElementById("steps").innerHTML=intro+D.stations.map(stepHTML).join("")+endHTML;
 const N=D.stations.length+2; // 起點＋四站＋終點
