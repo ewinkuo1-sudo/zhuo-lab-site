@@ -18,7 +18,10 @@ zh:
         url: '/#research'
         weight: 10
       - name: 研究地圖
-        url: '/research-map/'   # static/research-map/，單頁捲動敘事＋3D 光路
+        # static/research-map/，單頁捲動敘事＋3D 光路。
+        # 不能寫 '/research-map/'：它不對應任何 zh 內容頁，Hugo 會渲染成 /zh/zhuo-lab-site/research-map/（404）。
+        # 相對路徑從 /zhuo-lab-site/zh/ 往上一層，瀏覽器解析成 /zhuo-lab-site/research-map/。
+        url: '../research-map/'
         weight: 15
       - name: 論文
         url: '/#publications'
