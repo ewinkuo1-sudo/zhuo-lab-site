@@ -41,7 +41,6 @@ sections:
         2. A few sentences on which research direction interests you and why.
         3. Your earliest possible start date.
 
-        <!-- TODO(老師確認): 是否公開 email 或改用表單；招生名額與具體背景要求；是否列合作醫師。 -->
     design:
       columns: '1'
   - block: lab_video

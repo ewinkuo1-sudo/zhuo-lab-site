@@ -33,7 +33,6 @@ sections:
         2. 幾句話說明你對哪個研究方向有興趣、為什麼。
         3. 最早可以開始的時間。
 
-        <!-- TODO(老師確認): 公開 email 或改表單；名額與背景要求；是否列合作醫師。 -->
     design:
       columns: '1'
   - block: lab_video

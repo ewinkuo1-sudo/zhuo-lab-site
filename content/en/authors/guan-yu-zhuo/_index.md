@@ -63,7 +63,6 @@ His research advances label-free optical imaging, in particular multimodal nonli
 - Co-editor, *Advanced Biophysical Techniques in Biosciences*, Springer Cham, 2025
 - Chapter, "Nanoparticle Based Collagen Biomaterials for Wound Healing", in *Collagen Biomaterials*, IntechOpen
 
-<!-- TODO(老師確認): 計畫年份由編號推算，請核對；其他榮譽、學會服務、審稿請補。 -->
 
 
 ### Institutional profile and contact

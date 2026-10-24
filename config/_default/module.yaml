@@ -4,7 +4,7 @@
 ############################
 
 imports:
-  - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-plugin-decap-cms
+  # blox-plugin-decap-cms 拿掉：站上沒有 /admin/ 後台，它只會讓首頁多載 netlify-identity-widget.js（234 KB 第三方腳本）。
   - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-plugin-netlify
   - path: github.com/HugoBlox/hugo-blox-builder/modules/blox-bootstrap/v5
 

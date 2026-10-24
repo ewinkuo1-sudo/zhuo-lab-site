@@ -126,6 +126,9 @@ footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);paddin
   .stagebox{height:62vh;min-height:360px}
 }
 @media (max-width:480px){.plate{display:none}}
+/* 嵌在官網成員頁時，頁面上方已有標題與同一段說明，島內的標題區不再重複 */
+[data-embed] .top .brand{display:none}
+[data-embed] .top{justify-content:flex-end}
 </style>
 <script>
 /* 先決定主題與語言，避免先閃一下深色。網址參數優先；嵌在官網（iframe）固定淺色；單獨開時用記住的選擇，否則跟系統。 */
@@ -137,6 +140,7 @@ footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);paddin
   if(t!=="light"&&t!=="dark")t=emb?"light":(saved||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
   var l=Q.get("lang");
   if(l!=="en"&&l!=="zh"){l="zh";try{if(emb&&!/\/zh\//.test(window.top.location.pathname))l="en"}catch(e){}}
+  if(emb)document.documentElement.dataset.embed="1";
   document.documentElement.dataset.theme=t;document.documentElement.lang=l==="en"?"en":"zh-Hant";
   window.__MI={theme:t,lang:l,embedded:emb,themeFromUser:!!(Q.get("theme")||saved)};
 })();

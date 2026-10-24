@@ -26,7 +26,6 @@ sections:
         Collaborators and students from other groups who wish to use the instruments should
         [contact Dr. Zhuo](../contact/) to arrange access and training.
 
-        <!-- TODO(老師確認): 儀器照片；各系統詳細規格待老師確認後補上。 -->
     design:
       columns: '1'
 ---

@@ -798,7 +798,8 @@ a, .btn { transition: color .18s ease, background-color .18s ease, border-color 
 // Landing pages: hooks/body-end/zl-motion.html toggles .zl-scrolled on .page-header; inner pages: Headroom's .headroom--not-top.
 .navbar { transition: box-shadow .3s ease, background-color .3s ease; }
 .page-header.zl-scrolled .navbar, .navbar.headroom--not-top { box-shadow: 0 2px 14px rgba(8, 20, 34, .35); }
-.zl-motion .navbar .navbar-nav .nav-link:not(.active) {
+// 下拉選單（語言、Research 等）的 ::after 是 Bootstrap 的箭頭，不能拿來做底線，否則箭頭被拉成橫槓壓在字上。
+.zl-motion .navbar .navbar-nav .nav-link:not(.active):not(.dropdown-toggle) {
   position: relative;
   &::after {
     content: ""; position: absolute; left: .5rem; right: .5rem; bottom: .55rem; height: 1px;
@@ -874,5 +875,14 @@ a.zl-station-full:hover { border-color: var(--st); }
 @media (max-width: 991.98px) {
   .i18n-dropdown .dropdown-toggle::after {
     display: none;
+  }
+}
+
+// 手機展開的選單是疊在首圖上的絕對定位面板，底色和首圖暗部一樣，沒有分界時首圖的 email、標語看起來像選單項目。
+@media (max-width: 991.98px) {
+  .navbar .navbar-collapse.show,
+  .navbar .navbar-collapse.collapsing {
+    border-bottom: 1px solid rgba($zl-light-accent, .35);
+    box-shadow: 0 14px 24px rgba(8, 20, 34, .45);
   }
 }

@@ -8,7 +8,15 @@ zh:
   weight: 2
   title: 卓冠宇實驗室 國立陽明交通大學生醫光電研究所   # TODO(老師確認): 實驗室正式中文名稱
   params:
-    description: 轉譯生醫光電、無標記非線性光學顯微、AI 輔助病理影像分析、微型化非線性內視顯微術
+    # 主題的 <meta description>／og:description 讀 marketing.seo.description，只寫 params.description 會讓中文頁顯示英文。
+    # 其他 seo 鍵照抄 params.yaml，避免語言參數只淺層合併時被清空。
+    marketing:
+      seo:
+        site_type: Organization
+        local_business_type: ''
+        org_name: 'Zhuo Lab, Institute of Biophotonics, National Yang Ming Chiao Tung University'
+        description: 轉譯生醫光電：無標記非線性光學顯微、膠原蛋白偏振 SHG 影像、AI 輔助病理影像分析，以及走向臨床診斷的微型化非線性內視顯微術。
+        twitter: ''
     footer:
       copyright:
         notice: '© {year} 卓冠宇實驗室 · 國立陽明交通大學生醫光電研究所 · 台北市北投區立農街二段 155 號'

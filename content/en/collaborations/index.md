@@ -69,7 +69,6 @@ sections:
 
         Clinicians and pathologists interested in a pilot study: [contact us](../contact/).
 
-        <!-- TODO(老師確認): 每個合作案的醫院、科別、合作醫師姓名與是否可公開；進行中未發表的案子要不要列；食道癌全片掃描目前是「進行中」還是「規劃中」（2026-10-24 統一改成保守寫法，與研究頁一致）。 -->
     design:
       columns: '1'
 ---

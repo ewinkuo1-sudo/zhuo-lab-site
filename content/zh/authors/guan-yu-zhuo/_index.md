@@ -64,7 +64,6 @@ user_groups:
 - 共同編者，《Advanced Biophysical Techniques in Biosciences》，Springer Cham, 2025
 - 專章，"Nanoparticle Based Collagen Biomaterials for Wound Healing"，收於《Collagen Biomaterials》，IntechOpen
 
-<!-- TODO(老師確認): 本頁為英文版的中譯，職稱、系所名稱與計畫名稱的中文寫法請核對；計畫年份由編號推算。 -->
 
 
 ### 任職機構與聯絡方式
