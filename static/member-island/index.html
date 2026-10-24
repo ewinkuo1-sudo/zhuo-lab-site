@@ -61,7 +61,7 @@ button:focus-visible,a:focus-visible,.chip:focus-visible,.card:focus-visible{out
 .lab span{font-family:var(--f-body);font-size:11.5px}
 .lab.dim{opacity:.25}
 .lab.sel{outline:2px solid var(--warn);outline-offset:1px}
-.hidelabels .lab{display:none}
+.hidelabels .lab:not(.sel){display:none} /* 標籤關掉時，點到的那個人仍顯示名字 */
 .toolbar{position:absolute;left:10px;bottom:10px;display:flex;flex-wrap:wrap;gap:6px;max-width:calc(100% - 20px)}
 .toolbar button{font:inherit;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:4px;border:1px solid var(--line);background:var(--raised);color:var(--ink);cursor:pointer}
 .toolbar button[aria-pressed="false"]{color:var(--muted);background:transparent}
@@ -635,6 +635,8 @@ let THEME=THEME0;
 
   const tog=(id,fn)=>{const b=document.getElementById(id);b.onclick=()=>{const v=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",v);fn(v,b)}};
   tog("btn-labels",v=>box.classList.toggle("hidelabels",!v));
+  // 手機窄畫面十幾個名字會疊成一團：預設關標籤，點元件或小人時只顯示那個人的名字
+  if(matchMedia("(max-width:480px)").matches){document.getElementById("btn-labels").setAttribute("aria-pressed","false");box.classList.add("hidelabels")}
   tog("btn-photons",v=>{showPh=v;refresh()});
   tog("btn-spin",v=>controls.autoRotate=v);
   let camGoal=null;tog("btn-top",v=>{camGoal=(v?TOP:OBL).clone()});
