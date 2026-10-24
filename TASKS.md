@@ -41,6 +41,8 @@
 - [x] 研究地圖路線色點原本只改在官網副本，被英文版覆蓋掉 → 已搬回 research-map 原始檔重建（以後改研究地圖只改原始檔）
 - [ ] 手機上成員島標籤仍很擠（桌子縮太小，原本就有），之後可考慮手機預設關標籤或拉近鏡頭
 - [ ] 研究地圖英文段落用官網 research.json 英文原文，比中文版改寫保守；起點／終點卡、介面字、教材說明的英文是 Claude 寫的，待老師看
+- [x] 手機選單地球圖示旁的下拉箭頭黏在一起像破圖 → lg 以下隱藏箭頭（template.scss）
+- [x] Cloudflare 鏡像成員島 iframe 破圖：主題產生的 _headers 是 X-Frame-Options: DENY → layouts/index.headers 覆寫成 SAMEORIGIN
 
 ## 要老師確認
 - 全片掃描到底是「進行中」還是「待確認」（兩頁現在都寫保守版）
