@@ -864,3 +864,15 @@ a.zl-station-full:hover { border-color: var(--st); }
   .zl-flow li + li::before { display: none; }
   .zl-case-stations { gap: .4rem .7rem; }
 }
+
+// 語言選單：手機只顯示地球圖示（語言名稱 d-none d-lg-inline 被藏起來），
+// 下拉箭頭會直接黏在地球右邊像破圖，所以 lg 以下不顯示箭頭；桌機留一點間距。
+.i18n-dropdown .dropdown-toggle::after {
+  margin-left: 0.35em;
+  vertical-align: 0.15em;
+}
+@media (max-width: 991.98px) {
+  .i18n-dropdown .dropdown-toggle::after {
+    display: none;
+  }
+}
