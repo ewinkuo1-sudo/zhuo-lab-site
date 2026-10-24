@@ -51,7 +51,7 @@
 - [x] Q3 嵌入頁：卡片→島（選中＋捲動）、島→卡片（target=_top）都正常；研究地圖中英手機寬度正常；成員島嵌入時隱藏自己的標題說明（成員頁上方已有同一段）
 - [x] Q4 主控台：11 個主要頁面零錯誤、無 4xx 資源；拿掉沒用的 Decap CMS 外掛（首頁少載 234 KB netlify-identity）
 - [x] Q5 內容：中英成員職稱／光路一致；中文頁 meta description 原本是英文，已修；頁面原始碼裡的 TODO(老師確認) 註解移到 TODO_老師確認.md
-- [ ] Q7 待使用者決定：中文首頁大標仍是英文「Translational Biophotonics Laboratory」與 NYCU 眉標（正式中文名稱待老師）；成員島在手機寬度名字標籤互相重疊
+- [ ] Q7 待使用者決定：中文首頁大標仍是英文「Translational Biophotonics Laboratory」與 NYCU 眉標（正式中文名稱待老師）（成員島手機標籤重疊：10/24 已改成 ≤480 px 預設關標籤、只顯示點到的人）
 - [ ] Q6 手機實機：請使用者用手機看一輪（或 USB 偵錯接 chrome://inspect）
 
 ## 要老師確認
