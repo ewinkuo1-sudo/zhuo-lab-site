@@ -101,6 +101,25 @@ figcaption{font-size:13px;color:var(--muted);line-height:1.6}
 .papers .t{display:block;color:var(--ink);font-weight:500}
 .papers .m{display:block;color:var(--muted);font-size:13px}
 .status{font-size:14px;color:var(--muted);background:var(--bg);border-radius:8px;padding:10px 14px}
+/* 光在這一站：標題下一格，左側色條上半是進來的光、下半是出去的光 */
+.light{display:flex;gap:12px;padding:12px 14px;border-radius:10px;background:var(--bg);border:1px solid var(--line)}
+.light .bline{flex:none;width:5px;border-radius:3px;background:linear-gradient(to bottom,var(--c1),var(--c2))}
+.light h3{margin:0 0 4px}
+.light p{font-size:14.5px;line-height:1.65;color:var(--ink)}
+/* 四種組織 × 四站矩陣（終點前一張卡） */
+.matrix{width:100%;border-collapse:collapse;font-size:14px}
+.matrix th,.matrix td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:center}
+.matrix th:first-child,.matrix td:first-child{text-align:left;font-weight:500;color:var(--ink)}
+.matrix thead th{font-size:12.5px;color:var(--muted);font-weight:500;vertical-align:bottom;line-height:1.4}
+.matrix thead b{display:block;color:var(--navy);font-size:14.5px}
+.matrix .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.matrix .pub,.matrix .goal{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:middle}
+.matrix .pub{background:var(--primary)}
+.matrix .goal{border:2px dashed var(--dev)}
+.matrix .none{color:var(--line)}
+.legend{display:flex;gap:18px;font-size:13px;color:var(--muted);flex-wrap:wrap}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:50%;vertical-align:-1px;margin-right:6px}
+.legend i.pub{background:var(--primary)}.legend i.goal{border:2px dashed var(--dev);width:10px;height:10px}
 .toys{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
 .toy{display:block;padding:10px 12px;border:1px solid var(--line);border-radius:8px;text-decoration:none;color:var(--ink)}
 .toy:hover{border-color:var(--primary)}
@@ -206,17 +225,18 @@ if(EN){sw.textContent="中文";sw.lang="zh-Hant";
   document.getElementById("stage3d").setAttribute("aria-label","Schematic beam path: the laser passes a half-wave plate and scanning galvos into the objective and onto the sample; the signal returns to two detectors and the data go to a workstation; a second branch goes through a fibre to a probe; the destination is a screen with the lab’s goal. Full text is on the right.");
   document.getElementById("stage2d").setAttribute("aria-label","Flat schematic beam path that lights up as you scroll");
 }
-const NAMES=[t("光源","Source"),...D.stations.map(s=>s.verb),t("終點","Destination")];
+const NAMES=[t("光源","Source"),...D.stations.map(s=>s.verb),t("四種組織","Four tissues"),t("終點","Destination")];
 // 四站的顏色與官網首頁色標、成員島四條光路同一套（官網 data/stations.json）。
 const STCOL={microscopy:"#56B4E9",collagen:"#E69F00",ai:"#CC79A7",endomicroscopy:"#009E73"};
 document.getElementById("route").innerHTML=D.stations.map((s,i)=>`<li><a href="#st-${i+1}"><i class="dot" style="background:${STCOL[s.key]||"var(--primary)"}"></i><b>${esc(s.verb)}</b>${esc(s.name)}</a></li>`).join("");
 
-const intro=EN?`<article class="step" id="st-0" data-i="0"><div class="card">
+// data-a＝這一步 3D 光路要顯示到第幾站（起點 0、四站 1–4、矩陣卡沿用 4、終點 5）
+const intro=EN?`<article class="step" id="st-0" data-i="0" data-a="0"><div class="card">
   <div class="kicker"><span class="n">Start</span><span class="verb">A near-infrared laser beam</span></div>
   <h2>How can you see tissue without staining it?</h2>
   <p>The lab uses a near-infrared laser with extremely short pulses. Only at the focal point are the photons dense enough for the tissue itself to emit new light: collagen gives off second-harmonic generation (SHG) at exactly half the wavelength, and molecules in cells give off two-photon fluorescence.</p>
   <p>These signals come from the tissue itself, so no stain is needed. Follow this beam to see how it leads, step by step, towards label-free diagnosis.</p>
-</div></article>`:`<article class="step" id="st-0" data-i="0"><div class="card">
+</div></article>`:`<article class="step" id="st-0" data-i="0" data-a="0"><div class="card">
   <div class="kicker"><span class="n">起點</span><span class="verb">一束近紅外雷射</span></div>
   <h2>不染色，怎麼看見組織？</h2>
   <p>實驗室用的是脈衝極短的近紅外雷射。只有在聚焦的那一點，光子才密集到能讓組織自己發出新的光：膠原蛋白會發出波長剛好減半的倍頻光（SHG），細胞裡的分子會發出雙光子螢光。</p>
@@ -227,9 +247,13 @@ const stepHTML=(s,i)=>{
   const fig=s.figure?`<figure><a class="img" href="${esc(BASE+s.figure.src)}" target="_blank" rel="noopener"><img src="${esc(BASE+s.figure.src)}" width="${s.figure.w}" height="${s.figure.h}" alt="${esc(s.figure.alt)}" loading="lazy" decoding="async"></a>
     <figcaption>${esc(s.figure.caption)}<br>${esc(s.figure.credit)}${s.figure.source?` · <a href="${esc(s.figure.source)}">${t("原文","Article")}</a> · <a href="${esc(s.figure.license)}">CC BY 4.0</a>`:""}</figcaption></figure>`:"";
   const toys=s.toys.length?`<div><h3>${t("動手玩","Try it yourself")}</h3><div class="toys">${s.toys.map(t=>`<a class="toy" href="${esc(t.url)}" target="_blank" rel="noopener"><b>${esc(t.title)} ↗</b><small>${esc(t.desc)}</small></a>`).join("")}</div></div>`:"";
-  return `<article class="step" id="st-${i+1}" data-i="${i+1}"><div class="card">
+  // 光在這一站的色條：上半是進來的光、下半是出去的光（示意色，和圖例同一套）
+  const BC={microscopy:["--w780","--wSHG"],collagen:["--w780","--w780"],ai:["--wSHG","--cable"],endomicroscopy:["--w780","--w780"]}[s.key]||["--w780","--w780"];
+  const light=`<div class="light" style="--c1:var(${BC[0]});--c2:var(${BC[1]})"><span class="bline"></span><div><h3>${t("光在這一站","The light at this station")}</h3><p>${esc(s.beam)}</p></div></div>`;
+  return `<article class="step" id="st-${i+1}" data-i="${i+1}" data-a="${i+1}"><div class="card">
   <div class="kicker"><span class="n">${t(`第 ${i+1} 站`,`Station ${i+1}`)}</span><span class="verb">${esc(s.verb)}</span>${s.developing?`<span class="tag-dev">${t("發展中","In development")}</span>`:""}</div>
   <h2>${esc(s.name)}</h2>
+  ${light}
   <div><h3>${t("研究問題","Research question")}</h3><p class="q">${esc(s.question)}</p></div>
   <div><h3>${t("方法","Method")}</h3><p>${esc(s.method)}</p></div>
   <div><h3>${esc(s.finding_label)}</h3><p>${esc(s.finding)}</p></div>
@@ -239,14 +263,25 @@ const stepHTML=(s,i)=>{
   ${toys}
 </div></article>`};
 
-const endHTML=`<article class="step end" id="st-${D.stations.length+1}" data-i="${D.stations.length+1}"><div class="card">
+// 四種組織 × 四站：資料和官網研究頁同一份 cases.json；3D 不另加站，沿用第 4 站全亮的畫面
+const CI=D.stations.length+1;
+const casesHTML=`<article class="step" id="st-${CI}" data-i="${CI}" data-a="4"><div class="card">
+  <div class="kicker"><span class="n">${t("同一條光路","One beam path")}</span><span class="verb">${t("四種組織","Four tissues")}</span></div>
+  <h2>${t("這些方法用在哪？","Where are these methods used?")}</h2>
+  <p>${t("每一列是一種組織或臨床問題，每一欄是一站。實心點表示已有論文；虛線圈是目標，還沒有發表成果。","Each row is a tissue or clinical question, each column a station. A filled dot means published work; a dashed circle is a goal with no published result yet.")}</p>
+  <table class="matrix"><thead><tr><th>${t("組織","Tissue")}</th>${D.stations.map(s=>`<th><span class="dot" style="background:${esc(s.color)}"></span><b>${esc(s.verb)}</b></th>`).join("")}</tr></thead>
+  <tbody>${D.cases.map(c=>`<tr><td>${esc(c.name)}</td>${D.stations.map(s=>{const v=c.stations[s.key];const lab=v==="published"?t("已發表","Published"):v==="goal"?t("目標","Goal"):t("—","—");return `<td>${v?`<span class="${v==="published"?"pub":"goal"}" role="img" aria-label="${lab}"></span>`:`<span class="none">—</span>`}</td>`}).join("")}</tr>`).join("")}</tbody></table>
+  <div class="legend"><span><i class="pub"></i>${t("已有論文","Published")}</span><span><i class="goal"></i>${t("目標，尚未發表","Goal, not yet published")}</span></div>
+</div></article>`;
+
+const EI=CI+1;
+const endHTML=`<article class="step end" id="st-${EI}" data-i="${EI}" data-a="5"><div class="card">
   <div class="kicker"><span class="n" style="color:var(--navy-active)">${t("終點","Destination")}</span></div>
   <h2>${esc(D.statement)}</h2>
   <p>${t("看得到、讀得懂、判得準、到得了：四個方向接在同一條光路上，終點是不必染色的組織診斷。前三站已有論文支持，內視鏡微型化仍在發展中。","See, Quantify, Classify, Reach: four directions on one optical path, ending in tissue diagnosis without staining. The first three have published support; miniaturized endomicroscopy is still in development.")}</p>
   <div class="links"><a href="${esc(OFFICIAL)}">${t("實驗室官網 →","Lab website →")}</a><a href="${esc(OFFICIAL)}research/">${t("研究方向與成果 →","Research and results →")}</a><a href="${esc(D.owl+t("","?lang=en"))}" target="_blank" rel="noopener">${t("光學互動教材 ↗","Interactive optics toys ↗")}</a></div>
 </div></article>`;
-document.getElementById("steps").innerHTML=intro+D.stations.map(stepHTML).join("")+endHTML;
-const N=D.stations.length+2; // 起點＋四站＋終點
+document.getElementById("steps").innerHTML=intro+D.stations.map(stepHTML).join("")+casesHTML+endHTML;
 
 const stepper=document.getElementById("stepper");
 stepper.innerHTML=NAMES.map((n,i)=>`<button data-go="${i}">${esc(n)}</button>`).join("");
@@ -255,10 +290,11 @@ stepper.onclick=e=>{const b=e.target.closest("button");if(b)document.getElementB
 /* ---------- 捲動 → 目前站 ---------- */
 let active=0;const listeners=[];
 const steps=[...document.querySelectorAll(".step")];
+const actOf=i=>+steps[i].dataset.a; // 步驟編號 → 3D 光路狀態（矩陣卡不另加站，沿用第 4 站）
 function onScroll(){
   const line=innerHeight*0.55;let a=0;
   steps.forEach((s,i)=>{if(s.getBoundingClientRect().top<line)a=i});
-  if(a!==active){active=a;listeners.forEach(f=>f(a))}
+  if(a!==active){active=a;listeners.forEach(f=>f(actOf(a)))}
   steps.forEach((s,i)=>s.classList.toggle("active",i===active));
   [...stepper.children].forEach((b,i)=>{b.classList.toggle("on",i===active);b.classList.toggle("done",i<active)});
 }
@@ -655,7 +691,7 @@ setMode();
 // 網址帶 #st-3 時直接跳到那一站（分享連結、截圖用）
 const jump=location.hash.match(/^#st-(\d+)$/);
 if(jump){document.documentElement.style.scrollBehavior="auto";document.getElementById("st-"+jump[1])?.scrollIntoView({block:"start"})}
-onScroll();listeners.forEach(f=>f(active));
+onScroll();listeners.forEach(f=>f(actOf(active)));
 </script>
 </body>
 </html>

@@ -12,6 +12,25 @@ window.SITE_DATA={
     "verb": "看得到",
     "name": "無標記非線性光學顯微",
     "developing": false,
+    "color": "#56B4E9",
+    "beam": "780 nm 的近紅外光聚在樣品上一點，組織自己發出兩種新的光：膠原蛋白發出波長減半的 390 nm 倍頻光（SHG），細胞分子發出雙光子螢光。二向色鏡把兩種光分開，各進一顆偵測器。",
+    "cases": [
+     {
+      "id": "esophagus",
+      "name": "食道癌",
+      "state": "published"
+     },
+     {
+      "id": "cartilage",
+      "name": "軟骨疾病",
+      "state": "published"
+     },
+     {
+      "id": "oral",
+      "name": "口腔癌",
+      "state": "published"
+     }
+    ],
     "question": "不同的光學對比，如何呈現組織結構與分子特性？",
     "method": "已發表工作以多模態顯微方法結合 SHG、雙光子螢光、螢光生命期成像與 CARS；實際使用的通道與取像順序依實驗而定。",
     "finding": "2021 年論文介紹多模態平台；2025 年食道組織研究以 SHG、雙光子螢光與影像分析比較不同診斷組別的組織。",
@@ -77,6 +96,25 @@ window.SITE_DATA={
     "verb": "讀得懂",
     "name": "膠原蛋白手性與細胞外基質定量",
     "developing": false,
+    "color": "#E69F00",
+    "beam": "半波片把入射光的偏振方向一格一格轉過去。膠原纖維和偏振方向平行時 SHG 最亮，所以從亮度隨角度怎麼變，就能讀出纖維的排列。",
+    "cases": [
+     {
+      "id": "esophagus",
+      "name": "食道癌",
+      "state": "published"
+     },
+     {
+      "id": "cartilage",
+      "name": "軟骨疾病",
+      "state": "published"
+     },
+     {
+      "id": "collagen-score",
+      "name": "膠原蛋白病理分數",
+      "state": "published"
+     }
+    ],
     "question": "如何量化不同組織狀態下的膠原蛋白排列？",
     "method": "偏振解析 SHG 量測訊號隨偏振的變化，取得感受率比值、線偏振程度與纖維方向等參數，描述膠原蛋白的組織特徵。",
     "finding": "2024 年軟骨研究比較正常、骨關節炎與類風濕性關節炎組織，報告各組在偏振衍生參數與膠原排列上的差異。",
@@ -139,6 +177,25 @@ window.SITE_DATA={
     "verb": "判得準",
     "name": "AI 輔助無標記病理",
     "developing": false,
+    "color": "#CC79A7",
+    "beam": "光到這裡已經變成數字。偵測器的訊號經資料線進工作站，組成一張張影像；再從影像裡算出紋理特徵，交給分類器判斷。",
+    "cases": [
+     {
+      "id": "esophagus",
+      "name": "食道癌",
+      "state": "published"
+     },
+     {
+      "id": "oral",
+      "name": "口腔癌",
+      "state": "published"
+     },
+     {
+      "id": "collagen-score",
+      "name": "膠原蛋白病理分數",
+      "state": "published"
+     }
+    ],
     "question": "哪些影像特徵有助於區分不同組織組別？",
     "method": "2025 年食道研究以灰階共現矩陣（GLCM）抽取紋理特徵，使用支持向量機（SVM）分類。2026 年前導研究則探討深度學習與機器學習用於雙光子口腔病灶影像分類。",
     "finding": "2025 年食道研究用 SHG 影像的紋理特徵訓練 SVM，分辨不同診斷組別；2026 年口腔病灶研究則是深度學習與機器學習結合的前導研究。兩者都在各自的資料集內評估，樣本數有限。",
@@ -180,6 +237,11 @@ window.SITE_DATA={
     },
     "toys": [
      {
+      "title": "GLCM 紋理分類遊樂場",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/glcm-texture-playground.html",
+      "desc": "把組織紋理變成數字，再讓 SVM 畫分界線（合成影像）。"
+     },
+     {
       "title": "反卷積互動實驗台",
       "url": "https://ewinkuo1-sudo.github.io/cat-toys/deconvolution-playground.html",
       "desc": "分析之前：模糊、光子雜訊，影像能救回多少。"
@@ -191,6 +253,20 @@ window.SITE_DATA={
     "verb": "到得了",
     "name": "微型化非線性內視顯微術",
     "developing": true,
+    "color": "#009E73",
+    "beam": "光不再走桌上的鏡子，改進光纖送到手持探頭，訊號再沿光纖收回來。飛秒脈衝在光纖裡會被拉寬，所以送進去之前要先補償。",
+    "cases": [
+     {
+      "id": "esophagus",
+      "name": "食道癌",
+      "state": "goal"
+     },
+     {
+      "id": "oral",
+      "name": "口腔癌",
+      "state": "goal"
+     }
+    ],
     "question": "如何把非線性顯微成像帶入更小的探測空間？",
     "method": "把激發光經光纖送到微型探頭、再把訊號收回來，讓非線性顯微離開光學桌。探頭的設計與效能依目標應用而定。",
     "finding": "2021 年的多模態顯微論文是這個方向的技術基礎；微型探頭本身還沒有發表成果。",
@@ -216,7 +292,50 @@ window.SITE_DATA={
      "source": null,
      "license": null
     },
-    "toys": []
+    "toys": [
+     {
+      "title": "光纖脈衝變寬遊樂場",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/fiber-dispersion-playground.html",
+      "desc": "飛秒脈衝為什麼在光纖裡變寬，預補償怎麼拉回來。"
+     }
+    ]
+   }
+  ],
+  "cases": [
+   {
+    "id": "esophagus",
+    "name": "食道癌",
+    "stations": {
+     "microscopy": "published",
+     "collagen": "published",
+     "ai": "published",
+     "endomicroscopy": "goal"
+    }
+   },
+   {
+    "id": "cartilage",
+    "name": "軟骨疾病",
+    "stations": {
+     "microscopy": "published",
+     "collagen": "published"
+    }
+   },
+   {
+    "id": "oral",
+    "name": "口腔癌",
+    "stations": {
+     "microscopy": "published",
+     "ai": "published",
+     "endomicroscopy": "goal"
+    }
+   },
+   {
+    "id": "collagen-score",
+    "name": "膠原蛋白病理分數",
+    "stations": {
+     "collagen": "published",
+     "ai": "published"
+    }
    }
   ]
  },
@@ -232,6 +351,25 @@ window.SITE_DATA={
     "verb": "See",
     "name": "Label-free nonlinear optical microscopy",
     "developing": false,
+    "color": "#56B4E9",
+    "beam": "The 780 nm near-infrared beam is focused to one point on the sample, and the tissue itself emits two new kinds of light: collagen gives second-harmonic generation (SHG) at half the wavelength, 390 nm, and molecules in cells give two-photon fluorescence. A dichroic mirror separates the two, each into its own detector.",
+    "cases": [
+     {
+      "id": "esophagus",
+      "name": "Oesophageal cancer",
+      "state": "published"
+     },
+     {
+      "id": "cartilage",
+      "name": "Cartilage disease",
+      "state": "published"
+     },
+     {
+      "id": "oral",
+      "name": "Oral cancer",
+      "state": "published"
+     }
+    ],
     "question": "How can optical contrasts reveal tissue architecture and molecular properties?",
     "method": "Published work combines SHG, two-photon fluorescence, fluorescence-lifetime imaging and CARS within a multimodal microscopy approach. The contrast channels and acquisition sequence depend on the experiment.",
     "finding": "The 2021 paper presents a multimodal platform. A 2025 esophageal tissue study combines SHG and two-photon fluorescence with image analysis to compare tissue groups. That study includes H&E-stained sections; its figure should not be read as a demonstration that all samples were unstained.",
@@ -297,6 +435,25 @@ window.SITE_DATA={
     "verb": "Quantify",
     "name": "Collagen chirality and extracellular-matrix quantification",
     "developing": false,
+    "color": "#E69F00",
+    "beam": "A half-wave plate rotates the polarization of the incoming light step by step. SHG is brightest when collagen fibres lie parallel to the polarization, so how the brightness changes with angle reveals how the fibres are arranged.",
+    "cases": [
+     {
+      "id": "esophagus",
+      "name": "Oesophageal cancer",
+      "state": "published"
+     },
+     {
+      "id": "cartilage",
+      "name": "Cartilage disease",
+      "state": "published"
+     },
+     {
+      "id": "collagen-score",
+      "name": "Collagen pathology scores",
+      "state": "published"
+     }
+    ],
     "question": "How can collagen organization be quantified across different tissue conditions?",
     "method": "Polarization-resolved SHG measures polarization-dependent signals to derive susceptibility ratios, linear polarization and fibre orientation. These measurements describe aspects of collagen organization.",
     "finding": "The 2024 cartilage study compares normal, osteoarthritic and rheumatoid-arthritis tissues. It reports differences in polarization-derived parameters and collagen organization between these tissue groups.",
@@ -359,6 +516,25 @@ window.SITE_DATA={
     "verb": "Classify",
     "name": "AI-assisted label-free pathology",
     "developing": false,
+    "color": "#CC79A7",
+    "beam": "By this station the light has become numbers. Detector signals travel by cable to the workstation and are assembled into images; texture features are then computed from the images and handed to a classifier.",
+    "cases": [
+     {
+      "id": "esophagus",
+      "name": "Oesophageal cancer",
+      "state": "published"
+     },
+     {
+      "id": "oral",
+      "name": "Oral cancer",
+      "state": "published"
+     },
+     {
+      "id": "collagen-score",
+      "name": "Collagen pathology scores",
+      "state": "published"
+     }
+    ],
     "question": "Which image features can help distinguish tissue groups?",
     "method": "The 2025 esophageal study extracts gray-level co-occurrence matrix (GLCM) texture features and uses support-vector machines (SVM) for classification. A 2026 pilot study investigates deep learning and machine learning for two-photon imaging-based oral-lesion classification.",
     "finding": "Published studies evaluate tissue classification in their respective datasets. The oral-lesion work is a pilot study; these results do not establish a general clinical diagnostic system.",
@@ -400,6 +576,11 @@ window.SITE_DATA={
     },
     "toys": [
      {
+      "title": "GLCM texture classification playground",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/glcm-texture-playground.html?lang=en",
+      "desc": "Turn tissue texture into numbers, then let a linear SVM draw the line (synthetic images)."
+     },
+     {
       "title": "Deconvolution playground",
       "url": "https://ewinkuo1-sudo.github.io/cat-toys/deconvolution-playground.html?lang=en",
       "desc": "Before analysis: blur, photon noise, and how far an image can be restored."
@@ -411,6 +592,20 @@ window.SITE_DATA={
     "verb": "Reach",
     "name": "Miniaturized nonlinear endomicroscopy",
     "developing": true,
+    "color": "#009E73",
+    "beam": "Instead of mirrors on the bench, the light enters an optical fibre to a handheld probe, and the signal returns along the fibre. Femtosecond pulses stretch inside fibre, so they must be pre-compensated before going in.",
+    "cases": [
+     {
+      "id": "esophagus",
+      "name": "Oesophageal cancer",
+      "state": "goal"
+     },
+     {
+      "id": "oral",
+      "name": "Oral cancer",
+      "state": "goal"
+     }
+    ],
     "question": "How could nonlinear microscopy be brought into a smaller probing space?",
     "method": "The concept is to combine optical fibres and miniature optics for excitation delivery and signal collection. Probe design and performance depend on the intended application.",
     "finding": "The related 2021 paper describes multimodal microscopy as a technical foundation. It is not evidence of a completed endoscopic probe or clinical deployment.",
@@ -436,7 +631,50 @@ window.SITE_DATA={
      "source": null,
      "license": null
     },
-    "toys": []
+    "toys": [
+     {
+      "title": "Fiber pulse-broadening playground",
+      "url": "https://ewinkuo1-sudo.github.io/cat-toys/fiber-dispersion-playground.html?lang=en",
+      "desc": "Why a femtosecond pulse stretches in fiber, and how pre-compensation pulls it back."
+     }
+    ]
+   }
+  ],
+  "cases": [
+   {
+    "id": "esophagus",
+    "name": "Oesophageal cancer",
+    "stations": {
+     "microscopy": "published",
+     "collagen": "published",
+     "ai": "published",
+     "endomicroscopy": "goal"
+    }
+   },
+   {
+    "id": "cartilage",
+    "name": "Cartilage disease",
+    "stations": {
+     "microscopy": "published",
+     "collagen": "published"
+    }
+   },
+   {
+    "id": "oral",
+    "name": "Oral cancer",
+    "stations": {
+     "microscopy": "published",
+     "ai": "published",
+     "endomicroscopy": "goal"
+    }
+   },
+   {
+    "id": "collagen-score",
+    "name": "Collagen pathology scores",
+    "stations": {
+     "collagen": "published",
+     "ai": "published"
+    }
    }
   ]
  }
