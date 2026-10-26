@@ -71,6 +71,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--primary);outline-of
 .lab.hl{border-color:var(--primary);color:var(--primary)}
 .lab.dev{border-style:dashed;border-color:var(--dev);color:var(--dev)}
 .lab.off{opacity:0}
+.lab.tip{background:var(--navy);color:#fff;border-color:var(--navy)}
+.hint{position:absolute;right:12px;bottom:12px;font-size:12px;color:var(--muted);background:rgba(255,255,255,.85);border:1px solid var(--line);padding:3px 8px;border-radius:6px;pointer-events:none;transition:opacity .6s}
+.hint.off{opacity:0}
+.flat .hint,.shot .hint{display:none}
 #stage2d{position:absolute;inset:0;width:100%;height:100%;display:none}
 .stepper{position:absolute;left:12px;right:12px;top:12px;display:flex;gap:4px;flex-wrap:wrap;pointer-events:auto}
 .stepper button{font:inherit;font-size:12.5px;border:1px solid var(--line);background:rgba(255,255,255,.9);color:var(--muted);border-radius:999px;padding:2px 10px;cursor:pointer}
@@ -175,6 +179,7 @@ footer{max-width:1320px;margin:0 auto;padding:24px 16px 40px;border-top:1px soli
   <div class="stagewrap" id="stagewrap">
     <div id="stage3d" role="img" aria-label="示意光路：雷射經半波片、掃描振鏡進物鏡打到樣品，訊號回到兩支偵測器，資料送到工作站；另一支分光經光纖到探頭；終點是寫著實驗室目標的螢幕。完整文字在右側。"></div>
     <div id="labels" aria-hidden="true"></div>
+    <div class="hint" id="hint" aria-hidden="true"></div>
     <svg id="stage2d" viewBox="0 0 400 216" role="img" aria-label="平面示意光路，捲動時依序亮起"></svg>
     <div class="stepper" id="stepper"></div>
     <div class="plate" id="plate"><i style="background:var(--w780)"></i>780 nm 激發（近紅外，示意色）<i style="background:var(--wSHG)"></i>SHG 390 nm<i style="background:var(--wTPEF)"></i>雙光子螢光<i style="background:var(--cable)"></i>資料線<br>示意光路，依物理規則排，不是實驗室的真實架設。</div>
@@ -189,6 +194,9 @@ footer{max-width:1320px;margin:0 auto;padding:24px 16px 40px;border-top:1px soli
 
 <script src="../data.js"></script>
 <script src="../vendor/three.min.js"></script><!-- three.js r128，自帶不走 CDN -->
+<script src="../vendor/CopyShader.js"></script><script src="../vendor/SSAOShader.js"></script><script src="../vendor/SimplexNoise.js"></script>
+<script src="../vendor/EffectComposer.js"></script><script src="../vendor/ShaderPass.js"></script><script src="../vendor/SSAOPass.js"></script>
+<script src="../vendor/RenderPass.js"></script><script src="../vendor/LuminosityHighPassShader.js"></script><script src="../vendor/UnrealBloomPass.js"></script><!-- r128 examples/js：環境遮蔽、光束 bloom 後製 -->
 <script>
 const Q=new URLSearchParams(location.search);
 // 語言：en/index.html 在 <html> 上帶 data-lang="en"、data-base="../"（由 build_data.py 產生）；預覽或 Artifact 可用 ?lang=en
@@ -343,44 +351,58 @@ function initBench(){
   let renderer;
   try{renderer=new THREE.WebGLRenderer({antialias:true})}catch(e){return null}
   const host=document.getElementById("stage3d"),labelsEl=document.getElementById("labels");
-  renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  // 後製（SSAO 環境遮蔽）要 WebGL2 的深度貼圖；網址加 ?nopost 可關掉比較
+  const POST=!!(renderer.capabilities.isWebGL2&&THREE.EffectComposer&&THREE.SSAOPass)&&!Q.has("nopost");
+  renderer.setPixelRatio(Math.min(devicePixelRatio,POST?1.5:2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  // 線性色彩工作流：材質顏色轉線性、貼圖標 sRGB、ACES 色調映射；最後輸出才轉回 sRGB（有後製時由最後一個 pass 轉）
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.0;
+  if(!POST)renderer.outputEncoding=THREE.sRGBEncoding;
   host.appendChild(renderer.domElement);
-  const scene=new THREE.Scene();scene.background=new THREE.Color(css("--bg"));scene.fog=new THREE.Fog(css("--bg"),18,34);
-  const camera=new THREE.PerspectiveCamera(38,1,0.05,100);
+  // 背景／霧不經過色調映射與輸出編碼：後製路徑要給線性值（最後 pass 會轉成 sRGB），直出路徑給原值
+  const bgRaw=new THREE.Color(css("--bg")),bgCol=POST?bgRaw.clone().convertSRGBToLinear():bgRaw;
+  const scene=new THREE.Scene();scene.background=bgCol;scene.fog=new THREE.Fog(bgCol,18,34);
+  const camera=new THREE.PerspectiveCamera(38,1,0.15,60);
 
   // 環境反射：一個亮房間（天花板燈條）做 PMREM，讓金屬、鏡面、陽極黑有真實的反光
   (function(){const env=new THREE.Scene();
-    const room=new THREE.Mesh(new THREE.BoxGeometry(30,12,30),new THREE.MeshBasicMaterial({color:0x9a9890,side:THREE.BackSide}));room.position.y=4;env.add(room);
-    const floor=new THREE.Mesh(new THREE.PlaneGeometry(30,30),new THREE.MeshBasicMaterial({color:0x5c5a55}));floor.rotation.x=-Math.PI/2;floor.position.y=-1.9;env.add(floor);
+    const lc=c=>new THREE.Color(c).convertSRGBToLinear();const room=new THREE.Mesh(new THREE.BoxGeometry(30,12,30),new THREE.MeshBasicMaterial({color:lc(0x9a9890),side:THREE.BackSide}));room.position.y=4;env.add(room);
+    const floor=new THREE.Mesh(new THREE.PlaneGeometry(30,30),new THREE.MeshBasicMaterial({color:lc(0x5c5a55)}));floor.rotation.x=-Math.PI/2;floor.position.y=-1.9;env.add(floor);
     for(const [x,z] of [[-6,-4],[0,-4],[6,-4],[-6,4],[0,4],[6,4]]){const p=new THREE.Mesh(new THREE.PlaneGeometry(4,1.2),new THREE.MeshBasicMaterial({color:0xffffff}));p.rotation.x=Math.PI/2;p.position.set(x,9.9,z);env.add(p)}
-    const win=new THREE.Mesh(new THREE.PlaneGeometry(10,4),new THREE.MeshBasicMaterial({color:0xdfe6ee}));win.position.set(0,4,-14.9);env.add(win);
+    const win=new THREE.Mesh(new THREE.PlaneGeometry(10,4),new THREE.MeshBasicMaterial({color:lc(0xdfe6ee)}));win.position.set(0,4,-14.9);env.add(win);
     const pm=new THREE.PMREMGenerator(renderer);scene.environment=pm.fromScene(env,0.03).texture;pm.dispose()})();
-  scene.add(new THREE.HemisphereLight(0xffffff,0xd9d2c4,0.35));
-  const key=new THREE.DirectionalLight(0xffffff,0.55);key.position.set(-4,12,7);key.castShadow=true;
-  key.shadow.mapSize.set(2048,2048);key.shadow.bias=-0.0004;Object.assign(key.shadow.camera,{left:-8,right:8,top:8,bottom:-8});scene.add(key);
+  scene.add(new THREE.HemisphereLight(0xffffff,0xd9d2c4,0.3));
+  const key=new THREE.DirectionalLight(0xffffff,1.0);key.position.set(-4,12,7);key.castShadow=true;
+  key.shadow.mapSize.set(2048,2048);key.shadow.bias=-0.0004;key.shadow.normalBias=0.02;Object.assign(key.shadow.camera,{left:-8,right:8,top:8,bottom:-8});scene.add(key);
+  const rim=new THREE.DirectionalLight(0xdfe8ff,0.35);rim.position.set(6,5,-9);scene.add(rim);                 // 輪廓補光：從後方把黑色元件的邊勾出來
 
   /* 尺度：1 單位＝100 mm。光束高 90 mm。 */
   const Y=0.9,col=v=>new THREE.Color(css(v)),X1=new THREE.Vector3(1,0,0),Y1=new THREE.Vector3(0,1,0),V=(x,z,y=Y)=>new THREE.Vector3(x,y,z);
 
   // 光學桌：不鏽鋼面、M6 螺孔 25 mm 間距、深色封邊
-  const TW=11.6,TD=7.2,TZ=-1.0,cv=document.createElement("canvas");cv.width=2048;cv.height=Math.round(2048*TD/TW);const cx=cv.getContext("2d");
-  cx.fillStyle="#dde0e3";cx.fillRect(0,0,cv.width,cv.height);
-  const px=cv.width/(TW*4);
-  for(let i=0;i<TW*4;i++)for(let j=0;j<TD*4;j++){const x=(i+.5)*px,y=(j+.5)*px;
-    cx.beginPath();cx.arc(x,y,px*.13,0,7);cx.fillStyle="#7c8287";cx.fill();
-    cx.beginPath();cx.arc(x,y,px*.13,0.2*Math.PI,1.2*Math.PI);cx.strokeStyle="rgba(255,255,255,.35)";cx.lineWidth=1;cx.stroke()}
-  const tex=new THREE.CanvasTexture(cv);tex.anisotropy=renderer.capabilities.getMaxAnisotropy();
+  // 貼圖只畫「一格一孔」再重複鋪滿（46×29 格），近看才不糊；法線貼圖做倒角、粗糙度貼圖讓孔內不反光
+  const PITCH=0.25,TW=46*PITCH,TD=29*PITCH,TZ=-1.0,TS=256,HR=0.11*TS,CH=0.035*TS;   // 孔半徑 Ø6/25、倒角寬
+  const tile=draw=>{const c=document.createElement("canvas");c.width=c.height=TS;draw(c.getContext("2d"));const t=new THREE.CanvasTexture(c);
+    t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(TW/PITCH,TD/PITCH);t.anisotropy=renderer.capabilities.getMaxAnisotropy();return t};
+  const texCol=tile(k=>{k.fillStyle="#cfd3d7";k.fillRect(0,0,TS,TS);const c=TS/2,g=k.createRadialGradient(c,c,0,c,c,HR+CH);
+    g.addColorStop(0,"#4b5157");g.addColorStop(0.8*HR/(HR+CH),"#585e64");g.addColorStop(HR/(HR+CH),"#8a9096");g.addColorStop(1,"#e6e9ec");
+    k.fillStyle=g;k.beginPath();k.arc(c,c,HR+CH,0,7);k.fill()});
+  const texNrm=tile(k=>{const img=k.createImageData(TS,TS),d=img.data,c=TS/2,sl=0.75;   // 倒角是朝孔心向下的斜面，法線往孔心倒
+    for(let y=0;y<TS;y++)for(let x=0;x<TS;x++){const dx=x+.5-c,dy=y+.5-c,r=Math.hypot(dx,dy);let nx=0,ny=0,nz=1;
+      if(r>HR&&r<HR+CH){nx=-dx/r*sl;ny=dy/r*sl;nz=Math.sqrt(1-sl*sl)}
+      const i=(y*TS+x)*4;d[i]=128+nx*127;d[i+1]=128+ny*127;d[i+2]=128+nz*127;d[i+3]=255}
+    k.putImageData(img,0,0)});
+  const texRgh=tile(k=>{k.fillStyle="#6e6e6e";k.fillRect(0,0,TS,TS);k.fillStyle="#e8e8e8";k.beginPath();k.arc(TS/2,TS/2,HR,0,7);k.fill()});
   const edge=new THREE.MeshStandardMaterial({color:0x2a2e33,roughness:.5,metalness:.3});
-  const table=new THREE.Mesh(new THREE.BoxGeometry(TW,0.3,TD),[edge,edge,new THREE.MeshStandardMaterial({map:tex,roughness:.5,metalness:.2,envMapIntensity:.5}),edge,edge,edge]);
+  const table=new THREE.Mesh(new THREE.BoxGeometry(TW,0.3,TD),[edge,edge,new THREE.MeshStandardMaterial({map:texCol,normalMap:texNrm,roughnessMap:texRgh,roughness:1,metalness:.25,envMapIntensity:.5}),edge,edge,edge]);
   table.position.set(0,-0.15,TZ);table.receiveShadow=true;scene.add(table);
 
   /* 材質 */
   const knurl=(()=>{const c=document.createElement("canvas");c.width=64;c.height=4;const k=c.getContext("2d");k.fillStyle="#fff";k.fillRect(0,0,64,4);k.fillStyle="#000";for(let i=0;i<64;i+=4)k.fillRect(i,0,2,4);const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(10,1);return t})();
   const M={
-    anod:new THREE.MeshStandardMaterial({color:0x1d1f23,roughness:.36,metalness:.45}),                     // 黑色陽極處理鋁
-    knurl:new THREE.MeshStandardMaterial({color:0x1d1f23,roughness:.4,metalness:.45,bumpMap:knurl,bumpScale:.012}),
+    anod:new THREE.MeshStandardMaterial({color:0x26292e,roughness:.3,metalness:.5}),                     // 黑色陽極處理鋁
+    knurl:new THREE.MeshStandardMaterial({color:0x26292e,roughness:.35,metalness:.45,bumpMap:knurl,bumpScale:.012}),
     steel:new THREE.MeshStandardMaterial({color:0xd4d9de,roughness:.2,metalness:1}),                          // 不鏽鋼柱、籠桿
-    satin:new THREE.MeshStandardMaterial({color:0xc9cdd2,roughness:.38,metalness:.85}),                       // 平移台霧面鋁
+    satin:new THREE.MeshStandardMaterial({color:0xb4b8bd,roughness:.42,metalness:.85}),                       // 平移台霧面鋁
     chrome:new THREE.MeshStandardMaterial({color:0xe9ecef,roughness:.12,metalness:1}),
     brass:new THREE.MeshStandardMaterial({color:0xc9a24a,roughness:.3,metalness:1}),
     mirror:new THREE.MeshStandardMaterial({color:0xffffff,roughness:.02,metalness:1}),
@@ -441,7 +463,7 @@ function initBench(){
     DM2:V(0.6,-2.4),PSHG:V(1.45,-2.4),PTPEF:V(0.6,-3.2),G2a:V(-2.0,-0.78),G2b:V(-1.78,-0.78),CPL:V(-1.78,-0.3)};
   const rings=[]; // 每站在桌面亮起的光環（取代把元件塗色）
   function ring(x,z,r,h){const m=new THREE.Mesh(new THREE.RingGeometry(r,r+0.05,64),new THREE.MeshBasicMaterial({color:col("--primary"),transparent:true,opacity:0,depthWrite:false}));
-    m.rotation.x=-Math.PI/2;m.position.set(x,0.004,z);scene.add(m);rings.push({m,h});return m}
+    m.rotation.x=-Math.PI/2;m.position.set(x,0.004,z);m.userData.noAO=true;scene.add(m);rings.push({m,h});return m}
 
   // 飛秒雷射頭（示意外型）：墊高塊上，出光孔在光軸
   (function(){const g=new THREE.Group();
@@ -472,7 +494,7 @@ function initBench(){
     postStack(g,Y,0.4);place(g,P.HWP.x,P.HWP.z)})();
   // 偏振箭頭：半波片後，第 2 站起轉動
   const polArrows=[];
-  for(const x of[-2.6,-2.35]){const g=new THREE.Group();g.position.set(x,Y,ZA);
+  for(const x of[-2.6,-2.35]){const g=new THREE.Group();g.position.set(x,Y,ZA);g.userData.noAO=true;
     const mat=new THREE.MeshBasicMaterial({color:col("--primary"),transparent:true,opacity:0});
     g.add(new THREE.Mesh(new THREE.BoxGeometry(0.01,0.3,0.01),mat));
     for(const s of[1,-1]){const tip=new THREE.Mesh(new THREE.ConeGeometry(0.03,0.06,12),mat);tip.position.y=s*0.17;if(s<0)tip.rotation.z=Math.PI;g.add(tip)}
@@ -600,22 +622,28 @@ function initBench(){
 
   /* 光束：每段可依進度長出來；opt.after＝等另一束長完才開始 */
   const beams=[];
+  // 兩色條紋（SHG＋雙光子螢光同一條路回來）：沿光束長度交替
+  function bandTex(a,b){const c=document.createElement("canvas");c.width=4;c.height=32;const k=c.getContext("2d");k.fillStyle=a;k.fillRect(0,0,4,16);k.fillStyle=b;k.fillRect(0,16,4,16);
+    const tx=new THREE.CanvasTexture(c);tx.wrapS=tx.wrapT=THREE.RepeatWrapping;tx.magFilter=THREE.NearestFilter;return tx}
   function beam(pts,colorVar,s,opt={}){
-    const c=col(colorVar),r=opt.r||0.012,o=opt.off||new THREE.Vector3();
+    const c=col(colorVar),r=opt.r||0.012,o=opt.off||new THREE.Vector3(),mix=opt.mix?col(opt.mix):null;
     const p=pts.map(q=>q.clone().add(o));const segs=[];let L=0;
-    const core=new THREE.MeshBasicMaterial({color:c}),glow=new THREE.MeshBasicMaterial({color:c,transparent:true,opacity:.18,depthWrite:false});
+    const core=new THREE.MeshBasicMaterial(mix?{color:0xffffff,map:bandTex(css(colorVar),css(opt.mix))}:{color:c});core.toneMapped=false;   // 光束不壓暗，bloom 才亮得起來
+    const glow=new THREE.MeshBasicMaterial({color:mix?c.clone().lerp(mix,.5):c,transparent:true,opacity:POST?.08:.18,depthWrite:false});
     for(let i=0;i<p.length-1;i++){const a=p[i],b=p[i+1],l=a.distanceTo(b);if(l<1e-4)continue;
       const q=new THREE.Quaternion().setFromUnitVectors(Y1,b.clone().sub(a).normalize());
-      const mkb=(rr,m)=>{const g=new THREE.CylinderGeometry(rr,rr,1,10,1,true);g.translate(0,.5,0);const me=new THREE.Mesh(g,m);me.position.copy(a);me.quaternion.copy(q);me.scale.y=1e-4;me.visible=false;scene.add(me);return me};
-      segs.push({a,b,l,L0:L,core:mkb(r,core),glow:mkb(r*3,glow)});L+=l}
+      const mkb=(rr,m,bl)=>{const g=new THREE.CylinderGeometry(rr,rr,1,10,1,true);g.translate(0,.5,0);const me=new THREE.Mesh(g,m);me.position.copy(a);me.quaternion.copy(q);me.scale.y=1e-4;me.visible=false;me.userData.noAO=true;me.userData.bloom=bl;scene.add(me);return me};
+      let cm=core;if(mix){cm=core.clone();cm.map=core.map.clone();cm.map.repeat.set(1,Math.max(1,Math.round(l/0.3)));cm.map.needsUpdate=true}   // 每段條紋數照長度
+      segs.push({a,b,l,L0:L,core:mkb(r,cm,true),glow:mkb(r*3,glow,false)});L+=l}
     const photons=[];const n=opt.cable?Math.max(2,Math.round(L/1.2)):Math.max(2,Math.round(L/0.9));
-    for(let k=0;k<n;k++){const sp=new THREE.Mesh(opt.cable?new THREE.BoxGeometry(0.045,0.045,0.045):new THREE.SphereGeometry(r*2.6,10,10),new THREE.MeshBasicMaterial({color:opt.cable?0xffffff:c}));sp.visible=false;scene.add(sp);photons.push(sp)}
+    for(let k=0;k<n;k++){const pm=new THREE.MeshBasicMaterial({color:opt.cable?0xffffff:(mix&&k%2?mix:c)});pm.toneMapped=false;
+      const sp=new THREE.Mesh(opt.cable?new THREE.BoxGeometry(0.045,0.045,0.045):new THREE.SphereGeometry(r*2.6,10,10),pm);sp.visible=false;sp.userData.noAO=true;sp.userData.bloom=true;scene.add(sp);photons.push(sp)}
     const b={segs,L,photons,s,after:opt.after||null,prog:0,off:Math.random()};beams.push(b);return b}
   const up=new THREE.Vector3(0,0.025,0),dn=new THREE.Vector3(0,-0.025,0);
   const exc=beam([P.L,P.HWP,P.BS,P.G1a,P.G1b,P.DM1,P.TM1,P.TM2,P.TM3,P.SMP],"--w780",0);
   const back=[P.SMP,P.TM3,P.TM2,P.TM1,P.DM1,P.DM2];
-  const bS=beam(back,"--wSHG",1,{off:up,after:exc}),bT=beam(back,"--wTPEF",1,{off:dn,after:exc});
-  beam([P.DM2,V(P.DM2.x+0.3,P.DM2.z)],"--wSHG",1,{after:bS});beam([P.DM2,V(P.DM2.x,P.DM2.z-0.3)],"--wTPEF",1,{after:bT});
+  const bR=beam(back,"--wSHG",1,{off:up,after:exc,mix:"--wTPEF"});   // SHG 與雙光子螢光走同一條路回來：一束雙色條紋，到二向色鏡才分開
+  beam([P.DM2,V(P.DM2.x+0.3,P.DM2.z)],"--wSHG",1,{after:bR,off:up});beam([P.DM2,V(P.DM2.x,P.DM2.z-0.3)],"--wTPEF",1,{after:bR,off:up});
   // 資料線：沿桌面走到桌緣，再到後方工作站
   const cy=0.03,cab=(pts,s,after)=>beam(pts.map(([x,z,y])=>new THREE.Vector3(x,y??cy,z)),"--cable",s,{r:0.018,cable:true,after});
   cab([[2.0,-2.4],[2.0,-4.6],[PCX-0.3,-4.6],[PCX-0.3,PCZ,-0.32]],3);
@@ -644,7 +672,7 @@ function initBench(){
   const CAM=[[[-6.6,3.3,2.4],[-3.2,0.8,-1.5]],[[0.2,5.0,3.6],[1.4,1.0,-2.1]],[[-4.2,2.5,1.0],[-2.8,0.9,-1.5]],[[-0.6,5.5,0.0],[2.6,0.0,-4.0]],[[-2.8,4.2,5.0],[-0.9,0.6,0.0]],[[1.7,5.2,7.2],[1.7,0.3,-1.0]]];
   const SHOTS={probe:{cam:[[-1.3,1.75,2.75],[0.15,0.7,1.0]],act:4}};
   const camPos=new THREE.Vector3(...CAM[0][0]),camTgt=new THREE.Vector3(...CAM[0][1]);
-  camera.position.copy(camPos);camera.lookAt(camTgt);const look=camTgt.clone();
+  camera.position.copy(camPos);camera.lookAt(camTgt);const look=camTgt.clone(),cur=camPos.clone(),rel=new THREE.Vector3(),ax=new THREE.Vector3();
 
   let act=0;
   function apply(a){if(SHOT&&SHOTS[SHOT])a=SHOTS[SHOT].act;act=a;
@@ -653,13 +681,82 @@ function initBench(){
     LABS.forEach(L=>{L.el.classList.toggle("off",!L.show.includes(a));L.el.classList.toggle("hl",L.h===a)});
     camPos.set(...CAM[a][0]);camTgt.set(...CAM[a][1]);
     if(SHOT&&SHOTS[SHOT]){camPos.set(...SHOTS[SHOT].cam[0]);camTgt.set(...SHOTS[SHOT].cam[1])}
-    if(reduce){camera.position.copy(camPos);look.copy(camTgt)}
+    if(reduce){cur.copy(camPos);look.copy(camTgt)}
   }
   if(SHOT&&SHOTS[SHOT])wrap.classList.add("shot");
   listeners.push(apply);
 
-  function resize(){const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);renderer.domElement.style.width=w+"px";renderer.domElement.style.height=h+"px";camera.aspect=w/h;camera.fov=w/h<0.9?48:38;camera.updateProjectionMatrix()}
+  // 色彩：十六進位顏色是 sRGB，轉成線性才算得對；畫布貼圖標 sRGB 讓 shader 解碼；螢幕畫面保持原色
+  camera.layers.enable(1);
+  scene.traverse(o=>{if(o.userData.noAO||(o.parent&&o.parent.userData.noAO))o.layers.set(1);if(!o.isMesh)return;for(const m of (Array.isArray(o.material)?o.material:[o.material])){if(m.userData.lin)continue;m.userData.lin=true;
+    if(m.color)m.color.convertSRGBToLinear();if(m.isMeshStandardMaterial&&m.envMapIntensity===1)m.envMapIntensity=0.75;if(m.map){m.map.encoding=THREE.sRGBEncoding;m.map.needsUpdate=true}if(m.isMeshBasicMaterial&&m.map)m.toneMapped=false;m.needsUpdate=true}});
+  let composer=null,bloomC=null;const darkM=new THREE.MeshBasicMaterial({color:0x000000}),swapped=new Map();
+  const VS="varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}";
+  if(POST){composer=new THREE.EffectComposer(renderer);renderer.shadowMap.autoUpdate=false;   // 陰影每幀只算一次（bloom 那次不算）
+    const ssao=new THREE.SSAOPass(scene,camera,host.clientWidth||800,host.clientHeight||600);
+    ssao.kernelRadius=0.5;ssao.minDistance=0.0003;ssao.maxDistance=0.015;             // 單位：kernelRadius 是場景單位；min/max 是 near–far 的比例
+    ssao.normalRenderTarget.depthTexture.type=THREE.UnsignedIntType;
+    ssao.ssaoMaterial.fragmentShader=ssao.ssaoMaterial.fragmentShader.replace("float depth = getDepth( vUv );","float depth = getDepth( vUv ); if ( depth >= 1.0 ) { gl_FragColor = vec4( 1.0 ); return; }");ssao.ssaoMaterial.needsUpdate=true;
+    ssao.blurMaterial.fragmentShader=ssao.blurMaterial.fragmentShader.replace("vec3( result / ( 5.0 * 5.0 ) )","vec3( pow( result / 25.0, 1.8 ) )");ssao.blurMaterial.needsUpdate=true;   // 遮蔽加重一點                   // 24 位元深度，遠處才不會有條紋
+    const ov=ssao.overrideVisibility.bind(ssao);ssao.overrideVisibility=function(){ov();scene.traverse(o=>{if(o.userData.noAO)o.visible=false})};
+    if(Q.has("ao"))ssao.output=THREE.SSAOPass.OUTPUT.SSAO;                                      // 除錯：只看遮蔽圖
+    composer.addPass(ssao);
+    // 選擇性 bloom：另一個 composer 把光束以外的材質換成黑來畫，結果加回主畫面（淺色背景下只有光束會暈開）
+    bloomC=new THREE.EffectComposer(renderer);bloomC.renderToScreen=false;
+    bloomC.addPass(new THREE.RenderPass(scene,camera));
+    bloomC.addPass(new THREE.UnrealBloomPass(new THREE.Vector2(host.clientWidth||800,host.clientHeight||600),0.9,0.6,0));
+    composer.addPass(new THREE.ShaderPass({uniforms:{tDiffuse:{value:null},tBloom:{value:bloomC.renderTarget2.texture}},vertexShader:VS,
+      fragmentShader:"uniform sampler2D tDiffuse;uniform sampler2D tBloom;varying vec2 vUv;void main(){gl_FragColor=texture2D(tDiffuse,vUv)+texture2D(tBloom,vUv);}"}));
+    composer.addPass(new THREE.ShaderPass({uniforms:{tDiffuse:{value:null}},
+      vertexShader:VS,
+      fragmentShader:"uniform sampler2D tDiffuse;varying vec2 vUv;void main(){gl_FragColor=LinearTosRGB(texture2D(tDiffuse,vUv));}"}))}
+  function renderBloom(){const bg=scene.background,fog=scene.fog;scene.background=null;scene.fog=null;renderer.setClearColor(0x000000,1);
+    scene.traverse(o=>{if(o.isMesh&&!o.userData.bloom){swapped.set(o,o.material);o.material=darkM}});
+    bloomC.render();swapped.forEach((m,o)=>o.material=m);swapped.clear();scene.background=bg;scene.fog=fog}
+  function resize(){const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);if(composer){composer.setSize(w,h);bloomC.setSize(w,h)}renderer.domElement.style.width=w+"px";renderer.domElement.style.height=h+"px";camera.aspect=w/h;camera.fov=w/h<0.9?48:38;camera.updateProjectionMatrix()}
   new ResizeObserver(resize).observe(host);resize();
+
+  /* 拖曳轉視角（滑鼠／手寫筆；觸控留給捲動頁面）：角度有限制，放手慢慢回到該站視角。滑過元件顯示名稱 */
+  const cvs=renderer.domElement,hint=document.getElementById("hint"),tip=document.createElement("div");tip.className="lab tip off";labelsEl.appendChild(tip);
+  hint.textContent=t("拖曳可轉動視角","Drag to rotate the view");cvs.style.cursor="grab";cvs.style.touchAction="pan-y";
+  let yaw=0,pitch=0,drag=null;const mouse={x:0,y:0,on:false,moved:false};
+  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+  cvs.addEventListener("pointerdown",e=>{if(e.pointerType==="touch")return;drag={x:e.clientX,y:e.clientY,yaw,pitch};try{cvs.setPointerCapture(e.pointerId)}catch(_){}cvs.style.cursor="grabbing";hint.classList.add("off");tip.classList.add("off")});
+  cvs.addEventListener("pointermove",e=>{if(drag){yaw=clamp(drag.yaw-(e.clientX-drag.x)*0.005,-0.7,0.7);pitch=clamp(drag.pitch-(e.clientY-drag.y)*0.004,-0.35,0.2);return}
+    const rc=cvs.getBoundingClientRect();mouse.x=e.clientX-rc.left;mouse.y=e.clientY-rc.top;mouse.on=true;mouse.moved=true});
+  const endDrag=()=>{drag=null;cvs.style.cursor="grab"};cvs.addEventListener("pointerup",endDrag);cvs.addEventListener("pointercancel",endDrag);
+  cvs.addEventListener("pointerleave",()=>{mouse.on=false;tip.classList.add("off")});
+  setTimeout(()=>hint.classList.add("off"),9000);
+  // 元件名稱：拿打到的點找最近的錨點（距離÷半徑最小者），不必逐個幾何命名
+  const NAMES=[
+    {t:t("飛秒雷射","Femtosecond laser"),p:new THREE.Vector3(-4.5,0.8,ZA),r:1.3},
+    {t:t("半波片","Half-wave plate"),p:P.HWP,r:.45},
+    {t:t("分光鏡","Beamsplitter"),p:P.BS,r:.4},
+    {t:t("掃描振鏡","Scanning galvos"),p:new THREE.Vector3(-0.8,Y+0.3,(ZA+ZB)/2),r:.8},
+    {t:t("二向色鏡","Dichroic mirror"),p:P.DM1,r:.4},
+    {t:t("二向色鏡","Dichroic mirror"),p:P.DM2,r:.4},
+    {t:t("折返鏡","Turning mirror"),p:P.TM1,r:.4},
+    {t:t("潛望鏡","Periscope mirror"),p:P.TM2,r:.4},
+    {t:t("潛望鏡","Periscope mirror"),p:P.TM3,r:.3},
+    {t:t("物鏡","Objective"),p:new THREE.Vector3(P.TM3.x,YT-0.45,P.TM3.z),r:.35},
+    {t:t("樣品台","Sample stage"),p:new THREE.Vector3(P.SMP.x,0.7,P.SMP.z),r:1.0},
+    {t:t("SHG 偵測器","SHG detector"),p:new THREE.Vector3(1.42,Y,-2.4),r:.75},
+    {t:t("雙光子螢光偵測器","Two-photon fluorescence detector"),p:new THREE.Vector3(0.6,Y,-3.22),r:.75},
+    {t:t("支撐柱","Support post"),p:new THREE.Vector3(2.4,1.2,ZB-0.55),r:.5},
+    {t:t("振鏡（光纖支線）","Galvos (fibre branch)"),p:new THREE.Vector3(-1.9,Y+0.3,-0.78),r:.7},
+    {t:t("光纖耦合器","Fibre coupler"),p:P.CPL,r:.45},
+    {t:t("光纖探頭","Fibre probe"),p:new THREE.Vector3(0.3,0.9,1.15),r:1.0},
+    {t:t("工作站","Workstation"),p:new THREE.Vector3(PCX,0,PCZ),r:1.6},
+    {t:t("終點螢幕","Destination screen"),p:new THREE.Vector3(EX,1.1,EZ),r:1.3}];
+  const ray=new THREE.Raycaster(),ndc=new THREE.Vector2();
+  const shown=o=>{for(;o;o=o.parent)if(!o.visible)return false;return true};
+  function hover(){mouse.moved=false;if(!mouse.on||drag)return;
+    const W=host.clientWidth,H=host.clientHeight;ndc.set(mouse.x/W*2-1,-(mouse.y/H)*2+1);ray.setFromCamera(ndc,camera);
+    const hit=ray.intersectObjects(scene.children,true).find(h=>shown(h.object));let best=null,bd=1;
+    if(hit&&hit.object!==table)for(const n of NAMES){const d=hit.point.distanceTo(n.p)/n.r;if(d<bd){bd=d;best=n}}
+    if(!best){tip.classList.add("off");return}
+    tip.textContent=best.t;tip.classList.remove("off");const bw=tip.offsetWidth/2+6;
+    tip.style.transform=`translate(${clamp(mouse.x,bw,W-bw)}px,${Math.max(30,mouse.y-14)}px) translate(-50%,-100%)`}
 
   const clock=new THREE.Clock(),tmp=new THREE.Vector3(),v=new THREE.Vector3();const SPEED=7;
   function pointAt(b,d){for(const s of b.segs){if(d<=s.L0+s.l)return tmp.lerpVectors(s.a,s.b,(d-s.L0)/s.l)}return b.segs[b.segs.length-1].b}
@@ -669,7 +766,11 @@ function initBench(){
   function tick(){
     requestAnimationFrame(tick);if(!self.running||!self.inView||document.hidden)return;
     const dt=Math.min(clock.getDelta(),0.05),t=clock.elapsedTime;
-    camera.position.lerp(camPos,reduce?1:0.06);look.lerp(camTgt,reduce?1:0.06);camera.lookAt(look);
+    cur.lerp(camPos,reduce?1:0.06);look.lerp(camTgt,reduce?1:0.06);
+    if(!drag){yaw*=0.95;pitch*=0.95}                                                     // 放手慢慢回正
+    rel.copy(cur).sub(look).applyAxisAngle(Y1,yaw);if(pitch){ax.crossVectors(Y1,rel).normalize();rel.applyAxisAngle(ax,pitch)}
+    if(rel.y<0.5)rel.y=0.5;camera.position.copy(look).add(rel);camera.lookAt(look);
+    if(mouse.moved)hover();
     beams.forEach(b=>{const want=act>=b.s&&(!b.after||b.after.prog>=1);
       if(reduce)b.prog=want?1:0;else b.prog=want?Math.min(1,b.prog+dt*SPEED/b.L):Math.max(0,b.prog-dt*3);
       const d=b.prog*b.L;
@@ -681,7 +782,7 @@ function initBench(){
     LABS.forEach(L=>{v.set(...L.at).project(camera);const bw=L.el.offsetWidth/2+6,bh=L.el.offsetHeight+6;
       const x=Math.max(bw,Math.min(W-bw,(v.x*.5+.5)*W)),y=Math.max(bh,Math.min(H-34,(-v.y*.5+.5)*H));
       L.el.style.transform=`translate(${x}px,${y}px) translate(-50%,-100%)`;L.el.style.visibility=v.z<1?"visible":"hidden"});
-    renderer.render(scene,camera);
+    if(composer){renderBloom();renderer.shadowMap.needsUpdate=true;composer.render()}else renderer.render(scene,camera);
   }
   apply(0);tick();
   return self;
