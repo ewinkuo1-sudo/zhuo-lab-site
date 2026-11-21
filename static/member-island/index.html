@@ -190,7 +190,7 @@ footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);paddin
 
   <footer>
     <span data-t="foot1">光路是示意，不是實驗室的真實架設。誰在哪條光路、元件種類，依每個人目前的題目安排，會隨人事更動。畢業的人排在光路最前面，表示把題目交給後面的人。</span>
-    <span data-t="foot2">內容依實驗室成員頁整理。分工連線為示意，推論的另外標示。最後更新 2026-10-24。</span>
+    <span data-t="foot2">內容依實驗室成員頁整理。最後更新 2026-10-24。</span>
   </footer>
 </div>
 
@@ -239,15 +239,8 @@ const MEMBERS=[
 ];
 const byId=Object.fromEntries(MEMBERS.map(m=>[m.id,m]));
 // 分工：from 的輸出給 to 用。kind：said＝明說、inf＝推論
-const RELS=[
-  {from:"huang",to:"jackson",type:"sample",kind:"said",text:"柏翰的高光譜散射樣本，給 Jackson 測腫瘤邊界",src:""},
-  {from:"gagan",to:"jackson",type:"data",kind:"said",text:"Gagan 的 FFPE 壽命結論，影響 Jackson 改做多通道結構影像",src:""},
-  {from:"shih",to:"tsai",type:"data",kind:"inf",text:"承毅架好的掃描光路與拼接，給宜勲拍",src:""},
-  {from:"shih",to:"wangjw",type:"data",kind:"inf",text:"承毅架好的掃描光路，給靖崴拍",src:""},
-  {from:"wangjw",to:"zhuo",type:"data",kind:"said",text:"靖崴與柏翰幫老師測新的解調電路",src:""},
-  {from:"huang",to:"zhuo",type:"data",kind:"said",text:"柏翰與靖崴幫老師測新的解調電路",src:""},
-  {from:"jun",to:"shih",type:"baton",kind:"said",text:"涴鈞畢業離開前，把工作交棒給承毅",src:""}
-];
+// 2026-11-21 起不公開內部分工，留空；畫線與資訊卡的程式碼保留，日後有可公開的連線再填。
+const RELS=[];
 /* 英文版：照上面中文逐條翻，不加中文沒有的內容。LANG=en 時覆蓋到 LANES／MEMBERS／RELS 上。 */
 const LANG=window.__MI.lang,THEME0=window.__MI.theme,EMBED=window.__MI.embedded;
 const EN={
@@ -285,22 +278,14 @@ const EN={
     wu:{role:"Master's student (joined September 2026)",part:"Side table",line:"Just joined; topic not set yet."},
     fu:{role:"Master's student (joined September 2026)",part:"Side table",line:"Just joined; topic not set yet."}
   },
-  rels:[
-    "Po-Han's hyperspectral scattering samples go to Jackson for tumor-margin measurements",
-    "Gagan's FFPE lifetime results led Jackson to switch to multichannel structural imaging",
-    "The scanning optics and stitching Cheng-Yi built are used by Yi-Xun for imaging",
-    "The scanning optics Cheng-Yi built are used by Jing-Wei for imaging",
-    "Jing-Wei and Po-Han test the professor's new demodulation circuit",
-    "Po-Han and Jing-Wei test the professor's new demodulation circuit",
-    "Before leaving, Jun handed the work over to Cheng-Yi"
-  ]
+  rels:[]
 };
 const T={zh:{
   close:"收起說明",
   views:"檢視方式",legendH:"怎麼看這張桌子",fourPaths:"四條光路",clickHint:"點桌上的元件、小人或標籤看介紹。",
   lg:[["雷射頭＝老師","唯一光源。題目由老師分配，白光從這裡出來。"],["二向色鏡＝分方向","白光被分成四種顏色，一種顏色一個研究方向。"],
       ["元件＝成員","每個人是自己那條光路上的一個元件，架光路的是振鏡、物鏡，做分析的是偵測器、工作站。同方向的人前後排，前面的人輸出給後面的人。"],
-      ["桌面上的灰線＝分工","誰的東西給誰用。連線為示意，推論的另外標示。"],["戴方帽的小人＝已畢業","排在隊伍最前面，手上的棒子交給後面接手的人。"],["桌邊的小桌＝新生","題目還沒定，先在旁邊看。"]],
+      ["戴方帽的小人＝已畢業","排在隊伍最前面，手上的棒子交給後面接手的人。"],["桌邊的小桌＝新生","題目還沒定，先在旁邊看。"]],
   onTable:"在桌上是：",gradNote:"，排在光路最前面（已畢業，交棒）",doing:"在做什麼",samePath:"同一條光路",alone:"目前只有他一個。",split:"分出去的四條光路",
   rel:"分工",to:"→ 給",from:"← 來自",sample:"樣品",baton:"交棒",data:"資料",said:"明說",inf:"推論",links:"連結",
   kCard:"卡片",card:"成員頁介紹",cardSub:"跳到他在成員頁的卡片",kSite:"官網",site:"個人頁",siteSub:"完整介紹",noPage:"官網還沒有他的頁。",
@@ -311,11 +296,11 @@ const T={zh:{
   tabMap:"Optical table",tabList:"List",views:"View",stage:"Schematic beam path: the professor's laser is split by dichroic mirrors into four colored paths, and each member is a component on a path. For the full text, use the List view.",
   plate:"Schematic beam path, not the real setup",bLabels:"Labels",bPhotons:"Photons",bSpin:"Rotate",bTop:"Top view",bAll:"All",bPanel:"Guide",close:"Close panel",
   foot1:"The beam paths are schematic, not the lab's real setup. Who sits on which path, and as which component, follows each person's current project and will change as people come and go. Graduates sit at the front of their path, handing their topic to the people behind them.",
-  foot2:"Compiled from the lab's People page. Collaboration lines are schematic; inferred ones are marked. Last updated 2026-10-24.",
+  foot2:"Compiled from the lab's People page. Last updated 2026-10-24.",
   legendH:"How to read this table",fourPaths:"Four paths",clickHint:"Click a component, figure or label on the table to learn more.",
   lg:[["Laser head = the professor","The only light source. Topics are assigned by the professor, and the white beam starts here."],["Dichroic mirrors = directions","The white light is split into four colors, one per research direction."],
       ["Components = members","Each person is one component on their path: people building optics are galvos and objectives, people doing analysis are detectors and workstations. People on the same path line up, and each passes their output to the next."],
-      ["Gray lines on the table = collaboration","Whose work feeds whom. Schematic; inferred links are marked."],["Figure in a mortarboard = graduated","Stands at the front of the line, handing the baton to whoever takes over."],["Side table = new students","Topics not set yet; watching from the side."]],
+      ["Figure in a mortarboard = graduated","Stands at the front of the line, handing the baton to whoever takes over."],["Side table = new students","Topics not set yet; watching from the side."]],
   onTable:"On the table: ",gradNote:", at the front of the path (graduated, handing over)",doing:"Current work",samePath:"Same path",alone:"No one else on this path yet.",split:"The four paths split from here",
   rel:"Collaboration",to:"→ to",from:"← from",sample:"Sample",baton:"Baton",data:"Data",said:"Stated",inf:"Inferred",links:"Links",
   kCard:"Card",card:"People page",cardSub:"Jump to their card on the People page",kSite:"Website",site:"Personal page",siteSub:"Full profile",noPage:"No page on the lab website yet.",
