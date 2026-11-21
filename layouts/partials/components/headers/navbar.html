@@ -58,69 +58,29 @@
 
         <!-- Left Nav Bar -->
         <ul class="navbar-nav d-md-inline-flex">
+          {{/* Zhuo Lab: every menu entry is a page path resolved by lab_url (language- and base-path-aware).
+               Entries with children render as dropdowns. */}}
+          {{ $here := $current_page.RelPermalink }}
           {{ range site.Menus.main }}
-
           {{ if .HasChildren }}
+          {{ $open := false }}
+          {{ range .Children }}{{ if hasPrefix $here (partial "lab_url" .URL) }}{{ $open = true }}{{ end }}{{ end }}
           <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
-              {{- .Pre -}}<span>{{ .Name | safeHTML }}</span>{{- .Post -}}
-              <span class="caret"></span>
+            <a href="#" class="nav-link dropdown-toggle{{ if and $highlight_active_link $open }} active{{ end }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span>{{ .Name | safeHTML }}</span><span class="caret"></span>
             </a>
             <div class="dropdown-menu">
               {{ range .Children }}
-                <a class="dropdown-item" href="{{ .URL | relLangURL }}"{{ if $.IsHome }} data-target="{{ .URL }}"{{ end }}>
-                  {{- .Pre -}}<span>{{ .Name | safeHTML }}</span>{{- .Post -}}
-                </a>
+              {{ $href := partial "lab_url" .URL }}
+              <a class="dropdown-item{{ if hasPrefix $here $href }} active{{ end }}" href="{{ $href }}"><span>{{ .Name | safeHTML }}</span></a>
               {{ end }}
             </div>
           </li>
-
           {{ else }}
-
-          {{/* Set target for link. */}}
-          {{ $.Scratch.Set "target" "" }}
-          {{ if gt (len .URL) 4 }}
-            {{ if eq "http" (slicestr .URL 0 4) }}
-              {{ $.Scratch.Set "target" " target=\"_blank\" rel=\"noopener\"" }}
-            {{ end }}
-          {{ end }}
-
-          {{/* Get active page. */}}
-
-          {{ $is_link_in_current_path := false }}
-          {{ $is_widget_page := or $current_page.IsHome (eq $current_page.Type "widget_page") }}
-          {{ $is_same_page := false }}
-          {{ $hash := findRE "#(.+)" .URL }}
-
-          {{ if $current_page.IsHome | and (or (eq .URL "/") (eq .URL "")) }}
-            {{ $is_link_in_current_path = true }}
-          {{else}}
-            {{ if gt (len .URL) 1 }}{{/* Ignore root URL */}}
-              {{ $is_link_in_current_path = in $current_page.RelPermalink .URL }}
-              {{ $is_same_page = $is_link_in_current_path }}
-            {{end}}
-            {{ if gt (len $hash) 0 }}
-              {{ $hash = index $hash 0 }}
-              {{ $hash_removed := replace .URL $hash "" }}
-              {{ if eq (len $hash_removed) 0 }}
-                {{ $hash_removed = "/" }}{{/* Add robustness for `/#SECTION` or `#SECTION` in `menus.toml`. */}}
-              {{ end }}
-              {{ $is_same_page = eq (path.Dir $current_page.RelPermalink) (path.Dir ($hash_removed|relLangURL)) }}
-            {{ end }}
-          {{end}}
-
-          {{ $nav_href := .URL | relLangURL }}
-          {{ if in .URL "/gallery/" }}{{ $nav_href = partial "lab_url" "gallery/" }}{{ end }}
-          {{ if and (gt (len $hash) 0) (not (urls.Parse .URL).Scheme) }}
-            {{ $nav_href = printf "%s%s" site.Home.RelPermalink $hash }}
-            {{ $is_same_page = $current_page.IsHome }}
-          {{ end }}
+          {{ $href := partial "lab_url" .URL }}
           <li class="nav-item">
-            <a class="nav-link {{if and $highlight_active_link $is_link_in_current_path }} active{{end}}" href="{{ $nav_href }}"{{ if and $is_widget_page $is_same_page }} data-target="{{$hash}}"{{ end }}{{ ($.Scratch.Get "target") | safeHTMLAttr }}>
-              {{- .Pre -}}<span>{{ .Name | safeHTML }}</span>{{- .Post -}}
-            </a>
+            <a class="nav-link{{ if and $highlight_active_link (hasPrefix $here $href) }} active{{ end }}" href="{{ $href }}"><span>{{ .Name | safeHTML }}</span></a>
           </li>
-
           {{ end }}
           {{ end }}
 

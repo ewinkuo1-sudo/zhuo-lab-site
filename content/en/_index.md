@@ -15,9 +15,6 @@ sections:
     image_caption: Imaging from the lab
     original_label: View full image
     gallery_label: View the gallery
-- block: lab_pi
-  id: pi
-  content: {}
 - block: features
   id: research
   content:
@@ -71,51 +68,23 @@ sections:
       image_credit: Concept illustration
     subtitle: The questions we ask, the methods we use and what we have found
     integrated: true
-- block: lab_publication_brief
-  id: publications
+- block: lab_news
+  id: news
   content:
-    title: Selected publications
-    text: Read the studies behind our work, or browse the complete publication list.
+    title: Latest
+    link_label: News & events
+    pubs_label: All publications
 - block: lab_team_summary
   id: people
   content: {}
 - block: lab_join
   id: join
   content:
+    compact: true
     title: Join us
     text: We welcome backgrounds in physics, electrical and optical engineering, biomedical engineering, life sciences
-      and medicine.
-    apply: Email a short CV, your research interests and possible start date to discuss current opportunities.
-    items:
-    - title: Graduate students
-      text: Develop optical systems, image tissue or investigate quantitative image analysis.
-      apply: Apply through the Institute of Biophotonics and contact us about research directions.
-    - title: Undergraduate projects
-      text: Start with optical experiments, programming or image processing.
-      apply: Tell us about your background, interests and available time.
-    - title: Postdocs & research assistants
-      text: Bring your expertise to imaging technology and interdisciplinary research.
-      apply: Send a CV and relevant research experience to enquire about opportunities.
-- block: contact
-  id: contact
-  content:
-    title: Contact
-    text: Institute of Biophotonics, National Yang Ming Chiao Tung University (Yangming campus, Taipei).
-    email: zhuo0929@nycu.edu.tw
-    phone: +886-2-2826-7962
-    address:
-      street: No. 155, Sec. 2, Linong St., Beitou District
-      city: Taipei
-      region: ''
-      postcode: '11221'
-      country: Taiwan
-      country_code: TW
-    directions: 'Traditional Medicine Building A, 6th floor, Room 604-E (office). Institute office: Room 608, +886-2-2826-7000
-      ext. 65707.'
-    coordinates:
-      latitude: '25.1227'
-      longitude: '121.5164'
-    autolink: true
-  design:
-    columns: '1'
+      and medicine. Graduate students, undergraduate project students, postdocs and research assistants are all welcome
+      to enquire.
+    more_label: How to join
+    contact_label: Contact
 ---

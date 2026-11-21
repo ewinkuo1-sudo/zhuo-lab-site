@@ -1,23 +1,42 @@
-# Navigation links (English). Chinese menu lives in languages.yaml.
+# Navigation (English). The Chinese menu lives in languages.yaml.
+# URLs are content paths without a leading slash; the navbar resolves them with partials/lab_url.html, so they
+# work under the GitHub Pages project path and in both languages. Static pages (research map) are plain paths.
 main:
-  - name: Research
-    url: '/#research'
+  - identifier: research
+    name: Research
     weight: 10
-  - name: Research Map
-    url: '/research-map/en/'   # static/research-map/en/ (English); Chinese version is /research-map/
-    weight: 15
+  - name: Research directions
+    parent: research
+    url: 'research/'
+    weight: 11
+  - name: Research map
+    parent: research
+    url: 'research-map/en/'
+    weight: 12
+  - name: Clinical collaborations
+    parent: research
+    url: 'collaborations/'
+    weight: 13
   - name: Publications
-    url: '/#publications'
+    url: 'publication/'
     weight: 20
   - name: People
-    url: '/#people'
+    url: 'people/'
     weight: 30
-  - name: Gallery
-    url: '/gallery/'
+  - identifier: news
+    name: News & Gallery
     weight: 40
+  - name: News & events
+    parent: news
+    url: 'news/'
+    weight: 41
+  - name: Gallery
+    parent: news
+    url: 'gallery/'
+    weight: 42
   - name: Join Us
-    url: '/#join'
+    url: 'join/'
     weight: 50
   - name: Contact
-    url: '/#contact'
+    url: 'contact/'
     weight: 60

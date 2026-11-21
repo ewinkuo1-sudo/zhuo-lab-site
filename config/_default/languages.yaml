@@ -21,28 +21,43 @@ zh:
       copyright:
         notice: '© {year} 卓冠宇實驗室 · 國立陽明交通大學生醫光電研究所 · 台北市北投區立農街二段 155 號'
   menu:
+    # Same structure as menus.yaml; see the note there about URLs.
     main:
-      - name: 研究
-        url: '/#research'
+      - identifier: research
+        name: 研究
         weight: 10
+      - name: 研究方向
+        parent: research
+        url: 'research/'
+        weight: 11
       - name: 研究地圖
-        # static/research-map/，單頁捲動敘事＋3D 光路。
-        # 不能寫 '/research-map/'：它不對應任何 zh 內容頁，Hugo 會渲染成 /zh/zhuo-lab-site/research-map/（404）。
-        # 相對路徑從 /zhuo-lab-site/zh/ 往上一層，瀏覽器解析成 /zhuo-lab-site/research-map/。
-        url: '../research-map/'
-        weight: 15
+        parent: research
+        url: 'research-map/'
+        weight: 12
+      - name: 臨床合作
+        parent: research
+        url: 'collaborations/'
+        weight: 13
       - name: 論文
-        url: '/#publications'
+        url: 'publication/'
         weight: 20
       - name: 成員
-        url: '/#people'
+        url: 'people/'
         weight: 30
-      - name: 影像
-        url: '/gallery/'
+      - identifier: news
+        name: 消息與影像
         weight: 40
+      - name: 消息與活動
+        parent: news
+        url: 'news/'
+        weight: 41
+      - name: 研究影像與相簿
+        parent: news
+        url: 'gallery/'
+        weight: 42
       - name: 加入我們
-        url: '/#join'
+        url: 'join/'
         weight: 50
       - name: 聯絡
-        url: '/#contact'
+        url: 'contact/'
         weight: 60

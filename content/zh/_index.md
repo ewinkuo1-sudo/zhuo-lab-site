@@ -14,9 +14,6 @@ sections:
     image_caption: 實驗室研究影像
     original_label: 查看完整原圖
     gallery_label: 瀏覽影像
-- block: lab_pi
-  id: pi
-  content: {}
 - block: features
   id: research
   content:
@@ -64,49 +61,21 @@ sections:
       image_credit: 研究概念示意圖
     subtitle: 從研究問題、成像方法到已發表成果
     integrated: true
-- block: lab_publication_brief
-  id: publications
+- block: lab_news
+  id: news
   content:
-    title: 精選論文
-    text: 深入閱讀代表成果，或瀏覽完整論文清單。
+    title: 最新消息
+    link_label: 消息與活動
+    pubs_label: 完整論文清單
 - block: lab_team_summary
   id: people
   content: {}
 - block: lab_join
   id: join
   content:
+    compact: true
     title: 加入我們
-    text: 歡迎物理、電機、光電、生醫工程、生命科學與醫學背景的夥伴。
-    apply: 來信請附簡短履歷、研究興趣與預計開始時間；可洽詢目前的研究機會。
-    items:
-    - title: 碩博士生
-      text: 參與光學系統開發、組織成像或定量影像分析。
-      apply: 透過生醫光電所招生管道申請，並來信討論研究方向。
-    - title: 大學部專題生
-      text: 從光學實驗、程式分析或影像處理切入研究。
-      apply: 來信說明背景、感興趣的題目及可投入的時間。
-    - title: 博士後／研究助理
-      text: 結合既有專長，參與成像技術與跨領域研究。
-      apply: 提供履歷與相關研究經驗，洽詢合適機會。
-- block: contact
-  id: contact
-  content:
-    title: 聯絡
-    text: 國立陽明交通大學 生醫光電研究所（台北陽明校區）
-    email: zhuo0929@nycu.edu.tw
-    phone: +886-2-2826-7962
-    address:
-      street: 台北市北投區立農街二段155號
-      city: 台北市
-      region: ''
-      postcode: '11221'
-      country: 台灣
-      country_code: TW
-    directions: 傳統醫學大樓甲棟 6 樓 604-E 室（研究室）。所辦公室：608 室，+886-2-2826-7000 轉 65707。
-    coordinates:
-      latitude: '25.1227'
-      longitude: '121.5164'
-    autolink: true
-  design:
-    columns: '1'
+    text: 歡迎物理、電機與光電、醫工、生命科學及醫學背景的同學。碩博士生、大學部專題生、博士後與研究助理都歡迎來信洽詢。
+    more_label: 如何加入
+    contact_label: 聯絡方式
 ---

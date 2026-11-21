@@ -11,7 +11,7 @@ sections:
       title: 成員
       subtitle: 一張光學桌上的實驗室
       text: |
-        老師是雷射頭，白光分成四條顏色光路，一種顏色一個研究方向；每位成員是自己那條光路上的一個元件，旁邊的小人就是他本人在工作。點元件或小人看他在做什麼、和誰合作，再按「成員頁介紹」跳到下面他的卡片。卡片上的色標和光路同色。
+        老師是雷射頭，白光分成四條顏色光路，一種顏色一個研究方向；每位成員是自己那條光路上的一個元件，旁邊的小人就是他本人在工作。點元件或小人看他在做什麼，再按「成員頁介紹」跳到下面他的卡片。卡片上的色標和光路同色。
 
         <iframe id="member-island-frame" src="../../member-island/?lang=zh" title="成員島：一張光學桌上的實驗室成員" style="width:100%;height:min(860px,88vh);border:1px solid rgba(128,128,128,.25);border-radius:12px;background:#faf8f4"></iframe>
 

@@ -194,8 +194,9 @@ footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);paddin
   </footer>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<!-- three.js r128 與 OrbitControls：和研究地圖共用站內同一份，不走 CDN -->
+<script src="../research-map/vendor/three.min.js"></script>
+<script src="../research-map/vendor/OrbitControls.js"></script>
 <script>
 const SITE="https://ewinkuo1-sudo.github.io/zhuo-lab-site/zh/author/";
 const LANES={

@@ -1,4 +1,8 @@
 {{ $b := .wcBlock.content }}{{ $zh := eq .wcPage.Language.Lang "zh" }}
 <div class="section-heading">{{ if or $.wcPage.IsHome ($.wcPage.Store.Get "zl_h1") }}<h2 class="zl-h1">{{ $b.title }}</h2>{{ else }}{{ $.wcPage.Store.Set "zl_h1" true }}<h1>{{ $b.title }}</h1>{{ end }}<p>{{ $b.text }}</p></div>
+{{ if $b.compact }}
+<div class="zl-apply"><a class="btn btn-primary" href="{{ partial "lab_url" "join/" }}">{{ $b.more_label }} →</a><a href="{{ partial "lab_url" "contact/" }}">{{ $b.contact_label }} →</a></div>
+{{ else }}
 <div class="zl-join-grid">{{ range $b.items }}<article>{{ if $.wcPage.IsHome }}<h3 class="zl-h2">{{ .title }}</h3>{{ else }}<h2>{{ .title }}</h2>{{ end }}<p>{{ .text }}</p><p class="zl-join-detail">{{ .apply }}</p></article>{{ end }}</div>
 <div class="zl-apply"><p>{{ $b.apply }}</p><a class="btn btn-primary" href="mailto:zhuo0929@nycu.edu.tw">{{ if $zh }}聯絡卓老師{{ else }}Contact Prof. Zhuo{{ end }} ↗</a><a href="https://bioph.nycu.edu.tw/">{{ if $zh }}生醫光電所招生資訊{{ else }}Institute admissions{{ end }} ↗</a></div>
+{{ end }}
