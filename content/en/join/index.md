@@ -16,15 +16,15 @@ sections:
         you need to be curious about one part and willing to learn the rest.
 
         ### What you would work on
-        - Building and aligning nonlinear optical microscopes and fibre-based endoscopic probes.
-        - Imaging clinical tissue (collagen, cartilage, tumour stroma) and biomaterials.
+        - Building and aligning nonlinear optical microscopes and fiber-delivered beam paths.
+        - Imaging clinical tissue (collagen, cartilage, tumor stroma) and biomaterials.
         - Quantitative image analysis, machine learning and deep learning on label-free images.
         - Building AI-assisted analysis pipelines with modern tooling (Python, PyTorch, coding agents such as Claude Code).
         - Working directly with clinicians and pathologists on diagnostic problems.
 
         ### Master's and Ph.D. students
-        Apply through the [Institute of Biophotonics](https://bioph.nycu.edu.tw/) admission programmes
-        (Master's, Ph.D. and international programmes). Prospective students are encouraged to
+        Apply through the [Institute of Biophotonics](https://bioph.nycu.edu.tw/) admission programs
+        (Master's, Ph.D. and international programs). Prospective students are encouraged to
         e-mail Dr. Zhuo **before** applying.
 
         ### Undergraduates

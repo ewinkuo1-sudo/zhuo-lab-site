@@ -1,6 +1,8 @@
 {{- /* Builds research-map/data.js for the static research map page.
   Map-specific text and figures come from data/research_map.json. Everything the map shares with the rest of the
   site is taken from the same files the Hugo pages use, so a new paper or a renamed station is edited once:
+    statement, description <- the home page hero
+    question, method, finding, status <- data/research.json
     papers        <- data/research.json (slugs) + the publication pages
     verb, color   <- data/stations.json
     cases         <- data/cases.json
@@ -34,7 +36,14 @@
         {{- $cases = $cases | append (dict "id" $c.id "name" (index $c $lang) "state" .) -}}
       {{- end -}}
     {{- end -}}
+    {{- $text := index (index site.Data.research $id) $lang -}}
     {{- $stations = $stations | append (merge $s (dict
+        "question" $text.question
+        "method" $text.method
+        "finding" $text.finding
+        "status" $text.status
+        "papers_label" $text.papers_label
+        "short" (index $st $lang).short
         "papers" $papers
         "verb" (index $st $lang).verb
         "color" $st.color
@@ -50,8 +59,11 @@
       {{- with $langSite.GetPage $m.URL -}}{{- $nav = $nav | append (dict "name" $m.Name "url" .Permalink) -}}{{- end -}}
     {{- end -}}
   {{- end -}}
+  {{- $hero := (index $langSite.Home.Params.sections 0).content -}}
   {{- $out = merge $out (dict $lang (merge $src (dict
       "lang" $lang
+      "statement" $hero.statement
+      "description" $hero.description
       "stations" $stations
       "cases" $topCases
       "official" $langSite.Home.Permalink

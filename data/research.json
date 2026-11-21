@@ -2,59 +2,61 @@
   "microscopy": {
     "papers": [
       "zhuo-2021-labelfree",
-      "makkithaya-2025-quantitative"
+      "makkithaya-2025-quantitative",
+      "huang-2026-deciphering"
     ],
     "en": {
-      "question": "How can optical contrasts reveal tissue architecture and molecular properties?",
-      "method": "Published work combines SHG, two-photon fluorescence, fluorescence-lifetime imaging and CARS within a multimodal microscopy approach. The contrast channels and acquisition sequence depend on the experiment.",
-      "finding": "The 2021 paper presents a multimodal platform. A 2025 esophageal tissue study combines SHG and two-photon fluorescence with image analysis to compare tissue groups. That study includes H&E-stained sections; its figure should not be read as a demonstration that all samples were unstained.",
-      "status": "Published studies establish the methods and tissue applications. Extending them toward clinical use is a long-term goal; current system configurations and new projects should be discussed with the lab.",
-      "caption": "Esophageal tissue in the 2025 study: H&E histology alongside SHG, two-photon fluorescence and merged images. Full Fig. 2 is retained.",
+      "question": "Without stains or fluorescent dyes, what can light show us in tissue?",
+      "method": "A femtosecond near-infrared laser is focused into tissue. Collagen answers with second-harmonic generation (SHG) and molecules inside cells answer with two-photon fluorescence. Both signals come from the tissue itself, which is why the method is called label-free. The lab's microscope also integrates fluorescence-lifetime imaging and CARS (coherent anti-Stokes Raman scattering), which reads molecular vibrations.",
+      "finding": "A 2021 paper describes the multimodal microscope. A 2025 esophageal study images collagen with SHG and cells with two-photon fluorescence, side by side with H&E-stained sections. A 2026 oral-cancer study analyzes clinical data from 263 patients and finds collagen fibers aligned perpendicular to the tumor boundary in samples with the worst pattern of invasion (WPOI-5).",
+      "status": "All of these images come from excised tissue sections. Whether the same contrast can be obtained in living tissue, during surgery, is not yet known.",
+      "caption": "Fig. 2 of the 2025 esophageal study: H&E-stained sections alongside SHG, two-photon fluorescence and merged images. Full figure retained.",
       "papers_label": "Representative papers",
-      "home_question": "How can light reveal tissue structure?",
-      "home_method": "SHG and two-photon fluorescence with quantitative image analysis.",
-      "home_finding": "A 2025 study compares esophageal tissue groups using optical images and texture features."
+      "home_question": "Without stains, what can light show?",
+      "home_method": "SHG for collagen, two-photon fluorescence for cells; both signals come from the tissue itself.",
+      "home_finding": "A 2025 esophageal study sets these optical images side by side with H&E-stained sections."
     },
     "zh": {
-      "question": "不同的光學對比，如何呈現組織結構與分子特性？",
-      "method": "已發表工作以多模態顯微方法結合 SHG、雙光子螢光、螢光生命期成像與 CARS；實際使用的通道與取像順序依實驗而定。",
-      "finding": "2021 年論文介紹多模態平台；2025 年食道組織研究以 SHG、雙光子螢光與影像分析比較組織組別。後者包含 H&E 染色切片，因此這張圖不代表所有樣本皆未染色。",
-      "status": "方法與組織應用已有論文支持，走向臨床使用是長期目標；目前系統配置與新研究進度請洽實驗室。",
-      "caption": "2025 年食道組織研究：H&E 組織切片，以及 SHG、雙光子螢光與合併影像，保留完整圖 2。",
+      "question": "不染色、不加螢光劑，光能讓我們在組織裡看見什麼？",
+      "method": "把飛秒近紅外雷射聚焦在組織上，膠原蛋白會發出二倍頻光（SHG），細胞裡的分子會發出雙光子螢光。兩種訊號都來自組織本身，所以稱為無標記成像。實驗室的顯微平台另外整合了螢光生命期，以及讀取分子振動的 CARS（相干反斯托克斯拉曼散射）。",
+      "finding": "2021 年的論文描述這套多模態顯微平台。2025 年的食道研究用 SHG 拍膠原、用雙光子螢光拍細胞，並和 H&E 染色切片並排對照。2026 年的口腔癌研究分析 263 位病人的臨床資料，並在帶有最差侵犯型態（WPOI-5）的樣本裡，看到膠原纖維傾向垂直於腫瘤邊界。",
+      "status": "這些影像都來自取下來的組織切片。同樣的對比能不能在活體、在手術當下取得，還沒有答案。",
+      "caption": "2025 年食道研究圖 2：H&E 染色切片，以及 SHG、雙光子螢光與合併影像，保留完整圖。",
       "papers_label": "代表論文",
-      "home_question": "如何用光看見組織結構？",
-      "home_method": "結合 SHG、雙光子螢光與定量影像分析。",
-      "home_finding": "2025 年研究以光學影像與紋理特徵比較不同食道組織組別。"
+      "home_question": "不染色，光能看見什麼？",
+      "home_method": "SHG 拍膠原，雙光子螢光拍細胞；訊號都來自組織本身。",
+      "home_finding": "2025 年食道研究把這兩種光學影像和 H&E 染色切片並排對照。"
     },
     "home_paper": "makkithaya-2025-quantitative"
   },
   "collagen": {
     "papers": [
       "makkithaya-2024-investigating",
+      "huang-2026-deciphering",
       "rodrigues-2026-advancing",
       "mazumder-2017-polarization"
     ],
     "en": {
-      "question": "How can collagen organization be quantified across different tissue conditions?",
-      "method": "Polarization-resolved SHG measures polarization-dependent signals to derive susceptibility ratios, linear polarization and fibre orientation. These measurements describe aspects of collagen organization.",
-      "finding": "The 2024 cartilage study compares normal, osteoarthritic and rheumatoid-arthritis tissues. It reports differences in polarization-derived parameters and collagen organization between these tissue groups.",
-      "status": "Cartilage findings are published. Broader applications to collagen chirality and extracellular-matrix assessment remain research directions; the current scope of ongoing studies needs confirmation.",
-      "caption": "Osteoarthritis cartilage from the 2024 study: histology, SHG intensity and polarization-derived maps. Full Fig. 3 is retained.",
+      "question": "When tissue becomes diseased, how much does the arrangement of collagen change?",
+      "method": "The polarization of the incoming light is rotated step by step while the SHG signal is recorded; this is polarization-resolved SHG (P-SHG). The shape of the response yields three quantities: the susceptibility ratio χ33/χ31, the degree of linear polarization, and the distribution of fiber orientations.",
+      "finding": "A 2024 cartilage study compares normal, osteoarthritic and rheumatoid-arthritis tissue. Normal cartilage has χ33/χ31 values distinct from both diseased groups; osteoarthritic cartilage shows a higher degree of linear polarization and more directional fibers; rheumatoid-arthritis cartilage shows a more heterogeneous molecular orientation. A 2026 oral-cancer study applies the same measurement and finds increased collagen cross-linking and remodeling in the more invasive samples.",
+      "status": "Whether these three quantities can serve as diagnostic markers is still open: the paper presents them as a reference, and more samples are needed. A 2026 review surveys the same kind of measurement in other diseases.",
+      "caption": "Fig. 3 of the 2024 cartilage study: H&E sections, SHG intensity and polarization-derived maps of osteoarthritic cartilage. Full figure retained.",
       "papers_label": "Representative papers",
-      "home_question": "How does collagen organization change with disease?",
-      "home_method": "Polarization-resolved SHG maps fibre orientation and related parameters.",
-      "home_finding": "A 2024 study reports differences between normal, osteoarthritic and rheumatoid-arthritis cartilage."
+      "home_question": "How much does collagen change when tissue is diseased?",
+      "home_method": "Rotate the polarization of the light and read fiber arrangement from how the SHG signal responds.",
+      "home_finding": "A 2024 study: fibers are more directional in osteoarthritic cartilage and more disordered in rheumatoid arthritis."
     },
     "zh": {
-      "question": "如何量化不同組織狀態下的膠原蛋白排列？",
-      "method": "偏振解析 SHG 量測訊號隨偏振的變化，取得感受率比值、線偏振程度與纖維方向等參數，描述膠原蛋白的組織特徵。",
-      "finding": "2024 年軟骨研究比較正常、骨關節炎與類風濕性關節炎組織，報告各組在偏振衍生參數與膠原排列上的差異。",
-      "status": "軟骨研究已有發表成果；膠原蛋白手性與細胞外基質評估的延伸應用屬研究方向，進行中計畫的具體範圍待確認。",
-      "caption": "2024 年研究中的骨關節炎軟骨：組織切片、SHG 強度及偏振衍生參數圖，保留完整圖 3。",
+      "question": "組織生病之後，膠原蛋白的排列變了多少？",
+      "method": "把入射光的偏振方向一步一步轉過去，記錄 SHG 訊號怎麼跟著變，這叫偏振解析 SHG（P-SHG）。從變化的形狀可以算出三個量：感受率比值 χ33/χ31、線偏振度，以及纖維方向的分布。",
+      "finding": "2024 年的軟骨研究比較正常、退化性關節炎與類風濕性關節炎三種組織。正常軟骨的 χ33/χ31 與兩種病變組織不同；退化性關節炎的線偏振度較高，纖維排列更有方向性；類風濕性關節炎的分子排列則較雜亂。2026 年的口腔癌研究也用同一套量測，在侵犯性較強的樣本裡看到膠原交聯與重塑增加。",
+      "status": "這三個量能不能當成診斷指標，論文只把它們定位為參考，還需要更多樣本驗證。2026 年的回顧論文整理了同類量測在其他疾病上的應用。",
+      "caption": "2024 年軟骨研究圖 3：退化性關節炎軟骨的 H&E 切片、SHG 強度與偏振參數圖，保留完整圖。",
       "papers_label": "代表論文",
-      "home_question": "疾病如何改變膠原蛋白排列？",
-      "home_method": "以偏振解析 SHG 量測纖維方向與相關參數。",
-      "home_finding": "2024 年研究呈現正常、骨關節炎與類風濕性關節炎軟骨的組織差異。"
+      "home_question": "組織生病，膠原蛋白的排列變了多少？",
+      "home_method": "轉動入射光的偏振，從 SHG 訊號的變化算出纖維怎麼排。",
+      "home_finding": "2024 年研究：退化性關節炎的軟骨纖維排列更有方向性，類風濕性關節炎則較雜亂。"
     },
     "home_paper": "makkithaya-2024-investigating"
   },
@@ -63,57 +65,56 @@
       "zhuo-2021-labelfree"
     ],
     "en": {
-      "question": "How could nonlinear microscopy be brought into a smaller probing space?",
-      "method": "The concept is to combine optical fibres and miniature optics for excitation delivery and signal collection. Probe design and performance depend on the intended application.",
-      "finding": "The related 2021 paper describes multimodal microscopy as a technical foundation. It is not evidence of a completed endoscopic probe or clinical deployment.",
-      "status": "Miniaturization is a long-term direction. Prototype status, dimensions, imaging performance and representative experimental images await confirmation from the lab.",
-      "caption": "Concept illustration: an optical fibre delivers excitation light to a handheld probe. Rendered from the research map's 3D scene; not a photograph of a lab instrument.",
+      "question": "A microscope cannot go inside the body. Can the light go in by itself?",
+      "method": "The excitation light is sent through an optical fiber to a miniature probe, and the signal returns along the same path. The difficulty is that femtosecond pulses stretch inside a fiber, so they have to be pre-compensated before they enter it.",
+      "finding": "A 2021 paper describes a compact multimodal microscope that incorporates a photonic crystal fiber; it is the starting point for this direction. The miniature probe itself has no published results yet.",
+      "status": "How small the probe can be made, and how much image quality survives, are not yet backed by data we can publish. This is the lab's long-term direction.",
+      "caption": "Concept illustration: an optical fiber delivers excitation light to a handheld probe. Rendered from the research map's 3D scene; not a photograph of a lab instrument.",
       "papers_label": "Related technical background",
-      "home_question": "How can nonlinear imaging reach smaller spaces?",
-      "home_method": "Explore optical fibres and miniature optics for excitation and signal collection.",
-      "home_finding": "A published multimodal microscopy platform provides technical background; probe miniaturization remains a research direction."
+      "home_question": "Where a microscope cannot go, can light?",
+      "home_method": "An optical fiber carries the excitation light to a miniature probe and brings the signal back.",
+      "home_finding": "A 2021 multimodal microscope is the starting point; the probe itself has no published results yet."
     },
     "zh": {
-      "question": "如何把非線性顯微成像帶入更小的探測空間？",
-      "method": "概念上結合光纖與微型光學元件，傳遞激發光並收集訊號；探頭設計與效能需依目標應用評估。",
-      "finding": "相關的 2021 年論文提供多模態顯微技術基礎，不能據此視為已完成內視探頭或臨床使用的證據。",
-      "status": "微型化是長期方向；原型進度、尺寸、成像效能與代表性實驗影像待實驗室確認。",
+      "question": "顯微鏡搬不進體內，光能不能自己進去？",
+      "method": "把激發光送進光纖、接到微型探頭，再沿原路把訊號收回來。難處在於飛秒脈衝經過光纖會被拉寬，進光纖之前得先補償。",
+      "finding": "2021 年的論文描述一套整合光子晶體光纖的精簡型多模態顯微平台，是這個方向的起點。微型探頭本身還沒有發表成果。",
+      "status": "探頭能做到多小、影像品質能保留多少，目前沒有可以公開的數據。這是實驗室的長期方向。",
       "caption": "概念示意：光纖把激發光送到手持探頭。這是研究地圖 3D 場景的渲染圖，不是實驗室的實機照片。",
       "papers_label": "相關技術背景",
-      "home_question": "如何在更小的空間進行非線性成像？",
-      "home_method": "探索光纖與微型光學元件的激發光傳遞及訊號收集。",
-      "home_finding": "已發表多模態顯微平台提供技術基礎；探頭微型化仍屬研究方向。"
+      "home_question": "顯微鏡進不去的地方，光進得去嗎？",
+      "home_method": "用光纖把激發光送到微型探頭，再把訊號收回來。",
+      "home_finding": "2021 年的多模態顯微平台是起點；探頭本身還沒有發表成果。"
     },
     "home_paper": "zhuo-2021-labelfree"
   },
   "ai": {
     "papers": [
       "makkithaya-2026-deep",
-      "huang-2026-deciphering",
       "makkithaya-2025-quantitative",
       "karnati-2026-integration"
     ],
     "en": {
-      "question": "Which image features can help distinguish tissue groups?",
-      "method": "The 2025 esophageal study extracts gray-level co-occurrence matrix (GLCM) texture features and uses support-vector machines (SVM) for classification. A 2026 pilot study investigates deep learning and machine learning for two-photon imaging-based oral-lesion classification. A 2026 prostate study compares GLCM texture features with MobileNetV3-based deep-learning models on two-photon fluorescence images of tissue microarrays.",
-      "finding": "Published studies evaluate tissue classification in their respective datasets. In the 2026 prostate study the best deep-learning model reached 86.1% accuracy (AUC about 0.91) in group-disjoint five-fold cross-validation, against 71.9% for the texture-feature classifier. The oral-lesion work is a pilot study. None of these results establishes a general clinical diagnostic system; the prostate paper itself calls for larger, independent cohorts.",
-      "status": "Image classification has published support. New whole-slide workflows, pathology scores and deployment plans require separate confirmation and validation.",
+      "question": "Can a computer separate tissues that are hard to tell apart by eye?",
+      "method": "Two routes run side by side. One computes texture features from the image (the gray-level co-occurrence matrix, GLCM) and passes them to a conventional classifier; the other lets a deep-learning model look at the image directly.",
+      "finding": "A 2026 prostate study compares the two routes on 295 two-photon fluorescence images: the texture-feature classifier reaches 71.9% accuracy and the best deep-learning model 86.1% (AUC about 0.91), evaluated so that images from one sample group never appear in both training and testing. A 2025 esophageal study pairs SHG texture features with a support-vector machine and reports accuracies between 75% and 95.65% across four comparisons. A 2026 pilot study addresses oral-lesion classification.",
+      "status": "All of these numbers come from cross-validation within a single dataset. Whether they hold at another hospital, with other patients, has to be answered with larger independent cohorts; the prostate paper says so itself.",
       "caption": "Fig. 8 of the 2025 esophageal study: ROC curves of an SVM classifier trained on SHG image texture features, for four pairwise comparisons. Full figure retained.",
       "papers_label": "Representative papers",
-      "home_question": "Can image features help distinguish tissue groups?",
-      "home_method": "Texture analysis, machine learning and deep learning.",
-      "home_finding": "A 2026 study classifies normal and tumour prostate tissue from two-photon images with deep learning."
+      "home_question": "Can a computer separate tissues the eye cannot?",
+      "home_method": "One route computes texture features; the other lets deep learning read the image directly.",
+      "home_finding": "A 2026 prostate study: 86.1% accuracy with deep learning, 71.9% with texture features (cross-validation)."
     },
     "zh": {
-      "question": "哪些影像特徵有助於區分不同組織組別？",
-      "method": "2025 年食道研究以灰階共現矩陣（GLCM）抽取紋理特徵，使用支持向量機（SVM）分類。2026 年前導研究則探討深度學習與機器學習用於雙光子口腔病灶影像分類。2026 年攝護腺研究則在組織微陣列的雙光子螢光影像上，比較 GLCM 紋理特徵與以 MobileNetV3 為基礎的深度學習模型。",
-      "finding": "已發表工作在各自的資料集內評估組織分類。2026 年攝護腺研究中，最佳深度學習模型在分組不重疊的五折交叉驗證下準確率 86.1%（AUC 約 0.91），紋理特徵分類器為 71.9%。口腔病灶工作屬前導研究。這些結果尚不能代表通用的臨床診斷系統；攝護腺論文本身也指出需要更大的獨立世代驗證。",
-      "status": "影像分類已有論文支持；新的全片分析流程、病理評分與部署計畫，仍需另行確認與驗證。",
+      "question": "肉眼難以區分的組織，電腦能從影像裡分出來嗎？",
+      "method": "兩條路並行。一條先算出影像的紋理特徵（灰階共現矩陣，GLCM），再交給傳統分類器；另一條讓深度學習模型直接看影像。",
+      "finding": "2026 年的攝護腺研究用 295 張雙光子螢光影像比較這兩條路：紋理特徵分類器的準確率是 71.9%，最佳的深度學習模型是 86.1%（AUC 約 0.91）；評估時，同一組樣本不會同時出現在訓練與測試裡。2025 年的食道研究以 SHG 影像的紋理特徵加上支持向量機，四組比較的準確率在 75% 到 95.65% 之間。2026 年另有一篇口腔病灶分類的前導研究。",
+      "status": "這些數字都是在單一資料集裡交叉驗證得到的。換一家醫院、換一批病人還準不準，要靠更大的獨立世代來回答；攝護腺論文自己也這麼寫。",
       "caption": "2025 年食道研究圖 8：以 SHG 影像紋理特徵訓練的 SVM 分類器，在四組兩兩比較下的 ROC 曲線，保留完整圖。",
       "papers_label": "代表論文",
-      "home_question": "影像特徵能否協助區分組織組別？",
-      "home_method": "運用紋理分析、機器學習與深度學習。",
-      "home_finding": "2026 年研究以深度學習從雙光子影像區分正常與腫瘤攝護腺組織。"
+      "home_question": "肉眼難分的組織，電腦分得出來嗎？",
+      "home_method": "一條路算紋理特徵，一條路讓深度學習直接看影像。",
+      "home_finding": "2026 年攝護腺研究：深度學習準確率 86.1%，紋理特徵 71.9%（交叉驗證）。"
     },
     "home_paper": "makkithaya-2026-deep"
   }

@@ -31,8 +31,8 @@
     },
     "zh": {
       "title": "用偏振光解析軟骨結構",
-      "summary": "以偏振解析 SHG 與定量影像分析，研究骨關節炎及類風濕性關節炎相關的軟骨結構差異。",
-      "alt": "骨關節炎軟骨的 H&E、SHG 強度、感受率比值、偏振與方向分布圖。"
+      "summary": "以偏振解析 SHG 與定量影像分析，研究退化性關節炎及類風濕性關節炎相關的軟骨結構差異。",
+      "alt": "退化性關節炎軟骨的 H&E、SHG 強度、感受率比值、偏振與方向分布圖。"
     }
   },
   {
@@ -42,7 +42,7 @@
     "credit": "Concept illustration",
     "en": {
       "title": "Deep learning reads label-free prostate tissue",
-      "summary": "Two-photon fluorescence images of prostate tissue microarrays are classified as normal or tumour, comparing texture features with global-local deep-learning models.",
+      "summary": "Two-photon fluorescence images of prostate tissue microarrays are classified as normal or tumor, comparing texture features with global-local deep-learning models.",
       "alt": "Simulated tissue image with a classifier overlay (illustration)."
     },
     "zh": {
@@ -59,7 +59,7 @@
     "en": {
       "title": "One platform, many label-free contrasts",
       "summary": "The multimodal nonlinear microscopy platform that the miniaturized endomicroscopy direction builds on.",
-      "alt": "Schematic of a fibre-based nonlinear endomicroscopy probe (illustration)."
+      "alt": "Schematic of a fiber-based nonlinear endomicroscopy probe (illustration)."
     },
     "zh": {
       "title": "一個平台，多種無標記對比",

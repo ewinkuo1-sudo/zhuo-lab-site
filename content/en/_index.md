@@ -6,12 +6,11 @@ sections:
 - block: lab_hero
   id: home
   content:
-    statement: See tissue through light. Advance label-free diagnosis.
-    description: We combine nonlinear optics, quantitative imaging and AI to study cancer and tissue structure,
-      and develop imaging tools for clinical translation.
+    statement: 'See disease in tissue with light alone. No stains.'
+    description: 'We image the light that tissue itself emits, turn the images into numbers, teach computers to tell diseased tissue from healthy, and are working to bring the whole chain inside the body.'
     research_label: Explore our research
     join_label: Join the lab
-    image_alt: A multicolour tissue overview supplied by the lab, shown in full.
+    image_alt: A multicolor tissue overview supplied by the lab, shown in full.
     image_caption: Imaging from the lab
     original_label: View full image
     gallery_label: View the gallery
@@ -40,7 +39,7 @@ sections:
         maps.'
       icon: dna
       icon_pack: fas
-      description: How can collagen changes be quantified? Polarization-resolved SHG measures fibre organization
+      description: How can collagen changes be quantified? Polarization-resolved SHG measures fiber organization
         and tissue differences in cartilage and cancer research.
       url: research/#collagen-chirality-and-extracellular-matrix-quantification
       image_credit: Makkithaya et al. · APL Bioengineering · Fig. 3
@@ -61,14 +60,14 @@ sections:
     - research_key: endomicroscopy
       name: Miniaturized nonlinear endomicroscopy
       image: 'gen/probe-concept.webp'
-      image_alt: '3D illustration: an orange optical fibre leads to a handheld probe pointed at tissue in a Petri dish.'
+      image_alt: '3D illustration: an orange optical fiber leads to a handheld probe pointed at tissue in a Petri dish.'
       icon: stethoscope
       icon_pack: fas
-      description: How can microscopy reach smaller spaces? This direction explores optical fibres and miniature
+      description: How can microscopy reach smaller spaces? This direction explores optical fibers and miniature
         optics for nonlinear endomicroscopy.
       url: research/#miniaturized-nonlinear-endomicroscopy
       image_credit: 'Concept illustration · rendered from the research map''s 3D scene'
-    subtitle: The questions we ask, the methods we use and what we have found
+    subtitle: What we ask, how we work, what we have found
     integrated: true
 - block: lab_news
   id: news

@@ -1,14 +1,14 @@
 ---
 title: Research
-summary: 'The four research directions of the Zhuo Lab: label-free nonlinear microscopy, collagen quantification, AI-assisted pathology and miniaturized endomicroscopy, each with published evidence.'
+summary: 'Four research directions on one path: See, Measure, Distinguish, Reach. Each station states the question, the approach, the finding and what is not yet known.'
 date: 2026-09-06
 type: landing
 sections:
   - block: lab_research
     content:
       title: Research
-      subtitle: From optical contrasts to quantitative tissue analysis
-      intro: The four directions are four stages of one pipeline. First see tissue with light, then turn what is seen into numbers, hand them to AI to classify, and finally shrink the whole chain to reach inside the body. Each stage lists published evidence, long-term goals and the clinical cases it serves.
+      subtitle: Four stations along one beam of light
+      intro: 'The four directions form one path: first see, then measure, then distinguish, and finally reach inside the body. The first three stations have published results; the fourth is still on its way. Each station answers four things in order: what we asked, how we worked, what we found, and what we do not know yet.'
   - block: markdown
     content:
       text: |

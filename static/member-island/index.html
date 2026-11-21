@@ -200,18 +200,18 @@ footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);paddin
 <script>
 const SITE="https://ewinkuo1-sudo.github.io/zhuo-lab-site/zh/author/";
 const LANES={
-  // verb 與官網研究頁四站同一套（看得到／讀得懂／判得準／到得了），顏色也相同。
-  A:{verb:"讀得懂",name:"偏振 SHG",desc:"膠原蛋白、軟骨、骨：χ 張量、PTHG。",v:"--gA",z:-1.6,end:"膠原蛋白怎麼排"},
-  B:{verb:"看得到",name:"多模態對比",desc:"不只 SHG：FLIM、拉曼、CARS、高光譜散射。",v:"--gB",z:0,end:"不染色也看得到"},
-  C:{verb:"到得了",name:"成像系統與內視",desc:"掃描光路、拼接、電路、光纖內視鏡、光片。",v:"--gC",z:1.6,end:"拍得快、拍得進去"},
-  D:{verb:"判得準",name:"AI 判讀與臨床",desc:"分級、分割降噪、腫瘤邊界。",v:"--gD",z:3.2,end:"醫師看得懂的答案"},
+  // verb 與官網研究頁四站同一套（看得見／量得出／辨得出／送得進），顏色也相同。
+  A:{verb:"量得出",name:"偏振 SHG",desc:"膠原蛋白、軟骨、骨：χ 張量、PTHG。",v:"--gA",z:-1.6,end:"膠原蛋白怎麼排"},
+  B:{verb:"看得見",name:"多模態對比",desc:"不只 SHG：FLIM、拉曼、CARS、高光譜散射。",v:"--gB",z:0,end:"不染色也看得見"},
+  C:{verb:"送得進",name:"成像系統與內視",desc:"掃描光路、拼接、電路、光纖內視鏡、光片。",v:"--gC",z:1.6,end:"拍得快、拍得進去"},
+  D:{verb:"辨得出",name:"AI 判讀與臨床",desc:"分級、分割降噪、腫瘤邊界。",v:"--gD",z:3.2,end:"醫師看得懂的答案"},
   SRC:{name:"光源",desc:"",v:"--white"},
   N:{name:"新生",desc:"2026-09 入學，題目未定，先在桌邊看。",v:"--gX"}
 };
 const MEMBERS=[
   {id:"zhuo",name:"卓冠宇",en:"Guan-Yu Zhuo",role:"副教授、實驗室主持人",lane:"SRC",part:"雷射頭（唯一光源）",act:"point",x:-5.0,
    line:"題目從這裡出來：一道白光，分給四條光路。",
-   does:["轉譯生醫光電","免標記非線性光學顯微術","偏振解析 SHG 與膠原蛋白手性","微型化非線性內視顯微術"],slug:"guan-yu-zhuo",avatar:1},
+   does:["轉譯生醫光電","無標記非線性光學顯微術","偏振解析 SHG 與膠原蛋白手性","微型化非線性內視顯微術"],slug:"guan-yu-zhuo",avatar:1},
   {id:"jun",name:"陳涴鈞",en:"Jun Chen",role:"研究助理，已畢業（2026-10 離開）",lane:"A",part:"半波片（轉偏振）",act:"pass",grad:1,x:-2.6,
    line:"轉偏振方向，看膠原蛋白怎麼排。工作交棒給承毅。",does:["偏振解析 SHG 看軟骨","拉曼光譜看軟骨的生化組成","多模態非線性光學 × 膠原蛋白（2026-08 口試）"],slug:"jun",avatar:1},
   {id:"tsai",name:"蔡宜勲",en:"Yi-Xun Tsai",role:"碩士班",lane:"A",part:"分析器（讀偏振）",act:"type",x:0.6,
@@ -227,7 +227,7 @@ const MEMBERS=[
   {id:"kuo",name:"郭智翔",en:"Chih-Hsiang Kuo",role:"博士班",lane:"C",part:"物鏡（成像）",act:"knob",x:0.2,
    line:"共軛焦反射式量測，和光片成像。",does:["共軛焦反射式量測","光片顯微成像"],slug:"chih-hsiang-kuo",avatar:0,
    toys:[{k:"遊樂場",t:"cat-toys",d:"互動小工具集",u:"https://ewinkuo1-sudo.github.io/cat-toys/"}]},
-  {id:"wangwh",name:"Wei-Hsun Wang",en:"Wei-Hsun Wang",role:"碩士班，已畢業",lane:"C",part:"電路板（訊號）",act:"pass",grad:1,x:-2.9,pend:"交棒給誰待確認",
+  {id:"wangwh",name:"Wei-Hsun Wang",en:"Wei-Hsun Wang",role:"碩士班，已畢業",lane:"C",part:"電路板（訊號）",act:"pass",grad:1,x:-2.9,
    line:"把 SHG 訊號在時間上拉寬，電路收得更快。",does:["SHG 訊號時間展寬","電路設計、訊號增強","高速顯微成像"],slug:"wei-hsun-wang",avatar:1},
   {id:"huang",name:"黃柏翰",en:"Po-Han Huang",role:"碩士班",lane:"C",part:"光纖探頭（內視）",act:"knob",x:2.3,
    line:"把非線性成像做進光纖，往內視鏡走。",does:["波向量編碼非線性內視成像（WENE）","光纖式光學元件整合","高光譜散射判腫瘤邊界"],slug:"po-han-huang",avatar:1},
@@ -246,10 +246,10 @@ const RELS=[];
 const LANG=window.__MI.lang,THEME0=window.__MI.theme,EMBED=window.__MI.embedded;
 const EN={
   lanes:{
-    A:{verb:"Quantify",name:"Polarization SHG",desc:"Collagen, cartilage, bone: χ tensor, PTHG.",end:"How collagen is arranged"},
+    A:{verb:"Measure",name:"Polarization SHG",desc:"Collagen, cartilage, bone: χ tensor, PTHG.",end:"How collagen is arranged"},
     B:{verb:"See",name:"Multimodal contrast",desc:"Beyond SHG: FLIM, Raman, CARS, hyperspectral scattering.",end:"Seeing without stains"},
     C:{verb:"Reach",name:"Imaging systems & endoscopy",desc:"Scanning optics, stitching, electronics, fiber endoscopy, light-sheet.",end:"Faster, and inside the body"},
-    D:{verb:"Classify",name:"AI interpretation & clinic",desc:"Grading, segmentation and denoising, tumor margins.",end:"Answers clinicians can use"},
+    D:{verb:"Distinguish",name:"AI interpretation & clinic",desc:"Grading, segmentation and denoising, tumor margins.",end:"Answers clinicians can use"},
     SRC:{name:"Light source"},
     N:{name:"New students",desc:"Joined in September 2026. Topics not set yet; watching from the side table."}
   },
@@ -268,7 +268,7 @@ const EN={
     shih:{role:"Master's student",part:"Galvo mirrors (scanning)",line:"Builds the scanning optics and stitches the images together.",does:["Scanning system optics","Image stitching","Fiber coupling"]},
     kuo:{role:"PhD student",part:"Objective (imaging)",line:"Confocal reflectance measurement and light-sheet imaging.",does:["Confocal reflectance measurement","Light-sheet microscopy"],
       toys:[{k:"Playground",t:"cat-toys",d:"Interactive mini tools",u:"https://ewinkuo1-sudo.github.io/cat-toys/?lang=en"}]},
-    wangwh:{role:"Master's student, graduated",part:"Circuit board (signal)",pend:"Successor to be confirmed",line:"Stretches SHG signals in time so the electronics can capture them faster.",
+    wangwh:{role:"Master's student, graduated",part:"Circuit board (signal)",line:"Stretches SHG signals in time so the electronics can capture them faster.",
       does:["Temporal stretching of SHG signals","Circuit design, signal enhancement","High-speed microscopy"]},
     huang:{role:"Master's student",part:"Fiber probe (endoscopy)",line:"Brings nonlinear imaging into optical fiber, toward endoscopy.",
       does:["Wavevector-encoded nonlinear endoscopy (WENE)","Integrating fiber-optic components","Hyperspectral scattering for tumor margins"]},

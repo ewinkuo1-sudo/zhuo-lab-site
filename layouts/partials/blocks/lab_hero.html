@@ -6,11 +6,11 @@
   <img src="{{ $small.RelPermalink }}" srcset="{{ $small.RelPermalink }} 800w, {{ $large.RelPermalink }} 1400w" sizes="(min-width: 992px) 720px, 100vw" width="{{ $large.Width }}" height="{{ $large.Height }}" alt="" fetchpriority="high" decoding="async">
 </div>
 <div class="zl-hero-copy">
-  <p class="zl-eyebrow">NYCU · INSTITUTE OF BIOPHOTONICS</p>
-  <h1>Translational<br>Biophotonics Laboratory</h1>
+  <p class="zl-eyebrow">{{ if $zh }}國立陽明交通大學 · 生醫光電研究所{{ else }}NYCU · INSTITUTE OF BIOPHOTONICS{{ end }}</p>
+  <h1>{{ if $zh }}轉譯生醫光電實驗室{{ else }}Translational<br>Biophotonics Laboratory{{ end }}</h1>
   <div class="zl-hero-identity">
     <p><strong>{{ if $zh }}卓冠宇 Guan-Yu Zhuo · 副教授／實驗室主持人{{ else }}Guan-Yu Zhuo 卓冠宇 · Associate Professor / Principal Investigator{{ end }}</strong></p>
-    <p>{{ if $zh }}國立陽明交通大學 · 生醫光電研究所{{ else }}Institute of Biophotonics · National Yang Ming Chiao Tung University{{ end }}</p>
+    <p>{{ if $zh }}Translational Biophotonics Laboratory（TBL）{{ else }}Institute of Biophotonics · National Yang Ming Chiao Tung University{{ end }}</p>
     <p><a href="{{ partial "lab_url" "authors/guan-yu-zhuo/" }}">{{ if $zh }}主持人介紹{{ else }}About the PI{{ end }} →</a> · <a href="{{ site.Data.institution.faculty_url }}">{{ if $zh }}陽明交大官方教師頁{{ else }}Official NYCU faculty profile{{ end }} ↗</a> · <a href="mailto:{{ site.Data.institution.email }}">{{ site.Data.institution.email }}</a></p>
   </div>
   <p class="zl-hero-statement">{{ $b.statement }}</p>

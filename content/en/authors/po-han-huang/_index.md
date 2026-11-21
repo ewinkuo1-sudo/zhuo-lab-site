@@ -11,9 +11,9 @@ social: []
 email: ''
 user_groups:
 - Students
-bio: Wave-vector-encoded nonlinear endoscopy and fibre-based optical integration.
+bio: Wave-vector-encoded nonlinear endoscopy and fiber-based optical integration.
 ---
 
-Po-Han Huang is a master's student at the Institute of Biophotonics, National Yang Ming Chiao Tung University. He develops the wave-vector-encoded nonlinear (WENE) endoscopy system, integrating fibre-based optical components for biomedical applications.
+Po-Han Huang is a master's student at the Institute of Biophotonics, National Yang Ming Chiao Tung University. He develops the wave-vector-encoded nonlinear (WENE) endoscopy system, integrating fiber-based optical components for biomedical applications.
 
 His research aims to improve the precision of diagnostic imaging tools for clinical use.

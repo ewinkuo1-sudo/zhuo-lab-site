@@ -6,8 +6,8 @@ sections:
 - block: lab_hero
   id: home
   content:
-    statement: 用光學看見組織，推進無標記診斷。
-    description: 結合非線性光學、定量影像與人工智慧，研究癌症和組織結構，開發走向臨床的成像工具。
+    statement: '不染色，用光看見組織裡的病變。'
+    description: '我們拍下組織自己發出的光，把影像變成數字，讓電腦學著分辨病變，最後要把這套方法送進體內。'
     research_label: 探索研究
     join_label: 加入我們
     image_alt: 實驗室提供的多色組織全景影像，保留完整畫面。
@@ -33,7 +33,7 @@ sections:
     - research_key: collagen
       name: 膠原蛋白手性與細胞外基質定量
       image: publications/cartilage-2024.jpg
-      image_alt: 骨關節炎軟骨的 H&E、SHG 強度、感受率比值、偏振與方向分布圖。
+      image_alt: 退化性關節炎軟骨的 H&E、SHG 強度、感受率比值、偏振與方向分布圖。
       icon: dna
       icon_pack: fas
       description: 如何量化膠原蛋白的結構變化？以偏振解析 SHG 研究纖維方向與組織差異，應用於軟骨及癌症研究。
@@ -61,7 +61,7 @@ sections:
       description: 如何將顯微成像帶入更小的探測空間？以光纖與微型光學元件為方向，探索非線性內視成像。
       url: research/#微型化非線性內視顯微術
       image_credit: '概念示意 · 研究地圖 3D 場景渲染圖'
-    subtitle: 從研究問題、成像方法到已發表成果
+    subtitle: 問了什麼、怎麼做、發現什麼
     integrated: true
 - block: lab_news
   id: news

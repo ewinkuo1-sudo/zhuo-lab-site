@@ -7,7 +7,7 @@ station: endomicroscopy
 organizations:
   - name: Institute of Biophotonics, National Yang Ming Chiao Tung University
     url: https://bioph.nycu.edu.tw/
-bio: Scanning-system optical path, image stitching, fibre coupling.
+bio: Scanning-system optical path, image stitching, fiber coupling.
 
 social: []
 

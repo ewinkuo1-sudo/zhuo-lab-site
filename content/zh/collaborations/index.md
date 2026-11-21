@@ -1,6 +1,6 @@
 ---
 title: 臨床合作
-summary: '卓冠宇實驗室與臨床醫師、病理醫師合作的題目：食道癌、軟骨疾病、口腔癌與膠原病理評分。'
+summary: '從診斷現場帶回來的問題：食道癌、軟骨疾病、口腔癌與攝護腺癌，各自走到研究流程的哪一站、得到什麼結果、還不知道什麼。'
 date: 2026-09-06
 type: landing
 
@@ -8,51 +8,55 @@ sections:
   - block: markdown
     content:
       title: 臨床合作
-      subtitle: 真實組織、真實診斷問題
+      subtitle: 從診斷現場帶回來的問題
       text: |
-        實驗室每一項影像方法都是對著臨床醫師與病理科醫師帶來的問題發展的。每個案例都走在同一條[研究流程](../research/)上：先用光看到組織、再變成數字、交給 AI 判讀、最後往體內送。下面每個案例標出它目前走到哪幾站，點色標可回到該方向的說明。各案的合作單位與合作者，見該篇論文的作者單位。
+        實驗室的題目多半從臨床來：醫師與病理醫師遇到難以判讀的組織，我們試著用光學影像給出一個量得出來的答案。每個案例都走在同一條[研究流程](../research/)上：看得見、量得出、辨得出，最後希望送得進體內。色標標出它目前走到哪幾站，點一下可以回到那個方向的說明。合作單位與合作者列在各篇論文的作者欄。
 
-        ### 食道癌：不染色也能評估基質 {#esophagus}
+        ### 食道癌：鱗狀細胞癌與高度分化不良 {#esophagus}
 
-        <p class="zl-case-stations"><a class="zl-station" style="--st:#56B4E9" href="../research/#無標記非線性光學顯微"><i></i><b>看得到</b></a><a class="zl-station" style="--st:#E69F00" href="../research/#膠原蛋白手性與細胞外基質定量"><i></i><b>讀得懂</b></a><a class="zl-station" style="--st:#CC79A7" href="../research/#ai-輔助無標記病理"><i></i><b>判得準</b></a><a class="zl-station zl-station-goal" style="--st:#009E73" href="../research/#微型化非線性內視顯微術"><i></i><b>到得了</b><small>長期目標</small></a></p>
+        <p class="zl-case-stations"><a class="zl-station" style="--st:#56B4E9" href="../research/#無標記非線性光學顯微"><i></i><b>看得見</b></a><a class="zl-station" style="--st:#E69F00" href="../research/#膠原蛋白手性與細胞外基質定量"><i></i><b>量得出</b></a><a class="zl-station" style="--st:#CC79A7" href="../research/#ai-輔助無標記病理"><i></i><b>辨得出</b></a><a class="zl-station zl-station-goal" style="--st:#009E73" href="../research/#微型化非線性內視顯微術"><i></i><b>送得進</b><small>長期目標</small></a></p>
 
-        **問題。** 病灶周圍的細胞外基質，能否在病理醫師看 H&E 之前，就區分鱗狀細胞癌與高度分化不良？
-        **我們做的。** 對未染色切片做雙光子與 SHG 取像，抽取紋理特徵，訓練機器學習分類器。
-        **狀態。** 已發表（*Sci. Rep.* 2025）；全片掃描為後續方向，進度待確認。
+        **問題。** 鱗狀細胞癌與高度分化不良在切片上有時很像。病灶周圍的細胞外基質，能不能幫忙把兩者分開？<br>
+        **做法。** 用雙光子顯微拍細胞外基質的 SHG 與雙光子螢光，算出影像的紋理特徵，再交給支持向量機分類。<br>
+        **結果。** 以 SHG 影像為基礎的分類器，在四組比較中的準確率分別是 75%、84.21%、95% 與 95.65%（*Sci. Rep.* 2025）。<br>
+        **還不知道。** 這是單一研究的樣本；換一批病人是否成立，尚待驗證。
 
         ### 軟骨疾病：退化性關節炎與類風濕性關節炎 {#cartilage}
 
-        <p class="zl-case-stations"><a class="zl-station" style="--st:#56B4E9" href="../research/#無標記非線性光學顯微"><i></i><b>看得到</b></a><a class="zl-station" style="--st:#E69F00" href="../research/#膠原蛋白手性與細胞外基質定量"><i></i><b>讀得懂</b></a></p>
+        <p class="zl-case-stations"><a class="zl-station" style="--st:#56B4E9" href="../research/#無標記非線性光學顯微"><i></i><b>看得見</b></a><a class="zl-station" style="--st:#E69F00" href="../research/#膠原蛋白手性與細胞外基質定量"><i></i><b>量得出</b></a></p>
 
-        **問題。** 膠原纖維的排列與手性，能否區分正常、退化性與類風濕性軟骨？
-        **我們做的。** 極化解析 SHG、χ33/χ31 與線偏振度圖。
-        **狀態。** 已發表（*APL Bioeng.* 2024）。
+        **問題。** 正常、退化性關節炎與類風濕性關節炎的軟骨，膠原纖維的排列差在哪裡？<br>
+        **做法。** 偏振解析 SHG，逐點算出感受率比值 χ33/χ31、線偏振度與纖維方向。<br>
+        **結果。** 正常軟骨的 χ33/χ31 與兩種病變不同；退化性關節炎的線偏振度較高、排列更有方向性；類風濕性關節炎的排列較雜亂（*APL Bioeng.* 2024）。<br>
+        **還不知道。** 論文把這些參數定位為診斷的參考，能否成為臨床指標還需要更多樣本。
 
         ### 口腔癌：最差侵犯型態 {#oral}
 
-        <p class="zl-case-stations"><a class="zl-station" style="--st:#56B4E9" href="../research/#無標記非線性光學顯微"><i></i><b>看得到</b></a><a class="zl-station" style="--st:#CC79A7" href="../research/#ai-輔助無標記病理"><i></i><b>判得準</b></a><a class="zl-station zl-station-goal" style="--st:#009E73" href="../research/#微型化非線性內視顯微術"><i></i><b>到得了</b><small>長期目標</small></a></p>
+        <p class="zl-case-stations"><a class="zl-station" style="--st:#56B4E9" href="../research/#無標記非線性光學顯微"><i></i><b>看得見</b></a><a class="zl-station" style="--st:#E69F00" href="../research/#膠原蛋白手性與細胞外基質定量"><i></i><b>量得出</b></a><a class="zl-station" style="--st:#CC79A7" href="../research/#ai-輔助無標記病理"><i></i><b>辨得出</b></a><a class="zl-station zl-station-goal" style="--st:#009E73" href="../research/#微型化非線性內視顯微術"><i></i><b>送得進</b><small>長期目標</small></a></p>
 
-        **問題。** 一個肉眼難以評分的預後指標，能否從無標記多光子影像量化？
-        **我們做的。** 對腫瘤前緣做多光子取像，結合深度學習分類。
-        **狀態。** 已發表（*Lab. Invest.* 2026）。
+        **問題。** 「最差侵犯型態」（WPOI-5）是口腔癌預後不佳的病理指標。帶有這種型態的腫瘤，周圍的組織長什麼樣子？<br>
+        **做法。** 分析 263 位病人的臨床資料，並以多模態非線性顯微（SHG、三倍頻與雙光子螢光）和偏振解析 SHG 觀察腫瘤微環境。<br>
+        **結果。** WPOI-5 是無復發存活期較差的獨立預測因子；帶有 WPOI-5 的樣本裡，膠原交聯與重塑增加，纖維傾向垂直於腫瘤邊界（*Lab. Invest.* 2026）。另一篇前導研究嘗試用深度學習與機器學習分類口腔病灶的雙光子影像（*IEEE Photonics J.* 2026）。<br>
+        **還不知道。** 論文把影像部分定位為初步證據與概念驗證，後續需要驗證研究。
 
-        ### 病理醫師可以稽核的膠原蛋白病理分數 {#collagen-score}
+        ### 攝護腺癌：正常與腫瘤組織 {#prostate}
 
-        <p class="zl-case-stations"><a class="zl-station" style="--st:#E69F00" href="../research/#膠原蛋白手性與細胞外基質定量"><i></i><b>讀得懂</b></a><a class="zl-station" style="--st:#CC79A7" href="../research/#ai-輔助無標記病理"><i></i><b>判得準</b></a></p>
+        <p class="zl-case-stations"><a class="zl-station" style="--st:#56B4E9" href="../research/#無標記非線性光學顯微"><i></i><b>看得見</b></a><a class="zl-station" style="--st:#CC79A7" href="../research/#ai-輔助無標記病理"><i></i><b>辨得出</b></a></p>
 
-        **問題。** 膠原蛋白相關病理能否變成可重複的數字，而不是目測分級？
-        **我們做的。** 定量 SHG 指標與機器學習，並把結果與來源影像並列，讓推論可被檢視。
-        **狀態。** 已發表（*J. Microsc.* 2026）；持續進行。
+        **問題。** 無標記的雙光子螢光影像，足以分辨正常與腫瘤的攝護腺組織嗎？<br>
+        **做法。** 用組織微陣列的 295 張影像（135 個樣本組），比較紋理特徵分類器與以 MobileNetV3 為基礎的深度學習模型。<br>
+        **結果。** 紋理特徵分類器的準確率是 71.9%；最佳的深度學習模型是 86.1%，AUC 約 0.91（*Sci. Rep.* 2026）。<br>
+        **還不知道。** 結果來自單一資料集的交叉驗證；論文指出還需要更大的獨立世代，以及病人層級的驗證。
 
-        ## 資料與 ground truth
-        每項研究都使用同一蠟塊的**相鄰 5 µm 切片**：一片做 H&E 染色並由病理醫師標註作為 ground truth，另一片不染色供無標記多光子成像。分類器只對照這份標註訓練與測試，因此每個結論都能追溯到病理醫師對同一塊組織的判讀。
+        ## 影像對照什麼
+        光學影像的判讀以病理診斷為準。影像拍完之後，要和病理醫師在傳統染色切片上的判讀對照；分類器也是對著這個答案訓練與測試的。
 
         ## 合作怎麼進行
-        1. 你帶來診斷問題與組織來源（新鮮、冷凍或 FFPE 未染色切片）。
-        2. 我們在多光子平台上做無標記取像，並與你一起建立分析流程。
-        3. 結果對照你的 ground truth 驗證，共同撰寫發表。
+        1. 你帶來一個診斷上的難題，以及可用的組織。
+        2. 我們做無標記取像，和你一起決定要量什麼、怎麼分析。
+        3. 結果對照病理診斷，一起撰寫發表。
 
-        有興趣做先導研究的臨床與病理醫師，請[與我們聯絡](../contact/)。
+        想先做小規模試驗的臨床與病理醫師，請[與我們聯絡](../contact/)。
 
     design:
       columns: '1'

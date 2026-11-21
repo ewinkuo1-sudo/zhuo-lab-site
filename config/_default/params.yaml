@@ -14,7 +14,7 @@ marketing:
     site_type: Organization
     local_business_type: ''
     org_name: 'Zhuo Lab, Institute of Biophotonics, National Yang Ming Chiao Tung University'
-    description: 'Translational biophotonics: label-free nonlinear optical microscopy, polarization-resolved SHG imaging of collagen, and miniaturized nonlinear endomicroscopy for clinical diagnosis.'
+    description: 'Seeing disease in tissue with light alone: label-free nonlinear optical microscopy, polarization-resolved SHG measurement of collagen, AI image classification, and miniature endomicroscopy in development.'
     twitter: ''
   analytics:
     google_analytics: ''
@@ -37,7 +37,7 @@ header:
 
 footer:
   copyright:
-    notice: '© {year} Zhuo Lab · Institute of Biophotonics, National Yang Ming Chiao Tung University · No. 155, Sec. 2, Linong St., Beitou, Taipei 11221, Taiwan'
+    notice: '© {year} Translational Biophotonics Lab (Zhuo Lab) · Institute of Biophotonics, National Yang Ming Chiao Tung University · No. 155, Sec. 2, Linong St., Beitou, Taipei 11221, Taiwan'
     license:
       enable: false
 

@@ -7,7 +7,7 @@ station: ai
 organizations:
 - name: Institute of Biophotonics, National Yang Ming Chiao Tung University
   url: https://bioph.nycu.edu.tw/
-bio: Nonlinear optical imaging and AI for intraoperative tumour-margin assessment.
+bio: Nonlinear optical imaging and AI for intraoperative tumor-margin assessment.
 social: []
 email: ''
 user_groups:
@@ -18,7 +18,7 @@ education:
     institution: Manipal School of Life Sciences, Manipal Academy of Higher Education, India
 ---
 
-Jackson Rodrigues is a postdoctoral researcher at the Institute of Biophotonics, National Yang Ming Chiao Tung University. His work focuses on intraoperative tumour-margin assessment in oral and esophageal cancer, combining two-photon excited fluorescence (TPEF), second-harmonic generation (SHG), third-harmonic generation (THG) and artificial intelligence.
+Jackson Rodrigues is a postdoctoral researcher at the Institute of Biophotonics, National Yang Ming Chiao Tung University. His work focuses on intraoperative tumor-margin assessment in oral and esophageal cancer, combining two-photon excited fluorescence (TPEF), second-harmonic generation (SHG), third-harmonic generation (THG) and artificial intelligence.
 
 He earned his Ph.D. in Life Sciences at the Manipal School of Life Sciences, Manipal Academy of Higher Education, India. His thesis was entitled *Assessment of Breast Tumor Progression by Photoacoustic Spectroscopy*. His experience spans interdisciplinary research design, biomedical applications and clinical collaborations.
 

@@ -23,8 +23,8 @@
       maps.'
   zh:
     title: 用偏振光解析軟骨結構
-    alt: 骨關節炎軟骨的 H&E、SHG 強度、感受率比值、偏振與方向分布圖。
-    description: 骨關節炎軟骨的 H&E、SHG 強度、感受率比值、偏振與方向分布圖。
+    alt: 退化性關節炎軟骨的 H&E、SHG 強度、感受率比值、偏振與方向分布圖。
+    description: 退化性關節炎軟骨的 H&E、SHG 強度、感受率比值、偏振與方向分布圖。
 - image: gallery/lab-02.jpg
   en:
     title: Oral cancer microscopy · Figure 5
@@ -45,14 +45,14 @@
     alt: 深色背景中的紅色與綠色組織結構。
 - image: gallery/lab-03.png
   en:
-    title: Pseudocolour microscopy image
+    title: Pseudocolor microscopy image
     alt: Purple, orange and yellow image showing rounded structures and their surroundings.
   zh:
     title: 偽彩色顯微影像
     alt: 以紫、橙、黃色呈現圓形結構與周圍紋理的影像。
 - image: gallery/lab-04.png
   en:
-    title: Multicolour tissue overview
+    title: Multicolor tissue overview
     alt: A broad tissue image with red, orange, green and blue structures.
   zh:
     title: 多色組織全景
@@ -66,7 +66,7 @@
     alt: 深色背景中呈現綠色長條與條紋狀結構的影像。
 - image: gallery/lab-06.jpg
   en:
-    title: Circular pseudocolour image
+    title: Circular pseudocolor image
     alt: A round orange and yellow structure with a purple rim on a dark background.
   zh:
     title: 圓形結構偽彩色影像

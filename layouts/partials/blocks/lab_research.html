@@ -18,9 +18,9 @@
     <h2>{{ .name }}</h2>
     <div class="zl-research-detail">
       <div>
-        <h3>{{ if $zh }}研究問題{{ else }}Research question{{ end }}</h3><p>{{ $copy.question }}</p>
-        <h3>{{ if $zh }}方法{{ else }}Approach{{ end }}</h3><p>{{ $copy.method }}</p>
-        <h3>{{ if $zh }}{{ if eq .research_key "endomicroscopy" }}已有技術基礎{{ else }}已發表發現{{ end }}{{ else }}{{ if eq .research_key "endomicroscopy" }}Published foundation{{ else }}Published findings{{ end }}{{ end }}</h3><p>{{ $copy.finding }}</p>
+        <h3>{{ if $zh }}問了什麼{{ else }}The question{{ end }}</h3><p>{{ $copy.question }}</p>
+        <h3>{{ if $zh }}怎麼做{{ else }}The approach{{ end }}</h3><p>{{ $copy.method }}</p>
+        <h3>{{ if $zh }}{{ if eq .research_key "endomicroscopy" }}走到哪裡{{ else }}發現什麼{{ end }}{{ else }}{{ if eq .research_key "endomicroscopy" }}Where it stands{{ else }}What we found{{ end }}{{ end }}</h3><p>{{ $copy.finding }}</p>
       </div>
       <figure class="zl-research-figure">
         <a href="{{ $img.RelPermalink }}" aria-label="{{ if $zh }}查看完整原圖：{{ else }}View full image: {{ end }}{{ .name }}"><img src="{{ $small.RelPermalink }}" srcset="{{ $small.RelPermalink }} {{ $small.Width }}w, {{ $large.RelPermalink }} {{ $large.Width }}w" sizes="(min-width: 1200px) 470px, (min-width: 768px) 42vw, 90vw" width="{{ $small.Width }}" height="{{ $small.Height }}" alt="{{ .image_alt }}" loading="lazy" decoding="async"></a>
@@ -37,7 +37,7 @@
     {{ end }}
     <h3 class="zl-eyebrow">{{ $copy.papers_label }}</h3>
     <ul class="zl-research-papers">{{ range $detail.papers }}{{ $pub := $pubSite.GetPage (printf "publication/%s" .) }}{{ if not $pub }}{{ errorf "Missing research publication: %s" . }}{{ end }}<li><a href="{{ $pub.RelPermalink }}"{{ if $zh }} hreflang="en"{{ end }}>{{ $pub.Title }}</a> · {{ $pub.Date.Format "2006" }} · {{ $pub.Params.publication | markdownify }} · <a href="https://doi.org/{{ $pub.Params.doi }}">DOI</a></li>{{ end }}</ul>
-    <p class="zl-research-status">{{ $copy.status }}</p>
+    <p class="zl-research-status"><b>{{ if $zh }}還不知道的事{{ else }}What we do not know yet{{ end }}</b>　{{ $copy.status }}</p>
     <p class="zl-inline-links"><a href="{{ partial "lab_url" "gallery/" }}">{{ if $zh }}研究影像{{ else }}Research images{{ end }} →</a><a href="{{ partial "lab_url" "contact/" }}">{{ if $zh }}洽詢此研究方向{{ else }}Discuss this research{{ end }} →</a></p>
   </article>
 {{ end }}
