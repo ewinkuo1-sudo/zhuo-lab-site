@@ -37,7 +37,12 @@
       {{- end -}}
     {{- end -}}
     {{- $text := index (index site.Data.research $id) $lang -}}
+    {{- $more := "" -}}
+    {{- range $langSite.Home.Params.sections -}}{{- if eq .id "research" -}}{{- range .content.items -}}
+      {{- if eq .research_key $id -}}{{- $more = printf "%s%s" $langSite.Home.Permalink .url -}}{{- end -}}
+    {{- end -}}{{- end -}}{{- end -}}
     {{- $stations = $stations | append (merge $s (dict
+        "more" $more
         "question" $text.question
         "method" $text.method
         "finding" $text.finding

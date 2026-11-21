@@ -30,10 +30,18 @@
       {{ $grouped.Set $group ($members | append $person) }}
     {{ end }}
   {{ end }}
+  {{ if not $block.content.compact }}
+  <div class="zl-roster-filter" role="group" aria-label="{{ if $zh }}依研究方向篩選{{ else }}Filter by research direction{{ end }}">
+    <button type="button" data-f="" aria-pressed="true">{{ if $zh }}全部{{ else }}All{{ end }}</button>
+    {{ range (slice "microscopy" "collagen" "ai" "endomicroscopy") }}{{ $st := index site.Data.stations . }}{{ $copy := index $st $page.Language.Lang }}
+    <button type="button" data-f="{{ . }}" aria-pressed="false" style="--st:{{ $st.color }}"><i aria-hidden="true"></i><b>{{ $copy.verb }}</b><span>{{ $copy.short }}</span></button>
+    {{ end }}
+  </div>
+  {{ end }}
   {{ range site.Data.people_groups }}
   {{ $group := . }}
   {{ with $grouped.Get .id }}
-  <section class="zl-people-group" aria-labelledby="people-group-{{ $group.id }}">
+  <section class="zl-people-group" data-group="{{ $group.id }}" aria-labelledby="people-group-{{ $group.id }}">
     <h2 class="zl-people-group-title" id="people-group-{{ $group.id }}">{{ if $zh }}{{ $group.zh }}{{ else }}{{ $group.en }}{{ end }}</h2>
   {{ if $block.content.compact }}
   <div class="zl-people-cards">
@@ -47,7 +55,7 @@
     </article>
   {{ end }}
   </div>
-  {{ else }}
+  {{ else if eq $group.id "pi" }}
   {{ range . }}
   {{ $person := . }}
   {{ $portrait := .Resources.GetMatch "avatar*" }}
@@ -90,6 +98,34 @@
     </div>
   </article>
   {{ end }}
+  {{ else }}
+  {{/* 主持人以外：等高名錄卡。全文在個人頁，這裡只留一句研究題目。 */}}
+  <div class="zl-roster">
+  {{ range . }}
+    {{ $person := . }}
+    {{ $portrait := .Resources.GetMatch "avatar*" }}
+    {{ $id := .File.Dir | path.Clean | path.Base }}
+    <article class="zl-roster-card" id="member-{{ $id }}" data-station="{{ .Params.station }}" aria-labelledby="name-{{ $id }}">
+      <a class="zl-roster-photo" href="{{ .RelPermalink }}" tabindex="-1" aria-hidden="true">
+        {{ with $portrait }}{{ $img := .Fill "480x600 Top webp q88" }}<img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="" loading="lazy" decoding="async">
+        {{ else }}{{ partial "components/zl_silhouette" . }}{{ end }}
+      </a>
+      <div class="zl-roster-copy">
+        {{ with .Params.station }}
+          {{ $href := "" }}{{ with $anchors.Get . }}{{ $href = partial "lab_url" . }}{{ end }}
+          <p class="zl-member-station">{{ partial "components/zl_station_badge" (dict "key" . "lang" $page.Language.Lang "href" $href) }}</p>
+        {{ end }}
+        <h3 id="name-{{ $id }}"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        <p class="zl-person-role">{{ .Params.role }}{{ if .Params.alumni }}<span class="zl-person-alumni">{{ if $zh }}已畢業{{ else }}graduated{{ end }}</span>{{ end }}</p>
+        {{ with .Params.bio }}<p class="zl-roster-bio">{{ . }}</p>{{ end }}
+        <ul class="zl-person-links">
+          {{ if .Content }}<li><a href="{{ .RelPermalink }}">{{ if $zh }}完整介紹{{ else }}Full profile{{ end }} →</a></li>{{ end }}
+          <li><a class="zl-island-link" href="#member-island" data-slug="{{ $id }}">{{ if $zh }}在光學桌上{{ else }}On the table{{ end }} ↑</a></li>
+        </ul>
+      </div>
+    </article>
+  {{ end }}
+  </div>
   {{ end }}
   </section>
   {{ end }}
@@ -104,6 +140,25 @@
     var f = document.getElementById('member-island-frame'); if (!f || !f.contentWindow) return;
     try { f.contentWindow.postMessage({ sel: a.dataset.slug }, '*'); } catch (err) {}
   });
+  // 依光路篩選：主持人永遠留著，其餘只留同一條光路的人；空的分組整段收起。
+  (function () {
+    var bar = document.querySelector('.zl-roster-filter'); if (!bar) return;
+    function apply(f) {
+      bar.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.f === f)); });
+      document.querySelectorAll('.zl-people-group').forEach(function (g) {
+        var cards = g.querySelectorAll('.zl-roster-card'); if (!cards.length) return;
+        var n = 0;
+        cards.forEach(function (c) { var on = !f || c.dataset.station === f; c.hidden = !on; if (on) n++; });
+        g.hidden = !n;
+      });
+    }
+    bar.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) apply(b.dataset.f); });
+    // 從成員島跳到某人的卡片時，先解除篩選，免得目標被藏住。
+    addEventListener('hashchange', function () {
+      var el = location.hash.indexOf('#member-') === 0 && document.getElementById(location.hash.slice(1));
+      if (el && el.hidden) { apply(''); el.scrollIntoView(); }
+    });
+  })();
   </script>
   {{ end }}
 </div>

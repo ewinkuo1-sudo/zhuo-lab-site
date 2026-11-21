@@ -49,10 +49,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--primary);outline-of
 .bar .nav #langsw{border:1px solid rgba(237,243,248,.45);border-radius:999px;padding:1px 9px;font-size:13px}
 @media (max-width:440px){html[lang="en"] #brand-page{display:none}} /* 英文字比較寬，窄螢幕只留實驗室名 */
 
-.hero{max-width:1320px;margin:0 auto;padding:26px 16px 18px;display:grid;grid-template-columns:minmax(0,1fr);gap:10px} /* 收短，讓光學桌在第一屏就露出來 */
+.hero{max-width:1320px;margin:0 auto;padding:18px 16px 14px;display:grid;grid-template-columns:minmax(0,1fr);gap:10px} /* 收短，讓光學桌在第一屏就露出來 */
 .eyebrow{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.14em;color:var(--primary);text-transform:uppercase;margin:0}
-.hero h1{font-size:clamp(30px,4.6vw,52px);line-height:1.2;margin:0;letter-spacing:.02em;color:var(--navy);text-wrap:balance}
-.hero p.lede{font-size:clamp(16px,1.6vw,19px);color:var(--muted);margin:0;max-width:46em}
+.hero h1{font-size:clamp(26px,3.2vw,40px);line-height:1.2;margin:0;letter-spacing:.02em;color:var(--navy);text-wrap:balance}
+.hero p.lede{font-size:clamp(15px,1.3vw,17px);color:var(--muted);margin:0;max-width:46em}
 .route{display:flex;flex-wrap:wrap;gap:8px 6px;align-items:center;margin-top:10px;padding:0;list-style:none}
 .route li{display:flex;align-items:center;gap:6px}
 .route li+li::before{content:"";width:22px;height:2px;background:var(--w780);opacity:.55;border-radius:1px}
@@ -60,7 +60,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--primary);outline-of
 .route a .dot{width:10px;height:10px;border-radius:50%;flex:none;align-self:center;display:inline-block}
 .route a b{color:var(--primary);font-weight:600}
 .route a:hover{border-color:var(--primary)}
-.cue{color:var(--muted);font-size:14px;margin-top:4px}
+.cue{display:none;color:var(--muted);font-size:14px;margin-top:4px}
 /* ?shot=probe：只拍 3D 場景（內視鏡站概念圖用） */
 .shot .stepper,.shot .plate,.shot #labels{display:none}
 
@@ -87,8 +87,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--primary);outline-of
 .plate i:first-child{margin-left:0}
 
 .steps{display:flex;flex-direction:column;gap:0;padding-bottom:30vh}
-.step{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding:6vh 0;scroll-margin-top:var(--bar)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px 28px;display:flex;flex-direction:column;gap:16px;box-shadow:0 1px 2px rgba(20,45,69,.04);transition:border-color .3s,box-shadow .3s}
+.step{min-height:86vh;display:flex;flex-direction:column;justify-content:center;padding:6vh 0;scroll-margin-top:var(--bar)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 26px;display:flex;flex-direction:column;gap:14px;box-shadow:0 1px 2px rgba(20,45,69,.04);transition:border-color .3s,box-shadow .3s}
 .step.active .card{border-color:color-mix(in srgb,var(--primary) 45%,var(--line));box-shadow:0 6px 24px rgba(20,45,69,.08)}
 .kicker{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13.5px;color:var(--muted)}
 .kicker .n{font-family:var(--f-mono);color:var(--primary);font-weight:500}
@@ -100,7 +100,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--primary);outline-of
 .card .q{font-size:18px;font-weight:500;color:var(--ink)}
 figure{margin:0;display:flex;flex-direction:column;gap:8px}
 figure a.img{display:block;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
-figure img{display:block;width:100%;height:auto;max-height:440px;object-fit:contain;background:#fff}
+figure img{display:block;width:100%;height:auto;max-height:230px;object-fit:contain;background:#fff}
 figcaption{font-size:13px;color:var(--muted);line-height:1.6}
 .papers{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
 .papers li{font-size:14.5px;line-height:1.55;padding-left:12px;border-left:3px solid var(--primary-soft)}
@@ -131,6 +131,17 @@ figcaption{font-size:13px;color:var(--muted);line-height:1.6}
 .toy:hover{border-color:var(--primary)}
 .toy b{display:block;font-weight:600;font-size:14.5px;color:var(--primary)}
 .toy small{display:block;color:var(--muted);font-size:13px;line-height:1.5}
+/* 收起來的細節：方法、論文、限制、互動教材 */
+.more{border-top:1px solid var(--line);margin-top:2px}
+.more+.more{margin-top:-14px}
+.more summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 0 0;font-size:14px;font-weight:600;color:var(--navy)}
+.more summary::-webkit-details-marker{display:none}
+.more summary::after{content:"+";font-family:var(--f-mono);font-size:17px;font-weight:400;color:var(--primary)}
+.more[open] summary::after{content:"−"}
+.more summary small{font-weight:400;color:var(--muted);margin-left:8px}
+.more .in{display:flex;flex-direction:column;gap:14px;padding:12px 0 4px}
+.golink{font-size:14.5px;font-weight:600;text-decoration:none}
+.golink:hover{text-decoration:underline}
 .end .card{background:var(--navy);color:var(--navy-text);border-color:var(--navy)}
 .end .card h2{color:#fff;font-size:clamp(26px,3vw,36px)}
 .end .card p{color:var(--navy-text)}
@@ -141,7 +152,8 @@ footer{max-width:1320px;margin:0 auto;padding:24px 16px 40px;border-top:1px soli
 
 /* 窄螢幕：不跑 3D，上方固定一條平面光路 */
 @media (max-width:860px){
-  .hero{padding:36px 16px 24px}
+  .hero{padding:24px 16px 18px}
+  .cue{display:block}
   .story{grid-template-columns:minmax(0,1fr);gap:0}
   .stagewrap{top:var(--bar);height:auto;aspect-ratio:2/1.08;min-height:0;border-radius:0;border-left:0;border-right:0;margin:0 -16px;z-index:5;box-shadow:0 4px 10px rgba(20,45,69,.08)}
   .stepper,.plate{display:none}
@@ -259,21 +271,27 @@ const intro=EN?`<article class="step" id="st-0" data-i="0" data-a="0"><div class
 const stepHTML=(s,i)=>{
   const fig=s.figure?`<figure><a class="img" href="${esc(BASE+s.figure.src)}" target="_blank" rel="noopener"><img src="${esc(BASE+s.figure.src)}" width="${s.figure.w}" height="${s.figure.h}" alt="${esc(s.figure.alt)}" loading="lazy" decoding="async"></a>
     <figcaption>${esc(s.figure.caption)}<br>${esc(s.figure.credit)}${s.figure.source?` · <a href="${esc(s.figure.source)}">${t("原文","Article")}</a> · <a href="${esc(s.figure.license)}">CC BY 4.0</a>`:""}</figcaption></figure>`:"";
-  const toys=s.toys.length?`<div><h3>${t("動手玩","Try it yourself")}</h3><div class="toys">${s.toys.map(t=>`<a class="toy" href="${esc(t.url)}" target="_blank" rel="noopener"><b>${esc(t.title)} ↗</b><small>${esc(t.desc)}</small></a>`).join("")}</div></div>`:"";
+  const toys=s.toys.length?`<details class="more"><summary><span>${t("動手玩","Try it yourself")}<small>${t(`${s.toys.length} 個互動教材`,`${s.toys.length} interactive toys`)}</small></span></summary><div class="in"><div class="toys">${s.toys.map(t=>`<a class="toy" href="${esc(t.url)}" target="_blank" rel="noopener"><b>${esc(t.title)} ↗</b><small>${esc(t.desc)}</small></a>`).join("")}</div></div></details>`:"";
   // 光在這一站的色條：上半是進來的光、下半是出去的光（示意色，和圖例同一套）
   const BC={microscopy:["--w780","--wSHG"],collagen:["--w780","--w780"],ai:["--wSHG","--cable"],endomicroscopy:["--w780","--w780"]}[s.key]||["--w780","--w780"];
   const light=`<div class="light" style="--c1:var(${BC[0]});--c2:var(${BC[1]})"><span class="bline"></span><div><h3>${t("光在這一站","The light at this station")}</h3><p>${esc(s.beam)}</p></div></div>`;
+  // 一張卡一個畫面：問題、發現、一張圖；方法、論文與限制收在下面，全文在研究頁。
+  const detail=`<details class="more"><summary><span>${t("方法、論文與限制","Approach, papers and limits")}<small>${t(`${s.papers.length} 篇論文`,`${s.papers.length} papers`)}</small></span></summary><div class="in">
+    <div><h3>${t("怎麼做","The approach")}</h3><p>${esc(s.method)}</p></div>
+    <div><h3>${esc(s.papers_label)}</h3><ul class="papers">${s.papers.map(p=>`<li><span class="t">${esc(p.title)}</span><span class="m">${esc(p.authors)} · ${esc(p.journal)} · ${p.year} · <a href="https://doi.org/${esc(p.doi)}">DOI</a></span></li>`).join("")}</ul></div>
+    <p class="status">${esc(s.status)}</p>
+  </div></details>`;
+  const more=s.more?`<a class="golink" href="${esc(s.more)}">${t("這個方向的完整介紹 →","Full write-up of this direction →")}</a>`:"";
   return `<article class="step" id="st-${i+1}" data-i="${i+1}" data-a="${i+1}"><div class="card">
   <div class="kicker"><span class="n">${t(`第 ${i+1} 站`,`Station ${i+1}`)}</span><span class="verb">${esc(s.verb)}</span>${s.developing?`<span class="tag-dev">${t("發展中","In development")}</span>`:""}</div>
   <h2>${esc(s.name)}</h2>
   ${light}
   <div><h3>${t("問了什麼","The question")}</h3><p class="q">${esc(s.question)}</p></div>
-  <div><h3>${t("怎麼做","The approach")}</h3><p>${esc(s.method)}</p></div>
   <div><h3>${esc(s.finding_label)}</h3><p>${esc(s.finding)}</p></div>
   ${fig}
-  <div><h3>${esc(s.papers_label)}</h3><ul class="papers">${s.papers.map(p=>`<li><span class="t">${esc(p.title)}</span><span class="m">${esc(p.authors)} · ${esc(p.journal)} · ${p.year} · <a href="https://doi.org/${esc(p.doi)}">DOI</a></span></li>`).join("")}</ul></div>
-  <p class="status">${esc(s.status)}</p>
+  ${detail}
   ${toys}
+  ${more}
 </div></article>`};
 
 // 四種組織 × 四站：資料和官網研究頁同一份 cases.json；3D 不另加站，沿用第 4 站全亮的畫面
