@@ -48,24 +48,26 @@ sections:
       image_license: https://creativecommons.org/licenses/by/4.0/
     - research_key: ai
       name: AI-assisted label-free pathology
-      image: gen/thumb-ai.webp
-      image_alt: Simulated label-free tissue image with a tile-wise classifier probability overlay (illustration)
+      image: 'publications/esophagus-2025-fig8.webp'
+      image_alt: 'Four ROC curves, each comparing SVM classification of two diagnostic groups of esophageal tissue.'
       icon: brain
       icon_pack: fas
       description: How can images reveal disease features? We combine texture analysis, machine learning and deep
         learning to investigate tissue classification.
       url: research/#ai-assisted-label-free-pathology
-      image_credit: Concept illustration
+      image_credit: 'Makkithaya et al. · Scientific Reports · Fig. 8'
+      image_source: 'https://doi.org/10.1038/s41598-025-13910-7'
+      image_license: 'https://creativecommons.org/licenses/by/4.0/'
     - research_key: endomicroscopy
       name: Miniaturized nonlinear endomicroscopy
-      image: gen/thumb-endoscope.webp
-      image_alt: Schematic of a fibre-based nonlinear endomicroscopy probe imaging collagen in tissue (illustration)
+      image: 'gen/probe-concept.webp'
+      image_alt: '3D illustration: an orange optical fibre leads to a handheld probe pointed at tissue in a Petri dish.'
       icon: stethoscope
       icon_pack: fas
       description: How can microscopy reach smaller spaces? This direction explores optical fibres and miniature
         optics for nonlinear endomicroscopy.
       url: research/#miniaturized-nonlinear-endomicroscopy
-      image_credit: Concept illustration
+      image_credit: 'Concept illustration · rendered from the research map''s 3D scene'
     subtitle: The questions we ask, the methods we use and what we have found
     integrated: true
 - block: lab_news

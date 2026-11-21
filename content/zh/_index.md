@@ -43,22 +43,24 @@ sections:
       image_license: https://creativecommons.org/licenses/by/4.0/
     - research_key: ai
       name: AI 輔助無標記病理
-      image: gen/thumb-ai.webp
-      image_alt: 模擬無標記組織影像疊加分類器逐格機率圖（示意圖）
+      image: 'publications/esophagus-2025-fig8.webp'
+      image_alt: '四張 ROC 曲線圖，各自比較兩個食道組織診斷組別的 SVM 分類結果。'
       icon: brain
       icon_pack: fas
       description: 如何從影像提取疾病特徵？結合紋理分析、機器學習與深度學習，研究影像分類與病理評估。
       url: research/#ai-輔助無標記病理
-      image_credit: 研究概念示意圖
+      image_credit: 'Makkithaya et al. · Scientific Reports · Fig. 8'
+      image_source: 'https://doi.org/10.1038/s41598-025-13910-7'
+      image_license: 'https://creativecommons.org/licenses/by/4.0/'
     - research_key: endomicroscopy
       name: 微型化非線性內視顯微術
-      image: gen/thumb-endoscope.webp
-      image_alt: 光纖式非線性內視顯微探頭對組織中膠原蛋白取像的示意圖
+      image: 'gen/probe-concept.webp'
+      image_alt: '3D 示意圖：橘色光纖接到一支手持探頭，探頭指向培養皿裡的組織樣品。'
       icon: stethoscope
       icon_pack: fas
       description: 如何將顯微成像帶入更小的探測空間？以光纖與微型光學元件為方向，探索非線性內視成像。
       url: research/#微型化非線性內視顯微術
-      image_credit: 研究概念示意圖
+      image_credit: '概念示意 · 研究地圖 3D 場景渲染圖'
     subtitle: 從研究問題、成像方法到已發表成果
     integrated: true
 - block: lab_news
