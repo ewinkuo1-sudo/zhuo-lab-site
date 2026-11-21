@@ -14,6 +14,7 @@ sections:
         physicians and pathologists. Each case runs along the same [research pipeline](../research/):
         see tissue with light, turn it into numbers, hand them to AI, and eventually reach inside the body.
         The badges under each case show which stages it has reached; click one to read about that direction.
+        Collaborating institutions and clinicians for each case are listed in that paper's author affiliations.
 
         ### Oesophageal cancer: grading the stroma without stains {#esophagus}
 
@@ -23,7 +24,6 @@ sections:
         high-grade dysplasia, before a pathologist has to decide on H&E?
         **What we do.** Two-photon and SHG imaging of unstained sections, texture features, and
         machine-learning classifiers.
-        **With.** Gastroenterology and pathology collaborators at a medical centre (see the paper's affiliations).
         **Status.** Published (*Sci. Rep.* 2025); whole-slide scanning is a follow-on direction whose progress is to be confirmed.
 
         ### Cartilage disease: osteoarthritis versus rheumatoid arthritis {#cartilage}
@@ -33,7 +33,6 @@ sections:
         **Question.** Do collagen fibre organisation and chirality separate normal, osteoarthritic
         and rheumatoid cartilage?
         **What we do.** Polarization-resolved SHG, χ33/χ31 and degree-of-linear-polarization maps.
-        **With.** Rheumatology and orthopaedics collaborators at a medical centre (see the paper's affiliations).
         **Status.** Published (*APL Bioeng.* 2024).
 
         ### Oral cancer: worst pattern of invasion {#oral}
@@ -44,7 +43,6 @@ sections:
         from label-free multiphoton images?
         **What we do.** Multiphoton imaging of the tumour front combined with deep-learning
         classification.
-        **With.** Head-and-neck pathology collaborators.
         **Status.** Published (*Lab. Invest.* 2026).
 
         ### Collagen pathology scores a pathologist can audit {#collagen-score}

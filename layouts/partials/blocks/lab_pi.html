@@ -1,10 +1,10 @@
 {{ $zh := eq .wcPage.Language.Lang "zh" }}
 {{ with site.GetPage "/authors/guan-yu-zhuo" }}
 {{ $p := . }}{{ $img := (.Resources.GetMatch "avatar*").Resize "400x webp q88" }}
-<div class="section-heading"><h1>{{ if $zh }}實驗室主持人{{ else }}Principal Investigator{{ end }}</h1></div>
+<div class="section-heading">{{ if or $.wcPage.IsHome ($.wcPage.Store.Get "zl_h1") }}<h2 class="zl-h1">{{ if $zh }}實驗室主持人{{ else }}Principal Investigator{{ end }}</h2>{{ else }}{{ $.wcPage.Store.Set "zl_h1" true }}<h1>{{ if $zh }}實驗室主持人{{ else }}Principal Investigator{{ end }}</h1>{{ end }}</div>
 <div class="zl-pi">
   <a href="{{ .RelPermalink }}"><img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ .Title }}" loading="lazy"></a>
-  <div><h2>{{ if $zh }}卓冠宇 Guan-Yu Zhuo{{ else }}Guan-Yu Zhuo 卓冠宇{{ end }}</h2><p class="zl-person-role">{{ .Params.role }}</p><p>{{ range .Params.organizations }}<a href="{{ .url }}">{{ .name }}</a>{{ end }}</p><p>{{ .Params.bio }}</p>
+  <div>{{ if $.wcPage.IsHome }}<h3 class="zl-h2">{{ if $zh }}卓冠宇 Guan-Yu Zhuo{{ else }}Guan-Yu Zhuo 卓冠宇{{ end }}</h3>{{ else }}<h2>{{ if $zh }}卓冠宇 Guan-Yu Zhuo{{ else }}Guan-Yu Zhuo 卓冠宇{{ end }}</h2>{{ end }}<p class="zl-person-role">{{ .Params.role }}</p><p>{{ range .Params.organizations }}<a href="{{ .url }}">{{ .name }}</a>{{ end }}</p><p>{{ .Params.bio }}</p>
   <p>{{ if $zh }}物理學博士，研究橫跨非線性光學顯微、組織影像與轉譯生醫光電。{{ else }}A physicist working across nonlinear optical microscopy, tissue imaging and translational biophotonics.{{ end }}</p>
   <p><a href="{{ .RelPermalink }}">{{ if $zh }}完整介紹與學經歷{{ else }}Full profile and background{{ end }} →</a></p>
   <p><a href="{{ site.Data.institution.faculty_url }}">{{ if $zh }}陽明交大官方教師頁{{ else }}Official NYCU faculty profile{{ end }} ↗</a><br><a href="mailto:{{ site.Data.institution.email }}">{{ site.Data.institution.email }}</a></p>

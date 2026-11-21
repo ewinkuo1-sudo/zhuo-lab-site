@@ -4,7 +4,7 @@
 {{ $items := site.Data.lab_events }}
 {{ with $block.content.count }}{{ $items = first (int .) $items }}{{ end }}
 <div class="row">
-  <div class="col-12 section-heading"><h1>{{ $block.content.title }}</h1>{{ with $block.content.text }}<p>{{ . }}</p>{{ end }}</div>
+  <div class="col-12 section-heading">{{ if or $.wcPage.IsHome ($.wcPage.Store.Get "zl_h1") }}<h2 class="zl-h1">{{ $block.content.title }}</h2>{{ else }}{{ $.wcPage.Store.Set "zl_h1" true }}<h1>{{ $block.content.title }}</h1>{{ end }}{{ with $block.content.text }}<p>{{ . }}</p>{{ end }}</div>
   <div class="col-12">
     <div class="zl-events">
       {{ range $items }}

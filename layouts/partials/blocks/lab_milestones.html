@@ -1,4 +1,4 @@
 {{ $b := .wcBlock.content }}
-<div class="section-heading"><h1>{{ $b.title }}</h1></div>
+<div class="section-heading">{{ if or $.wcPage.IsHome ($.wcPage.Store.Get "zl_h1") }}<h2 class="zl-h1">{{ $b.title }}</h2>{{ else }}{{ $.wcPage.Store.Set "zl_h1" true }}<h1>{{ $b.title }}</h1>{{ end }}</div>
 <ol class="zl-milestones">{{ range $b.items }}<li><time>{{ .year }}</time><div><h2>{{ .title }}</h2><p>{{ .text }}</p></div></li>{{ end }}</ol>
 <p class="zl-section-link"><a href="{{ (site.GetPage "/authors/guan-yu-zhuo").RelPermalink }}">{{ $b.link_label }} →</a></p>

@@ -139,12 +139,11 @@ Home now leads with a real lab image and research mission, followed by news, fou
 - `docs/homepage-figure-sources.json`: figure provenance, hashes and open licences where applicable. Original figures remain uncropped; Hugo generates WebP previews.
 - Homepage metrics count website records; they do not claim lab-only lifetime output or unverified clinical partnerships.
 
-Browser verification requires Python with Playwright and Microsoft Edge. Build with the deployment prefix so the Chinese URL regression is exercised:
+Internal links and anchors are checked offline by `scripts/check_links.py` (run in CI after the build; warnings only):
 
-```powershell
-$env:PATH = "%USERPROFILE%\.cache\zhuo-site-tools\go\go\bin;" + $env:PATH
-& '%USERPROFILE%\.cache\zhuo-site-tools\hugo\hugo.exe' --minify --baseURL 'http://127.0.0.1:18766/zhuo-lab-site/' --destination '%USERPROFILE%\.cache\zhuo-site-review\redesign-public\zhuo-lab-site'
-& 'python' scripts/check_home_redesign.py --root '%USERPROFILE%\.cache\zhuo-site-review\redesign-public' --output '%USERPROFILE%\.cache\zhuo-site-review\redesign'
+```bash
+hugo --minify --baseURL "https://ewinkuo1-sudo.github.io/zhuo-lab-site/"
+python scripts/check_links.py public "https://ewinkuo1-sudo.github.io/zhuo-lab-site/"
 ```
 
 ## Colour and spacing refresh (2026-09-11)

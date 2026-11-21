@@ -1,5 +1,5 @@
 {{ $lang := .wcPage.Language.Lang }}{{ $zh := eq $lang "zh" }}
-<div class="section-heading"><h1>{{ .wcBlock.content.title }}</h1><p>{{ .wcBlock.content.text }}</p></div>
+<div class="section-heading">{{ if or $.wcPage.IsHome ($.wcPage.Store.Get "zl_h1") }}<h2 class="zl-h1">{{ .wcBlock.content.title }}</h2>{{ else }}{{ $.wcPage.Store.Set "zl_h1" true }}<h1>{{ .wcBlock.content.title }}</h1>{{ end }}<p>{{ .wcBlock.content.text }}</p></div>
 <div class="zl-highlights">
 {{ range site.Data.highlights }}
   {{ $item := . }}{{ $copy := index . $lang }}

@@ -9,7 +9,7 @@
 <div class="row featurette">
   {{ with $block.content.title }}
   <div class="col-md-12 section-heading">
-    <h1>{{ . | markdownify | emojify }}</h1>
+    {{ if or $.wcPage.IsHome ($.wcPage.Store.Get "zl_h1") }}<h2 class="zl-h1">{{ . | markdownify | emojify }}</h2>{{ else }}{{ $.wcPage.Store.Set "zl_h1" true }}<h1>{{ . | markdownify | emojify }}</h1>{{ end }}
     {{ if $block.content.subtitle }}<p>{{ $block.content.subtitle | markdownify | emojify }}</p>{{ end }}
   </div>
   {{ end }}

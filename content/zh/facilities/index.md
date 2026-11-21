@@ -3,6 +3,8 @@ title: 儀器設備
 summary: '卓冠宇實驗室的儀器資訊整理中。'
 date: 2026-09-06
 type: landing
+# Not published until instrument specifications and access terms are confirmed. Remove this line to bring the page back.
+draft: true
 
 sections:
   - block: markdown

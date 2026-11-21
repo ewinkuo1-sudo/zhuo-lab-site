@@ -886,3 +886,8 @@ a.zl-station-full:hover { border-color: var(--st); }
     box-shadow: 0 14px 24px rgba(8, 20, 34, .45);
   }
 }
+
+// Heading levels: the home page has one <h1> (hero). Section headings there are <h2 class="zl-h1"> and item
+// headings <h3 class="zl-h2">; @extend gives them every rule written for h1 / h2 so nothing changes visually.
+h2.zl-h1 { @extend h1; }
+h3.zl-h2 { @extend h2; font-weight: 400; }  // the theme makes every h3 bold; keep the h2 weight

@@ -4,7 +4,7 @@
 {{ $items := slice }}
 {{ range site.Home.Params.sections }}{{ if eq .id "research" }}{{ $items = .content.items }}{{ end }}{{ end }}
 {{ $pubSite := site }}{{ range site.Sites }}{{ if eq .Language.Lang "en" }}{{ $pubSite = . }}{{ end }}{{ end }}
-<div class="section-heading"><h1>{{ $b.title }}</h1><p>{{ $b.subtitle }}</p></div>
+<div class="section-heading">{{ if or $.wcPage.IsHome ($.wcPage.Store.Get "zl_h1") }}<h2 class="zl-h1">{{ $b.title }}</h2>{{ else }}{{ $.wcPage.Store.Set "zl_h1" true }}<h1>{{ $b.title }}</h1>{{ end }}<p>{{ $b.subtitle }}</p></div>
 <div class="zl-research-intro"><p>{{ $b.intro }}</p></div>
 <nav aria-label="{{ $b.title }}"><ol class="zl-research-toc">{{ range $items }}<li><a href="#{{ index (split .url "#") 1 }}">{{ .name }}</a></li>{{ end }}</ol></nav>
 {{ range $items }}
