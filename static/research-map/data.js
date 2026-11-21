@@ -204,6 +204,13 @@ window.SITE_DATA={
     "finding_label": "已發表發現",
     "papers": [
      {
+      "title": "A deep learning framework for label-free prostate tissue classification using two-photon imaging",
+      "authors": "Makkithaya 等",
+      "journal": "Scientific Reports",
+      "year": 2026,
+      "doi": "10.1038/s41598-026-79760-z"
+     },
+     {
       "title": "Deciphering the Worst Pattern of Invasion in Oral Cancer: Integrative Clinical, Pathological, and Multimodal Nonlinear Optical Imaging Insights",
       "authors": "Huang 等",
       "journal": "Laboratory Investigation",
@@ -542,6 +549,13 @@ window.SITE_DATA={
     "papers_label": "Representative papers",
     "finding_label": "Published findings",
     "papers": [
+     {
+      "title": "A deep learning framework for label-free prostate tissue classification using two-photon imaging",
+      "authors": "Makkithaya et al.",
+      "journal": "Scientific Reports",
+      "year": 2026,
+      "doi": "10.1038/s41598-026-79760-z"
+     },
      {
       "title": "Deciphering the Worst Pattern of Invasion in Oral Cancer: Integrative Clinical, Pathological, and Multimodal Nonlinear Optical Imaging Insights",
       "authors": "Huang et al.",

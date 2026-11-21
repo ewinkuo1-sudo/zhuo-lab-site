@@ -36,20 +36,19 @@
     }
   },
   {
-    "slug": "huang-2026-deciphering",
+    "slug": "makkithaya-2026-deep",
     "station": "ai",
-    "image": "gallery/lab-02.jpg",
-    "credit": "Huang et al. · Laboratory Investigation · Fig. 5",
-    "source": "https://doi.org/10.1016/j.labinv.2025.104257",
+    "image": "gen/thumb-ai.webp",
+    "credit": "Concept illustration",
     "en": {
-      "title": "Seeing oral cancer invasion",
-      "summary": "Multimodal nonlinear microscopy examines the tissue microenvironment associated with an aggressive pattern of oral cancer invasion.",
-      "alt": "Figure 5 from Huang et al., showing six microscopy panels with original annotations."
+      "title": "Deep learning reads label-free prostate tissue",
+      "summary": "Two-photon fluorescence images of prostate tissue microarrays are classified as normal or tumour, comparing texture features with global-local deep-learning models.",
+      "alt": "Simulated tissue image with a classifier overlay (illustration)."
     },
     "zh": {
-      "title": "看見口腔癌的侵犯型態",
-      "summary": "結合臨床資料與多模態非線性顯微影像，研究口腔癌侵襲型態所伴隨的組織微環境變化。",
-      "alt": "Huang 等人論文圖 5，六分圖顯微影像保留原始標記。"
+      "title": "深度學習判讀無標記攝護腺組織",
+      "summary": "以攝護腺組織微陣列的雙光子螢光影像區分正常與腫瘤，比較紋理特徵與兼顧全域、局部的深度學習模型。",
+      "alt": "模擬組織影像與分類器疊圖（示意圖）。"
     }
   },
   {
