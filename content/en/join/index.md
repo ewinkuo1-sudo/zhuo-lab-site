@@ -1,5 +1,6 @@
 ---
 title: Join Us
+summary: 'How to join the Zhuo Lab as a graduate student, undergraduate project student, postdoc or research assistant.'
 date: 2026-09-06
 type: landing
 

@@ -1,5 +1,6 @@
 ---
 title: People
+summary: 'Members of the Zhuo Lab at the NYCU Institute of Biophotonics: principal investigator, postdoctoral researchers, research assistants and graduate students.'
 date: 2026-09-06
 type: landing
 

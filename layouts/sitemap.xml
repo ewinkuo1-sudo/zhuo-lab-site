@@ -1,0 +1,36 @@
+{{- /* Override of Hugo's built-in sitemap.
+  - Skips taxonomy lists and auto-generated term pages (co-author pages with one line of content);
+    member profiles are terms backed by a content file, so they stay.
+  - Adds the static pages (research map, member island), which Hugo does not know about. */ -}}
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  {{- range where .Pages "Sitemap.Disable" "ne" true }}
+    {{- $thin := or (eq .Kind "taxonomy") (and (eq .Kind "term") (not .File)) }}
+    {{- if and .Permalink (not $thin) }}
+  <url>
+    <loc>{{ .Permalink }}</loc>{{ if not .Lastmod.IsZero }}
+    <lastmod>{{ safeHTML ( .Lastmod.Format "2006-01-02T15:04:05-07:00" ) }}</lastmod>{{ end }}{{ with .Sitemap.ChangeFreq }}
+    <changefreq>{{ . }}</changefreq>{{ end }}{{ if ge .Sitemap.Priority 0.0 }}
+    <priority>{{ .Sitemap.Priority }}</priority>{{ end }}{{ if .IsTranslated }}{{ range .Translations }}
+    <xhtml:link
+                rel="alternate"
+                hreflang="{{ .Language.LanguageCode }}"
+                href="{{ .Permalink }}"
+                />{{ end }}
+    <xhtml:link
+                rel="alternate"
+                hreflang="{{ .Language.LanguageCode }}"
+                href="{{ .Permalink }}"
+                />{{ end }}
+  </url>
+    {{- end }}
+  {{- end }}
+  {{- if eq site.Language.Lang "en" }}
+    {{- range slice "research-map/" "research-map/en/" "member-island/" }}
+  <url>
+    <loc>{{ printf "%s%s" (site.Sites.Default.Home.Permalink) . }}</loc>
+  </url>
+    {{- end }}
+  {{- end }}
+</urlset>

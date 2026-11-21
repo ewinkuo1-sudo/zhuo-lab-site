@@ -45,8 +45,8 @@ npx wrangler deploy
 Hugo 0.135.0 extended and Go are kept as portable binaries under `..\tools\` so the local build matches CI exactly.
 
 ```powershell
-$env:PATH = "C:\Users\ewink\rc-desktop\tools\go-1.27.0\bin;$env:PATH"
-C:\Users\ewink\rc-desktop\tools\hugo-0.135.0\hugo.exe server -D
+$env:PATH = "..\tools\go-1.27.0\bin;$env:PATH"
+..\tools\hugo-0.135.0\hugo.exe server -D
 ```
 
 Then open http://localhost:1313/ (Chinese at /zh/).
@@ -142,9 +142,9 @@ Home now leads with a real lab image and research mission, followed by news, fou
 Browser verification requires Python with Playwright and Microsoft Edge. Build with the deployment prefix so the Chinese URL regression is exercised:
 
 ```powershell
-$env:PATH = "C:\Users\ewink\.cache\zhuo-site-tools\go\go\bin;" + $env:PATH
-& 'C:\Users\ewink\.cache\zhuo-site-tools\hugo\hugo.exe' --minify --baseURL 'http://127.0.0.1:18766/zhuo-lab-site/' --destination 'C:\Users\ewink\.cache\zhuo-site-review\redesign-public\zhuo-lab-site'
-& 'C:\Users\ewink\AppData\Local\Programs\Python\Python312\python.exe' scripts/check_home_redesign.py --root 'C:\Users\ewink\.cache\zhuo-site-review\redesign-public' --output 'C:\Users\ewink\.cache\zhuo-site-review\redesign'
+$env:PATH = "%USERPROFILE%\.cache\zhuo-site-tools\go\go\bin;" + $env:PATH
+& '%USERPROFILE%\.cache\zhuo-site-tools\hugo\hugo.exe' --minify --baseURL 'http://127.0.0.1:18766/zhuo-lab-site/' --destination '%USERPROFILE%\.cache\zhuo-site-review\redesign-public\zhuo-lab-site'
+& 'python' scripts/check_home_redesign.py --root '%USERPROFILE%\.cache\zhuo-site-review\redesign-public' --output '%USERPROFILE%\.cache\zhuo-site-review\redesign'
 ```
 
 ## Colour and spacing refresh (2026-09-11)

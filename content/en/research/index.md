@@ -1,5 +1,6 @@
 ---
 title: Research
+summary: 'The four research directions of the Zhuo Lab: label-free nonlinear microscopy, collagen quantification, AI-assisted pathology and miniaturized endomicroscopy, each with published evidence.'
 date: 2026-09-06
 type: landing
 sections:

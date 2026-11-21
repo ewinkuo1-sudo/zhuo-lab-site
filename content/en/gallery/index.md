@@ -1,5 +1,6 @@
 ---
 title: Gallery
+summary: 'Microscopy images and published figures from the Zhuo Lab, with photographs of lab events.'
 date: '2026-09-11'
 type: landing
 sections:

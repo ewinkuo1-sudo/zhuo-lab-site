@@ -1,5 +1,6 @@
 ---
 title: News & Events
+summary: 'News, publications and events from the Zhuo Lab.'
 date: '2026-09-11'
 type: landing
 sections:
