@@ -7,24 +7,9 @@ sections:
   - block: markdown
     content:
       title: Facilities
-      subtitle: Instruments in the lab
+      subtitle: Being compiled
       text: |
-        All systems are built or configured in-house and are available to collaborators after training.
-
-        ### Multiphoton scanning microscope
-        Home-built multiphoton platform for simultaneous SHG, THG, and two-photon fluorescence imaging with polarisation-resolved detection capability.
-
-        ### Confocal laser-scanning microscope
-        Olympus FluoView FV300 for correlative reflectance and fluorescence imaging.
-
-        ### Fluorescence-lifetime (FLIM) detection chain
-        Frequency-domain lifetime measurement system for fluorescence-lifetime and coherent-Raman contrast.
-
-        ### Sample preparation and analysis
-        Cryostat sectioning and GPU workstation for image analysis and deep-learning training.
-
-        Collaborators and students from other groups who wish to use the instruments should
-        [contact Dr. Zhuo](../contact/) to arrange access and training.
+        Instrument specifications and access arrangements are being compiled and will be posted here once confirmed. To ask what measurements are currently possible, please [contact Dr. Zhuo](../contact/).
 
     design:
       columns: '1'

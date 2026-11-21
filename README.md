@@ -1,6 +1,6 @@
 # Zhuo Lab website
 
-[網站配色、直角與留白改版計畫](NEXT_SESSION_PLAN.md)（2026-09-11；已完成）。驗證與比較圖見 [改版紀錄](docs/visual-refresh-review.md)。
+網站配色、直角與留白改版（2026-09-11；已完成）。驗證與比較圖見 [改版紀錄](docs/visual-refresh-review.md)。
 
 Lab website for Prof. Guan-Yu Zhuo, Institute of Biophotonics, National Yang Ming Chiao Tung University.
 Built with [Hugo Blox](https://hugoblox.com) (research-group template, blox-bootstrap v5) and deployed to GitHub Pages.
@@ -155,7 +155,7 @@ The bilingual site now uses square corners, a centered 1040 px content width, wi
 
 The bilingual homepage now uses the supplied microscopy image as an uncropped background with a separate readability gradient and a direct original-image link. Research detail pages reuse the home research names, order, images, credits and stable anchors. `data/research.json` holds bilingual evidence summaries and publication slugs; `lab_research.html` reads publication metadata from the English records.
 
-See [validation and previews](docs/research-hero-review.md), [source audit](docs/research-content-audit.md), and [future sessions](FUTURE_ROADMAP.md). Current project progress and equipment capabilities still require confirmation; the audit distinguishes published evidence from unverified drafts.
+See [validation and previews](docs/research-hero-review.md), [source audit](docs/research-content-audit.md). Current project progress and equipment capabilities still require confirmation; the audit distinguishes published evidence from unverified drafts.
 
 ## Focused homepage (2026-09-15)
 

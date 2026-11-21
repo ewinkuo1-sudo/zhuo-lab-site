@@ -11,3 +11,9 @@ resources/
 
 # Python browser-check caches
 __pycache__/
+
+# Internal working notes: kept locally, not published
+TODO_老師確認.md
+TASKS.md
+NEXT_SESSION_PLAN.md
+FUTURE_ROADMAP.md

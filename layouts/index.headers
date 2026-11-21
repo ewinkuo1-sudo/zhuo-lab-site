@@ -6,12 +6,15 @@
 # Netlify / Cloudflare headers
 # 本站覆寫 blox-plugin-netlify 的 index.headers：DENY 改 SAMEORIGIN，
 # 否則成員頁嵌的成員島（同站 iframe）在 Cloudflare 鏡像會被擋成破圖。外站仍不能嵌。
+# X-Robots-Tag: _headers only takes effect on the Cloudflare mirror (GitHub Pages ignores it). noindex keeps the mirror
+# out of search results so it does not compete with the primary URL. Remove it when Cloudflare becomes the primary site.
 # Automatically generated
 # Documentation: https://docs.hugoblox.com/hugo-tutorials/security/
 /*
   {{if not $allow_frame}}X-Frame-Options: SAMEORIGIN{{end}}
   X-XSS-Protection: 1; mode=block
   X-Content-Type-Options: nosniff
+  X-Robots-Tag: noindex
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   Referrer-Policy: strict-origin-when-cross-origin
   {{with $csp_policy}}Content-Security-Policy{{if $csp_report_only}}-Report-Only{{end}}: {{replaceRE "(\\s\\s+)" " " (trim . " ")}}{{end}}
